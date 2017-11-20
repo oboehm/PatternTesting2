@@ -19,5 +19,11 @@ The plans for version 2 are:
 * code will be prepared for Java 9 module system
 * consolidation of the different document parts
 
+
+## Branching Model
+
+Development will follow [a successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/) von Vincent Driessen.
+The actual development you can find on the [develop](https://github.com/oboehm/PatternTesting2/tree/develop) branch.
+
 ---
 November 2017
