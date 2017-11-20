@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/oboehm/PatternTesting2.svg?branch=master)](https://travis-ci.org/oboehm/PatternTesting2)
 # PatternTesting 2
 
 This is the continuation of the [SourceForge PatternTesting project](https://sourceforge.net/projects/patterntesting/).
