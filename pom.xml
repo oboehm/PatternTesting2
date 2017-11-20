@@ -1,0 +1,1039 @@
+<!--
+	Project Object Model (POM) for PatternTesting
+	If you are behind a proxy try the following command:
+		'mvn -Dhttp.proxyHost=10.253.1.158 -Dhttp.proxyPort=8080 validate'
+	Instead of 'validate' you can use also another goal. The following goals
+	should work (see also iX 2/2006, p.77):
+		validate
+		generate-sources
+		install
+	
+	Some other useful goals are:
+	    jar
+	    source:jar
+	    source:test-jar
+	
+	PS: If you want to update the maven plugins use the option -U.
+
+	see http://maven.apache.org/guides/introduction/introduction-to-the-pom.html
+	see http://maven.apache.org/pom.htm
+	
+    (c)reated 13-Mar-07 by ob@aosd.de
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+  <!-- 
+      The Basics
+      must be set if you want to upload it to the Central Repository
+      see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+   -->	
+  <modelVersion>4.0.0</modelVersion>
+  <!-- 
+      changed Jan-2010 to org.patterntesting
+      see FAQ on http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+   -->
+  <groupId>org.patterntesting</groupId>
+  <artifactId>patterntesting-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>2.0.0-SNAPSHOT</version>
+  <name>PatternTesting Parent</name>
+  <url>http://patterntesting.org/release/</url>
+  <inceptionYear>2002</inceptionYear>
+  
+  <!-- 
+      Because patterntesting-rt is also base for patterntesting-tools it
+      is extracted now as separate module build (otherwise we would get
+      a cycle).
+   -->
+  <modules>
+    <!-- TODO: add modules (20-Nov-2017, oboehm) -->
+  </modules>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
+  <!-- Build Server (Travis) -->
+  <ciManagement>
+    <system>Travis CI</system>
+    <url>https://travis-ci.org/oboehm/PatternTesting2</url>
+  </ciManagement>
+
+  <!-- 
+      Deployment
+      see "Better Builds with Maven", p. 74
+      see http://maven.apache.org/plugins/maven-deploy-plugin/
+  -->
+  <distributionManagement>
+    <!--
+        Deployment of the Web-Site 
+        (try 'mvn site-deploy' to deploy it)
+    -->
+    <site>
+      <id>ftp-patterntesting.org</id>
+      <name>PatternTesting Website</name>
+      <url>${patterntesting.site.url}/${project.version}/</url>
+    </site>
+  </distributionManagement>
+  
+  <!--
+    This section *must* be overwritten by subprojects. It is only to allow
+    a release of the commons-parent POM.
+  -->
+  <scm>
+    <connection>scm:git:git://github.com/oboehm/PatternTesting2.git</connection>
+    <url>https://github.com/oboehm/PatternTesting2</url>
+  </scm>
+
+  <mailingLists>
+    <mailingList>
+      <name>PatternTesting user mailing list</name>
+      <subscribe>http://lists.sourceforge.net/lists/listinfo/patterntesting-user</subscribe>
+      <unsubscribe>http://lists.sourceforge.net/lists/listinfo/patterntesting-user</unsubscribe>
+      <post>patterntesting-user@lists.sourceforge.net</post>
+      <archive>http://sourceforge.net/mailarchive/forum.php?forum_name=patterntesting-user</archive>
+    </mailingList>
+    <mailingList>
+      <name>PatternTesting development mailing list</name>
+      <subscribe>http://lists.sourceforge.net/lists/listinfo/patterntesting-devel</subscribe>
+      <unsubscribe>http://lists.sourceforge.net/lists/listinfo/patterntesting-devel</unsubscribe>
+      <post>patterntesting-devel@lists.sourceforge.net</post>
+      <archive>http://sourceforge.net/mailarchive/forum.php?forum_name=patterntesting-devel</archive>
+    </mailingList>
+  </mailingLists>
+
+  <!-- 
+      L I B R A R I E S
+      the libraries are (normally) alphabetically sorted.
+      see http://www.ibiblio.org/maven2/ for available libraries
+   -->
+  <!-- TODO: add dependencyManagement (20-Nov-2017, oboehm) -->
+
+  <!-- 
+      libraries which are needed by all sub modules
+   -->
+  <!-- TODO: add dependencies (20-Nov-2017, oboehm) -->
+
+
+  <!-- Build Settings -->
+  <build>
+  
+    <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${basedir}</directory>
+        <targetPath>META-INF</targetPath>
+        <includes>
+          <include>NOTICE.txt</include>
+          <include>LICENSE.txt</include>
+        </includes>
+      </resource>
+    </resources>
+    <extensions>
+      <!-- Enabling the use of SFTP -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>2.2</version>
+      </extension>
+    </extensions>
+
+
+    <pluginManagement>
+
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.19.1</version>
+          <configuration>
+            <forkCount>1</forkCount>
+            <reuseForks>true</reuseForks>
+            <useSystemClassLoader>true</useSystemClassLoader>
+            <useManifestOnlyJar>false</useManifestOnlyJar>
+	      </configuration>
+        </plugin>
+        <!-- JavaDoc -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.10.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <!-- 3.1 does not work together with maven-aspect-plugin 1.5 -->
+          <version>2.5.1</version>
+          <configuration>
+            <source>${maven.compile.source}</source>
+            <target>${maven.compile.target}</target>
+            <encoding>${commons.encoding}</encoding>
+            <showDeprecation>true</showDeprecation>
+            <showWarnings>true</showWarnings>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>2.8</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.6</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>2.5.3</version>
+          <inherited>true</inherited>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-build-plugin</artifactId>
+          <version>1.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>aspectj-maven-plugin</artifactId>
+          <version>1.9</version>
+        </plugin>
+        <!-- Changes -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-changes-plugin</artifactId>
+          <version>2.11</version>
+        </plugin>
+        <!-- TODO list -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>taglist-maven-plugin</artifactId>
+          <version>2.4</version>
+          <configuration>
+            <tags>
+              <tag>TODO</tag>
+              <tag>FIXME</tag>
+            </tags>
+          </configuration>
+        </plugin>
+        <!-- Sonar -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+
+      <!--
+          Maven Site Plugin
+          call 'mvn site:site' to generate web site
+          see http://maven.apache.org/plugins/maven-site-plugin/
+      -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <locales>en,de</locales>
+        </configuration>
+      </plugin>
+
+      <!-- set JDK level, see http://maven.apache.org/general.html#Compiling-J2SE-5 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${maven.compile.source}</source>
+          <target>${maven.compile.target}</target>
+        </configuration>
+      </plugin>
+	  <!--
+		  AspectJ compiler
+		  @see http://www.mail-archive.com/user@mojo.codehaus.org/msg00157.html
+		  @see http://mail-archives.apache.org/mod_mbox/maven-users/200601.mbox/%3CB39B8F0E-BB20-44DB-96B3-3C7FCB85B594@gmail.com%3E
+		  @see http://mojo.codehaus.org/aspectj-maven-plugin/differentTestAndCompile.html
+		  NOTE:
+		      use build.ajproperties as ajdtBuildDefFile
+		      (src/build.ajproperties does not work for ajdoc)
+	   -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>aspectj-maven-plugin</artifactId>
+        <configuration>
+          <source>${maven.compile.source}</source>
+          <target>${maven.compile.target}</target>
+          <complianceLevel>${maven.compile.complianceLevel}</complianceLevel>
+		  <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
+        </configuration>
+        <executions>
+          <execution>
+		    <id>compile</id>
+			<configuration>
+			  <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
+			</configuration>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>compile</goal>
+		    </goals>
+		  </execution>
+		  <execution>
+			<id>test-compile</id>
+			<configuration>
+			  <ajdtBuildDefFile>src/test/build.ajproperties</ajdtBuildDefFile>
+			</configuration>
+            <phase>process-sources</phase>
+			<goals>
+              <goal>test-compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>reports</id>
+            <phase>site</phase>
+            <goals>
+              <goal>aspectj-report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+	  <!-- see http://maven.apache.org/plugins/maven-surefire-plugin/examples/inclusion-exclusion.html -->
+	  <plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <systemPropertyVariables>
+            <propertyName>patterntesting.integrationTest</propertyName>
+          </systemPropertyVariables>
+          <excludes>
+            <exclude>**/Test*Aspect*.java</exclude>
+          </excludes>
+        </configuration>
+	  </plugin>
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>
+      	<artifactId>maven-jar-plugin</artifactId>
+      	<version>2.3.1</version>
+      </plugin>
+      <plugin>
+        <!--
+          - Copy LICENSE.txt and NOTICE.txt so that they are included
+          - in the -javadoc jar file for the component.
+          -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version><!--$NO-MVN-MAN-VER$-->
+        <executions>
+          <execution>
+            <id>javadoc.resources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <copy todir="${project.build.directory}/apidocs/META-INF">
+                  <fileset dir="${basedir}">
+                    <include name="LICENSE.txt" />
+                    <include name="NOTICE.txt" />
+                  </fileset>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-build-plugin</artifactId>
+      </plugin>
+	  <!-- see http://maven.apache.org/plugins/maven-source-plugin/usage.html -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- 
+        see http://maven.apache.org/plugins/maven-changes-plugin/examples/changes-file-validation.html
+       -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changes-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>validate-changes</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>changes-validate</goal>
+            </goals>
+            <configuration>
+              <!-- if set to true the build will fail if the changes file is invalid,
+                   if set to false warnings will be logged. -->
+              <failOnError>true</failOnError>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Code Coverage  -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.7.9</version>
+        <configuration>
+          <destFile>${sonar.jacoco.reportPath}</destFile>
+          <append>true</append>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
+  </build>
+  
+  
+  
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.9</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>index</report>
+              <report>dependencies</report>
+              <report>dependency-convergence</report>
+              <report>dependency-info</report>
+              <report>dependency-management</report>
+              <report>issue-tracking</report>
+              <report>license</report>
+              <report>mailing-list</report>
+              <report>modules</report>
+              <report>project-team</report>
+              <report>scm</report>
+              <report>summary</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <!-- Javadoc -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <tags>
+            <tag>
+              <name>extendsPlugin</name>
+              <placement>a</placement>
+              <head>extends plugin:</head>
+            </tag>
+            <tag>
+              <name>goal</name>
+              <placement>a</placement>
+              <head>goal:</head>
+            </tag>
+            <tag>
+              <name>requiresDependencyResolution</name>
+              <placement>a</placement>
+              <head>requires dependency resolution:</head>
+            </tag>
+            <tag>
+              <name>requiresProject</name>
+              <placement>a</placement>
+              <head>requires project:</head>
+            </tag>
+            <tag>
+              <name>phase</name>
+              <placement>a</placement>
+              <head>phase:</head>
+            </tag>
+            <tag>
+              <name>description</name>
+              <placement>a</placement>
+              <head>description:</head>
+            </tag>
+          </tags>
+          <source>${maven.compile.source}</source>
+          <encoding>${commons.encoding}</encoding>
+          <additionalDependencies>
+            <additionalDependency>
+              <groupId>org.apache.maven.plugin-testing</groupId>
+              <artifactId>maven-test-tools</artifactId>
+              <version>3.3.0</version>
+            </additionalDependency>
+          </additionalDependencies> 
+         <linksource>true</linksource>
+          <!-- 
+              The following apidocs were not included because of missing package-list:
+              http://jamonapi.sourceforge.net/javadoc/
+           -->
+          <links>
+            <link>http://docs.oracle.com/javase/7/docs/api/</link>
+            <link>http://www.eclipse.org/aspectj/doc/released/runtime-api</link>
+            <link>http://commons.apache.org/proper/commons-lang/apidocs/</link>
+            <link>http://commons.apache.org/proper/commons-io/javadocs/api-release/</link>
+            <link>http://junit.org/junit4/javadoc/latest/</link>
+          </links>
+        </configuration>
+      </plugin>
+      <!-- Unit Tests -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>2.20</version>
+      </plugin>
+      <!-- 
+          Changes
+          see http://maven.apache.org/plugins/maven-changes-plugin/usage.html
+       -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changes-plugin</artifactId>
+        <version>2.12.1</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>changes-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
+
+
+
+  <!-- 
+      To install a jar of sources along with your artifact
+      during the release process use the release profile below.
+      
+      see http://maven.apache.org/plugins/maven-source-plugin/usage.html
+   -->
+  <profiles>
+  
+    <!-- Mac OS -->
+    <profile>
+      <id>mac</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+      </activation>
+      <properties>
+        <htdocs.dir>/Library/WebServer/Documents</htdocs.dir>
+      </properties>
+    </profile>
+
+    <!-- Linux -->
+    <profile>
+      <id>linux</id>
+      <activation>
+        <os>
+          <name>linux</name>
+        </os>
+      </activation>
+      <properties>
+        <htdocs.dir>/srv/www/htdocs</htdocs.dir>
+      </properties>
+    </profile>
+  
+    <!--
+        For OSGi versions of some OSS libs Springsource provides a repository.
+        These are needed for testing the bundles inside an OSGi container like
+        Felix.
+        
+        see http://ebr.springsource.com/repository/app/faq#q8
+    -->
+    <profile>
+      <id>osgi</id>
+      <build>
+        <plugins>
+          <!-- use PAX runner to test bundles -->
+          <plugin>
+            <groupId>org.ops4j</groupId>
+            <artifactId>maven-pax-plugin</artifactId>
+            <version>1.5</version>
+            <configuration>
+              <provision>
+                <param>--platform=felix</param>
+                <param>--profiles=core,compendium,event,ds,log</param>
+              </provision>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <!-- we need special versions of libs for OSGi -->
+      <dependencies>
+        <dependency>
+          <groupId>org.aspectj</groupId>
+          <artifactId>org.aspectj-library</artifactId>
+          <type>libd</type>
+          <version>1.6.5.RELEASE</version>
+        </dependency>
+        <dependency>
+          <groupId>org.junit</groupId>
+          <artifactId>com.springsource.org.junit</artifactId>
+          <version>4.8.1</version>
+        </dependency>
+      </dependencies>
+      <!-- here comes the special repository for OSGi'fyied libs -->
+      <repositories>
+        <repository>
+          <id>com.springsource.repository.bundles.release</id>
+          <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+          <url>http://repository.springsource.com/maven/bundles/release</url>
+        </repository>
+        <repository>
+          <id>com.springsource.repository.bundles.external</id>
+          <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+          <url>http://repository.springsource.com/maven/bundles/external</url>
+        </repository>
+        <repository>
+          <id>com.springsource.repository.libraries.release</id>
+          <name>SpringSource Enterprise Bundle Repository - SpringSource Library Releases</name>
+          <url>http://repository.springsource.com/maven/libraries/release</url>
+        </repository>
+        <repository>
+          <id>com.springsource.repository.libraries.external</id>
+          <name>SpringSource Enterprise Bundle Repository - External Library Releases</name>
+          <url>http://repository.springsource.com/maven/libraries/external</url>
+        </repository> 
+      </repositories>
+    </profile>
+
+    <!-- 
+        Disable SNAPSHOT signing
+        (start 'mvn -Prelease' to activate release profile with signing)
+        see https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven#HowToGeneratePGPSignaturesWithMaven-MavenGPGPlugin
+     -->
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.4</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-install-plugin</artifactId>
+            <configuration>
+              <createChecksum>true</createChecksum>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-release-plugin</artifactId>
+            <configuration>
+              <!-- Pass these arguments to the deploy plugin. -->
+              <arguments>-Prelease</arguments>
+            </configuration>
+          </plugin>
+          <!-- see http://maven.apache.org/plugins/maven-changes-plugin/examples/changes-file-validation.html -->
+		  <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-changes-plugin</artifactId>
+			<executions>
+				<execution>
+					<id>validate-changes</id>
+					<phase>pre-site</phase>
+					<goals>
+						<goal>changes-validate</goal>
+					</goals>
+					<configuration>
+						<!--
+							if set to true the build will fail if the changes file is invalid,
+							if set to false warnings will be logged.
+						-->
+						<failOnError>true</failOnError>
+					</configuration>
+				</execution>
+			</executions>
+		  </plugin>   
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>local-site</id>
+      <activation>
+        <file>
+          <exists>${patterntesting.site.dir}</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <!--
+              copy reports
+              
+              ask Ant to do some jobs for us
+              @see http://maven.apache.org/plugins/maven-antrun-plugin/usage.html
+              @see http://maven.apache.org/settings.html / Properties
+           -->
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>site</phase>
+                <configuration>
+                  <tasks name="install.reports" description="copy reports to local site">
+                    <!--
+                      Place any ant task here. You can add anything
+                      you can add between <target> and </target> in a
+                      build.xml.
+                    -->
+                    <echo>copying reports...</echo>
+                    <copy todir="${patterntesting.site.artifact.dir}/" verbose="false">
+                      <fileset dir="target/site" />
+                    </copy>
+                  </tasks>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    
+    <!-- 
+      Use this profile if you want UML diagrams inside the generated javadoc.
+     -->
+    <profile>
+      <id>umlgraph</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <tags>
+                <tag>
+                  <name>extendsPlugin</name>
+                  <placement>a</placement>
+                  <head>extends plugin:</head>
+                </tag>
+                <tag>
+                  <name>goal</name>
+                  <placement>a</placement>
+                  <head>goal:</head>
+                </tag>
+                <tag>
+                  <name>requiresDependencyResolution</name>
+                  <placement>a</placement>
+                  <head>requires dependency resolution:</head>
+                </tag>
+                <tag>
+                  <name>requiresProject</name>
+                  <placement>a</placement>
+                  <head>requires project:</head>
+                </tag>
+                <tag>
+                  <name>phase</name>
+                  <placement>a</placement>
+                  <head>phase:</head>
+                </tag>
+                <tag>
+                  <name>description</name>
+                  <placement>a</placement>
+                  <head>description:</head>
+                </tag>
+              </tags>
+              <!-- see http://joachim.weinbrenner.name/2010/03/29/umlgraph-in-javadoc-mit-maven/ -->
+              <doclet>gr.spinellis.umlgraph.doclet.UmlGraphDoc</doclet>
+              <docletArtifact>
+                <groupId>gr.spinellis</groupId>
+                <artifactId>UmlGraph</artifactId>
+                <version>4.6</version>
+              </docletArtifact>
+              <additionalparam>
+                 -inferrel -inferdep -quiet -hide java.* -collpackages java.util.* -qualify
+                 -postfixpackage -nodefontsize 9
+                 -nodefontpackagesize 7
+              </additionalparam>
+              <source>${maven.compile.source}</source>
+              <encoding>${commons.encoding}</encoding>
+              <linksource>true</linksource>
+              <!-- 
+                  The following apidocs were not included because of missing package-list:
+                  http://jamonapi.sourceforge.net/javadoc/
+               -->
+              <links>
+                <link>http://docs.oracle.com/javase/7/docs/api/</link>
+                <link>http://www.eclipse.org/aspectj/doc/released/runtime-api</link>
+                <link>http://commons.apache.org/proper/commons-lang3/apidocs/</link>
+                <link>http://commons.apache.org/proper/commons-io/javadocs/api-release/</link>
+                <link>http://junit.org/javadoc/latest/</link>
+              </links>
+              <quiet>true</quiet>
+            </configuration>
+            <executions>
+              <execution>
+                <id>aggregate</id>
+                <goals>
+                  <goal>aggregate</goal>
+                </goals>
+                <phase>site</phase>
+              </execution>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+  </profiles>
+ 
+  <!-- More Project Information -->
+  <description>
+    PatternTesting-Parent is the parent of the PatternTesting family.
+    The goal of PatternTesting is to verify Architecture/Design recommendations
+    and to write better code more easily.
+    It uses AOP and AspectJ to perform this feat.
+  </description>
+  <organization>
+    <name>PatternTesting Team</name>
+    <url>http://sourceforge.net/project/memberlist.php?group_id=48833</url>
+  </organization>
+  <developers>
+    <developer>
+      <name>Vincent Massol</name>
+      <id>vmassol</id>
+      <email>vmassol@pivolis.com</email>
+      <organization>Pivolis</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Matt Smith</name>
+      <id>ojojo</id>
+      <email>matt@ojojo.com</email>
+      <organization>ojojo</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Oliver Boehm</name>
+      <id>oboehm</id>
+      <email>ob@aosd.de</email>
+      <url>http://www.aosd.de/</url>
+      <organization>Java User Group Stuttgart</organization>
+      <organizationUrl>http://jugs.org/</organizationUrl>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Christian Heise</name>
+      <id>ninthbit</id>
+      <email>ninthbit@users.sourceforge.net</email>
+      <url>http://ninthbit.users.sourceforge.net/</url>
+      <organization>IBM</organization>
+      <organizationUrl>http://www.ibm.com/</organizationUrl>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+  </developers>
+  <contributors>
+    <contributor>
+      <name>Shohara Shaikh</name>
+      <email />
+      <organization>KPIT Cummins</organization>
+      <roles>
+        <role>Java Devleoper</role>
+      </roles>
+    </contributor>
+  </contributors>
+	
+  <!-- Environment Settings -->
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/oboehm/PatternTesting2/issues</url>
+  </issueManagement>
+
+
+
+  <!--
+      General Properties
+      (may be used and overwritten by subprojects)
+      see http://svn.apache.org/viewvc/commons/proper/commons-parent/trunk/pom.xml
+   -->
+  
+  <properties>
+
+    <!-- Default configuration for compiler source and target JVM -->
+    <maven.compile.source>1.8</maven.compile.source>
+    <maven.compile.target>1.8</maven.compile.target>
+    <maven.compile.complianceLevel>1.8</maven.compile.complianceLevel>
+
+    <!-- Sonar -->
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
+
+    <!-- Sonar 4.x Violations Filter -->
+    <!-- Execution of the Garbage Collector should be triggered only by the JVM -->
+    <sonar.issue.ignore.multicriteria.1.ruleKey>squid:S1215</sonar.issue.ignore.multicriteria.1.ruleKey>
+    <sonar.issue.ignore.multicriteria.1.resourceKey>**</sonar.issue.ignore.multicriteria.1.resourceKey>
+    <!-- Exception handlers should preserve the original exception  -->
+    <sonar.issue.ignore.multicriteria.2.ruleKey>squid:S1166</sonar.issue.ignore.multicriteria.2.ruleKey>
+    <sonar.issue.ignore.multicriteria.2.resourceKey>**/ReflectionHelper.java</sonar.issue.ignore.multicriteria.2.resourceKey>
+    <!-- Throwable.printStackTrace(...) should never be called  -->
+    <sonar.issue.ignore.multicriteria.3.ruleKey>squid:S1148</sonar.issue.ignore.multicriteria.3.ruleKey>
+    <sonar.issue.ignore.multicriteria.3.resourceKey>**/ClasspathMonitor.java</sonar.issue.ignore.multicriteria.3.resourceKey>
+    <!-- "object == null" should be used instead of "object.equals(null)"  -->
+    <sonar.issue.ignore.multicriteria.4.ruleKey>squid:S1318</sonar.issue.ignore.multicriteria.4.ruleKey>
+    <sonar.issue.ignore.multicriteria.4.resourceKey>**/runtime/junit/ObjectTester.java</sonar.issue.ignore.multicriteria.4.resourceKey>
+    <!-- System.exit(...) and Runtime.getRuntime().exit(...) should not be called  -->
+    <sonar.issue.ignore.multicriteria.5.ruleKey>squid:S1147</sonar.issue.ignore.multicriteria.5.ruleKey>
+    <sonar.issue.ignore.multicriteria.5.resourceKey>**/UmlautEncoder.java</sonar.issue.ignore.multicriteria.5.resourceKey>
+    <!-- Throwable and Error classes should not be caught  -->
+    <sonar.issue.ignore.multicriteria.6.ruleKey>squid:S1181</sonar.issue.ignore.multicriteria.6.ruleKey>
+    <sonar.issue.ignore.multicriteria.6.resourceKey>**/concurrent/junit/JUnitExecutor.java</sonar.issue.ignore.multicriteria.6.resourceKey>
+    <!-- 
+        Dodgy - Redundant nullcheck of value known to be non-null:
+        This rule is disabled because FindBugs works on the byte code. Some (or most?)
+        of the warnings seems to be result of the weaved byte code
+    -->
+    <sonar.issue.ignore.multicriteria.7.ruleKey>findbugs:RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE</sonar.issue.ignore.multicriteria.7.ruleKey>
+    <sonar.issue.ignore.multicriteria.7.resourceKey>**/concurrent/**</sonar.issue.ignore.multicriteria.7.resourceKey>
+    <!-- Security - Array is stored directly   -->
+    <sonar.issue.ignore.multicriteria.8.ruleKey>pmd:ArrayIsStoredDirectly</sonar.issue.ignore.multicriteria.8.ruleKey>
+    <sonar.issue.ignore.multicriteria.8.resourceKey>**/junit/internal/TestOn.java</sonar.issue.ignore.multicriteria.8.resourceKey>
+    <!-- Resources should be closed -->
+    <sonar.issue.ignore.multicriteria.9.ruleKey>squid:S2095</sonar.issue.ignore.multicriteria.9.ruleKey>
+    <sonar.issue.ignore.multicriteria.9.resourceKey>**/runtime/monitor/db/internal/StasiStatement.java</sonar.issue.ignore.multicriteria.9.resourceKey>
+    <!--  Classes should not be too complex -->
+    <sonar.issue.ignore.multicriteria.10.ruleKey>squid:ClassCyclomaticComplexity</sonar.issue.ignore.multicriteria.10.ruleKey>
+    <sonar.issue.ignore.multicriteria.10.resourceKey>**/runtime/monitor/db/internal/StasiResultSet.java</sonar.issue.ignore.multicriteria.10.resourceKey>
+    <!--  Classes should not be too complex -->
+    <sonar.issue.ignore.multicriteria.11.ruleKey>squid:MaximumInheritanceDepth</sonar.issue.ignore.multicriteria.11.ruleKey>
+    <sonar.issue.ignore.multicriteria.11.resourceKey>**/*Exception.java</sonar.issue.ignore.multicriteria.11.resourceKey>
+    <!--  Source files should not have any duplicated blocks -->
+    <sonar.issue.ignore.multicriteria.12.ruleKey>common-java:DuplicatedBlocks</sonar.issue.ignore.multicriteria.12.ruleKey>
+    <sonar.issue.ignore.multicriteria.12.resourceKey>**/annotation/*.java</sonar.issue.ignore.multicriteria.12.resourceKey>
+    <!--  Standard outputs should not be used directly to log anything -->
+    <sonar.issue.ignore.multicriteria.106.ruleKey>squid:S106</sonar.issue.ignore.multicriteria.106.ruleKey>
+    <sonar.issue.ignore.multicriteria.106.resourceKey>**/runtime/io/ExtendedFile.java</sonar.issue.ignore.multicriteria.106.resourceKey>
+    <!--  Generic exceptions should never be thrown -->
+    <sonar.issue.ignore.multicriteria.112.ruleKey>squid:S00112</sonar.issue.ignore.multicriteria.112.ruleKey>
+    <sonar.issue.ignore.multicriteria.112.resourceKey>src/main/java/patterntesting/runtime/**/*ro*.java</sonar.issue.ignore.multicriteria.112.resourceKey>
+    <!-- Loggers should be "private static final" and should share a naming convention -->
+    <sonar.issue.ignore.multicriteria.1312.ruleKey>squid:S1312</sonar.issue.ignore.multicriteria.1312.ruleKey>
+    <sonar.issue.ignore.multicriteria.1312.resourceKey>**/patterntesting/runtime/log/PerfLogger.java </sonar.issue.ignore.multicriteria.1312.resourceKey>
+    <!-- IP addresses should not be hardcoded -->
+    <sonar.issue.ignore.multicriteria.1313.ruleKey>squid:S1313</sonar.issue.ignore.multicriteria.1313.ruleKey>
+    <sonar.issue.ignore.multicriteria.1313.resourceKey>**/patterntesting/runtime/junit/internal/TestOn.java</sonar.issue.ignore.multicriteria.1313.resourceKey>
+    <!-- Objects should be compared with "equals()" -->
+    <sonar.issue.ignore.multicriteria.1698.ruleKey>squid:S1698</sonar.issue.ignore.multicriteria.1698.ruleKey>
+    <sonar.issue.ignore.multicriteria.1698.resourceKey>**/patterntesting/runtime/junit/CloneableTester.java</sonar.issue.ignore.multicriteria.1698.resourceKey>
+    <!-- Classes should not be compared by name -->
+    <sonar.issue.ignore.multicriteria.1872.ruleKey>squid:S1872</sonar.issue.ignore.multicriteria.1872.ruleKey>
+    <sonar.issue.ignore.multicriteria.1872.resourceKey>src/main/java/patterntesting/runtime/**/*.java</sonar.issue.ignore.multicriteria.1872.resourceKey>
+    <!-- Silly equality checks should not be made -->
+    <sonar.issue.ignore.multicriteria.2159.ruleKey>squid:S2159</sonar.issue.ignore.multicriteria.2159.ruleKey>
+    <sonar.issue.ignore.multicriteria.2159.resourceKey>**/patterntesting/runtime/junit/ObjectTester.java</sonar.issue.ignore.multicriteria.2159.resourceKey>
+    <!-- "ResultSet.isLast()" should not be used -->
+    <sonar.issue.ignore.multicriteria.2232.ruleKey>squid:S2232</sonar.issue.ignore.multicriteria.2232.ruleKey>
+    <sonar.issue.ignore.multicriteria.2232.resourceKey>**/*ResultSet.java</sonar.issue.ignore.multicriteria.2232.resourceKey>
+    <!-- Collection methods with O(n) performance should be used carefully -->
+    <sonar.issue.ignore.multicriteria.2250.ruleKey>squid:S2250</sonar.issue.ignore.multicriteria.2250.ruleKey>
+    <sonar.issue.ignore.multicriteria.2250.resourceKey>**/*ResultSet.java</sonar.issue.ignore.multicriteria.2250.resourceKey>
+    <!--  NullPointerException might be thrown -->
+    <sonar.issue.ignore.multicriteria.2259.ruleKey>squid:S2259</sonar.issue.ignore.multicriteria.2259.ruleKey>
+    <sonar.issue.ignore.multicriteria.2259.resourceKey>src/main/java/patterntesting/runtime/util/*o*n*e*er.java</sonar.issue.ignore.multicriteria.2259.resourceKey>
+    <!-- Mutable members should not be stored or returned directly -->
+    <sonar.issue.ignore.multicriteria.2384.ruleKey>squid:S2384</sonar.issue.ignore.multicriteria.2384.ruleKey>
+    <sonar.issue.ignore.multicriteria.2384.resourceKey>**/runtime/monitor/internal/DoubletDigger.java</sonar.issue.ignore.multicriteria.2384.resourceKey>
+    <!--  Mutable fields should not be "public static" -->
+    <sonar.issue.ignore.multicriteria.2386.ruleKey>squid:S2386</sonar.issue.ignore.multicriteria.2386.ruleKey>
+    <sonar.issue.ignore.multicriteria.2386.resourceKey>**/*Constants.java</sonar.issue.ignore.multicriteria.2386.resourceKey>
+    <!-- ignore violations -->
+    <sonar.issue.ignore.multicriteria>1,2,3,4,5,6,7,8,9,10,11,12,106,112,1312,1313,1698,1872,2159,2232,2250,2259,2384,2386</sonar.issue.ignore.multicriteria>
+    
+    <version.spring>1.5.6.RELEASE</version.spring>
+
+    <!--
+      Make the deployment site pluggable. This allows to switch to
+      other protocols like scpexe and other sites like ftp://ftp.agentes.de
+      or file:/srv/www/htdocs/builds/patterntesting
+    -->
+    <patterntesting.site.dir>${htdocs.dir}/builds/patterntesting</patterntesting.site.dir>
+    <patterntesting.site.url>file:${patterntesting.site.dir}</patterntesting.site.url>
+    <!-- 
+      Overwrite this in sub module, e.g. to ${patterntesting.site.dir}/rt for runtime
+     -->
+    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/</patterntesting.site.artifact.dir>
+    <patterntesting.site.artifact.url>file:${patterntesting.site.artifact.dir}</patterntesting.site.artifact.url>
+
+    <!--
+      Encoding of Java source files: Make sure, that the compiler and
+      the javadoc generator use the right encoding. Subprojects may
+      overwrite this, if they are using another encoding.
+    -->
+    <commons.encoding>utf-8</commons.encoding>
+    <commons.docEncoding>${commons.encoding}</commons.docEncoding>
+    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
+    
+  </properties>
+  
+</project>
