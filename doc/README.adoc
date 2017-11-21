@@ -1,0 +1,13 @@
+= image:src/main/asciidoc/images/arc42-logo.png[arc42] Documentation
+
+The documentation of PatternTesting is based on the https://github.com/arc42/arc42-template[Arc42 template].
+AsciiDoc was choosen as format for the documentation because it is simple but with enough expressiveness.
+And it is another form of source code which you can handle with GIT (or other SCM tools).
+
+Other ideas (and source files) are copied from https://github.com/dukecon/dukecon[dukecon].
+Especially the POM and index.adoc files were helpful to set up a working document generation.
+You find the source for documents at:
+
+* link:src/main/asciidoc/de[src/main/asciidoc/de] : German version
+* link:src/main/asciidoc/en[src/main/asciidoc/en] : English version
+* link:src/main/asciidoc/images[src/main/asciidoc/images] : images
