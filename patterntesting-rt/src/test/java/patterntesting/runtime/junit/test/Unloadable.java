@@ -1,0 +1,38 @@
+/*
+ * Copyright (c) 2015 by Oli B.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express orimplied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * (c)reated 04.11.2015 by Oli B. (ob@aosd.de)
+ */
+
+package patterntesting.runtime.junit.test;
+
+/**
+ * This is a class which is not loadable because it will crash in the static
+ * initializer. It is used as test class for the ClassTester.
+ *
+ * @author oboehm (ob@aosd.de)
+ * @since 1.6 (04.11.2015)
+ */
+public final class Unloadable {
+
+	static {
+		crash();
+	}
+
+	private static void crash() {
+		throw new ExceptionInInitializerError("I'm not loadable");
+	}
+
+}

@@ -1,0 +1,19 @@
+actor(S1,"SequenceGrapherTest");
+placeholder_object(D0);
+step();
+step();
+
+# Message sequences
+active(S1);
+create_message(S1,D0,":Date");
+step();
+message(S1,D0,"getTime()");
+active(D0);
+return_message(D0,S1,"4711");
+inactive(D0);
+
+# Complete the lifelines
+step();
+complete(D0);
+complete(S1);
+.PE

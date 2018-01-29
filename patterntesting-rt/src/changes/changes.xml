@@ -1,0 +1,841 @@
+<?xml version="1.0"?>
+
+<!-- 
+    $Id: changes.xml,v 1.189 2017/11/09 20:34:51 oboehm Exp $
+    
+    A kind of release notes. This document describes the changes in the
+    different releases.
+    
+    see http://maven.apache.org/plugins/maven-changes-plugin/usage.html
+    see http://maven.apache.org/plugins/maven-changes-plugin/changes.html
+ -->
+
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
+
+  <properties>
+    <title>Main changes</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <release version="1.8.0" date="11-Nov-2017"
+             description="last version with CVS">
+       <action dev="oboehm" date="2017-11-08" type="update">
+        Deprecated classes removed.
+      </action>
+      <action dev="oboehm" date="2017-08-17" type="fix" >
+        Bug in ClasspathMonitor.getIncompatibleClasses() fixed.
+      </action>
+      <action dev="oboehm" date="2017-08-19" type="fix"
+                    issue="bugs/39/" system="SourceForge2">
+        Old faulty code in ResourcepathMonitor removed.
+      </action>
+      <action dev="oboehm" date="2017-08-17" type="fix"
+                    issue="bugs/38/" system="SourceForge2">
+        Bug in DescritptionUtils fixed.
+      </action>
+    </release>
+
+    <release version="1.7.2" date="13-Aug-2017"
+             description="ResourcepathMonitor">
+      <action dev="oboehm" date="2017-07-26" type="add">
+        NetworkTester added.
+      </action>
+      <action dev="oboehm" issue="feature-requests/50/" system="SourceForge2"
+              date="2017-07-17" type="fix">
+        Methods deserialize(..) and assertNoFinalTransientAttribute(..) added
+        in SerializableTester.
+      </action>
+      <action dev="oboehm" date="2017-07-16" type="fix"
+                    issue="bugs/37/" system="SourceForge2">
+        Monitor class no longer can be registered as shutdown hook.
+      </action>
+      <action dev="oboehm" date="2017-06-10" type="update">
+        Resource specific methods of ClasspathMonitor are now more and more
+        moved to ResourcepathMonitor.
+      </action>
+    </release>
+
+    <release version="1.7.1" date="11-May-2017"
+             description="Spring Boot Support">
+      <action dev="oboehm" date="2017-05-10" type="fix"
+              issue="bugs/36/" system="SourceForge2">
+        ClasspathDigger refactored and tested in Spring environment.
+      </action>
+    </release>
+
+    <release version="1.7.0" date="06-Jan-2017"
+             description="Java 7 version">
+      <action dev="oboehm" date="2016-12-28" type="update">
+        Dependency to SLF4J removed.
+      </action>
+      <action dev="oboehm" date="2016-12-04" type="update">
+        Switched to Log4j 2.
+      </action>
+      <action dev="oboehm" date="2016-11-15" type="update">
+        Not existing classpath entries are now ignored for ClasspathMonitor.
+      </action>
+      <action dev="oboehm" date="2016-10-02" type="update">
+        ClasspathMonitor can read now nested archives
+        (like executable WARs with packed JARs)
+        to get classes.
+      </action>
+    </release>
+
+    <release version="1.6.3" date="17-Aug-2016"
+             description="enhancements for JMX">
+      <action dev="oboehm" issue="feature-requests/49/" system="SourceForge2"
+              date="2016-08-07" type="fix">
+        Warning is logged if JDBC connection is closed without necessary commit.
+      </action>
+      <action dev="oboehm" date="2016-05-26" type="add">
+        ResourcepathMonitor added as MBean.
+      </action>
+    </release>
+
+    <release version="1.6.2" date="27-Mar-2016"
+             description="eastern version">
+      <action dev="oboehm" date="2016-03-06" type="add">
+        Broken annotation provides now also a hide flag
+        (as well as SkipTestOn and RuntTestOn).
+      </action>
+      <action dev="oboehm" date="2016-03-03" type="add">
+        Internal DB monitor classes provide now a getWrappedXxx method.
+      </action>
+    </release>
+
+    <release version="1.6.1" date="29-Feb-2016"
+             description="leap year version">
+      <action dev="oboehm" date="2016-02-25" type="update">
+        ConnectionMonitor can now be registered as shutdown hook.
+      </action>
+      <action dev="oboehm" date="2016-02-24" type="fix"
+              issue="bugs/35/" system="SourceForge2">
+        Synchronisation problems in ClasspathMonitor fixed.
+      </action>
+      <action dev="oboehm" date="2016-02-13" type="add">
+        Update to commons-lang3.
+      </action>
+      <action dev="oboehm" date="2016-02-09" type="add">
+        ImmutableTester added.
+      </action>
+      <action dev="oboehm" date="2016-01-08" type="remove">
+        ObjectInspector now declared as deprecated.
+      </action>
+    </release>
+
+    <release version="1.6.0" date="06-Jan-2016"
+             description="Java 6 version">
+      <action dev="oboehm" date="2016-01-06" type="remove">
+        Deprecated patterntesting.runtime.db package is removed now.
+        Use package patterntesting.runtime.monitor.db instead.
+      </action>
+      <action dev="oboehm" date="2016-01-05" type="add">
+        Resource file added in io package.
+      </action>
+      <action dev="oboehm" date="2015-12-18" type="add"
+              issue="feature-requests/48/" system="SourceForge2">
+        Size of ProfileStatistic can now be limited.
+      </action>
+      <action dev="oboehm" date="2015-12-13" type="update">
+        ClasspathMonitor, ProfileStatistic and SqlStatistic can be now registered
+        as MBean with a given name.
+      </action>
+      <action dev="oboehm" date="2015-12-12" type="fix"
+              issue="bugs/34/" system="SourceForge2">
+        Classloader of Tomcat 8 is supported now for ClasspathMonitor.
+      </action>
+      <action dev="oboehm" date="2015-12-08" type="add"
+              issue="feature-requests/47/" system="SourceForge2">
+        FileTester prints now filename if files differ.
+      </action>
+      <action dev="oboehm" date="2015-11-10" type="add"
+              issue="feature-requests/46/" system="SourceForge2">
+        ClassTester added to check static initializer of classes.
+      </action>
+      <action dev="oboehm" date="2015-06-15" type="add">
+        You are now able to ignore e.g. white spaces in FileTester / IOTester
+        by using a StringConverter as additional argument.
+      </action>
+    </release>
+
+    <release version="1.5.2" date="04-Jul-2015"
+             description="bug fix">
+      <action dev="oboehm" date="2015-06-15" type="add"
+              issue="feature-requests/44/" system="SourceForge2">
+        Sequence diagrams can be now generated as simple text files which can
+        be used as input for https://www.websequencediagrams.com/.
+      </action>
+      <action dev="oboehm" date="2015-01-16" type="update">
+        For the generation of sequence diagrams ids are now used as name for
+        classes.
+      </action>
+      <action dev="oboehm" date="2015-05-29" type="fix"
+              issue="bugs/33/" system="SourceForge2">
+        Generated sequence diagrams no longer have double messages.
+      </action>
+      <action dev="oboehm" date="2015-05-27" type="fix"
+              issue="bugs/32/" system="SourceForge2">
+        NPE fixed for empty @DrawSequenceDiagram annotation.
+      </action>
+    </release>
+
+    <release version="1.5.1" date="26-Apr-2015"
+             description="Pattern support">
+      <action dev="oboehm" date="2015-02-08" type="add"
+              issue="feature-requests/42/" system="SourceForge2">
+        @RunTestOn and @SkipTestOn have no 'days' and 'time' as new
+        parameter.
+      </action>
+      <action dev="oboehm" date="2015-02-07" type="add">
+        Some minor extensions to ReflectionHelper.
+      </action>
+      <action dev="oboehm" date="2015-01-16" type="update">
+        The internal StasiResultSet (which is used for logging) is now more
+        stable for abnormal and buggy JDBC driver.
+      </action>
+      <action dev="oboehm" date="2015-01-11" type="add">
+        Patterns are now allowed as parameter for assert methods
+        in ClonableTester, ComparableTester and ObjectTester
+      </action>
+      <action dev="oboehm" date="2015-01-13" type="add"
+              issue="feature-requests/23/" system="SourceForge2">
+        @Zombie annotation is now provided to mark dead classes
+        for PatternTesting Check-RT.
+      </action>
+    </release>
+
+    <release version="1.5.0" date="06-Jan-2015"
+             description="PatternTesting Benchmark project added for micro-benchmarking">
+      <action dev="oboehm" date="2014-12-20" type="update">
+        ArrayTester, CollectionTester and MapTester logs now the 
+        detected differences to the log in DEBUG or TRACE level.
+      </action>
+      <action dev="oboehm" date="2014-11-30" type="add">
+        SkipTestOn and RuntTestOn annotation provides now a hide flag.
+        If it is set non-executed unit tests are hidden, i.e. they
+        are not appears as ignored test.
+      </action>
+      <action dev="oboehm" date="2014-10-14" type="add">
+        SerializableTester has now a getSizeOf(..) method.
+      </action>
+      <action dev="oboehm" date="2014-10-11" type="update">
+        Tuning of ClasspathMonitor about a factor of 2 and more.
+      </action>
+      <action dev="oboehm" date="2014-09-23" type="update">
+        ProfileStatistic can now dump its attributes to a given filename.
+      </action>
+      <action dev="oboehm" date="2014-09-18" type="fix"
+              issue="bugs/30/" system="SourceForge2">
+        NoSuchElementException is now catched and logged.
+      </action>
+      <action dev="oboehm" date="2014-08-28" type="add">
+        ObjectTester provides now an assertNotEquals(..) method.
+      </action>
+      <action dev="oboehm" date="2014-08-28" type="fix"
+              issue="bugs/29/" system="SourceForge2">
+        Attributes in ArchivEntry are initialized now also for unknown entries.
+      </action>
+      <action dev="oboehm" date="2014-08-28" type="update">
+        ClasspathMonitor dumps its different attributes no longer to a single
+        file but directory (together with a README file).
+      </action>
+      <action dev="oboehm" date="2014-08-27" type="add">
+        ArrayTester added.
+      </action>
+      <action dev="oboehm" date="2014-08-27" type="add">
+        ExtendedFile added to enrich the normal File interface.
+      </action>
+      <action dev="oboehm" date="2014-08-26" type="update">
+        ClassloaderType added to encapsulate classloader specifics.
+      </action>
+      <action dev="oboehm" date="2014-08-25" type="update">
+        ClasspathMonitor supports now WebSphere's classloader.
+      </action>
+      <action dev="oboehm" date="2014-08-23" type="update">
+        ClasspathMonitor can now dump its attributes to a given filename.
+      </action>
+      <action dev="oboehm" date="2014-06-26" type="fix">
+        Converter.toDate(..) recognizes now dates formated with the toString
+        method of the Date class.
+      </action>
+      <action dev="oboehm" date="2014-06-26" type="fix"
+              issue="bugs/28/" system="SourceForge2">
+        MapTester works now with maps containing null values.
+      </action>
+    </release>
+
+    <release version="1.4.3" date="14-Jun-2014"
+             description="SQL logging">
+      <action dev="oboehm" date="2014-05-17" type="add"
+              issue="feature-requests/41/" system="SourceForge2">
+        Stacktrace is logged now if log level of SqlStatistic class is set to
+        TRACE.
+      </action>
+    </release>
+
+    <release version="1.4.2" date="05-May-2014"
+             description="SQL profiling">
+      <action dev="oboehm" date="2014-05-03" type="update">
+        CallerStacktraces and LastCallerStacktrace added as new attribute to
+        ConnectionMonitorMBean.
+      </action>
+      <action dev="oboehm" date="2014-04-27" type="update">
+        ConnectionMonitor, ProxyConnection and ProxyDriver moved to 
+        patterntesting.runtime.monitor.db package.
+      </action>
+      <action dev="oboehm" date="2014-04-26" type="update">
+        MBeans are now registered in a hierarchical manner.
+      </action>
+      <action dev="oboehm" date="2014-04-24" type="add"
+              issue="feature-requests/13/" system="SourceForge2">
+        SqlStatistic provides some statistics of SQL statements via JMX.
+      </action>
+      <action dev="oboehm" date="2014-04-14" type="update">
+        SQL is now part of SQLException if ProxyDriver is used.
+      </action>
+    </release>
+
+    <release version="1.4.1" date="07-Apr-2014"
+             description="improved monitoring of JDBC connections">
+      <action dev="oboehm" date="2014-04-06" type="add"
+              issue="feature-requests/13/" system="SourceForge2">
+        ProxyDriver registers itself at the JDBC DriverManager and listens
+        to the URL "jdbc:proxy:...". It acts as a proxy for the real DB driver.
+        E.g. the URL "jdbc:proxy:hsqldb:mem:testdb" is a proxy for the
+        HSQL driver with the URL "jdbc:hsqldb:mem:testdb".
+        Together with the ConnectionMonitor as MBean you can monitor the opened
+        and closed connections.
+      </action>
+      <action dev="oboehm" date="2014-02-13" type="fix"
+              issue="bugs/26/" system="SourceForge2">
+        SerializableTester works now corrected with class argument.
+      </action>
+      <action dev="oboehm" date="2014-01-24" type="add">
+        StrackTraceScanner class added to scan stack trace.
+      </action>
+      <action dev="oboehm" date="2014-01-21" type="update">
+        Empty create messages are now filtered out from generated sequence diagram.
+      </action>
+      <action dev="oboehm" date="2014-01-12" type="fix"
+              issue="feature-requests/39/" system="SourceForge2">
+        Classes of java.* are no longer part of the generated sequence diagram.
+        SequenceGrapher accepts now exclude filter.
+        TypePattern added.
+      </action>
+      <action dev="oboehm" date="2014-01-10" type="update">
+        Generated sequence diagram looks better now.
+      </action>
+      <action dev="oboehm" issue="bugs/25/" system="SourceForge2"
+              date="2014-01-08" type="fix">
+        String in generated return message is now escaped.
+      </action>
+    </release>
+
+    <release version="1.4.0" date="06-Jan-2014"
+             description="logging as sequence diagram">
+      <action dev="oboehm" issue="bugs/24/" system="SourceForge2"
+              date="2014-01-02" type="fix">
+        CloneableTester reports now original cause if clone fails.
+      </action>
+      <action dev="oboehm" date="2013-12-19" type="fix">
+        CollectionTester handles now Sets correct where ordering is not important.
+      </action>
+       <action dev="oboehm" issue="feature-requests/38/" system="SourceForge2"
+               date="2011-12-18" type="add">
+        MapTester added for assertions around Maps.
+      </action>
+      <action dev="oboehm" issue="bugs/23/" system="SourceForge2"
+              date="2013-12-17" type="fix">
+        FileTester ignores now different linefeeds.
+      </action>
+      <action dev="oboehm" date="2013-11-29" type="add">
+        AssertArg with Support of JSR 349 (bean validation) added.
+      </action>
+      <action dev="oboehm" date="2013-11-13" type="add">
+        FileTester and IOTester accepts patterns of lines which should be
+        ignored.
+      </action>
+      <action dev="oboehm" date="2013-10-09" type="add">
+        Sequence diagrams can be generated by marking methods or construtors
+        with annotation @DrawSequenceDiagram.
+      </action>
+      <action dev="oboehm" date="2013-09-28" type="add">
+        FileTester and IOTester accepts now first and last line number which
+        should be compared.
+      </action>
+      <action dev="oboehm" date="2013-08-05" type="add">
+        (Lazy)ObjectRecorder and ObjectPlayer added to provide recording and replay of joinpoints 
+        and returned objects.
+      </action>
+    </release>
+
+    <release version="1.3.0" date="06-Jan-2013"
+             description="DB monitoring">
+      <action dev="oboehm" date="2013-01-02" type="update">
+        DB connections can be now monitored by ConnectionMonitor together with
+        ProxyConnection.
+      </action>
+      <action dev="oboehm" date="2012-09-27" type="update">
+        ObjectTester.assertEquals(..) checks now if equals method is
+        symmetrical implemented.
+      </action>
+      <action dev="oboehm" date="2012-08-12" type="add">
+        @SuppressExceptionWarning added to suppress warning from ExceptionAspect
+        (PatternTesting Check-CT).
+      </action>
+      <action dev="oboehm" date="2012-08-09" type="add">
+        SuppressEncodingWarning added to suppress warning from EncodingAspect
+        (PatternTesting Check-CT).
+      </action>
+      <action dev="oboehm" date="2012-08-08" type="add">
+        Annotation SuppressStreamWarning is now deprecated and replaced by
+        EnableStreamWarning.
+      </action>
+      <action dev="oboehm" date="2012-08-08" type="add">
+        ObjectTester.assertEquals(..) checks now, if null as argument is
+        handled correct in the equals method.
+      </action>
+    </release>
+    
+    <release version="1.2.20" date="15-Jul-2012"
+             description="extended JUnit support">
+      <action dev="oboehm" date="2012-07-01" issue="3539278" system="Sourceforge" type="fix">
+        ConcurrentModificationException in ObjectTester fixed.
+      </action>
+      <action dev="oboehm" date="2012-04-25" type="update">
+        ProxyRunner moved from experimental to junit package.
+      </action>
+      <action dev="oboehm" date="2012-04-25" type="update">
+        Support for JUnit 4.9 and 4.10 added.
+      </action>
+      <action dev="oboehm" date="2012-04-20" type="update">
+        Support for JUnit 4.5 added.
+      </action>
+      <action dev="oboehm" date="2012-04-19" type="update">
+        Support for JUnit 4.6 and 4.7 added.
+      </action>
+    </release>
+
+    <release version="1.2.10-YEARS" date="23-Mar-2012"
+             description="10 years PatternTesting">
+      <action dev="oboehm" date="2012-03-20" type="update">
+        ClasspathMonitor / ClasspathDigger uses now patterntesting-agent for
+        unsupported classloaders.
+      </action>
+      <action dev="oboehm" date="2012-01-31" type="add">
+        @SuppressIllegalArgumentExceptionWarning added to suppress warnings of
+        IllegalArgumentExceptionAspect (PatternTesting Check).
+      </action>
+      <action dev="oboehm" date="2012-01-28" type="add">
+        StringTester added to simplify tests with strings.
+      </action>
+      <action dev="oboehm" date="2012-01-15" type="fix">
+        Improved event handling for ignored and executed tests.
+        Number of executed tests should now be correct.
+      </action>
+      <action dev="oboehm" date="2012-01-13" type="add">
+        CollectionTester added for assertions of collections.
+      </action>
+    </release>
+
+    <release version="1.2.0" date="06-Jan-2012"
+             description="OSGi bundle">
+      <action dev="oboehm" issue="3462965" type="add" 
+              system="Sourceforge" date="2011-12-30">
+        SmokeSuite provided to support same annotations as for SmokeRunner.
+      </action>
+      <action dev="oboehm" issue="3434963" type="add" 
+              system="Sourceforge" date="2011-12-13">
+        ProxyRunner provided in package patterntesting.runtime.experimental
+        to support delegation to other JUnit runners.
+      </action>
+      <action dev="oboehm" date="2011-11-21" type="update">
+        Wildcards for @RunTestOn and @SkipTestOn annotation are now supported.
+      </action>
+      <action dev="oboehm" date="2011-09-22" type="add">
+        Deprecated methods from 1.0 removed.
+      </action>
+      <action dev="oboehm" date="2011-09-21" type="add">
+        ComparableTester provided.
+      </action>
+      <action dev="oboehm" date="2011-09-15" type="add">
+        An uberjar is now provided for easier start with PatternTesting Runtime.
+      </action>
+      <action dev="oboehm" date="2011-07-28" type="add">
+        Meta informatation for OSGi provided.
+      </action>
+      <action dev="oboehm" date="2011-07-09" type="update">
+        Switched from commons-logging to SLF4J.
+      </action>
+      <action dev="oboehm" date="2011-05-10" type="add">
+        RuntimeTester with assertMaxMemory(..) added.
+      </action>
+      <action dev="oboehm" issue="3294468" type="fix" 
+              system="Sourceforge" date="2011-04-29">
+        @Broken JUnit tests behaves line @Ignore. 
+      </action>
+    </release>
+    
+    <release version="1.1.0" date="22-Apr-2011"
+             description="version for Stuttgarter Test-Tage 2011">
+      <action dev="oboehm" date="2011-04-06" type="add">
+        IOTester and FileTester added.
+      </action>
+      <action dev="oboehm" date="2011-03-24" type="update">
+        Improved startup time for ClasspathMonitor.
+      </action>
+      <action dev="oboehm" date="2011-03-20" type="update">
+        The checkXxx() methods in the different tester (ObjectTester,
+        SerializableTester, CloneableTester) are renamed to assertXxx().
+      </action>
+      <action dev="oboehm" date="2011-03-18" type="update">
+        The "till" argument in @Broken can handle now simple times
+        like "18-Mar-2011 17:55".
+      </action>
+      <action dev="oboehm" date="2011-02-23" type="update">
+        Suppressing "adviceDidNotMatch" warning.
+      </action>
+      <action dev="oboehm" date="2011-02-23" type="remove">
+        Deprecated aspects (BrokenAspect, IntegrationTestAspect,
+        RunTestOnAspect, SkipTestOnAspect) for JUnit tests removed.
+        Use "@RunWith(SmokeRunner.class)" in your JUnit tests for that
+        functionality.
+      </action>
+      <action dev="oboehm" date="2011-02-23" type="remove">
+        Deprecated @RunTestsParallel annotation removed.
+      </action>
+      <action dev="oboehm" date="2011-01-15" type="fix" issue="2859540">
+        ArrayOutOfBoundsException fixed if no profiling dates were available.
+      </action>
+      <action dev="oboehm" date="2010-12-29" type="fix" issue="2859540">
+        PMD errors fixed.
+      </action>
+      <action dev="oboehm" date="2010-12-27" type="add">
+        Experimental package added with ClassTester and XrayClassLoader.
+      </action>
+      <action dev="oboehm" date="2010-11-01" type="fix">
+        @LogRuntimeException and @LogThrowable works now for static methods
+        inside the annotated class.
+      </action>
+    </release>
+
+    <release version="1.0.3" date="18-Oct-2010"
+             description="upload version">
+      <action dev="oboehm" date="2010-10-18" type="update">
+        Prepared for upload to https://oss.sonatype.org/
+      </action>
+      <action dev="oboehm" date="2010-10-01" type="add">
+        @TraceMe (and @DontTraceMe) allows you now to mark classes (or methods)
+        for tracing.
+      </action>
+      <action dev="oboehm" date="2010-09-13" type="update">
+        ObjectTester can use now reflection to get a copy of an object
+        to check equals implementation.
+      </action>
+      <action dev="oboehm" date="2010-09-23" type="update">
+        ObjectTester handles now interfaces and abstract classes better
+        if given as excluded parameter. All classes or subclasses are
+        excluded now.
+      </action>
+      <action dev="oboehm" issue="3064725" type="fix" 
+              system="Sourceforge" date="2010-09-13">
+        ObjectTester recognizes now a Package parameter correct.
+      </action>
+    </release>
+
+    <release version="1.0.2" date="06-Sep-2010"
+             description="holiday version">
+      <action dev="oboehm" issue="3034823" type="fix" 
+              system="Sourceforge" date="2010-08-06">
+        @RunTestOn handled now for @BeforeClasses and @AfterClasses methods
+        and before class.
+      </action>
+      <action dev="oboehm" date="2010-08-05" type="add">
+        @Broken understands now the same attributes than @RunTestOn and
+        @SkipTestOn.
+      </action>
+      <action dev="oboehm" date="2010-07-21" type="add">
+        ObjectTester / SerializationTester added as helper for JUnit tests.
+      </action>
+      <action dev="oboehm" date="2010-07-21" type="update">
+        Classes for internal use moved to internal package.
+      </action>
+    </release>
+
+    <release version="1.0.1" date="18-Jul-2010"
+             description="the version after JFS 2010">
+      <action dev="oboehm" date="2010-06-18" type="update">
+        @RunTestsParallel marked as deprecated because it is obsolete
+        (replaced by ParallelRunner of PatternTesting Concurrent).
+      </action>
+    </release>
+
+    <release version="1.0.0" date="20-Jun-2010"
+             description="first org.patterntesting version">
+      <action dev="ninthbit" issue="2940287" type="fix" 
+              system="Sourceforge" date="2010-06-06">
+        AnnotatedStandardMBean added
+      </action>
+      <action dev="oboehm" date="2010-05-15" type="update">
+        XRunner is renamed to SmokeRunner to avoid naming conflicts with
+        Mercury's XRunner.
+      </action>
+      <action dev="oboehm" date="2010-04-02">
+        @Broken is handled no longer by BrokenAspect but XRunner class.
+      </action>
+      <action dev="oboehm" date="2010-03-05">
+        @IntegrationTest added to mark JUnit tests which have more
+        integration character and needs a little bit longer.
+      </action>
+      <action dev="oboehm" issue="2937233" type="added" 
+              system="Sourceforge" date="2010-01-27">
+        @SkipTestOn provided.
+        And as counterpart of it @RunTestOn is added now.
+      </action>
+      <action dev="oboehm" issue="2937229" type="add" 
+              system="Sourceforge" date="2010-01-23">
+        Two attributes added for @Broken: "os" and "user".
+      </action>
+      <action dev="oboehm" date="2010-01-05">
+        GroupId changed to "org.patterntesting".
+      </action>
+    </release>
+
+    <release version="0.9.9" date="30-Dec-2009"
+             description="Silvester version">
+      <action dev="oboehm" issue="2922716" type="fix" 
+              system="Sourceforge" date="2009-12-29">
+        ClasspathMonitor is now tested with Windows and WLS.
+      </action>
+      <action dev="oboehm" issue="2859518" type="fix" 
+              system="Sourceforge" date="2009-12-28">
+        PMD warning removed.
+      </action>
+      <action dev="oboehm" type="add" date="2009-12-27">
+        Default value for @Broken added
+        (you can now give a reason why the test is marked as broken)
+      </action>
+    </release>
+
+    <release version="0.9.8" date="12-Dec-2009"
+             description="Christmas version">
+      <action dev="oboehm" issue="2883068" type="add" 
+              system="Sourceforge" date="2009-11-23">
+        You can now mark JUnit tests (and other methods/ctors) as @Broken.
+      </action>
+      <action dev="oboehm" issue="2859497" type="fix" 
+              system="Sourceforge" date="2009-09-26">
+        Javadoc warnings and errors fixed (with the help of JAutodoc).
+      </action>
+      <action dev="oboehm" issue="2860629" type="fix" 
+              system="Sourceforge" date="2009-09-20">
+        You can now ask for the manifest entries for a class.
+      </action>
+    </release>
+  
+    <release version="0.9.7" date="14-Sep-2009"
+             description="improved samples version">
+      <action dev="oboehm" type="update" date="2009-09-03">
+        JAMon 2.7 is supported now.
+      </action>
+      <action dev="oboehm" type="update" date="2009-08-03">
+        ClasspathDigger is now able to determine the classpath from the loaded
+        packages if it detects an application server like Weblogic server
+        (for this application server we are not able to ask the WLS classloader
+        for the needed infos).
+      </action>
+      <action dev="oboehm" type="update" date="2009-06-17">
+        NullConstants class provided which contains NULL_OBJECT and other
+        useful NULL constants.
+      </action>
+      <action dev="oboehm" type="update" date="2009-06-15">
+        @MayBeNull added for parameters.
+      </action>
+      <action dev="oboehm" type="update" date="2009-06-08">
+        For Profiling and other log activities you can now prefix parameters
+        you don't want to see the value in the log (e.g. passwords) with
+        the @DontLogMe annotation.
+      </action>
+      <action dev="oboehm" issue="2787695" type="fix" 
+              system="Sourceforge" date="2009-05-12">
+        ClasspathMonitor has now an operation to get the serialVersionUID.
+        And you get now the incompatible classes. These are the doublets
+        which are different.
+      </action>
+      <action dev="oboehm" issue="2786846" type="fix" 
+              system="Sourceforge" date="2009-05-08">
+        @GuardInitialization guards now not only static initialization but
+        also constructor execution.
+      </action>
+      <action dev="oboehm" type="update" date="2009-05-09">
+        Operations like "isLoaded(String)" added to ClasspathMonitor.
+      </action>
+    </release>
+
+    <release version="0.9.6" date="02-May-2009"
+             description="version for Stuttgarter TestTage 2009">
+      <action dev="oboehm" type="add" date="2009-04-30">
+        @NotYetImplemented added.
+      </action>
+      <action dev="oboehm" issue="2777814" type="fix" 
+              system="Sourceforge" date="2009-04-24" >
+        @DontProfileMe provided to mark methods which should be not profiled.
+      </action>
+      <action dev="oboehm" issue="2777819" type="fix" 
+              system="Sourceforge" date="2009-04-22" >
+        Only methods of classes marked with "@ProfileMe" are added initialized
+        for ProfileMonitor but not methods of super classes.
+      </action>
+      <action dev="oboehm" type="update">
+        @UnsupportedOperation accepts now a string as parameter.
+      </action>
+      <action dev="oboehm" type="add">
+        Unused classes can be detected with the new attribute
+        "unusedClasses" of ClasspathMonitor.
+      </action>      
+      <action dev="oboehm" type="add">
+        ClasspathMonitor has now a logMe and dumpMe operation for JMX.
+        And it has a new attribute "classpathClasses".
+      </action>
+      <action dev="oboehm" type="update">
+        ClasspathMonitor.getClasspath() works now in a web environment
+        (but only for Tomcat; for other servlet engines or appservers
+        the system property java.class.path is used).
+      </action>
+      <action dev="oboehm" type="add">
+        @SuppressStreamWarning added.
+      </action>
+      <action dev="oboehm" type="update">
+        With (Abstract)ProfileAspect it is now possible to find methods or
+        constructors which are never called.
+      </action>
+      <action dev="oboehm" issue="2745302" type="fix" 
+              system="Sourceforge" date="2009-04-09" >
+        no longer double entries with ProfileStatistic
+      </action>
+    </release>
+
+    <release version="0.9.5" date="31-Mar-2009"
+             description="version for giropay">
+      <action dev="oboehm" type="update">
+        All annotation for the other patterntesting subprojects starts now
+        with patterntesting.annotation.
+      </action>    
+      <action dev="oboehm" issue="2719516" type="fix" 
+              system="Sourceforge" date="2009-03-29" >
+        Correct summary with SimpleProfileMonitor
+      </action>
+    </release>
+
+    <release version="0.9.1" date="20-Mar-2009"
+             description="version for Q1/2009">
+      <action dev="oboehm" type="add">
+        Abstract calls in constructors are damned now.
+      </action>
+      <action dev="oboehm" type="add">
+        Design by Contract (DbC) is supported via DbC class and Contract
+        interface.
+      </action>
+      <action dev="oboehm" type="add">
+        CollectionsAspect protects critical methods of Collections
+        (e.g. binarySearch) by DbC.
+      </action>
+      <action dev="oboehm" type="add">
+        ClasspathMonitor added as JMX bean to check classpath problems
+        and to find unused jar files.
+      </action>
+      <action dev="oboehm" type="add">
+        MBeanRegistryAspect provides a default implementation for the
+        MBeanRegistry interface. With this interface you can easily register
+        your MBean at the mbean server.
+      </action>
+      <action dev="oboehm" type="update">
+        Because of problems when JAMon 2.0 was found in the classpath only
+        JAMon 2.4 will be used now by the ProfileStatistic class.
+        Otherwise the SimpleProfileMonitor will be used.
+      </action>
+      <action dev="oboehm" type="update">
+        The SimpleProfileMonitor measures now time in nanosecond precision
+        (tested under Linux and MacOS-X).
+      </action>
+      <action dev="oboehm" type="add">
+        ReflectionHelper added which allows easier access to private or
+        protected fields.
+      </action>
+    </release>
+
+    <release version="0.9.0" date="22-Jan-2009"
+             description="version for 2009">
+      <action dev="oboehm" type="add">
+        supporting better ConnectExceptions
+      </action>
+      <action dev="oboehm" type="add">
+        extended thread support:
+        with @RunParallel you can mark methods which should be started parallel
+        (e.g. for testing);
+        with @RunBackground you can mark methods which should be started as
+        background task
+      </action>
+      <action dev="oboehm" type="add">
+        MonitorGuard is added to be able to watch memory consumption.
+        At once it is also an example for "@RunBackground".
+      </action>
+      <action dev="oboehm" type="update">
+        @DamnSystemOut is no longer needed as annotation because it is
+        the default now.
+      </action>
+      <action dev="oboehm" type="remove">
+        depencency to net.jcip removed
+      </action>
+      <action>
+        still supporting Java 5
+      </action>
+    </release>
+
+    <release version="0.8.1" date="28-Dec-2008"
+             description="profiling support">
+      <action dev="oboehm" type="add">
+        Better exception if XMLReaderFactory.createXMLReader()
+        fails.
+      </action>
+      <action dev="oboehm" type="add">
+        Profile support added which can be activated by @ProfileMe
+        and monitored via JMX.
+      </action>
+    </release>
+
+    <release version="0.8.0" date="12-Dec-2008"
+             description="project split">
+      <action dev="oboehm" type="add">
+        The project was splitted in several subparts:
+        patterntesting-parent,
+        patterntesting-rt (runtime),
+        patterntesting-check,
+        patterntesting-tools,
+        patterntesting-samples.
+      </action>
+      <action dev="oboehm" type="add">
+        You can prevent classes during static initialization by annotating
+        them with @GuardInitialization.
+      </action>
+      <action dev="oboehm" type="add">
+        Methods which are not or not fully implemented can be mark with a
+        @UnsupportedOperation. They will throw an UnsupportedOperationException
+        if some other methods call them accidentally.
+      </action>
+    </release>
+
+    <release version="0.6.x" date="2008"
+             description="before the split (see patterntesting-parent)" >
+      <action dev="oboehm" type="update">
+        See patterntesting-parent for the history.
+      </action>
+    </release>
+
+  </body>
+
+</document>

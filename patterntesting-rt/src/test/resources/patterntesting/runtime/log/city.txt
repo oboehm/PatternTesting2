@@ -1,0 +1,5 @@
+title city
+
+# SequenceDiagramTest ->  +City 70839: <<create>>
+SequenceDiagramTest ->  +City 70839: getId()
+City 70839 --> -SequenceDiagramTest: 70839

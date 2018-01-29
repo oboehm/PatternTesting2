@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>Was ist PatternTesting-Runtime?</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <section name="Einleitung">
+      <p>
+        <i>PatternTesting Runtime</i> ist die Basis f&#252;r alle
+        PatternTesting-Komponenten. PatternTesting Runtime bringt alle
+        Annotationen mit, die von den anderen Komponenten ben&#246;tigt
+        werden.
+      </p>
+      <p>
+        <i>PatternTesting-Runtime</i> bringt einige Aspekte mit, die &#252;ber
+        Annotationen aus <code>patterntesting.runtime.annotation</code>
+        gesteuert werden. Dazu muss <i>patterntesting-rt-x.x.x.jar</i>
+        als Aspekt-Bibliothek ins Projekt eingebunden werden.
+      </p>
+      <p>
+        <i>PatternTesting-Runtime</i> kann auch als reine Java-Bibliothek
+        eingebunden werden, wenn man z.B. nur den
+        <a href="../apidocs/patterntesting/runtime/monitor/ClasspathMonitor.html">ClasspathMonitor</a>
+        einsetzen will.
+      </p>
+            
+    </section>
+
+    <section name="Some examples">
+
+      <p>
+      	Here are some improvements that <i>PatternTesting-Runtime</i>
+      	provides to your application:
+      </p>
+      <ul>
+        <li>
+          Logging:
+          There are some frameworks like Spring-Webflow which cut this
+          information in the stacktrace. If you want to see the full
+          stacktrace you can mark your class with
+          <code>@LogRuntimeException</code> which logs all you
+          RuntimeExceptions.
+        </li>
+        <li>
+          Initialization:
+          If a class fails during static initialization you'll get not only
+          an InitializationError for the first time but also an
+          ClassNotFoundException the next times. This can be confusing and
+          anoying.
+          With <code>@GuardInitialization</code> you can tell
+          PatternTesting-Check to catch each Exception during initialization.
+        </li>
+        <li>
+          Developer support:
+          Your implementation of your some methods are not finished?
+          Mark them with <code>@UnsupportedOperation</code> and the
+          caller will get a UnsupportedOperationException.
+          This is better as to deal with a result which may be wrong because
+          the the implementation is not yet finished.
+        </li>
+      </ul>
+
+    </section>
+
+  </body>
+
+</document>

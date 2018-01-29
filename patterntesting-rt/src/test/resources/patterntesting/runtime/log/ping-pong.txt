@@ -1,0 +1,12 @@
+title ping-pong
+
+# SequenceDiagramTest ->  +Player P1: <<create>>
+# SequenceDiagramTest ->  +Player P2: <<create>>
+SequenceDiagramTest ->  +Player P2: startPingPong(3)
+Player P2 ->  +Player P1: ping("ping")
+Player P1 --> -Player P2: pong
+Player P2 ->  +Player P1: ping("pong")
+Player P1 --> -Player P2: ping
+Player P2 ->  +Player P1: ping("ping")
+Player P1 --> -Player P2: pong
+Player P2 --> -SequenceDiagramTest:

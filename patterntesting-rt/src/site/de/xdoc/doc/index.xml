@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>Dokumentation</title>
+  </properties>
+
+  <body>
+
+    <section name="Hello World">
+      <p>
+        Das alt-bekannte Hello-World-Beispiel findet man im
+        <a href="http://patterntesting.sourceforge.net/wiki/index.php/Hello_World">Wiki</a>
+        oder (f&#252;r &#228;ltere PatternTesting-Versionen) in
+        <a href="http://oli.blogger.de/stories/1242343/">Oli's Blog</a>.
+      </p>
+    </section>
+    
+    <section name="Weitere Beispiele">
+      <p>
+        Weitere Beispiele gibt es unter 
+        <a href="../../../samples/de/index.html">PatternTesting-Samples</a>.
+      </p>
+    </section>
+
+  </body>
+  
+</document>

@@ -1,0 +1,18 @@
+actor(S0,"SequenceGrapherTest");
+object(D1,":Date");
+step();
+step();
+active(S0);
+
+# Message sequences
+message(S0,D1,"getTime()");
+active(D1);
+step();
+return_message(D1,S0,"12:34 \"MEZ\"");
+inactive(D1);
+
+# Complete the lifelines
+step();
+complete(D1);
+complete(S0);
+.PE

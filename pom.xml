@@ -47,6 +47,7 @@
    -->
   <modules>
     <module>doc</module>
+    <module>patterntesting-rt</module>
   </modules>
 
   <licenses>
@@ -111,8 +112,229 @@
       the libraries are (normally) alphabetically sorted.
       see http://www.ibiblio.org/maven2/ for available libraries
    -->
-  <!-- TODO: add dependencyManagement (20-Nov-2017, oboehm) -->
+  <dependencyManagement>
 
+    <dependencies>
+      <dependency>
+        <groupId>commons-collections</groupId>
+        <artifactId>commons-collections</artifactId>
+        <version>3.2.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.5</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>1.1.1</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>[1.4,)</version>
+      </dependency>
+      <dependency>
+        <groupId>com.ecyrd.speed4j</groupId>
+        <artifactId>speed4j</artifactId>
+        <version>0.18</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>jsr305</artifactId>
+        <version>3.0.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.jamonapi</groupId>
+        <artifactId>jamon</artifactId>
+        <version>2.75</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fdsapi</groupId>
+        <artifactId>fdsapi</artifactId>
+        <version>1.0.4</version>
+      </dependency>
+      <dependency>
+        <groupId>com.thoughtworks.xstream</groupId>
+        <artifactId>xstream</artifactId>
+        <version>1.4.4</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>1.1.0.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>[4.5,4.12]</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-library</artifactId>
+        <version>1.3</version>
+      </dependency>
+
+      <!-- Logging (Log4J v2) -->
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>[2.6.2,2.7]</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>[2.6.2,2.7]</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.ant</groupId>
+        <artifactId>ant</artifactId>
+        <version>1.7.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.ant</groupId>
+        <artifactId>ant-launcher</artifactId>
+        <version>1.7.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.8</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.10.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.7</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.6</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.19.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjrt</artifactId>
+        <version>1.8.7</version>
+      </dependency>
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjtools</artifactId>
+        <version>1.8.7</version>
+      </dependency>
+      <dependency>
+        <groupId>org.easymock</groupId>
+        <artifactId>easymock</artifactId>
+        <version>2.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>5.0.1.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hsqldb</groupId>
+        <artifactId>hsqldb</artifactId>
+        <version>2.3.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>2.4.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.patterntesting</groupId>
+        <artifactId>patterntesting-agent</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.patterntesting</groupId>
+        <artifactId>patterntesting-rt</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.patterntesting</groupId>
+        <artifactId>patterntesting-check-ct</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.patterntesting</groupId>
+        <artifactId>patterntesting-check-rt</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.patterntesting</groupId>
+        <artifactId>patterntesting-concurrent</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.patterntesting</groupId>
+        <artifactId>patterntesting-exception</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.patterntesting</groupId>
+        <artifactId>patterntesting-tools</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.patterntesting</groupId>
+        <artifactId>patterntesting-benchmark</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <!-- Spring -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${version.spring}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${version.spring}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${version.spring}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>xmlunit</groupId>
+        <artifactId>xmlunit</artifactId>
+        <version>1.3</version>
+      </dependency>
+      <!-- OSGi -->
+      <dependency>
+        <groupId>org.osgi</groupId>
+        <artifactId>org.osgi.core</artifactId>
+        <version>4.3.0</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.osgi</groupId>
+        <artifactId>org.osgi.compendium</artifactId>
+        <version>4.2.0</version>
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+
+  </dependencyManagement>
+
+  
   <!-- 
       libraries which are needed by all sub modules
    -->
@@ -294,10 +516,47 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <!-- 3.1 does not work together with maven-aspect-plugin 1.5 -->
+        <version>2.5.1</version>
         <configuration>
           <source>${maven.compile.source}</source>
           <target>${maven.compile.target}</target>
+          <showDeprecation>true</showDeprecation>
+          <showWarnings>true</showWarnings>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>aspectj-maven-plugin</artifactId>
+        <version>1.9</version>
+        <configuration>
+          <source>${maven.compile.source}</source>
+          <target>${maven.compile.target}</target>
+          <complianceLevel>${maven.compile.complianceLevel}</complianceLevel>
+          <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
+        </configuration>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <configuration>
+              <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
+            </configuration>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <configuration>
+              <ajdtBuildDefFile>src/test/build.ajproperties</ajdtBuildDefFile>
+            </configuration>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 	  <!-- see http://maven.apache.org/plugins/maven-surefire-plugin/examples/inclusion-exclusion.html -->
 	  <plugin>
@@ -413,8 +672,7 @@
 
   </build>
   
-  
-  
+
   <reporting>
     <plugins>
       <plugin>
@@ -1007,7 +1265,7 @@
     <!-- ignore violations -->
     <sonar.issue.ignore.multicriteria>1,2,3,4,5,6,7,8,9,10,11,12,106,112,1312,1313,1698,1872,2159,2232,2250,2259,2384,2386</sonar.issue.ignore.multicriteria>
     
-    <version.spring>1.5.6.RELEASE</version.spring>
+    <version.spring>5.0.3.RELEASE</version.spring>
 
     <!--
       Make the deployment site pluggable. This allows to switch to

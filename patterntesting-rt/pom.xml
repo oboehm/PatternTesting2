@@ -1,0 +1,379 @@
+<!--
+    $Id: pom.xml,v 1.115 2017/11/09 20:34:51 oboehm Exp $
+
+	Project Object Model (POM) for Maven
+	If you are behind a proxy try the following command:
+		'mvn -Dhttp.proxyHost=10.253.1.158 -Dhttp.proxyPort=8080 validate'
+	Instead of 'validate' you can use also another goal. The following goals
+	should work (see also iX 2/2006, p.77):
+		validate
+		generate-sources
+		install
+	
+	Some other useful goals are:
+	    jar
+	    source:jar
+	    source:test-jar
+	
+	PS: If you want to update the maven plugins use the option -U.
+
+	see http://maven.apache.org/guides/introduction/introduction-to-the-pom.html
+	see http://maven.apache.org/pom.htm
+	
+    (c)reated 13-Mar-07 by ob@aosd.de
+	last up$Date: 2017/11/09 20:34:51 $ by $Author: oboehm $
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <groupId>org.patterntesting</groupId>
+    <artifactId>patterntesting-parent</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+  </parent>
+	
+  <!-- 
+      The Basics
+      must be set if you want to upload it to the Central Repository
+      see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+   -->	
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>patterntesting-rt</artifactId>
+  <packaging>jar</packaging>
+  <name>patterntesting-rt</name>
+  <!-- see http://maven.apache.org/pom.html#Licenses -->
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <url>http://patterntesting.org/release/runtime/</url>
+
+  <inceptionYear>2002</inceptionYear>
+  <description>
+    PatternTesting Runtime (patterntesting-rt) is the runtime component for
+    the PatternTesting framework. It provides the annotations and base classes
+    for the PatternTesting testing framework (e.g. patterntesting-check,
+    patterntesting-concurrent or patterntesting-exception) but can be also
+    used standalone for classpath monitoring or profiling.
+    It uses AOP and AspectJ to perform this feat.
+  </description>
+
+  
+  <!-- 
+      Deployment
+      see "Better Builds with Maven", p. 74
+      see http://maven.apache.org/plugins/maven-deploy-plugin/
+  -->
+  <distributionManagement>
+    <!--
+        Deployment of the Web-Site 
+        (try 'mvn site-deploy' to deploy it)
+    -->
+    <site>
+      <id>ftp-patterntesting.org</id>
+      <name>PatternTesting Website</name>
+      <url>${patterntesting.site.url}/${project.version}/runtime/</url>
+    </site>
+  </distributionManagement>
+  
+  <scm>
+    <connection>scm:cvs:pserver:anonymous@patterntesting.cvs.sourceforge.net:/cvsroot/patterntesting:PatternTesting10/patterntesting-rt</connection>
+    <url>http://patterntesting.cvs.sourceforge.net/viewvc/patterntesting/PatternTesting10/patterntesting-rt/</url>
+    <tag>patterntesting-1_3_0</tag>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Vincent Massol</name>
+      <id>vmassol</id>
+      <email>vmassol@pivolis.com</email>
+      <organization>Pivolis</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Matt Smith</name>
+      <id>ojojo</id>
+      <email>matt@ojojo.com</email>
+      <organization>ojojo</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Oliver Boehm</name>
+      <id>oboehm</id>
+      <email>ob@aosd.de</email>
+      <url>http://www.aosd.de/</url>
+      <organization>Java User Group Stuttgart</organization>
+      <organizationUrl>http://jugs.org/</organizationUrl>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+  </developers>
+  <contributors>
+    <contributor>
+      <name>Shohara Shaikh</name>
+      <email />
+      <organization>KPIT Cummins</organization>
+      <roles>
+        <role>Java Devleoper</role>
+      </roles>
+    </contributor>
+  </contributors>
+  
+  <!-- 
+	  L I B R A R I E S
+	  see http://www.ibiblio.org/maven2/ for available libraries
+   -->
+  <dependencies>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+    </dependency>
+    <!-- optional: XStream for serialization -->
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <!-- optional: JAMon (Java and Performance Monitor) -->
+    <dependency>
+      <groupId>com.jamonapi</groupId>
+      <artifactId>jamon</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+    </dependency>
+    <!-- not only for testing -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- needed for testing -->
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-library</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.c2.fit</groupId>
+        <artifactId>fit</artifactId>
+        <version>1.1</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-catalina</artifactId>
+      <version>8.5.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- logging -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+    </dependency>
+    <!-- Spring -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <!-- 
+      General Properties
+      (see parent POM)
+   -->
+  <properties>
+    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/runtime/</patterntesting.site.artifact.dir>
+  </properties> 
+
+  <!-- Build Settings -->
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+        <includes>
+          <include>**/*.template</include>
+          <include>**/*.txt</include>
+        </includes>
+      </resource>
+    </resources>
+    <extensions>
+      <!-- Enabling the use of FTP -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+         <artifactId>wagon-ftp</artifactId>
+      </extension>
+    </extensions>
+    <plugins>
+	  <!-- see http://maven.apache.org/plugins/maven-surefire-plugin/examples/inclusion-exclusion.html -->
+	  <plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>**/AjcTestCase.java</exclude>
+            <exclude>**/TestThreadAspect*.java</exclude>
+            <exlcude>**/TestOn*.java</exlcude>
+          </excludes>
+        </configuration>
+	  </plugin>
+	  <!-- see http://maven.apache.org/plugins/maven-source-plugin/usage.html -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- 
+          provide it as bundle
+          see http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html
+       -->
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Import-Package>
+              !com.jamonapi,
+              *
+            </Import-Package>
+            <Export-Package>
+              patterntesting.annotation**,
+              patterntesting.runtime,
+              patterntesting.runtime.*
+            </Export-Package>
+            <Private-Package>
+              patterntesting.runtime.experimental,
+              patterntesting.runtime.junit.internal
+            </Private-Package>
+          </instructions>
+        </configuration>
+        <executions>
+          <execution>
+            <id>bundle-manifest</id>
+            <phase>process-classes</phase>
+            <goals>    
+              <goal>manifest</goal>
+            </goals>   
+          </execution>
+        </executions>
+      </plugin>
+      <!--
+          see "Adding OSGi metadata to existing projects without changing the packaging type"
+          (http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html)
+       -->
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>  
+            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+          </archive> 
+        </configuration>
+      </plugin>
+      <!-- we want an Uber JAR -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>uberjar</shadedClassifierName>
+              <artifactSet>
+                <excludes>
+                  <exclude>com.jamonapi:jamon</exclude>
+                  <exclude>com.c2.fit:fit</exclude>
+                  <exclude>org.easymock:easymock</exclude>
+                </excludes>
+              </artifactSet>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+ 
+  </build>
+
+</project>

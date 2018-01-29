@@ -1,0 +1,5 @@
+title add-address
+
+# SequenceDiagramTest ->  +AddressBook A0: <<create>>
+SequenceDiagramTest ->  +AddressBook A0: addAddress(Home)
+AddressBook A0 --> -SequenceDiagramTest:

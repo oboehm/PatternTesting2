@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout
+        pattern="%d{HH:mm:ss,SSS}[%-5.5t]%-5p%-30.30c{3} %m%n" />
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Logger name="patterntesting.runtime.junit.NetworkTester" level="debug"/>
+    <Logger name="patterntesting.runtime.junit.internal" level="warn"/>
+    <!-- needed to test TraceAspect -->
+    <Logger name="patterntesting.runtime.log.Trace" level="debug"/>
+    <!-- to increase test coverage for SqlStatistic -->
+    <Logger name="patterntesting.runtime.monitor.db.SqlStatistic" level="debug"/>
+    <!-- to increase test coverage of MemoryGuard -->
+    <Logger name="patterntesting.runtime.monitor.MemoryGuard" level="debug"/>
+    <Root level="info" additivity="false">
+      <AppenderRef ref="console" />
+    </Root>
+  </Loggers>
+</Configuration>

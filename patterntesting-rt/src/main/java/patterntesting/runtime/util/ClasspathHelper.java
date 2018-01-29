@@ -1,0 +1,96 @@
+/**
+ * $Id: ClasspathHelper.java,v 1.9 2016/12/18 20:19:36 oboehm Exp $
+ *
+ * Copyright (c) 2009 by Oliver Boehm
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express orimplied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * (c)reated 27.07.2009 by oliver (ob@oasd.de)
+ */
+
+package patterntesting.runtime.util;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.*;
+
+/**
+ * This class contains some helper classes which are used inside
+ * ClasspathMonitor <b>and</b> ClasspathDigger. Some of the methods were
+ * formerly placed in ClasspathMonitor but also needed by ClasspathDigger. To
+ * avoid dependencies from ClasspathDigger to ClasspathMonitor the common
+ * methods were moved to this class here.
+ *
+ * @author oliver
+ * @version $Revision: 1.9 $
+ * @since 27.07.2009
+ */
+public final class ClasspathHelper {
+
+	private static final Logger LOG = LogManager.getLogger(ClasspathHelper.class);
+
+	/** to avoid instantiation */
+	private ClasspathHelper() {
+	}
+
+	/**
+	 * Don't use @ProfileMe here! This method is also used when ProfileStatistic
+	 * is set up!.
+	 *
+	 * @param path
+	 *            e.g. "jar:file:/a/b/c.jar!/d/e.class
+	 * @param resource
+	 *            e.g. "/d/e.class"
+	 * @return e.g. "jar:file:/a/b/c.jar"
+	 */
+	public static URI getParent(final URI path, final String resource) {
+		String p = removeTrailingSlash(path.toString());
+		String res = removeTrailingSlash(resource);
+		String parent = StringUtils.removeEnd(p, res);
+		parent = removeTrailingSlash(parent);
+		if (parent.endsWith("!")) {
+			parent = parent.substring(0, (parent.length() - 1));
+		}
+		try {
+			return new URI(parent);
+		} catch (URISyntaxException canthappen) {
+			LOG.error("can't extract " + resource + " from " + path, canthappen);
+			return path;
+		}
+	}
+
+	private static String removeTrailingSlash(final String s) {
+		if (s.endsWith("/") || s.endsWith("\\")) {
+			return s.substring(0, (s.length() - 1));
+		}
+		return s;
+	}
+
+	/**
+	 * Gets the parent of the given class.
+	 *
+	 * @param path
+	 *            e.g. "jar:file:/a/b/c.jar!/d/e.class
+	 * @param clazz
+	 *            e.gl. "d.e.class"
+	 * @return e.g. "jar:file:/a/b/c.jar"
+	 */
+	public static URI getParent(final URI path, final Class<?> clazz) {
+		String resource = Converter.toResource(clazz);
+		return getParent(path, resource);
+	}
+
+}
