@@ -20,18 +20,19 @@
 package patterntesting.runtime.monitor;
 
 
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.RunWith;
+import patterntesting.runtime.annotation.ProfileMe;
+import patterntesting.runtime.junit.SmokeRunner;
 
+import javax.management.JMException;
+import javax.management.MBeanServer;
 import java.lang.management.ManagementFactory;
 
-import javax.management.*;
-
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-import org.junit.runner.*;
-
-import patterntesting.runtime.annotation.*;
-import patterntesting.runtime.junit.SmokeRunner;
+import static org.junit.Assert.*;
 
 /**
  * The Class ProfileTest.
@@ -46,7 +47,7 @@ public final class ProfileTest {
     private static final Logger log = LogManager.getLogger(ProfileTest.class);
     private static final MBeanServer mbeanServer = ManagementFactory
             .getPlatformMBeanServer();
-    private static ProfileStatistic statistic = ProfileStatistic.getInstance();
+    private static final ProfileStatistic statistic = ProfileStatistic.getInstance();
 
     static {
         // must be called to activate the ProfileStatistic for Dummy class
@@ -90,7 +91,7 @@ public final class ProfileTest {
             callDummy();
         }
         Integer maxCalls = (Integer) mbeanServer.getAttribute(statistic.getMBeanName(), "MaxHits");
-        assertTrue(maxCalls.intValue() >= calls);
+        assertTrue(maxCalls >= calls);
     }
 
     @ProfileMe
@@ -105,7 +106,7 @@ public final class ProfileTest {
      * @throws InterruptedException the interrupted exception
      */
     @Test
-    public void testRun() throws JMException, InterruptedException {
+    public void testRun() throws JMException {
         mbeanServer.invoke(statistic.getMBeanName(), "logStatistic", null, null);
     }
 
@@ -113,14 +114,13 @@ public final class ProfileTest {
      * Test get profile monitor.
      */
     @Test
-    @SkipTestOn(osName = {"Mac", "Win"}, hide = true)
     public void testGetProfileMonitor() {
         synchronized (statistic) {
             callDummy();    // we must call it for this test!
             ProfileMonitor monitor = statistic.getProfileMonitor(this.getClass(),
                     "callDummy()");
-            assertNotNull(monitor);
-            assertTrue(monitor.getHits() > 0);
+            assertNotNull("cannot get monitor wit " + statistic, monitor);
+            assertTrue("no hit received for " + monitor, monitor.getHits() > 0);
         }
     }
 
