@@ -22,11 +22,10 @@ package patterntesting.runtime.monitor;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
-import org.junit.runner.RunWith;
 import patterntesting.runtime.annotation.ProfileMe;
-import patterntesting.runtime.junit.SmokeRunner;
 
 import javax.management.JMException;
 import javax.management.MBeanServer;
@@ -41,7 +40,6 @@ import static org.junit.Assert.*;
  * @version $Revision: 1.17 $
  * @since 22.12.2008
  */
-@RunWith(SmokeRunner.class)
 public final class ProfileTest {
 
     private static final Logger log = LogManager.getLogger(ProfileTest.class);
@@ -49,8 +47,12 @@ public final class ProfileTest {
             .getPlatformMBeanServer();
     private static final ProfileStatistic statistic = ProfileStatistic.getInstance();
 
-    static {
-        // must be called to activate the ProfileStatistic for Dummy class
+    /**
+     * A method of the Dummy class is called so that the ProflieStatistic for
+     * it is activated.
+     */
+    @BeforeClass
+    public static void registerDummy() {
         Dummy.hello();
     }
 
@@ -96,7 +98,8 @@ public final class ProfileTest {
 
     @ProfileMe
     private void callDummy() {
-        Dummy.hello();
+        String hello = Dummy.hello();
+        log.info("Dummy.hello() says '{}'.", hello);
     }
 
     /**
@@ -119,7 +122,7 @@ public final class ProfileTest {
             callDummy();    // we must call it for this test!
             ProfileMonitor monitor = statistic.getProfileMonitor(this.getClass(),
                     "callDummy()");
-            assertNotNull("cannot get monitor wit " + statistic, monitor);
+            assertNotNull("cannot get monitor with " + statistic, monitor);
             assertTrue("no hit received for " + monitor, monitor.getHits() > 0);
         }
     }

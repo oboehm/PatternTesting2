@@ -1,7 +1,5 @@
 /**
- * $Id: ProfileAspect.aj,v 1.4 2016/12/18 20:19:41 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2018 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +18,11 @@
 package patterntesting.runtime.monitor;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 
-import patterntesting.runtime.annotation.DontProfileMe;
-import patterntesting.runtime.annotation.ProfileMe;
+import patterntesting.runtime.annotation.*;
 
 /**
  * @author <a href="boehm@javatux.de">oliver</a>
@@ -76,12 +73,13 @@ public aspect ProfileAspect extends AbstractProfileAspect {
         staticinitialization(@ProfileMe *..*);
 
     /**
-     * Put the profiled into the internal statistic table after the the class
-     * is initialized.
+     * Put the profiled class into the internal statistic table after the the
+     * class is initialized.
      */
     @SuppressAjWarnings({"adviceDidNotMatch"})
     after() : profiledClasses() {
         Signature sig = thisJoinPointStaticPart.getSignature();
+        log.trace("Putting {} into the statistic table.", sig);
         ProfileStatistic.getInstance().init(sig.getDeclaringType());
     }
 

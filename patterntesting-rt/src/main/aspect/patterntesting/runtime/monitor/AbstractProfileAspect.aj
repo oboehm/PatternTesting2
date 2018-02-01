@@ -33,6 +33,8 @@ import patterntesting.runtime.util.JoinPointHelper;
  */
 public abstract aspect AbstractProfileAspect {
 
+    private static final Logger LOG = LogManager.getLogger(AbstractProfileAspect.class);
+
     /**
      * To get the aspect specific logger.
      * @return the logger
@@ -52,11 +54,13 @@ public abstract aspect AbstractProfileAspect {
     @SuppressAjWarnings({"adviceDidNotMatch"})
     Object around() : applicationCode() {
         Signature sig = thisJoinPoint.getSignature();
+        LOG.trace("Profiling {}...", sig);
         ProfileMonitor mon = ProfileStatistic.start(sig);
         try {
             return proceed();
         } finally {
             mon.stop();
+            LOG.trace("Profiling {} ended.", sig);
             log(thisJoinPoint, mon.getLastValue());
         }
     }

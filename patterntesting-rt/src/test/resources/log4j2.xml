@@ -15,6 +15,9 @@
     <Logger name="patterntesting.runtime.monitor.db.SqlStatistic" level="debug"/>
     <!-- to increase test coverage of MemoryGuard -->
     <Logger name="patterntesting.runtime.monitor.MemoryGuard" level="debug"/>
+    <!-- to trace problems on Travis... -->
+    <logger name="patterntesting.runtime.monitor.AbstractProfileAspect" level="trace"/>
+    <logger name="patterntesting.runtime.monitor.ProfileAspect" level="trace"/>
     <Root level="info" additivity="false">
       <AppenderRef ref="console" />
     </Root>
