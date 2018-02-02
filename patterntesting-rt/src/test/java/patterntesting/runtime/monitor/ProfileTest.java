@@ -118,6 +118,7 @@ public final class ProfileTest {
      */
     @Test
     public void testGetProfileMonitor() {
+    		log.info("testGetProfileMonitor() is started.");
         synchronized (statistic) {
             callDummy();    // we must call it for this test!
             if (statistic.isResetted()) {
@@ -126,7 +127,10 @@ public final class ProfileTest {
             }
             ProfileMonitor monitor = statistic.getProfileMonitor(this.getClass(),
                     "callDummy()");
-            assertNotNull("cannot get monitor with " + statistic, monitor);
+            if (monitor == null) {
+            		statistic.logStatistic();
+            		fail("callDummy() does not appear in statistic.");
+            }
             assertTrue("no hit received for " + monitor, monitor.getHits() > 0);
         }
     }
