@@ -120,6 +120,7 @@ public final class ProfileTest {
     public void testGetProfileMonitor() {
         synchronized (statistic) {
             callDummy();    // we must call it for this test!
+            callDummy();
             ProfileMonitor monitor = statistic.getProfileMonitor(this.getClass(),
                     "callDummy()");
             assertNotNull("cannot get monitor with " + statistic, monitor);
