@@ -60,7 +60,7 @@ public abstract aspect AbstractProfileAspect {
             return proceed();
         } finally {
             mon.stop();
-            LOG.trace("Profiling {} ended.", sig);
+            LOG.trace("Profiling {} ended with {}.", sig, mon);
             log(thisJoinPoint, mon.getLastValue());
         }
     }
