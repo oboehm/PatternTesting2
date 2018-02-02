@@ -128,7 +128,7 @@ public final class ProfileTest {
             ProfileMonitor monitor = statistic.getProfileMonitor(this.getClass(),
                     "callDummy()");
             if (monitor == null) {
-            		log.error("No statistic found for {}.callDummy().", this.getClass());
+            		log.error("No statistic found for {} and method callDummy().", this.getClass());
             		statistic.logStatistic();
             		fail("callDummy() does not appear in statistic.");
             }

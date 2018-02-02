@@ -154,11 +154,11 @@
       <optional>true</optional>
     </dependency>
     <!-- optional: JAMon (Java and Performance Monitor) -->
-    <dependency>
-      <groupId>com.jamonapi</groupId>
-      <artifactId>jamon</artifactId>
-      <optional>true</optional>
-    </dependency>
+<!--     <dependency> -->
+<!--       <groupId>com.jamonapi</groupId> -->
+<!--       <artifactId>jamon</artifactId> -->
+<!--       <optional>true</optional> -->
+<!--     </dependency> -->
     <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>

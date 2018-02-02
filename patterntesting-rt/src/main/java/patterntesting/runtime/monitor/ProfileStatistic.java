@@ -329,7 +329,7 @@ public class ProfileStatistic extends Thread implements ProfileStatisticMBean {
 	 */
 	public ProfileMonitor startProfileMonitorFor(final String sig) {
 		ProfileMonitor mon = factory.getMonitor(sig);
-		LOG.trace("Starting {} for {}.", mon, sig);
+		LOG.trace("Starting '{}' for {}.", mon, sig);
 		mon.start();
 		return mon;
 	}
