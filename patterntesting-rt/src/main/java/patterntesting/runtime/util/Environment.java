@@ -354,7 +354,10 @@ public class Environment {
 			Manifest manifest = jarfile.getManifest();
 			Attributes attributes = manifest.getMainAttributes();
 			String version = attributes.getValue("version");
-			if ("JAMon 2.4".equalsIgnoreCase(version) || (version.compareTo("JAMon 2.7") >= 0)) {
+			if (version == null) {
+				LOG.info("JAMon in {} available for profiling.", jarfile.getName());
+				return true;
+			} else if ("JAMon 2.4".equalsIgnoreCase(version) || (version.compareTo("JAMon 2.7") >= 0)) {
 				LOG.info("{} available for profiling.", version);
 				return true;
 			} else {
