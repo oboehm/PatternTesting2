@@ -152,17 +152,29 @@ public class ProfileStatistic extends Thread implements ProfileStatisticMBean {
 	 * 0 hits to see which methods or constructors are never called.
 	 */
 	@Override
-	public void reset() {
-		synchronized (ProfileStatistic.class) {
-			List<String> labels = new ArrayList<>();
-			ProfileMonitor[] monitors = getMonitors();
-			for (int i = 0; i < monitors.length; i++) {
-				if (monitors[i].getHits() == 0) {
-					labels.add(monitors[i].getLabel());
-				}
+	synchronized public void reset() {
+		List<String> labels = new ArrayList<>();
+		ProfileMonitor[] monitors = getMonitors();
+		for (int i = 0; i < monitors.length; i++) {
+			if (monitors[i].getHits() == 0) {
+				labels.add(monitors[i].getLabel());
 			}
-			this.factory.addMonitors(labels);
 		}
+		this.factory.addMonitors(labels);
+		LOG.debug("{} is resetted.", this);
+	}
+	
+	/**
+	 * Looks if the statistic was resetted.
+	 * 
+	 * @return true if statistic has no hits.
+	 */
+	public boolean isResetted() {
+		int sum = 0;
+		for (ProfileMonitor monitor : getMonitors()) {
+			sum += monitor.getHits();
+		}
+		return sum == 0;
 	}
 
 	/**
