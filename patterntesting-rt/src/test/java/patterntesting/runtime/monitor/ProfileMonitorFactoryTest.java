@@ -18,15 +18,18 @@
 
 package patterntesting.runtime.monitor;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 
 /**
  * Unit tests for {@link ProfileMonitorFactory}.
@@ -76,7 +79,26 @@ public abstract class ProfileMonitorFactoryTest {
 	}
 
 	/**
-	 * Test method for {@link ProfileMonitorFactory#addMonitors(List)}.
+	 * Test method for {@link ProfileMonitorFactory#getMonitor(String)}.
+	 * If the maximum number of monitors is unlimited this method works ok.
+	 * But if the maximum number is set and is reached the JamonMonitorFactory
+	 * fall back to a NullMonitor which causes problems.
+	 */
+	@Test
+	public void testGetMonitor() {
+		factory.setMaxNumMonitors(11);
+		for (int i = 0; i < 16; i++) {
+			String label = "label_" + Integer.toHexString(i);
+			ProfileMonitor mon = factory.getMonitor(label);
+			assertThat(mon.toString(), containsString(label));
+		}
+	}
+
+	/**
+	 * Test method for {@link ProfileMonitorFactory#addMonitors(List)} together
+	 * with {@link ProfileMonitorFactory#setMaxNumMonitors(int)}. If the max.
+	 * number of monitors is reached adding more monitors should not increase
+	 * this number. I.e. old monitors must be removed by adding new ones.
 	 */
 	@Test
 	public void testAddMonitors() {

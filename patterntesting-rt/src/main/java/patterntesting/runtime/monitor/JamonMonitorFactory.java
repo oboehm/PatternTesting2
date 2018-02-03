@@ -19,16 +19,15 @@
  */
 package patterntesting.runtime.monitor;
 
+import com.jamonapi.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.aspectj.lang.Signature;
+import patterntesting.runtime.util.SignatureHelper;
+
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.apache.logging.log4j.*;
-import org.aspectj.lang.Signature;
-
-import com.jamonapi.*;
-
-import patterntesting.runtime.util.SignatureHelper;
 
 /**
  * This is a thin wrapper around com.jamonapi.MonitorFactory to keep the
@@ -89,6 +88,10 @@ public final class JamonMonitorFactory extends ProfileMonitorFactory {
 			factory = new FactoryEnabled();
 			monitorFactories.put(label, factory);
 		}
+//		if (factory.getMap().size() >= factory.getMaxNumMonitors()) {
+//			LOG.debug("Limit of {} monitors is reached and will be increased.", factory.getMaxNumMonitors());
+//			factory.setMaxNumMonitors(factory.getMaxNumMonitors() * 2 + 1);			
+//		}
 		return factory;
 	}
 
@@ -173,7 +176,25 @@ public final class JamonMonitorFactory extends ProfileMonitorFactory {
 	public static ProfileMonitor start(final String label, final String rootLabel) {
 		MonitorFactoryInterface factory = getMonitorFactory(rootLabel);
 		Monitor mon = factory.start(label);
+		if (mon instanceof NullMonitor) {
+			LOG.debug("Limit of {} monitors reached.", factory.getMaxNumMonitors());
+			reduceMonitors(factory);
+			mon = factory.start(label);
+		}
 		return new JamonMonitor(mon);
+	}
+
+	private static void reduceMonitors(MonitorFactoryInterface factory) {
+		Map<MonKey, Monitor> monitorMap = factory.getMap();
+		Map.Entry<MonKey, Monitor> first = monitorMap.entrySet().iterator().next();
+		for (Map.Entry<MonKey, Monitor> entry : monitorMap.entrySet()) {
+			Monitor mon = entry.getValue();
+			if (mon.getFirstAccess().before(first.getValue().getFirstAccess())) {
+				first = entry;
+			}
+		}
+		LOG.debug("Removing {} to reduce number of monitors.", first);
+		factory.remove(first.getKey());
 	}
 
 	/**
