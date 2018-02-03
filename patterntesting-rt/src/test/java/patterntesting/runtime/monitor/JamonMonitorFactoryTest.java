@@ -20,9 +20,12 @@
 
 package patterntesting.runtime.monitor;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
+
+import java.util.Arrays;
+
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertThat;
 
 /**
  * Unit tests for {@link JamonMonitorFactory} class.
@@ -51,7 +54,7 @@ public final class JamonMonitorFactoryTest extends ProfileMonitorFactoryTest {
         ProfileMonitor mon = JamonMonitorFactory.start("testStart", "TWO");
         mon.stop();
         ProfileMonitor[] monitors = JamonMonitorFactory.getMonitors("TWO");
-        assertEquals(1, monitors.length);
+        assertThat(Arrays.toString(monitors), containsString("testStart"));
     }
 
     /**
