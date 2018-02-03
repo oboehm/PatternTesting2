@@ -88,10 +88,6 @@ public final class JamonMonitorFactory extends ProfileMonitorFactory {
 			factory = new FactoryEnabled();
 			monitorFactories.put(label, factory);
 		}
-//		if (factory.getMap().size() >= factory.getMaxNumMonitors()) {
-//			LOG.debug("Limit of {} monitors is reached and will be increased.", factory.getMaxNumMonitors());
-//			factory.setMaxNumMonitors(factory.getMaxNumMonitors() * 2 + 1);			
-//		}
 		return factory;
 	}
 

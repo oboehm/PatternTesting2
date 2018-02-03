@@ -19,26 +19,31 @@
  */
 package patterntesting.runtime.monitor;
 
-import static org.easymock.EasyMock.createMock;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.aspectj.lang.Signature;
+import org.aspectj.lang.reflect.AdviceSignature;
+import org.aspectj.lang.reflect.CatchClauseSignature;
+import org.aspectj.lang.reflect.CodeSignature;
+import org.aspectj.lang.reflect.ConstructorSignature;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import patterntesting.runtime.jmx.MBeanHelper;
+import patterntesting.runtime.util.SignatureHelper;
+import patterntesting.runtime.util.ThreadUtil;
 
+import javax.management.JMException;
+import javax.management.MBeanServer;
 import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.UUID;
 
-import javax.management.JMException;
-import javax.management.MBeanServer;
-
-import org.apache.logging.log4j.*;
-import org.aspectj.lang.Signature;
-import org.aspectj.lang.reflect.*;
-import org.junit.*;
-
-import patterntesting.runtime.jmx.MBeanHelper;
-import patterntesting.runtime.util.SignatureHelper;
-import patterntesting.runtime.util.ThreadUtil;
+import static org.easymock.EasyMock.createMock;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit tests for {@link ProfileStatistic} class.
@@ -287,4 +292,12 @@ public class ProfileStatisticTest {
         assertTrue("not registered: " + mbeanName, MBeanHelper.isRegistered(mbeanName));
     }
 
+    /**
+     * Resets the ProfileStatistc to a default value for tests after this class.
+     */
+    @After
+    public void resetProfileStatistic() {
+        profileStatistic.setMaxSize(100);
+    }
+    
 }

@@ -20,6 +20,7 @@ package patterntesting.runtime.monitor;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.After;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
@@ -41,7 +42,7 @@ public abstract class ProfileMonitorFactoryTest {
 
 	private static final Logger LOG = LogManager.getLogger(ProfileMonitorFactoryTest.class);
 	private final ProfileMonitorFactory factory = this.createProfileMonitorFactory();
-
+	
 	/**
 	 * Gets the profile monitor factory.
 	 *
@@ -57,7 +58,7 @@ public abstract class ProfileMonitorFactoryTest {
 	protected ProfileMonitorFactory getFactory() {
 		return this.factory;
 	}
-
+	
 	/**
 	 * Test method for {@link ProfileMonitorFactory#setMaxNumMonitors(int)}.
 	 */
@@ -141,6 +142,14 @@ public abstract class ProfileMonitorFactoryTest {
 		String s = factory.toString();
 		assertFalse("looks like default implementation: " + s, s.contains("@"));
 		LOG.info("s = \"{}\"", s);
+	}
+
+	/**
+	 * Resets the factory to a default value for tests after this class.
+	 */
+	@After
+	public void resetFactory() {
+		factory.setMaxNumMonitors(0);
 	}
 
 }

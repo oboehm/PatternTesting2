@@ -121,16 +121,12 @@ public final class ProfileTest {
     		log.info("testGetProfileMonitor() is started.");
         synchronized (statistic) {
             callDummy();    // we must call it for this test!
-            if (statistic.isResetted()) {
-            		log.info("{} was resetted.", statistic);
-            		callDummy();
-            }
             ProfileMonitor monitor = statistic.getProfileMonitor(this.getClass(),
                     "callDummy()");
             if (monitor == null) {
-            		log.error("No statistic found for {} and method callDummy().", this.getClass());
-            		statistic.logStatistic();
-            		fail("callDummy() does not appear in statistic.");
+                log.error("No statistic found for {} and method callDummy().", this.getClass());
+                statistic.logStatistic();
+                fail("callDummy() does not appear in statistic.");
             }
             assertTrue("no hit received for " + monitor, monitor.getHits() > 0);
         }

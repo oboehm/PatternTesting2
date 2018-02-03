@@ -19,21 +19,22 @@
  */
 package patterntesting.runtime.monitor;
 
-import java.io.*;
-import java.lang.reflect.*;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-
-import javax.management.ObjectName;
-import javax.management.openmbean.*;
-
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.Signature;
-
 import patterntesting.annotation.check.runtime.MayReturnNull;
 import patterntesting.runtime.annotation.DontProfileMe;
 import patterntesting.runtime.jmx.MBeanHelper;
-import patterntesting.runtime.util.*;
+import patterntesting.runtime.util.Environment;
+import patterntesting.runtime.util.SignatureHelper;
+
+import javax.management.ObjectName;
+import javax.management.openmbean.*;
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 /**
  * This is constructed as a thin layer around com.jamonapi.MonitorFactory for
@@ -164,19 +165,6 @@ public class ProfileStatistic extends Thread implements ProfileStatisticMBean {
 		LOG.debug("{} is resetted.", this);
 	}
 	
-	/**
-	 * Looks if the statistic was resetted.
-	 * 
-	 * @return true if statistic has no hits.
-	 */
-	public boolean isResetted() {
-		int sum = 0;
-		for (ProfileMonitor monitor : getMonitors()) {
-			sum += monitor.getHits();
-		}
-		return sum == 0;
-	}
-
 	/**
 	 * Resets the root monitor.
 	 */
