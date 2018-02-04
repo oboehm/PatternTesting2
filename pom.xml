@@ -170,7 +170,6 @@
     <sonar.issue.ignore.multicriteria.9.resourceKey>**/runtime/monitor/db/internal/StasiStatement.java</sonar.issue.ignore.multicriteria.9.resourceKey>
     <!-- Resources should be closed -->
     <sonar.issue.ignore.multicriteria.9.ruleKey>squid:S2095</sonar.issue.ignore.multicriteria.9.ruleKey>
-    <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
 
     <!-- Sonar -->
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
@@ -731,25 +730,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.7.9</version>
-        <configuration>
-          <destFile>${sonar.jacoco.reportPath}</destFile>
-          <append>true</append>
-        </configuration>
-        <executions>
-          <execution>
-            <id>default-prepare-agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>default-report</id>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
+        <version>0.8.0</version>
       </plugin>
     </plugins>
     <extensions>
