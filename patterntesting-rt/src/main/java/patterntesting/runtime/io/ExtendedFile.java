@@ -20,12 +20,17 @@
 
 package patterntesting.runtime.io;
 
-import java.io.*;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.util.List;
-
-import org.apache.commons.io.*;
-import org.apache.logging.log4j.*;
 
 /**
  * This is the extended version of the {@link File} class. It provides some
@@ -174,10 +179,16 @@ public final class ExtendedFile extends File {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public static File createTmpdir(final String prefix, final String suffix) throws IOException {
-        File tmpdir = getTmpdir(prefix + "@" + Long.toString(System.currentTimeMillis(), Character.MAX_RADIX) + suffix);
+    	long n = System.currentTimeMillis();
+        File tmpdir = getTmpdir(prefix + "@" + Long.toString(n, Character.MAX_RADIX) + suffix);
+		if (tmpdir.exists()) {
+			LOG.debug("{} exists already, will increase timestamp.", tmpdir);
+			tmpdir = getTmpdir(prefix + "@" + Long.toString(n+1, Character.MAX_RADIX) + suffix);
+		}
         if (!tmpdir.mkdirs()) {
             throw new IOException("can't create dir " + tmpdir);
         }
+        LOG.trace("Dir {} is created.", tmpdir);
         return tmpdir;
     }
 

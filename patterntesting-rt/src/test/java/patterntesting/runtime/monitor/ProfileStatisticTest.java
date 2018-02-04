@@ -157,7 +157,7 @@ public class ProfileStatisticTest {
     public final void testMaxAvg() {
         synchronized (profileStatistic) {
             ProfileMonitor profMon = ProfileStatistic.start(signatures[1]);
-            ThreadUtil.sleep();
+            ThreadUtil.sleep(2);
             profMon.stop();
             ProfileStatistic statistic = getProfileStatistic();
             double maxAvg = statistic.getMaxAvg();

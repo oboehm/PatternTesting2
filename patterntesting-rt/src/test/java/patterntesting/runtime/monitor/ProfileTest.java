@@ -185,9 +185,8 @@ public final class ProfileTest {
 
     private void check0HitsConstructor() {
         Dummy.hello();
-        ProfileMonitor monitor = statistic.getProfileMonitor("new "
-                + Dummy.class.getName() + "()");
-        assertEquals(0, monitor.getHits());
+        ProfileMonitor monitor = statistic.getProfileMonitor("new " + Dummy.class.getName() + "()");
+        assertTrue("hits recorded with " + monitor, monitor == null || monitor.getHits() == 0);
     }
 
     /**
@@ -204,15 +203,15 @@ public final class ProfileTest {
     private static void checkDummyNotCalled(final String method) {
         synchronized (statistic) {
             ProfileMonitor monitor = statistic.getProfileMonitor(Dummy.class, method);
-            assertEquals(0, monitor.getHits());
+            assertTrue("hits recorded with " + monitor, monitor == null || monitor.getHits() == 0);
         }
     }
 
     /**
      * The method of the given class should never appear as profiled method.
      *
-     * @param cl
-     * @param method
+     * @param cl checked class
+     * @param method checked method
      */
     private static void checkNotProfiled(final Class<?> cl, final String method) {
         synchronized (statistic) {
