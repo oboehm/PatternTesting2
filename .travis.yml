@@ -3,6 +3,16 @@ language: java
 jdk:
   - oraclejdk8
 
+addons:
+  sonarcloud:
+    organization: "oboehm-github"
+    token:
+      secure: "eo1cZ9vdCTmm5lQI81pGSDOjZHc1LjxkeePY1aoO3jNg/e8HApjZdfwz7rPqiT37AaX9KEJY/P7pSIRXD+6q5ZtwGrUCoZ0oxL2FUSrTpbinnq1WXvNDcFYrWxIYPxKiKMl+PTXuyP8u4UCpPCzGpBjc2N/E8n/Dq+qyD+ZUBDgw9zH22AX271RnT1nzf02wpHX7UuAkmZyxAtGBRNzJsjV0Tpr2i0VMfvlMFDAcYedAqDpi3S3PsLqZTfj6RGa5ztDLoQMnbTUO5u7zY8dyNP5LI0/+Q/NdV2Qid8qomZFQhiqC8xxxiqrJmESDnXCoiq9rtwLBPw1nGAn+mzeLLp6MueZn93B0mW0kPe9m2MdPWrCAh9vku98cGtRt452zkLVI5kMI0G48ryGyZrxYLyPYxmxZs9TT3XTzlWak98KU7JxgXaWf98Y/L2dMR+/AF08rJfSvxB7zsKnPbM7Vz1gpTeCGi5RXNtus4J9ZQsuKehUt1yVNcr3MTvWKf8KvKGEzslA71eaox0rYIQ6cP8DF1CPso2z94tmQq+TvPAeuekUv9s0nZF0g1+S90x9pcKSTvePrQZ4nVkteZk/Rr62jdYnYK6umMwb8u/ZYm/PR9izvcZxPO03LyOQPxrQQ0rkEewK2dbc7tlPPLBnoGG/6OHrJjo2q+cc8hk8SBsY="
+    branches:
+      - master
+      - develop/3.x
+
+
 after_success:
 - mvn clean integration-test jacoco:report coveralls:report sonar:sonar
 
