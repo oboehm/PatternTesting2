@@ -1,3 +1,12 @@
 language: java
+
 jdk:
   - oraclejdk8
+
+after_success:
+- mvn clean integration-test jacoco:report coveralls:report sonar:sonar
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
