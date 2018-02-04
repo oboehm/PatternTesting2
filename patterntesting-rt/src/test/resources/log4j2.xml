@@ -16,10 +16,10 @@
     <!-- to increase test coverage of MemoryGuard -->
     <Logger name="patterntesting.runtime.monitor.MemoryGuard" level="debug"/>
     <!-- to trace problems on Travis... -->
-    <logger name="patterntesting.runtime.monitor.AbstractProfileAspect" level="trace"/>
-    <logger name="patterntesting.runtime.monitor.JamonMonitorFactory" level="debug"/>
-    <logger name="patterntesting.runtime.monitor.ProfileAspect" level="trace"/>
-    <logger name="patterntesting.runtime.monitor.ProfileStatistic" level="trace"/>
+    <logger name="patterntesting.runtime.monitor.AbstractProfileAspect" level="debug"/>
+    <logger name="patterntesting.runtime.monitor.JamonMonitorFactory" level="info"/>
+    <logger name="patterntesting.runtime.monitor.ProfileAspect" level="debug"/>
+    <logger name="patterntesting.runtime.monitor.ProfileStatistic" level="debug"/>
     <Root level="info" additivity="false">
       <AppenderRef ref="console" />
     </Root>
