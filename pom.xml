@@ -726,13 +726,37 @@
           </execution>
         </executions>
       </plugin>
+
       <!-- Code Coverage  -->
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.0</version>
+        <configuration>
+          <append>true</append>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
+      <plugin>
+        <groupId>org.eluder.coveralls</groupId>
+        <artifactId>coveralls-maven-plugin</artifactId>
+        <version>4.3.0</version>
+      </plugin>
+
     </plugins>
+
     <extensions>
       <!-- Enabling the use of SFTP -->
       <extension>
@@ -744,6 +768,7 @@
 
   </build>
 
+  
   <reporting>
     <plugins>
       <plugin>
