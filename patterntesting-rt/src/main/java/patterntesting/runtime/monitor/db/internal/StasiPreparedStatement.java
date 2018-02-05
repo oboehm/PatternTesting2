@@ -149,17 +149,22 @@ public final class StasiPreparedStatement extends StasiStatement implements Prep
 	}
 
 	/**
-	 * Execute query.
+	 * Execute query. 
+	 * <p>
+	 * NOTE: The {@link ResultSet} which is returned by this method must be
+	 * closed by the caller.
+	 * </p>
 	 *
-	 * @return the result set
-	 * @throws SQLException
-	 *             the sQL exception
+	 * @return an open result set
+	 * @throws SQLException in case of DB problems
 	 * @see java.sql.PreparedStatement#executeQuery()
 	 */
 	@Override
+	@SuppressWarnings("squid:S2095")
 	public ResultSet executeQuery() throws SQLException {
 		ProfileMonitor mon = SqlStatistic.start(this.sqlTemplate);
-		try (ResultSet rs = new StasiResultSet(this.preparedStatement.executeQuery())) {
+		try {
+			ResultSet rs = new StasiResultSet(this.preparedStatement.executeQuery());
 			SqlStatistic.stop(mon, this.getSQL4Logging(), rs);
 			return rs;
 		} catch (SQLException ex) {
