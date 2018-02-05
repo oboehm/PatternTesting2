@@ -20,21 +20,21 @@
 
 package patterntesting.runtime.monitor.db.internal;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import patterntesting.runtime.log.LogWatch;
+import patterntesting.runtime.monitor.ProfileMonitor;
+import patterntesting.runtime.monitor.db.SqlStatistic;
+
 import java.io.InputStream;
 import java.io.Reader;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
-import java.sql.Date;
-import java.util.*;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-
-import patterntesting.runtime.log.LogWatch;
-import patterntesting.runtime.monitor.ProfileMonitor;
-import patterntesting.runtime.monitor.db.SqlStatistic;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple wrapper for {@link PreparedStatement} to be able to find resource
@@ -159,8 +159,7 @@ public final class StasiPreparedStatement extends StasiStatement implements Prep
 	@Override
 	public ResultSet executeQuery() throws SQLException {
 		ProfileMonitor mon = SqlStatistic.start(this.sqlTemplate);
-		try {
-			ResultSet rs = new StasiResultSet(this.preparedStatement.executeQuery());
+		try (ResultSet rs = new StasiResultSet(this.preparedStatement.executeQuery())) {
 			SqlStatistic.stop(mon, this.getSQL4Logging(), rs);
 			return rs;
 		} catch (SQLException ex) {

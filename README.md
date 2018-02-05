@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/oboehm/PatternTesting2.svg?branch=develop)](https://travis-ci.org/oboehm/PatternTesting2)
 [![Coverage Status](https://coveralls.io/repos/github/oboehm/PatternTesting2/badge.svg?branch=develop)](https://coveralls.io/github/oboehm/PatternTesting2)
 [![Quality Gate](https://sonarcloud.io/api/badges/gate?key=org.patterntesting:patterntesting-parent)](https://sonarcloud.io/dashboard?id=org.patterntesting%3Apatterntesting-parent%3Adevelop)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-parent)
 
 # PatternTesting 2
 
