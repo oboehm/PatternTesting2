@@ -43,14 +43,6 @@ public final class Assertions {
 	/** The Constant enabled. */
 	public static final boolean ENABLED;
 
-	/**
-	 * Use ENABLED. This constant will be removed with 1.8
-	 *
-	 * @deprecated use {@link #ENABLED}
-	 */
-	@Deprecated
-	public static final boolean enabled;
-
 	static {
 		boolean assertsEnabled = false;
 		try {
@@ -65,7 +57,6 @@ public final class Assertions {
 			}
 		}
 		ENABLED = assertsEnabled;
-		enabled = assertsEnabled;
 	}
 
 	/**
