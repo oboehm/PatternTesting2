@@ -1,7 +1,7 @@
 /*
  * $Id: ConverterTest.java,v 1.26 2017/02/05 17:06:09 oboehm Exp $
  *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2018 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,12 +43,11 @@ import static org.junit.Assert.*;
  * The Class ConverterTest.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.26 $
  * @since 19.01.2009
  */
 public final class ConverterTest {
 
-	private static Logger log = LogManager.getLogger(ConverterTest.class);
+	private static Logger LOG = LogManager.getLogger(ConverterTest.class);
 
     /**
      * Test method for {@link Converter#getMemoryAsString(long)}.
@@ -202,7 +201,7 @@ public final class ConverterTest {
     public void testToShortInnerClass() {
         InnerConverterTest ict = new InnerConverterTest();
         String s = Converter.toShortString(ict);
-        log.info("s = \"{}\"", s);
+        LOG.info("s = \"{}\"", s);
     }
 
     /**
@@ -262,7 +261,7 @@ public final class ConverterTest {
     	URL url = new URL("file:/with blank/");
     	URI uri = Converter.toURI(url);
     	assertNotNull(uri);
-    	log.info(url + " was converted to " + uri);
+    	LOG.info(url + " was converted to " + uri);
     }
 
     /**
@@ -276,7 +275,7 @@ public final class ConverterTest {
     public void testToURIwithDirURL() throws MalformedURLException {
         File dir = new File("target").getAbsoluteFile();
         URL url = new URL("file:/" + FilenameUtils.separatorsToUnix(dir.getPath()));
-        assertEquals(dir.toURI(), Converter.toURI(url));
+        checkURI(dir, Converter.toURI(url));
     }
 
     /**
@@ -290,7 +289,13 @@ public final class ConverterTest {
     public void testToURIwithDirname() throws MalformedURLException {
         File dir = new File("target").getAbsoluteFile();
         String url = "file:/" + FilenameUtils.separatorsToUnix(dir.getPath());
-        assertEquals(dir.toURI(), Converter.toURI(url));
+        checkURI(dir, Converter.toURI(url));
+    }
+
+    private static void checkURI(File dir, URI converted) {
+        LOG.info("Checking dir '{}' if it has '{}' as URI.", dir, converted);
+        URI expected = dir.toURI();
+        assertEquals(expected, converted);
     }
 
     /**
@@ -307,7 +312,7 @@ public final class ConverterTest {
 	private void checkToFile(final String filename) throws IOException {
 		File file = new File(filename).getCanonicalFile();
 		URI uri = file.toURI();
-		log.info(file + " as URI is " + uri);
+		LOG.info(file + " as URI is " + uri);
     	assertEquals(file, Converter.toFile(uri));
 	}
 
@@ -320,7 +325,7 @@ public final class ConverterTest {
 	public void testToJarFile() throws URISyntaxException {
 		URI uri = new URI("jar:file:/C:/Dokumente%20und%20Einstellungen/.m2/hugo.jar");
 		File file = Converter.toFile(uri);
-		log.info("file=" + file);
+		LOG.info("file=" + file);
 		String filename = file.toString();
         assertTrue(file + " does not start with 'C:'",
                 filename.startsWith("C:")
