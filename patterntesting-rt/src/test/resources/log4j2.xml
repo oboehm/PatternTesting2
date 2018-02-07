@@ -20,7 +20,7 @@
     <logger name="patterntesting.runtime.monitor.JamonMonitorFactory" level="info"/>
     <logger name="patterntesting.runtime.monitor.ProfileAspect" level="info"/>
     <logger name="patterntesting.runtime.monitor.ProfileStatistic" level="info"/>
-    <logger name="patterntesting.runtime.util.Converter" level="trace"/>
+    <logger name="patterntesting.runtime.util.Converter" level="debug"/>
     <Root level="info" additivity="false">
       <AppenderRef ref="console" />
     </Root>
