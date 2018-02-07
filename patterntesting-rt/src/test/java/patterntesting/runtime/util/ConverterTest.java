@@ -275,6 +275,7 @@ public final class ConverterTest {
     public void testToURIwithDirURL() throws MalformedURLException {
         File dir = new File("target").getAbsoluteFile();
         URL url = new URL("file:/" + FilenameUtils.separatorsToUnix(dir.getPath()));
+        LOG.info("Checking '{}' as URI ({}).", dir, url);
         checkURI(dir, Converter.toURI(url));
     }
 
@@ -289,6 +290,7 @@ public final class ConverterTest {
     public void testToURIwithDirname() throws MalformedURLException {
         File dir = new File("target").getAbsoluteFile();
         String url = "file:/" + FilenameUtils.separatorsToUnix(dir.getPath());
+        LOG.info("Checking '{}' as URI ({}).", dir, url);
         checkURI(dir, Converter.toURI(url));
     }
 
