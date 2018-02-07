@@ -20,15 +20,21 @@
 
 package patterntesting.runtime.monitor;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
+import patterntesting.runtime.util.Converter;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
-
-import java.io.*;
-import java.net.*;
-import java.util.*;
-
-import org.apache.logging.log4j.*;
-import org.junit.Test;
 
 /**
  * Unit tests for {@link ResourcepathMonitorTest} class.
@@ -107,7 +113,7 @@ public final class ResourcepathMonitorTest extends AbstractMonitorTest {
     }
 
     /**
-     * Test get no resources.
+     * Test method for {@link ResourcepathMonitor#getNoResources(String)}.
      */
     @Test
     public void testGetNoResources() {
@@ -117,14 +123,37 @@ public final class ResourcepathMonitorTest extends AbstractMonitorTest {
             assertEquals(1, monitor.getNoResources("test/log4j.properties"));
         }
         assertTrue(monitor.getNoResources("log4j2.xml") > 0);
-        monitor.getNoResources("log4j.xml");
+    }
+
+    /**
+     * Test method for {@link ResourcepathMonitor#getNoResources(String)}.
+     */
+    @Test
+    public void testGetNoResourcesMultiple() {
+        LOG.info("testGetNoResourcesMultiple() is started.");
         int n = monitor.getNoResources("META-INF/MANIFEST.MF");
         assertTrue(n > 0);
         LOG.info("{} META-INF/MANIFEST.MF entries found in classpath.", n);
     }
 
     /**
-     * Test is doublet.
+     * We use the String class as resource for testing. But with this class it
+     * happened that it appeared 2 times in the classpath, e.g. if you call the
+     * test inside your favorite IDE. In most cases this was the same classpath
+     * where the doublet appears. Since 2.0 doublets in the same classpath are
+     * not regarded as doublet.
+     */
+    @Test
+    public void tetsGetNoResourcesClass() {
+        String rsc = Converter.toResource(String.class);
+        int n = monitor.getNoResources(rsc);
+        if (n > 1) {
+            assertThat(monitor.getDoublet(rsc, 0), not(monitor.getDoublet(rsc, 1)));
+        }
+    }
+
+    /**
+     * Test method for {@link ResourcepathMonitor#isDoublet(String)}.
      */
     @Test
     public void testIsDoublet() {

@@ -20,16 +20,21 @@
 
 package patterntesting.runtime.monitor;
 
-import java.io.*;
-import java.net.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import patterntesting.runtime.jmx.Description;
+import patterntesting.runtime.monitor.internal.DoubletDigger;
+import patterntesting.runtime.monitor.internal.ResourcepathDigger;
+import patterntesting.runtime.util.ArchivEntry;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.net.URI;
+import java.net.URL;
 import java.util.*;
 import java.util.concurrent.*;
-
-import org.apache.logging.log4j.*;
-
-import patterntesting.runtime.jmx.Description;
-import patterntesting.runtime.monitor.internal.*;
-import patterntesting.runtime.util.ArchivEntry;
 
 /**
  * Analogous to ClasspathMonitor this class allows you to ask for resources in
@@ -168,8 +173,7 @@ public class ResourcepathMonitor extends AbstractMonitor implements Resourcepath
 	/**
 	 * Gets the number of resources.
 	 *
-	 * @param name
-	 *            the name of the resource
+	 * @param name the name of the resource
 	 * @return number of resources
 	 * @see ResourcepathMonitorMBean#getNoResources(String)
 	 */

@@ -19,23 +19,34 @@
  */
 package patterntesting.runtime.monitor;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
-
-import java.io.*;
-import java.net.*;
-import java.util.*;
-import java.util.jar.JarFile;
-
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
-import org.junit.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import patterntesting.runtime.annotation.SkipTestOn;
 import patterntesting.runtime.io.ExtendedFile;
 import patterntesting.runtime.junit.SmokeRunner;
-import patterntesting.runtime.util.*;
+import patterntesting.runtime.util.ArchivEntry;
+import patterntesting.runtime.util.Converter;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.jar.JarFile;
+
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.*;
 
 /**
  * The Class ClasspathMonitorTest.
@@ -175,14 +186,24 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
 
     /**
      * ClasspathMonitorTest seems to be 2 times in the classpath during build.
-     * So we use now another class for testing.
+     * So we use now the String class for testing. But also with this class it
+     * happened that it appeared 2 times in the classpath, e.g. if you call the
+     * test inside your favorite IDE. In most cases this was the same classpath
+     * where the doublet appears. Since 2.0 doublets in the same classpath are
+     * not regarded as doublet.
      */
     @Test
     public void testGetNoClasses() {
         LOG.info("testGetNoClasses() is started.");
         Class<?> clazz = String.class;
         int n = cpMon.getNoClasses(clazz);
-        assertEquals(1, n);
+        assertThat(n, is(greaterThan(0)));
+        for (int i = 0; i < n; i++) {
+            LOG.info("The {} is found in {}.", clazz, cpMon.getDoublet(clazz, i));
+        }
+        if (n > 1) {
+            assertThat(cpMon.getDoublet(clazz, 0), not(cpMon.getDoublet(clazz, 1)));
+        }
     }
 
     /**

@@ -19,24 +19,30 @@
  */
 package patterntesting.runtime.monitor.internal;
 
-import java.io.*;
-import java.lang.management.ManagementFactory;
-import java.lang.reflect.Field;
-import java.net.*;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-
-import javax.management.*;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import patterntesting.runtime.exception.NotFoundException;
 import patterntesting.runtime.io.ExtendedFile;
 import patterntesting.runtime.monitor.ClassloaderType;
-import patterntesting.runtime.util.*;
+import patterntesting.runtime.util.ClasspathHelper;
+import patterntesting.runtime.util.Converter;
+import patterntesting.runtime.util.Environment;
+import patterntesting.runtime.util.ReflectionHelper;
+
+import javax.management.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.management.ManagementFactory;
+import java.lang.reflect.Field;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 /**
  * This helper class digs into the classloader for information like used
@@ -373,11 +379,12 @@ public class ClasspathDigger extends AbstractDigger {
 	}
 
 	/**
-	 * Gets the resources.
+	 * Gets the resources of the given name. Normally that would only be one
+	 * element but some resources (like the MANIFEST.MF file) can appear
+	 * several times in the classpath.
 	 *
-	 * @param name
-	 *            the name
-	 * @return the resources
+	 * @param name the name of the resource
+	 * @return all resources with the given name
 	 */
 	public Enumeration<URL> getResources(final String name) {
 		try {
@@ -388,10 +395,19 @@ public class ClasspathDigger extends AbstractDigger {
 					return getResources(name.substring(1));
 				}
 			}
-			return resources;
+			Set<URL> resourceSet = asSet(resources);
+			return new Vector<URL>(resourceSet).elements();
 		} catch (IOException ioe) {
 			throw new NotFoundException("resource '" + name + "' not found in classpath", ioe);
 		}
+	}
+	
+	private static Set<URL> asSet(Enumeration<URL> enums) {
+		Set<URL> set = new HashSet<>();
+		while (enums.hasMoreElements()) {
+			set.add(enums.nextElement());
+		}
+		return set;
 	}
 
 	/**

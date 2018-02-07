@@ -20,20 +20,25 @@
 
 package patterntesting.runtime.monitor.internal;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import org.junit.Test;
+import patterntesting.runtime.util.Converter;
 
-import java.io.*;
-import java.net.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Enumeration;
 import java.util.Set;
 
-import org.junit.Test;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertThat;
 
 /**
  * Unit tests for ResourcepathDigger class.
  * 
  * @author oboehm
- * @version $Revision: 1.3 $
  */
 public final class ResourcepathDiggerTest extends AbstractDiggerTest {
 
@@ -109,6 +114,25 @@ public final class ResourcepathDiggerTest extends AbstractDiggerTest {
         assertThat(resources, not(hasItem("META-INF/")));
         assertThat(resources, not(hasItem("/META-INF")));
         assertThat(resources, not(hasItem("/META-INF/")));
+    }
+
+    /**
+     * We use the String class as resource for testing. But with this class it
+     * happened that it appeared 2 times in the classpath, e.g. if you call the
+     * test inside your favorite IDE. In most cases this was the same classpath
+     * where the doublet appears. Since 2.0 doublets in the same classpath are
+     * not regarded as doublet.
+     */
+    @Test
+    public void testGetResources() {
+        ResourcepathDigger digger = new ResourcepathDigger();
+        String rsc = Converter.toResource(String.class);
+        Enumeration<URL> resources = digger.getResources(rsc);
+        URL r1 = resources.nextElement();
+        if (resources.hasMoreElements()) {
+            URL r2 = resources.nextElement();
+            assertThat(r1, not(r2));
+        }
     }
 
 }

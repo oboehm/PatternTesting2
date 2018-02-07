@@ -20,19 +20,18 @@
 
 package patterntesting.runtime.monitor.internal;
 
-import static org.junit.Assert.assertFalse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
+import patterntesting.runtime.junit.CollectionTester;
+import patterntesting.runtime.log.LogWatch;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Assert;
-import org.junit.Test;
-
-import patterntesting.runtime.junit.CollectionTester;
-import patterntesting.runtime.log.LogWatch;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 
 /**
  * Unit tests for {@link DoubletDigger} class.
@@ -50,8 +49,10 @@ public final class DoubletDiggerTest {
      */
     @Test
     public void testGetDoublet() {
-        URI doublet = digger.getDoublet(Assert.class, 1);
-        LOG.info("doublet = {}", doublet);
+        Class<?> clazz = String.class;
+        if (digger.isDoublet(clazz)) {
+            assertThat(digger.getDoublet(clazz, 0), not(digger.getDoublet(clazz, 1)));
+        }
     }
 
     /**

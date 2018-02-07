@@ -20,14 +20,19 @@
 
 package patterntesting.runtime.monitor.internal;
 
-import java.net.*;
-import java.util.*;
-import java.util.concurrent.*;
-
-import org.apache.logging.log4j.*;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import patterntesting.runtime.annotation.ProfileMe;
-import patterntesting.runtime.util.*;
+import patterntesting.runtime.util.Converter;
+import patterntesting.runtime.util.ObjectComparator;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * The DoubletDigger looks for classes which appears more than once in the
@@ -101,7 +106,7 @@ public final class DoubletDigger {
 			try {
 				doublet = isDoublet(resource);
 			} catch (NoSuchElementException ex) {
-				LOG.trace("{} is not found:", ex);
+				LOG.trace("{} is not found:", clazz, ex);
 				LOG.debug("{} is a proxy or similar class because classloader does not find it:", clazz);
 				doublet = false;
 			}
