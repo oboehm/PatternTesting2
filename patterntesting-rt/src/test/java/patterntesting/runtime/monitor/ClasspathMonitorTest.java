@@ -28,6 +28,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import patterntesting.runtime.annotation.SkipTestOn;
 import patterntesting.runtime.io.ExtendedFile;
+import patterntesting.runtime.junit.CollectionTester;
 import patterntesting.runtime.junit.SmokeRunner;
 import patterntesting.runtime.util.ArchivEntry;
 import patterntesting.runtime.util.Converter;
@@ -37,15 +38,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.jar.JarFile;
 
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 /**
@@ -379,17 +375,22 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
 	}
 
     /**
-     * This test can fail sometimes because of race conditions which we don't
-     * have under control (classloader behaviour).
+     * This test failed sometimes in the past, because the call of
+     * {@link ClasspathMonitor#getUnusedClasspathSet()} may load new classes
+     * so that after the call of this method the unused classpath can decrease.
+     * So this method, together with {@link ClasspathMonitor#getUsedClasspathSet()}
+     * is called twice now.
      */
     @Test
     public void testSizeOfUnusedClasspath() {
         LOG.info("testSizeOfUnusedClasspath() is started.");
-        String[] used = cpMon.getUsedClasspath();
-        String[] classpath = cpMon.getClasspath();
-        String[] unused = cpMon.getUnusedClasspath();
-        assertEquals(used.length + " pathes used, " + unused.length + " unused:", classpath.length, unused.length
-                + used.length);
+        SortedSet<URI> classpath = cpMon.getClasspathSet();
+        SortedSet<URI> used = cpMon.getUsedClasspathSet();
+        SortedSet<URI> unused = cpMon.getUnusedClasspathSet();
+        LOG.info("Classpath has {} used and {} unused elements.", used.size(), unused.size());
+        SortedSet<URI> merged = new TreeSet<>(cpMon.getUsedClasspathSet());
+        merged.addAll(cpMon.getUnusedClasspathSet());
+        CollectionTester.assertEquals(classpath, merged);
     }
 
     /**

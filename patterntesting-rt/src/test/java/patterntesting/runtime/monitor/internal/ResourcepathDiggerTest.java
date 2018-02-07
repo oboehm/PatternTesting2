@@ -26,6 +26,7 @@ import patterntesting.runtime.util.Converter;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
@@ -33,6 +34,8 @@ import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -133,6 +136,16 @@ public final class ResourcepathDiggerTest extends AbstractDiggerTest {
             URL r2 = resources.nextElement();
             assertThat(r1, not(r2));
         }
+    }
+
+    /**
+     * Unit test for {@link ResourcepathDigger#whichResource(String, ClassLoader)}.
+     */
+    @Test
+    public void testWhichResource() {
+        URI uri = ResourcepathDigger.whichResource("log4j2.xml", this.getClass().getClassLoader());
+        assertThat(uri, not(nullValue()));
+        assertEquals(new File(uri).toURI(), uri);
     }
 
 }

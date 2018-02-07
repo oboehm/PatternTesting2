@@ -20,13 +20,12 @@
 
 package patterntesting.runtime.junit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import patterntesting.runtime.util.Converter;
+
 import java.util.Collection;
 import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-
-import patterntesting.runtime.util.Converter;
 
 /**
  * If you want to assert that the content of two collections are equals use this
@@ -85,8 +84,8 @@ public final class CollectionTester {
 			for (Object elem1 : c1) {
 				if (!c2.contains(elem1)) {
 					logMissingElement(elem1, c2, msg);
-					throw new AssertionError(msg + ": [" + Converter.toShortString(elem1) + "] is not in "
-							+ Converter.toShortString(c2));
+					throw new AssertionError(msg + ": [" + Converter.toString(elem1) + "] is not in "
+							+ Converter.toString(c2));
 				}
 			}
 		}
@@ -146,7 +145,7 @@ public final class CollectionTester {
 			for (Object element : c1) {
 				if (!c2.contains(element)) {
 					logMissingElement(element, c2);
-					throw new AssertionError("\"" + Converter.toShortString(element)
+					throw new AssertionError("\"" + Converter.toString(element)
 							+ "\" is missing in one collection (size: " + c1.size() + " / " + c2.size() + " elements)");
 				}
 			}
@@ -158,7 +157,9 @@ public final class CollectionTester {
 			LOG.trace("Element \"{}\" is missing in {}.", Converter.toLongString(element),
 					Converter.toLongString(collection));
 		} else if (LOG.isDebugEnabled()) {
-			LOG.debug("Element \"{}\" is missing in {}.", Converter.toString(element), Converter.toString(collection));
+			LOG.debug("Element \"{}\" is missing in {}.", Converter.toString(element), Converter.toLongString(collection));
+		} else {
+			LOG.info("Element \"{}\" is missing in {}.", Converter.toString(element), Converter.toString(collection));
 		}
 	}
 

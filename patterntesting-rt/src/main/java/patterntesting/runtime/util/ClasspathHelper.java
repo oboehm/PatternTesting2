@@ -20,12 +20,11 @@
 
 package patterntesting.runtime.util;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Logger;
+
+import java.net.URI;
 
 /**
  * This class contains some helper classes which are used inside
@@ -64,12 +63,7 @@ public final class ClasspathHelper {
 		if (parent.endsWith("!")) {
 			parent = parent.substring(0, (parent.length() - 1));
 		}
-		try {
-			return new URI(parent);
-		} catch (URISyntaxException canthappen) {
-			LOG.error("can't extract " + resource + " from " + path, canthappen);
-			return path;
-		}
+		return Converter.toURI(parent);
 	}
 
 	private static String removeTrailingSlash(final String s) {

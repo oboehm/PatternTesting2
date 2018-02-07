@@ -19,15 +19,25 @@
  */
 package patterntesting.runtime.util;
 
-import static org.junit.Assert.*;
-
-import java.io.*;
-import java.net.*;
-import java.sql.Time;
-import java.util.*;
-
-import org.apache.logging.log4j.*;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.NotSerializableException;
+import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.sql.Time;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Properties;
+
+import static org.junit.Assert.*;
 
 /**
  * The Class ConverterTest.
@@ -253,6 +263,34 @@ public final class ConverterTest {
     	URI uri = Converter.toURI(url);
     	assertNotNull(uri);
     	log.info(url + " was converted to " + uri);
+    }
+
+    /**
+     * For a file URL which represents a directory the {@link File#toURI()}
+     * method generates an URI with a trailing slash ("/"). So should be
+     * done also by {@link Converter#toURI(URL)}.
+     *
+     * @throws MalformedURLException should not happen
+     */
+    @Test
+    public void testToURIwithDirURL() throws MalformedURLException {
+        File dir = new File("target").getAbsoluteFile();
+        URL url = new URL("file:/" + FilenameUtils.separatorsToUnix(dir.getPath()));
+        assertEquals(dir.toURI(), Converter.toURI(url));
+    }
+
+    /**
+     * For a file URL which represents a directory the {@link File#toURI()}
+     * method generates an URI with a trailing slash ("/"). So should be
+     * done also by {@link Converter#toURI(String)}.
+     *
+     * @throws MalformedURLException should not happen
+     */
+    @Test
+    public void testToURIwithDirname() throws MalformedURLException {
+        File dir = new File("target").getAbsoluteFile();
+        String url = "file:/" + FilenameUtils.separatorsToUnix(dir.getPath());
+        assertEquals(dir.toURI(), Converter.toURI(url));
     }
 
     /**

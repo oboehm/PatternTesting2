@@ -19,18 +19,23 @@
  */
 package patterntesting.runtime.util;
 
-import static patterntesting.runtime.NullConstants.NULL_DATE;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.lang.reflect.Array;
-import java.net.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.Time;
 import java.text.*;
 import java.util.*;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.*;
-import org.apache.logging.log4j.*;
+import static patterntesting.runtime.NullConstants.NULL_DATE;
 
 /**
  * The Class Converter to convert objects from one type to another type.
@@ -216,7 +221,7 @@ public final class Converter {
 	 */
 	public static URI toURI(final URL url) {
 		try {
-			return url.toURI();
+			return normalize(url.toURI());
 		} catch (URISyntaxException ex) {
 			LOG.trace("Cannot convert {} to URI:", url, ex);
 			return toURI(url.toExternalForm());
@@ -233,7 +238,7 @@ public final class Converter {
 	 */
 	public static URI toURI(final String uri) {
 		try {
-			return new URI(uri);
+			return normalize(new URI(uri));
 		} catch (URISyntaxException ex) {
 			String converted = uri.replaceAll(" ", "%20");
 			try {
@@ -245,12 +250,18 @@ public final class Converter {
 		}
 	}
 
+	private static URI normalize(URI uri) {
+		if ("file".equalsIgnoreCase(uri.getScheme())) {
+			return new File(uri).toURI();
+		} else {
+			return uri;
+		}
+	}
+
 	/**
 	 * Converts an URI into a file.
 	 *
-	 * @param uri
-	 *            e.g. URI("file:/tmp")
-	 *
+	 * @param uri e.g. URI("file:/tmp")
 	 * @return e.g. File("/tmp")
 	 */
 	public static File toFile(final URI uri) {

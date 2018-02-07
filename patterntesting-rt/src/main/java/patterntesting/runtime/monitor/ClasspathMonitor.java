@@ -20,23 +20,31 @@
 
 package patterntesting.runtime.monitor;
 
-import java.io.*;
-import java.lang.management.ManagementFactory;
-import java.lang.reflect.*;
-import java.net.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.jar.*;
-
-import javax.management.*;
-
-import org.apache.logging.log4j.*;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import patterntesting.runtime.NullConstants;
 import patterntesting.runtime.annotation.ProfileMe;
-import patterntesting.runtime.jmx.*;
-import patterntesting.runtime.monitor.internal.*;
+import patterntesting.runtime.jmx.AnnotatedStandardMBean;
+import patterntesting.runtime.jmx.MBeanHelper;
+import patterntesting.runtime.monitor.internal.ClasspathDigger;
+import patterntesting.runtime.monitor.internal.DoubletDigger;
 import patterntesting.runtime.util.*;
+
+import javax.management.JMException;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+import java.io.*;
+import java.lang.management.ManagementFactory;
+import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.net.URI;
+import java.net.URL;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 
 /**
  * To avoid classpath problems like double entries of the same class or resource
@@ -931,7 +939,7 @@ public class ClasspathMonitor extends AbstractMonitor implements ClasspathMonito
 	}
 
 	/**
-	 * The unused classpath is this path which are not used by the classloader.
+	 * The unused classpath is the path which are not used by the classloader.
 	 *
 	 * @return the unused classpath (sorted)
 	 */
@@ -950,6 +958,15 @@ public class ClasspathMonitor extends AbstractMonitor implements ClasspathMonito
 		}
 		String[] a = new String[unused.size()];
 		return unused.toArray(a);
+	}
+
+	/**
+	 * The unused classpath is the path which are not used by the classloader.
+	 *
+	 * @return the unused classpath (sorted)
+	 */
+	public SortedSet<URI> getUnusedClasspathSet() {
+		return toUriSet(this.getUnusedClasspath());
 	}
 
 	/**
@@ -972,6 +989,30 @@ public class ClasspathMonitor extends AbstractMonitor implements ClasspathMonito
 	@Override
 	public String[] getClasspath() {
 		return this.classpath.clone();
+	}
+
+	/**
+	 * The classpath is stored in the system property "java.class.path" as
+	 * sorted set.
+	 *
+	 * @return the classpath set
+	 * @since 2.0
+	 */
+	public SortedSet<URI> getClasspathSet() {
+		return toUriSet(this.classpath);
+	}
+	
+	private static SortedSet<URI> toUriSet(String[] array) {
+		SortedSet<URI> set = new TreeSet<>();
+		for (String s : array) {
+			File f = new File(s);
+			if (f.isDirectory()) {
+				set.add(f.toURI());
+			} else {
+				set.add(URI.create("jar:" + f.toURI()));
+			}
+		}
+		return set;
 	}
 
 	/**
