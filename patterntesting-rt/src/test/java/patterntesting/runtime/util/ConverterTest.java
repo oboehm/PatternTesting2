@@ -276,7 +276,8 @@ public final class ConverterTest {
         File dir = new File("target").getAbsoluteFile();
         URL url = new URL("file:/" + FilenameUtils.separatorsToUnix(dir.getPath()));
         LOG.info("Checking '{}' as URI ({}).", dir, url);
-        checkURI(dir, Converter.toURI(url));
+        URI converted = Converter.toURI(url);
+        checkURI(dir, converted);
     }
 
     /**
@@ -291,7 +292,8 @@ public final class ConverterTest {
         File dir = new File("target").getAbsoluteFile();
         String url = "file:/" + FilenameUtils.separatorsToUnix(dir.getPath());
         LOG.info("Checking '{}' as URI ({}).", dir, url);
-        checkURI(dir, Converter.toURI(url));
+        URI converted = Converter.toURI(url);
+        checkURI(dir, converted);
     }
 
     private static void checkURI(File dir, URI converted) {
