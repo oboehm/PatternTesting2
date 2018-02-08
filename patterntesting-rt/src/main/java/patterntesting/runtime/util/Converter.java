@@ -238,15 +238,11 @@ public final class Converter {
 	 */
 	public static URI toURI(final String uri) {
 		try {
-			return normalize(new URI(uri));
+            String converted = uri.replaceAll(" ", "%20");
+			return normalize(new URI(converted));
 		} catch (URISyntaxException ex) {
-			String converted = uri.replaceAll(" ", "%20");
-			try {
-				return new URI(converted);
-			} catch (URISyntaxException again) {
-				LOG.trace("Cannot convert '{}' to URI:", converted, again);
-				throw new IllegalArgumentException(uri + " is not a valid URI", ex);
-			}
+            LOG.trace("Cannot convert '{}' to URI:", uri, ex);
+            throw new IllegalArgumentException(uri + " is not a valid URI", ex);
 		}
 	}
 
