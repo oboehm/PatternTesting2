@@ -40,6 +40,7 @@ import patterntesting.runtime.annotation.RunTestOn;
  */
 @RunTestOn(osName = "Mac OS X", osArch = "fake", hide = true)
 //@RunWith(SmokeRunner.class)
+@SuppressWarnings("squid:S2187")
 public final class RunTestOnFakeTest {
 
     /**

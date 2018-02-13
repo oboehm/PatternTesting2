@@ -1,19 +1,27 @@
 package patterntesting.runtime.monitor.internal;
 
-import static org.mockito.Mockito.*;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.net.*;
+import java.util.Enumeration;
+
+import org.junit.Test;
+
+import patterntesting.runtime.util.Converter;
 
 /**
  * The Class AbstractDiggerTest provides some common constants and setup
  * methodes which are used by the different derived unit tests.
  */
-public class AbstractDiggerTest {
+public abstract class AbstractDiggerTest {
 
     /** The Constant WORLD_WAR. */
     protected static final File WORLD_WAR = new File("src/test/resources/patterntesting/runtime/monitor/world.war");
-    
+
     /** The Constant WORLD_EAR. */
     protected static final File WORLD_EAR = new File("src/test/resources/patterntesting/runtime/monitor/world.ear");
 
@@ -32,5 +40,32 @@ public class AbstractDiggerTest {
         when(mockedClassLoader.getURLs()).thenReturn(webclasspath);
         return mockedClassLoader;
     }
+
+    /**
+     * Should return the digger for testing.
+     *
+     * @return digger
+     */
+    protected abstract AbstractDigger getDigger();
+
+    /**
+     * We use the String class as resource for testing. But with this class it
+     * happened that it appeared 2 times in the classpath, e.g. if you call the
+     * test inside your favorite IDE. In most cases this was the same classpath
+     * where the doublet appears. Since 2.0 doublets in the same classpath are
+     * not regarded as doublet.
+     */
+    @Test
+    public void testGetResources() {
+        AbstractDigger digger = getDigger();
+        String rsc = Converter.toResource(String.class);
+        Enumeration<URL> resources = digger.getResources(rsc);
+        URL r1 = resources.nextElement();
+        if (resources.hasMoreElements()) {
+            URL r2 = resources.nextElement();
+            assertThat(r1, not(r2));
+        }
+    }
+
 
 }

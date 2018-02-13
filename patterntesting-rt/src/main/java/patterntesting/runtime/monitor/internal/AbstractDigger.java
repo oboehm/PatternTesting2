@@ -19,13 +19,17 @@
  */
 package patterntesting.runtime.monitor.internal;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.*;
-import java.util.zip.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import patterntesting.runtime.util.NestedZipFile;
 
@@ -38,14 +42,24 @@ import patterntesting.runtime.util.NestedZipFile;
  * (the other way around at now), because a class can be considered as
  * specialized resource (resource with suffix ".class").
  * </p>
- * 
+ *
  * @author oboehm
  * @version $Revision: 1.1 $
  * @since 1.7.2 (31.05.2017)
  */
 public abstract class AbstractDigger {
-    
+
     private static final Logger LOG = LogManager.getLogger(AbstractDigger.class);
+
+    /**
+     * Gets the resources of the given name. Normally that would only be one
+     * element but some resources (like the MANIFEST.MF file) can appear
+     * several times in the classpath.
+     *
+     * @param name the name of the resource
+     * @return all resources with the given name
+     */
+    public abstract Enumeration<URL> getResources(final String name);
 
     /**
      * Read elements from nested archive.

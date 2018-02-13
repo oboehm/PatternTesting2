@@ -20,34 +20,40 @@
 
 package patterntesting.runtime.monitor.internal;
 
-import org.junit.Test;
-import patterntesting.runtime.util.Converter;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.Enumeration;
-import java.util.Set;
-
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.*;
+import java.util.Enumeration;
+import java.util.Set;
+
+import org.junit.Test;
+
+import patterntesting.runtime.util.Converter;
+
 /**
  * Unit tests for ResourcepathDigger class.
- * 
+ *
  * @author oboehm
  */
 public final class ResourcepathDiggerTest extends AbstractDiggerTest {
 
     /**
+     * Returns a {@link ResourcepathDigger} for testing.
+     *
+     * @return digger
+     */
+    @Override
+    protected AbstractDigger getDigger() {
+        return new ResourcepathDigger();
+    }
+
+    /**
      * Here we test the digging of a classpath inside a WAR.
-     * 
+     *
      * @throws MalformedURLException from using an {@link URLClassLoader}
      */
     @Test
@@ -59,7 +65,7 @@ public final class ResourcepathDiggerTest extends AbstractDiggerTest {
     /**
      * Here we test the digging of a JAR a WAR. E.g. here we have now a nested
      * JAR hierarchy to parse.
-     * 
+     *
      * @throws MalformedURLException from using an {@link URLClassLoader}
      */
     @Test
@@ -102,10 +108,10 @@ public final class ResourcepathDiggerTest extends AbstractDiggerTest {
         Set<String> resources = warDigger.getResources();
         assertThat(resources, hasItem(resourcename));
     }
-    
+
     /**
      * Directories are no files and therefore no resources.
-     * 
+     *
      * @throws MalformedURLException from using an {@link URLClassLoader}
      */
     @Test
@@ -126,6 +132,7 @@ public final class ResourcepathDiggerTest extends AbstractDiggerTest {
      * where the doublet appears. Since 2.0 doublets in the same classpath are
      * not regarded as doublet.
      */
+    @Override
     @Test
     public void testGetResources() {
         ResourcepathDigger digger = new ResourcepathDigger();

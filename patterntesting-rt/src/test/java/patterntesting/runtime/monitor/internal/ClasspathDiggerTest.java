@@ -1,16 +1,21 @@
 package patterntesting.runtime.monitor.internal;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.*;
 
-import java.io.*;
-import java.net.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URLClassLoader;
 import java.util.*;
 
-import javax.management.*;
+import javax.management.InstanceNotFoundException;
+import javax.management.JMException;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.util.CollectionUtils;
@@ -18,7 +23,8 @@ import org.springframework.util.CollectionUtils;
 import patterntesting.runtime.annotation.SkipTestOn;
 import patterntesting.runtime.jmx.MBeanHelper;
 import patterntesting.runtime.junit.*;
-import patterntesting.runtime.monitor.loader.*;
+import patterntesting.runtime.monitor.loader.CompoundClassLoader;
+import patterntesting.runtime.monitor.loader.WebappClassLoader;
 
 /**
  * Here we test some methods from ClasspathDigger.
@@ -32,6 +38,16 @@ public final class ClasspathDiggerTest extends AbstractDiggerTest {
 
     private static final Logger LOG = LogManager.getLogger(ClasspathDiggerTest.class);
     private final ClasspathDigger digger = new ClasspathDigger();
+
+    /**
+     * Returns the {@link ClasspathDigger} for testing.
+     *
+     * @return digger
+     */
+    @Override
+    protected AbstractDigger getDigger() {
+        return digger;
+    }
 
     /**
      * The tests in this JUnit class are only useful if this test here is ok.
@@ -249,7 +265,7 @@ public final class ClasspathDiggerTest extends AbstractDiggerTest {
         assertThat(loadedResources, hasItem("/patterntesting/runtime/junit/file1.txt"));
         assertThat(loadedResources, not(hasItem("/patterntesting/runtime/BrokenClass.class")));
     }
-    
+
     /**
      * Test method for {@link ClasspathDigger#getClasses()}.
      */
@@ -293,11 +309,11 @@ public final class ClasspathDiggerTest extends AbstractDiggerTest {
         ClasspathDigger warDigger = createClasspathDigger(WORLD_WAR, "!/WEB-INF/classes");
         checkGetClasses(warDigger, "patterntesting.sample.World");
     }
-    
+
     /**
      * This is the same test as before but now for a JAR inside a WAR. E.g.
      * here we have now a nested JAR hierarchy to parse.
-     * 
+     *
      * @throws MalformedURLException as a result of using an
      *         {@link URLClassLoader}
      */
@@ -323,7 +339,7 @@ public final class ClasspathDiggerTest extends AbstractDiggerTest {
     /**
      * Here we test the next level of nesting: a classes directory inside a WAR
      * inside an EAR.
-     * 
+     *
      * @throws IOException as a result of using an {@link URLClassLoader}
      */
     @Test
