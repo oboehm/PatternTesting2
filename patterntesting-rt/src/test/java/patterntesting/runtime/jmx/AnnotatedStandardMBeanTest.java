@@ -20,15 +20,18 @@
 
 package patterntesting.runtime.jmx;
 
-import static org.junit.Assert.assertEquals;
-
-import javax.management.*;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import patterntesting.runtime.monitor.ClasspathMonitor;
-import patterntesting.runtime.monitor.ClasspathMonitorMBean;
+import patterntesting.runtime.monitor.ProfileStatistic;
+import patterntesting.runtime.monitor.ProfileStatisticMBean;
+
+import javax.management.IntrospectionException;
+import javax.management.MBeanAttributeInfo;
+import javax.management.MBeanOperationInfo;
+import javax.management.NotCompliantMBeanException;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Unit tests for {@link AnnotatedStandardMBean} class.
@@ -47,8 +50,8 @@ public final class AnnotatedStandardMBeanTest {
      */
     @Before
     public void setUpMBean() throws NotCompliantMBeanException {
-        mbean = new AnnotatedStandardMBean(ClasspathMonitor.getInstance(),
-                ClasspathMonitorMBean.class);
+        mbean = new AnnotatedStandardMBean(ProfileStatistic.getInstance(),
+                ProfileStatisticMBean.class);
     }
 
     /**
@@ -60,10 +63,10 @@ public final class AnnotatedStandardMBeanTest {
      */
     @Test
     public void testGetDescriptionOperation() throws NoSuchMethodException, SecurityException {
-        MBeanOperationInfo info = new MBeanOperationInfo("logMe",
-                ClasspathMonitor.class.getMethod("logMe"));
+        MBeanOperationInfo info = new MBeanOperationInfo("logStatistic",
+                ProfileStatistic.class.getMethod("logStatistic"));
         String description = mbean.getDescription(info);
-        assertEquals("logs all attributes to the log output", description);
+        assertEquals("log the statistic data", description);
     }
 
     /**

@@ -44,7 +44,7 @@ import java.util.concurrent.*;
  * @version $Revision: 1.39 $
  * @since 1.6.4
  */
-public class ResourcepathMonitor extends AbstractMonitor implements ResourcepathMonitorMBean {
+public class ResourcepathMonitor extends clazzfish.monitor.AbstractMonitor implements clazzfish.monitor.ResourcepathMonitorMBean {
 
 	private static final Logger LOG = LogManager.getLogger(ResourcepathMonitor.class);
 	private static final Executor EXECUTOR = Executors.newCachedThreadPool();
@@ -151,7 +151,6 @@ public class ResourcepathMonitor extends AbstractMonitor implements Resourcepath
 	 * @param name
 	 *            of a resource e.g. "log4j.properties"
 	 * @return URI of the given resource (or null if resource was not found)
-	 * @see ResourcepathMonitorMBean#whichResource(String)
 	 */
 	@Override
 	@Description("returns the URI of the given resource")
@@ -175,7 +174,6 @@ public class ResourcepathMonitor extends AbstractMonitor implements Resourcepath
 	 *
 	 * @param name the name of the resource
 	 * @return number of resources
-	 * @see ResourcepathMonitorMBean#getNoResources(String)
 	 */
 	@Override
 	public int getNoResources(final String name) {
@@ -203,7 +201,6 @@ public class ResourcepathMonitor extends AbstractMonitor implements Resourcepath
      * @throws NoSuchElementException the no such element exception
      * @throws java.util.NoSuchElementException if no classname or resource was
      *         found
-     * @see ResourcepathMonitorMBean#isDoublet(String)
      */
 	@Override
 	@Description("is the given classname or resource found more than once in the classpath?")
@@ -217,7 +214,6 @@ public class ResourcepathMonitor extends AbstractMonitor implements Resourcepath
 	 * @param name
 	 *            a classname or resource
 	 * @return the first doublet
-	 * @see ResourcepathMonitorMBean#getFirstDoublet(String)
 	 */
 	@Override
 	@Description("returns the first doublet of the given classname or resource")
@@ -233,7 +229,6 @@ public class ResourcepathMonitor extends AbstractMonitor implements Resourcepath
 	 * @param nr
 	 *            the nr
 	 * @return the doublet
-	 * @see ResourcepathMonitorMBean#getDoublet(java.lang.String, int)
 	 */
 	@Override
 	public URI getDoublet(final String name, final int nr) {
@@ -248,7 +243,6 @@ public class ResourcepathMonitor extends AbstractMonitor implements Resourcepath
      * </p>
 	 *
 	 * @return the doublets
-	 * @see ResourcepathMonitorMBean#getDoublets()
 	 */
 	@Override
 	public String[] getDoublets() {
@@ -287,7 +281,7 @@ public class ResourcepathMonitor extends AbstractMonitor implements Resourcepath
 	 *
 	 * @return the URIs of the doublets
 	 */
-	protected URI[] getDoubletResourcepathURIs() {
+	public URI[] getDoubletResourcepathURIs() {
 		LOG.trace("Calculating doublet-resourcepath.");
 		List<String> doubletsWithoutMetaInf = new ArrayList<>();
 		for (String doublet : this.getDoublets()) {
@@ -347,7 +341,7 @@ public class ResourcepathMonitor extends AbstractMonitor implements Resourcepath
      *
      * @return the resourcepath as array of URIs
      */
-	protected URI[] getIncompatibleResourcepathURIs() {
+	public URI[] getIncompatibleResourcepathURIs() {
         List<String> resourcesWithoutMetainf = new ArrayList<String>();
         for (String resource : this.getIncompatibleResources()) {
             if (!resource.startsWith("/META-INF")) {

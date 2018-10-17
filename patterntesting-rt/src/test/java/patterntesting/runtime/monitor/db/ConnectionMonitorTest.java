@@ -32,7 +32,6 @@ import javax.management.openmbean.TabularData;
 
 import org.junit.Test;
 
-import patterntesting.runtime.monitor.AbstractMonitor;
 import patterntesting.runtime.monitor.AbstractMonitorTest;
 
 /**

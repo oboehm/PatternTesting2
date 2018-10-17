@@ -1,10 +1,10 @@
 package patterntesting.runtime.monitor.db;
 
+import clazzfish.monitor.AbstractMonitorMBean;
+import patterntesting.runtime.jmx.Description;
+
 import javax.management.openmbean.OpenDataException;
 import javax.management.openmbean.TabularData;
-
-import patterntesting.runtime.jmx.Description;
-import patterntesting.runtime.monitor.AbstractMonitorMBean;
 
 /**
  * This is the interface of {@link ConnectionMonitor} for the use of this class
@@ -27,7 +27,7 @@ public interface ConnectionMonitorMBean extends AbstractMonitorMBean {
 	 * @return all callers
 	 */
 	@Description("get the caller of the open connections")
-	public StackTraceElement[] getCallers();
+	StackTraceElement[] getCallers();
 
 	/**
 	 * Gets the caller stacktraces of all connections.
@@ -37,7 +37,7 @@ public interface ConnectionMonitorMBean extends AbstractMonitorMBean {
 	 *             the open data exception
 	 */
 	@Description("get the caller of the open connections")
-	public TabularData getCallerStacktraces() throws OpenDataException;
+	TabularData getCallerStacktraces() throws OpenDataException;
 
 	/**
 	 * Gets the caller which opens the last connection.
@@ -45,7 +45,7 @@ public interface ConnectionMonitorMBean extends AbstractMonitorMBean {
 	 * @return the all caller
 	 */
 	@Description("get the caller of the last open connection")
-	public StackTraceElement getLastCaller();
+	StackTraceElement getLastCaller();
 
 	/**
 	 * Gets the stacktrace of the caller which opens the last connection.
@@ -53,7 +53,7 @@ public interface ConnectionMonitorMBean extends AbstractMonitorMBean {
 	 * @return the all caller
 	 */
 	@Description("get the call stacktrace of the last open connection")
-	public StackTraceElement[] getLastCallerStacktrace();
+	StackTraceElement[] getLastCallerStacktrace();
 
 	/**
 	 * Gets the number of open connections.
@@ -64,7 +64,7 @@ public interface ConnectionMonitorMBean extends AbstractMonitorMBean {
 	 * @return the number of open connections
 	 */
 	@Description("get the number of open connections")
-	public int getOpenConnections();
+	int getOpenConnections();
 
 	/**
 	 * Gets the number of closed connections.
@@ -73,7 +73,7 @@ public interface ConnectionMonitorMBean extends AbstractMonitorMBean {
 	 * @since 1.4.1
 	 */
 	@Description("get the number of closed connections")
-	public int getClosedConnections();
+	int getClosedConnections();
 
 	/**
 	 * Gets the total sum of open and closed connections.
@@ -82,7 +82,7 @@ public interface ConnectionMonitorMBean extends AbstractMonitorMBean {
 	 * @since 1.4.1
 	 */
 	@Description("get the total sum of open and closed connections")
-	public int getSumOfConnections();
+	int getSumOfConnections();
 
 	/**
 	 * Log the caller stacktraces.

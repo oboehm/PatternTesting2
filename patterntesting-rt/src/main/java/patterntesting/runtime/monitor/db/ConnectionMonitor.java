@@ -32,7 +32,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.*;
 
 import patterntesting.runtime.jmx.MBeanHelper;
-import patterntesting.runtime.monitor.AbstractMonitor;
 
 /**
  * This is the monitor class for the {@link ProxyConnection} which monitors the
@@ -51,7 +50,7 @@ import patterntesting.runtime.monitor.AbstractMonitor;
  * @version $Revision: 1.17 $
  * @since 1.3 (07.10.2012)
  */
-public class ConnectionMonitor extends AbstractMonitor implements ConnectionMonitorMBean {
+public class ConnectionMonitor extends clazzfish.monitor.AbstractMonitor implements ConnectionMonitorMBean {
 
 	private static final Logger LOG = LogManager.getLogger(ConnectionMonitor.class);
 	private static final ConnectionMonitor INSTANCE;

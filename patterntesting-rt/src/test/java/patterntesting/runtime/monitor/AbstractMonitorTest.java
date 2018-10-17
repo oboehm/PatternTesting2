@@ -20,13 +20,16 @@
 
 package patterntesting.runtime.monitor;
 
-import static org.junit.Assert.*;
-
-import java.io.*;
-
+import clazzfish.monitor.AbstractMonitor;
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
+
+import java.io.File;
+import java.io.IOException;
+
+import static org.junit.Assert.*;
 
 /**
  * Unit tests for {@link AbstractMonitor} class.
@@ -129,4 +132,3 @@ public abstract class AbstractMonitorTest {
     }
 
 }
-

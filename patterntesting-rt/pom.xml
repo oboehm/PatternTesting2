@@ -74,6 +74,10 @@
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
     </dependency>
+    <dependency>
+      <groupId>de.aosd.clazzfish</groupId>
+      <artifactId>clazzfish-monitor</artifactId>
+    </dependency>
     <!-- optional: XStream for serialization -->
     <dependency>
       <groupId>com.thoughtworks.xstream</groupId>
