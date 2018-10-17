@@ -1,0 +1,20 @@
+= Release Notes
+
+
+
+== 2.0 (2012)
+
+* move from https://sourceforge.net/projects/patterntesting/[SoureForge] (CVS) to https://github.com/oboehm/PatternTesting2[GitHub] (GIT)
+
+
+
+== 1.8 (11-Nov-2017)
+
+* last version with CVS
+* depends now on Java 8
+* #_fixed_#: bug http://sourceforge.net/p/patterntesting/bugs/38/[#38] and http://sourceforge.net/p/patterntesting/bugs/39/[#39]
+
+
+== 1.7 and earlier
+
+* see http://www.patterntesting.com/release/index.html

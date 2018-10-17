@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/oboehm/PatternTesting2.svg?branch=develop)](https://travis-ci.org/oboehm/PatternTesting2)
 [![Coverage Status](https://coveralls.io/repos/github/oboehm/PatternTesting2/badge.svg?branch=develop)](https://coveralls.io/github/oboehm/PatternTesting2)
-[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=org.patterntesting:patterntesting-parent)](https://sonarcloud.io/dashboard?id=org.patterntesting%3Apatterntesting-parent%3Adevelop)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?metric=alert_status&project=org.patterntesting:patterntesting-parent:develop)](https://sonarcloud.io/dashboard?id=org.patterntesting%3Apatterntesting-parent%3Adevelop)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-parent)
 
@@ -31,5 +31,11 @@ The plans for version 2 are:
 Development will follow [a successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/) von Vincent Driessen.
 The actual development you can find on the [develop](https://github.com/oboehm/PatternTesting2/tree/develop) branch.
 
+
+## More Infos
+
+* Release Notes: [doc/release-notes](doc/release-notes.adoc)
+
 ---
-November 2017
+October 2018,
+Oli B.
