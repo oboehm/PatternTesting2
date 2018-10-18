@@ -1,0 +1,16 @@
+https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-rt[image:https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-rt/badge.svg[Maven Metadata]]
+
+
+
+= What Is patterntesting-rt?
+
+PatternTesting Runtime (patterntesting-rt) is the runtime component for the PatternTesting framework.
+It provides the annotations and base classes for the PatternTesting testing framework
+(e.g. patterntesting-check, patterntesting-concurrent or patterntesting-exception)
+but can be also used standalone for classpath monitoring or profiling.
+It uses AOP and AspectJ to perform this feat.
+
+
+== More Infos
+
+general link:../README.md[README]
