@@ -20,10 +20,6 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
-
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.*;
 import org.junit.runner.Description;
@@ -32,9 +28,16 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.ParentRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
+import patterntesting.runtime.annotation.Broken;
+import patterntesting.runtime.annotation.IntegrationTest;
+import patterntesting.runtime.annotation.RunTestOn;
+import patterntesting.runtime.util.Environment;
+import patterntesting.runtime.util.ReflectionHelper;
+import patterntesting.runtime.util.ThreadUtil;
 
-import patterntesting.runtime.annotation.*;
-import patterntesting.runtime.util.*;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * JUnit tests for {@link SmokeRunner} class.
@@ -91,18 +94,6 @@ public class SmokeRunnerTest {
     public void testCounter() {
         assertTrue("setUpBeforeClass() was not called", started);
         assertEquals(1, counter);
-    }
-
-    /**
-     * Test method for <code>SmokeRunner.testCount()</code>.
-     * This is the test case for JUnit 3.
-     *
-     * @throws InitializationError if SmokeRunner can't be created
-     */
-    @Test
-    public void testCount3() throws InitializationError {
-        SmokeRunner runner3 = new SmokeRunner(patterntesting.runtime.junit.v3.BrokenTest.class);
-        assertEquals(1, runner3.testCount());
     }
 
     /**

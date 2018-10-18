@@ -20,15 +20,14 @@
 
 package patterntesting.runtime.junit.internal;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 import org.junit.internal.builders.JUnit3Builder;
 import org.junit.internal.builders.JUnit4Builder;
 import org.junit.runner.Runner;
-
 import patterntesting.runtime.junit.SmokeRunner;
 import patterntesting.runtime.junit.v3.BrokenTest;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Unit tests for {@link SmokeBuilder} class.
