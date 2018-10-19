@@ -19,17 +19,16 @@
  */
 package patterntesting.runtime.monitor;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.junit.SmokeRunner;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * The Class MemoryGuardTest.
@@ -134,7 +133,11 @@ public final class MemoryGuardTest {
     @AfterClass
     public static void stopBackgroundLogger() throws InterruptedException {
         MemoryGuard.logFreeMemory(0);
-        Thread.sleep(1);
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException ie) {
+            LOG.info("Could not sleep:", ie);
+        }
         LOG.info("Background logging should be stopped now.");
     }
 

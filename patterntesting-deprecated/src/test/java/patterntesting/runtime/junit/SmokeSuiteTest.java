@@ -20,13 +20,12 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import org.junit.Test;
 import org.junit.runner.Runner;
-
 import patterntesting.runtime.annotation.Broken;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * JUnit tests for {@link SmokeSuite} class.

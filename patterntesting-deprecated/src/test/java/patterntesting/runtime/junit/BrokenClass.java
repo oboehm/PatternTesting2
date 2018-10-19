@@ -18,7 +18,7 @@
  * (c)reated 23.11.2009 by oliver (ob@oasd.de)
  */
 
-package patterntesting.runtime;
+package patterntesting.runtime.junit;
 
 import patterntesting.runtime.annotation.Broken;
 

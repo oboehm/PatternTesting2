@@ -20,20 +20,24 @@
 
 package patterntesting.runtime.junit.internal;
 
-import java.io.*;
-import java.net.URI;
-import java.util.*;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-
+import org.apache.logging.log4j.Logger;
 import patterntesting.runtime.monitor.ClasspathMonitor;
 import patterntesting.runtime.util.Converter;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  * If we want to load a class and see what happens if another class (needed by
@@ -79,7 +83,7 @@ public final class XrayClassLoader extends ClassLoader {
 	}
 
 	/**
-	 * Loads the class eith the given binary name. If the given class is a Java
+	 * Loads the class with the given binary name. If the given class is a Java
 	 * class from the bootstrap class we ask the parent to do the job. Otherwise
 	 * we would get a security exception or something like that.
 	 *

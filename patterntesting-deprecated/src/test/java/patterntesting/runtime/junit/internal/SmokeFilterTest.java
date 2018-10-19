@@ -20,19 +20,18 @@
 
 package patterntesting.runtime.junit.internal;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import org.apache.commons.lang3.SystemUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
+import org.junit.runner.Description;
+import patterntesting.runtime.junit.v4.*;
+import patterntesting.runtime.util.Environment;
 
 import java.lang.reflect.Method;
 
-import org.apache.commons.lang3.SystemUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-import org.junit.runner.Description;
-
-import patterntesting.runtime.junit.v4.*;
-import patterntesting.runtime.util.Environment;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * The Class SmokeFilterTest.

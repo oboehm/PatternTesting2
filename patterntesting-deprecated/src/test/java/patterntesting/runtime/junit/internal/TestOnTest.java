@@ -20,14 +20,14 @@
 
 package patterntesting.runtime.junit.internal;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Time;
 
-import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test of {@link TestOn}.

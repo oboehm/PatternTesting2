@@ -20,23 +20,21 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.io.NotSerializableException;
-import java.util.Date;
-import java.util.regex.Pattern;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import patterntesting.runtime.BrokenClass;
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.annotation.SkipTestOn;
 import patterntesting.runtime.init.Crash;
 import patterntesting.runtime.init.RunOnInitializerBug;
 import patterntesting.runtime.junit.test.*;
 import patterntesting.runtime.monitor.Dummy;
+
+import java.io.NotSerializableException;
+import java.util.Date;
+import java.util.regex.Pattern;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for ObjectTester class.
@@ -254,7 +252,7 @@ public final class ObjectTesterTest {
     @Test
     public void testCheckAllOfPackage() {
         ObjectTester.assertAllOfPackage("patterntesting.runtime", Pattern.compile(".*Test"),
-                Pattern.compile(".*Lottery"), Pattern.compile(BrokenClass.class.getName()),
+                Pattern.compile(".*Lottery"),
                 Pattern.compile(Crash.class.getName()),
                 Pattern.compile(RunOnInitializerBug.class.getName()),
                 Pattern.compile(Dummy.class.getName()));

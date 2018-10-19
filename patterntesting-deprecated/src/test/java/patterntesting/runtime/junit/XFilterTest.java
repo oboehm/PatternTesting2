@@ -20,21 +20,20 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.lang.reflect.Method;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.manipulation.Filter;
-
 import patterntesting.runtime.annotation.SmokeTest;
 import patterntesting.runtime.junit.internal.SmokeFilter;
 import patterntesting.runtime.junit.v4.IntegrationTestTest;
 import patterntesting.runtime.util.Environment;
+
+import java.lang.reflect.Method;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * The Class XFilterTest.

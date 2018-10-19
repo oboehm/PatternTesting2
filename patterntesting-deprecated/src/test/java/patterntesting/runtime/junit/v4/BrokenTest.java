@@ -26,7 +26,7 @@ import org.apache.logging.log4j.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import patterntesting.runtime.BrokenClass;
+import patterntesting.runtime.junit.BrokenClass;
 import patterntesting.runtime.annotation.*;
 import patterntesting.runtime.junit.SmokeRunner;
 import patterntesting.runtime.util.Assertions;
