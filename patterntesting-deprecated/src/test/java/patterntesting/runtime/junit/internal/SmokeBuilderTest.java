@@ -21,11 +21,9 @@
 package patterntesting.runtime.junit.internal;
 
 import org.junit.Test;
-import org.junit.internal.builders.JUnit3Builder;
 import org.junit.internal.builders.JUnit4Builder;
 import org.junit.runner.Runner;
 import patterntesting.runtime.junit.SmokeRunner;
-import patterntesting.runtime.junit.v3.BrokenTest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -45,18 +43,6 @@ public final class SmokeBuilderTest {
     public void testRunnerForClass() throws Throwable {
         SmokeBuilder smBuilder = new SmokeBuilder(new JUnit4Builder());
         Runner runner = smBuilder.runnerForClass(SmokeBuilderTest.class);
-        assertEquals(SmokeRunner.class, runner.getClass());
-    }
-
-    /**
-     * Test method for {@link SmokeBuilder#runnerForClass(Class)}.
-     *
-     * @throws Throwable the throwable
-     */
-    @Test
-    public void testRunnerForClassForJUnit3() throws Throwable {
-        SmokeBuilder smBuilder = new SmokeBuilder(new JUnit3Builder());
-        Runner runner = smBuilder.runnerForClass(BrokenTest.class);
         assertEquals(SmokeRunner.class, runner.getClass());
     }
 
