@@ -20,21 +20,18 @@
 
 package patterntesting.runtime.net;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
+import patterntesting.runtime.annotation.IntegrationTest;
+import patterntesting.runtime.util.Converter;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Collection;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import patterntesting.runtime.annotation.IntegrationTest;
-import patterntesting.runtime.junit.SmokeRunner;
-import patterntesting.runtime.util.Converter;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * The Class LocalhostTest.
@@ -42,7 +39,6 @@ import patterntesting.runtime.util.Converter;
  * @author oliver
  * @since 1.0 (30.01.2010)
  */
-@RunWith(SmokeRunner.class)
 public final class LocalhostTest {
 
     private static final Logger log = LogManager.getLogger(LocalhostTest.class);

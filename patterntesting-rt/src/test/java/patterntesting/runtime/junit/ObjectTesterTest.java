@@ -21,7 +21,6 @@
 package patterntesting.runtime.junit;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.annotation.SkipTestOn;
 import patterntesting.runtime.init.Crash;
@@ -42,7 +41,6 @@ import static org.junit.Assert.assertTrue;
  * @author oliver
  * @since 1.1 (21.07.2010)
  */
-@RunWith(SmokeRunner.class)
 public final class ObjectTesterTest {
 
     private static Boolean hasCorrectHashCode = true;

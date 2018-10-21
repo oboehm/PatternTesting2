@@ -20,13 +20,13 @@
 
 package patterntesting.runtime.junit;
 
-import java.util.regex.Pattern;
-
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import patterntesting.runtime.annotation.IntegrationTest;
-import patterntesting.runtime.junit.test.*;
+import patterntesting.runtime.junit.test.BlackSheep;
+import patterntesting.runtime.junit.test.Person;
+import patterntesting.runtime.junit.test.Sheep;
+
+import java.util.regex.Pattern;
 
 /**
  * JUnit test for {@link ComparableTester}.
@@ -34,7 +34,6 @@ import patterntesting.runtime.junit.test.*;
  * @author oliver (ob@aosd.de)
  * @since 1.2 (21.09.2011)
  */
-@RunWith(SmokeRunner.class)
 public class ComparableTesterTest {
 
     /**

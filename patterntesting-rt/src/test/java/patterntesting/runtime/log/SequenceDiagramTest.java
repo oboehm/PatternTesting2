@@ -20,23 +20,25 @@
 
 package patterntesting.runtime.log;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.File;
-import java.util.*;
-import java.util.regex.Pattern;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.test.util.ReflectionTestUtils;
-
 import patterntesting.runtime.annotation.DrawSequenceDiagram;
 import patterntesting.runtime.annotation.IgnoreForSequenceDiagram;
 import patterntesting.runtime.junit.FileTester;
-import patterntesting.runtime.junit.SmokeRunner;
-import patterntesting.runtime.log.test.*;
+import patterntesting.runtime.log.test.Address;
+import patterntesting.runtime.log.test.AddressBook;
+import patterntesting.runtime.log.test.City;
+import patterntesting.runtime.log.test.CityRepo;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.regex.Pattern;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * This is class if for testing the generation of sequence diagrams by the
@@ -46,7 +48,6 @@ import patterntesting.runtime.log.test.*;
  * @author oliver
  * @since 1.3.1 (07.09.2013)
  */
-@RunWith(SmokeRunner.class)
 public class SequenceDiagramTest {
 
     private static final Logger log = LogManager.getLogger(SequenceDiagramTest.class);

@@ -23,9 +23,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import patterntesting.runtime.annotation.IntegrationTest;
-import patterntesting.runtime.junit.SmokeRunner;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -37,7 +35,6 @@ import static org.junit.Assert.assertTrue;
  * @version $Revision: 1.8 $
  * @since 19.01.2009
  */
-@RunWith(SmokeRunner.class)
 public final class MemoryGuardTest {
 
     private static final Logger LOG = LogManager.getLogger(MemoryGuardTest.class);

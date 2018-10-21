@@ -20,19 +20,20 @@
 
 package patterntesting.runtime.log;
 
-import static org.junit.Assert.assertFalse;
+import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
+import patterntesting.runtime.junit.FileTester;
+import patterntesting.runtime.mock.JoinPointStaticPartMock;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import patterntesting.runtime.junit.*;
-import patterntesting.runtime.mock.JoinPointStaticPartMock;
+import static org.junit.Assert.assertFalse;
 
 /**
  * JUnit tests for {@link SequenceGrapher} class.
@@ -40,7 +41,6 @@ import patterntesting.runtime.mock.JoinPointStaticPartMock;
  * @author oliver
  * @since 1.3.1 (08.09.2013)
  */
-@RunWith(SmokeRunner.class)
 public final class SequenceGrapherTest {
 
     private static final Logger LOG = LogManager.getLogger(SequenceGrapherTest.class);

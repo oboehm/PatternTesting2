@@ -25,11 +25,9 @@ import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import patterntesting.runtime.annotation.SkipTestOn;
 import patterntesting.runtime.io.ExtendedFile;
 import patterntesting.runtime.junit.CollectionTester;
-import patterntesting.runtime.junit.SmokeRunner;
 import patterntesting.runtime.util.ArchivEntry;
 import patterntesting.runtime.util.Converter;
 
@@ -51,7 +49,6 @@ import static org.junit.Assert.*;
  * @version $Revision: 1.47 $
  * @since 10.02.2009
  */
-@RunWith(SmokeRunner.class)
 public final class ClasspathMonitorTest extends AbstractMonitorTest {
 
     private static final Logger LOG = LogManager.getLogger(ClasspathMonitorTest.class);

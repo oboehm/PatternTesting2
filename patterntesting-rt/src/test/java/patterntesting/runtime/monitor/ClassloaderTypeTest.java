@@ -20,19 +20,21 @@
 
 package patterntesting.runtime.monitor;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import java.net.*;
-
 import org.apache.catalina.loader.ParallelWebappClassLoader;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hamcrest.Matcher;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import patterntesting.runtime.monitor.loader.CompoundClassLoader;
+import patterntesting.runtime.monitor.loader.WebappClassLoader;
 
-import patterntesting.runtime.junit.SmokeRunner;
-import patterntesting.runtime.monitor.loader.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  * Unit tests for {@link ClassloaderType}.
@@ -40,7 +42,6 @@ import patterntesting.runtime.monitor.loader.*;
  * @author oliver
  * @since 1.5 (26.08.2014)
  */
-@RunWith(SmokeRunner.class)
 public class ClassloaderTypeTest {
 
     private static final Logger log = LogManager.getLogger(ClassloaderTypeTest.class);

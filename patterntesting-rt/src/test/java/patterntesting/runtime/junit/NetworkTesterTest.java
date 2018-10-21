@@ -20,17 +20,18 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.Assert.assertTrue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Ignore;
+import org.junit.Test;
+import patterntesting.runtime.annotation.IntegrationTest;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.*;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import patterntesting.runtime.annotation.IntegrationTest;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Junit tests for {@link NetworkTester} class.
@@ -38,7 +39,6 @@ import patterntesting.runtime.annotation.IntegrationTest;
  * @author oboehm
  * @version $Revision: 1.11 $
  */
-@RunWith(SmokeRunner.class)
 public final class NetworkTesterTest {
 
     private static final Logger LOG = LogManager.getLogger(NetworkTesterTest.class);
@@ -121,7 +121,7 @@ public final class NetworkTesterTest {
      * @throws UnknownHostException if localhost is unknown
      */
     @Test
-    @IntegrationTest
+    @Ignore
     public void testAssertOnlineInetAddress() throws UnknownHostException {
         NetworkTester.assertOnline(InetAddress.getLocalHost());
     }

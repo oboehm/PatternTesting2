@@ -20,21 +20,21 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
-import java.util.regex.Pattern;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.junit.test.BlackSheep;
 import patterntesting.runtime.junit.test.Sheep;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.regex.Pattern;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * JUnit test for CloneableTester class.
@@ -42,7 +42,6 @@ import patterntesting.runtime.junit.test.Sheep;
  * @author oliver
  * @since 1.0.2 (06.08.2010)
  */
-@RunWith(SmokeRunner.class)
 public final class CloneableTesterTest implements Cloneable {
 
     private static final Logger log = LogManager.getLogger(CloneableTesterTest.class);

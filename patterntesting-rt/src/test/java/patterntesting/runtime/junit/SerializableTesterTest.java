@@ -20,17 +20,18 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
+import patterntesting.runtime.annotation.IntegrationTest;
+import patterntesting.runtime.junit.test.Person;
+import patterntesting.runtime.junit.test.Sheep;
 
-import java.io.*;
+import java.io.NotSerializableException;
+import java.io.Serializable;
 import java.util.Date;
 
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import patterntesting.runtime.annotation.IntegrationTest;
-import patterntesting.runtime.junit.test.*;
+import static org.junit.Assert.*;
 
 /**
  * JUnit tests for SerializableTester class.
@@ -38,7 +39,6 @@ import patterntesting.runtime.junit.test.*;
  * @author oliver
  * @since 1.1 (21.07.2010)
  */
-@RunWith(SmokeRunner.class)
 public final class SerializableTesterTest implements Serializable {
 
     private static final long serialVersionUID = 20140213L;

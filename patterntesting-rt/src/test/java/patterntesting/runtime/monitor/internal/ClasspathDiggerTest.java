@@ -1,30 +1,28 @@
 package patterntesting.runtime.monitor.internal;
 
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.*;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
+import org.springframework.util.CollectionUtils;
+import patterntesting.runtime.annotation.SkipTestOn;
+import patterntesting.runtime.jmx.MBeanHelper;
+import patterntesting.runtime.junit.ArrayTester;
+import patterntesting.runtime.junit.FileTester;
+import patterntesting.runtime.monitor.loader.CompoundClassLoader;
+import patterntesting.runtime.monitor.loader.WebappClassLoader;
 
+import javax.management.InstanceNotFoundException;
+import javax.management.JMException;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URLClassLoader;
 import java.util.*;
 
-import javax.management.InstanceNotFoundException;
-import javax.management.JMException;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.util.CollectionUtils;
-
-import patterntesting.runtime.annotation.SkipTestOn;
-import patterntesting.runtime.jmx.MBeanHelper;
-import patterntesting.runtime.junit.*;
-import patterntesting.runtime.monitor.loader.CompoundClassLoader;
-import patterntesting.runtime.monitor.loader.WebappClassLoader;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.*;
 
 /**
  * Here we test some methods from ClasspathDigger.
@@ -33,7 +31,6 @@ import patterntesting.runtime.monitor.loader.WebappClassLoader;
  * @version $Revision: 1.26 $
  * @since 27.07.2009
  */
-@RunWith(SmokeRunner.class)
 public final class ClasspathDiggerTest extends AbstractDiggerTest {
 
     private static final Logger LOG = LogManager.getLogger(ClasspathDiggerTest.class);

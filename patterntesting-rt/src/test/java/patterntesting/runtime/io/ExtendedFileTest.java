@@ -20,19 +20,24 @@
 
 package patterntesting.runtime.io;
 
+import org.apache.commons.lang3.SystemUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import patterntesting.runtime.annotation.RunTestOn;
+import patterntesting.runtime.junit.FileTester;
+import patterntesting.runtime.junit.ObjectTester;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
-import java.io.*;
-
-import org.apache.commons.lang3.SystemUtils;
-import org.apache.logging.log4j.*;
-import org.junit.*;
-import org.junit.runner.RunWith;
-
-import patterntesting.runtime.annotation.RunTestOn;
-import patterntesting.runtime.junit.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for {@link ExtendedFile} class.
@@ -40,7 +45,6 @@ import patterntesting.runtime.junit.*;
  * @author oliver
  * @since 1.5 (27.08.2014)
  */
-@RunWith(SmokeRunner.class)
 public final class ExtendedFileTest {
 
 	private static final Logger LOG = LogManager.getLogger(ExtendedFileTest.class);
