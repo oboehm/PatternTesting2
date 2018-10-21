@@ -25,6 +25,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import patterntesting.runtime.annotation.RunTestOn;
 import patterntesting.runtime.junit.FileTester;
@@ -104,6 +105,7 @@ public final class ExtendedFileTest {
      */
     @Test
     @RunTestOn(osName = "Mac", hide = true)
+    @Ignore // runs only on Mac
     public void testEqualsFileOnDifferentPath() throws IOException {
         String name = dummy.getName();
         File tmp = new ExtendedFile("/tmp", name);
