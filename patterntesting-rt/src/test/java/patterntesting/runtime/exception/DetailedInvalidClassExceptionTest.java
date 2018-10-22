@@ -20,9 +20,9 @@
 
 package patterntesting.runtime.exception;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static junit.framework.TestCase.assertEquals;
 
 /**
  * Unit tests for {@link DetailedInvalidClassException}.

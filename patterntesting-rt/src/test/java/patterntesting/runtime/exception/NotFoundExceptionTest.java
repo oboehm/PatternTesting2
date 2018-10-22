@@ -20,15 +20,16 @@
 
 package patterntesting.runtime.exception;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 import java.util.regex.Pattern;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for {@link NotFoundException}.
@@ -71,7 +72,7 @@ public class NotFoundExceptionTest {
         Pattern pattern = Pattern.compile("world");
         NotFoundException ex = new NotFoundException(pattern);
         String msg = ex.getMessage();
-        assertTrue(msg, msg.contains("world"));
+        assertThat(msg, containsString("world"));
     }
 
     /**
@@ -82,7 +83,7 @@ public class NotFoundExceptionTest {
         Date now = new Date();
         NotFoundException ex = new NotFoundException(now);
         String msg = ex.getMessage();
-        assertTrue(msg, msg.contains("value"));
+        assertThat(msg, containsString("value"));
     }
 
 }

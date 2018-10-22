@@ -19,18 +19,24 @@
  */
 package patterntesting.runtime.dbc;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import patterntesting.runtime.util.Assertions;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.Serializable;
-import java.util.*;
-
-import org.junit.*;
-
-import patterntesting.runtime.util.Assertions;
-
 /**
- * The Class CollectionsTest.
+ * For the Collections class of JDK you can define some preconditions which are
+ * collected in {@link CollectionsAspect}. This is the test class for this
+ * aspect.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
  * @version $Revision: 1.11 $
