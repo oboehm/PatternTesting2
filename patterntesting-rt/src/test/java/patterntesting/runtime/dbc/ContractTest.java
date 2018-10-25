@@ -19,14 +19,15 @@
  */
 package patterntesting.runtime.dbc;
 
-import static org.junit.Assert.assertTrue;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.util.Assertions;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 /**
  * The Class ContractTest.
@@ -35,28 +36,25 @@ import patterntesting.runtime.util.Assertions;
  * @version $Revision: 1.6 $
  * @since 30.01.2009
  */
-public class ContractTest implements Contract {
+public class ContractTest {
 
     private static Logger log = LogManager.getLogger(ContractTest.class);
-    private boolean valid = true;
+    private final ContractViolator rowdie = new ContractViolator();
 
     /**
      * Sets the up.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
-        this.valid = true;
-		assertTrue("assertion must be enabled ('java -ea ...')",
-				Assertions.areEnabled());
+        assumeTrue(Assertions.ENABLED, "assertions must be enabled ('java -ea ...')");
     }
 
     /**
      * Test method for {@link patterntesting.runtime.dbc.Contract#invariant()}.
      */
-    @Test(expected = ContractViolation.class)
+    @Test
     public final void testInvariant() {
-        this.valid = false;
-        log.info("you'll get a ContractViolation soon (invariant violated)");
+        assertThrows(ContractViolation.class, () -> rowdie.violateInvariant());
     }
 
     /**
@@ -64,65 +62,31 @@ public class ContractTest implements Contract {
      */
     @Test
     public final void testInvariantOk() {
+        assertTrue(rowdie.isValid());
     	log.debug("invariant() is ok -> no ContractViolation");
     }
 
-    /**
-     * The invariant method should be always return true.
-     *
-     * @return true, if invariant
-     */
-    @Override
-	public boolean invariant() {
-        return isValid();
-    }
+    
+    
+    static class ContractViolator implements Contract {
 
-    /**
-     * Checks if is valid.
-     *
-     * @return true, if is valid
-     */
-    public boolean isValid() {
-        return this.valid;
-    }
+        private static Logger LOG = LogManager.getLogger(ContractViolator.class);
+        private boolean valid = true;
 
+        public void violateInvariant() {
+            this.valid = false;
+            LOG.info("you'll get a ContractViolation soon (invariant violated)");
+        }
+
+        @Override
+        public boolean invariant() {
+            return isValid();
+        }
+
+        public boolean isValid() {
+            return this.valid;
+        }
+
+    }
+    
 }
-
-/**
- * $Log: ContractTest.java,v $
- * Revision 1.6  2016/12/18 20:19:41  oboehm
- * dependency to SLF4J removed
- *
- * Revision 1.5  2016/12/10 20:55:22  oboehm
- * code reformatted and cleaned up
- *
- * Revision 1.4  2016/01/06 20:46:32  oboehm
- * javadoc tags corrected
- *
- * Revision 1.3  2011/07/09 21:43:22  oboehm
- * switched from commons-logging to SLF4J
- *
- * Revision 1.2  2010/12/31 15:31:52  oboehm
- * checkstyle warnings reduced (bug 2859499)
- *
- * Revision 1.1  2010/01/05 13:26:18  oboehm
- * begin with 1.0
- *
- * Revision 1.3  2009/12/19 22:34:09  oboehm
- * trailing spaces removed
- *
- * Revision 1.2  2009/09/25 14:49:43  oboehm
- * javadocs completed with the help of JAutodoc
- *
- * Revision 1.1  2009/02/03 19:46:54  oboehm
- * DbC support moved from patterntesting-check to here
- *
- * Revision 1.4  2009/02/01 21:14:56  oboehm
- * require() and insure() moved to DbC
- * (to be imported static)
- *
- * Revision 1.3  2009/01/31 18:33:31  oboehm
- * DbC can now be activated via 'java -ea ...'
- *
- * $Source: /cvsroot/patterntesting/PatternTesting10/patterntesting-rt/src/test/java/patterntesting/runtime/dbc/ContractTest.java,v $
- */

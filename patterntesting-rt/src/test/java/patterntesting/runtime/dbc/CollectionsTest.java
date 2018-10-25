@@ -19,9 +19,9 @@
  */
 package patterntesting.runtime.dbc;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.util.Assertions;
 
 import java.io.Serializable;
@@ -30,8 +30,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 /**
  * For the Collections class of JDK you can define some preconditions which are
@@ -50,9 +51,9 @@ public class CollectionsTest {
     private static final List<StringBuilder> unsortedListBuffer = new ArrayList<>();
 
     /**
-     * Sets the up before class.
+     * Sets the up the sorted and unsorted lists for testing.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() {
         setUpSortedList();
         setUpUnsortedList();
@@ -81,11 +82,12 @@ public class CollectionsTest {
     }
 
     /**
-     * Sets the up.
+     * A precondition for each test is that assertions must be enabled for the
+     * VM. So call 'java -ea ...' if the tests are ignored.
      */
-    @Before
+    @BeforeEach
     public final void setUp() {
-        assertTrue("assertions must be enabled", Assertions.ENABLED);
+        assumeTrue(Assertions.ENABLED, "assertions must be enabled");
     }
 
     /**
@@ -96,7 +98,7 @@ public class CollectionsTest {
         private static final long serialVersionUID = 20100126L;
 
         /**
-         * Compare.
+         * A simpple comparator which uses the toString method for comparison.
          *
          * @param o1 the o1
          * @param o2 the o2
@@ -111,7 +113,8 @@ public class CollectionsTest {
     }
 
     /**
-     * Test method for {@link Collections#binarySearch(List, Object)}.
+     * The precondition for {@link Collections#binarySearch(List, Object)} is
+     * given. So the binary search should work as expected.
      */
     @Test
     public final void testBinarySearchFound() {
@@ -120,7 +123,8 @@ public class CollectionsTest {
     }
 
     /**
-     * Test binary search with comparator found.
+     * The binary search on a sorted list with a correct comparator should work
+     * as expected.
      */
     @Test
     public final void testBinarySearchWithComparatorFound() {
@@ -130,7 +134,7 @@ public class CollectionsTest {
     }
 
     /**
-     * Test binary search not found.
+     * The binary search on a sorted list should work as expected.
      */
     @Test
     public final void testBinarySearchNotFound() {
@@ -139,20 +143,24 @@ public class CollectionsTest {
     }
 
     /**
-     * Test binary search unsorted.
+     * The binary search is not defined for an unsorted list. I.e. the
+     * precondition is not satisfied and should result in a
+     * {@link ContractViolation}.
      */
-    @Test(expected = ContractViolation.class)
+    @Test
     public final void testBinarySearchUnsorted() {
-        Collections.binarySearch(unsortedList, "Java");
+        assertThrows(ContractViolation.class, () -> Collections.binarySearch(unsortedList, "Java"));
     }
 
     /**
-     * Test binary search unsorted list buffer.
+     * The binary search is not defined for an unsorted list. I.e. the
+     * precondition is not satisfied and should result in a
+     * {@link ContractViolation}.
      */
-    @Test(expected = ContractViolation.class)
+    @Test
     public final void testBinarySearchUnsortedListBuffer() {
-        Collections.binarySearch(unsortedListBuffer, new StringBuilder("Java"),
-                new StringBuilderComparator());
+        assertThrows(ContractViolation.class, () -> Collections
+                .binarySearch(unsortedListBuffer, new StringBuilder("Java"), new StringBuilderComparator()));
     }
 
 }

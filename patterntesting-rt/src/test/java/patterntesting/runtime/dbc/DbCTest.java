@@ -17,17 +17,17 @@
  */
 package patterntesting.runtime.dbc;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.util.Assertions;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static patterntesting.runtime.dbc.DbC.ensure;
 import static patterntesting.runtime.dbc.DbC.require;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Before;
-import org.junit.Test;
-
-import patterntesting.runtime.util.Assertions;
 
 /**
  * The Class DbCTest.
@@ -41,10 +41,9 @@ public class DbCTest {
 	/**
 	 * Setup.
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() {
-		assertTrue("assertion must be enabled ('java -ea ...')",
-				Assertions.areEnabled());
+        assumeTrue(Assertions.areEnabled(), "assertions must be enabled ('java -ea ...')");
 	}
 
     /**
@@ -59,10 +58,12 @@ public class DbCTest {
     /**
      * Test require false.
      */
-    @Test(expected = ContractViolation.class)
+    @Test
     public final void testRequireFalse() {
-        require(false);
-        log.warn("you should never see this message (precondition is false!)");
+        assertThrows(ContractViolation.class, () -> {
+            require(false);
+            log.warn("you should never see this message (precondition is false!)");
+        });
     }
 
     /**
@@ -86,12 +87,14 @@ public class DbCTest {
     }
 
     /**
-     * Test ensure false.
+     * Test method for {@link DbC#ensure(boolean)}.
      */
-    @Test(expected = ContractViolation.class)
+    @Test
     public final void testEnsureFalse() {
-        log.info("you'll get a ContractViolation soon");
-        ensure(false);
+        assertThrows(ContractViolation.class, () -> {
+            log.info("you'll get a ContractViolation soon");
+            ensure(false);
+        });
     }
 
     /**
