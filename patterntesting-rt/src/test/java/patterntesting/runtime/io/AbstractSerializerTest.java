@@ -20,14 +20,14 @@
 
 package patterntesting.runtime.io;
 
-import static org.junit.Assert.assertEquals;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The Class AbstractSerializerTest.
@@ -51,10 +51,9 @@ public abstract class AbstractSerializerTest {
      * Tests the serialization and deserialization.
      *
      * @throws IOException Signals that an I/O exception has occurred.
-     * @throws ClassNotFoundException the class not found exception
      */
     @Test
-    public void testSerialize() throws IOException, ClassNotFoundException {
+    public void testSerialize() throws IOException {
         File testFile = File.createTempFile("test", ".ser");
         log.info("File \"{}\" is used to test (de)serialization.", testFile);
         Object hello = "Hello World!";

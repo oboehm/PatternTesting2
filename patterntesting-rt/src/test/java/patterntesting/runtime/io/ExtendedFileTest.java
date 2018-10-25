@@ -23,11 +23,9 @@ package patterntesting.runtime.io;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-import patterntesting.runtime.annotation.RunTestOn;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.junit.FileTester;
 import patterntesting.runtime.junit.ObjectTester;
 
@@ -35,8 +33,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -46,7 +46,7 @@ import static org.mockito.Mockito.when;
  * @author oliver
  * @since 1.5 (27.08.2014)
  */
-public final class ExtendedFileTest {
+public class ExtendedFileTest {
 
 	private static final Logger LOG = LogManager.getLogger(ExtendedFileTest.class);
 	private static File dummy;
@@ -56,10 +56,9 @@ public final class ExtendedFileTest {
      *
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpDummyFile() throws IOException {
         dummy = File.createTempFile("dummy", ".tst");
-        dummy.createNewFile();
         LOG.info("File '{}' was created for testing.", dummy);
     }
 
@@ -71,8 +70,8 @@ public final class ExtendedFileTest {
         ExtendedFile file = new ExtendedFile("/tmp/web/WEB-INF/classes");
         File webinf = new File("WEB-INF");
         File webinfClasses = new File(webinf, "classes");
-        assertTrue(file + " should end with " + webinfClasses, file.endsWith(webinfClasses));
-        assertFalse(file + " should not end with " + webinf, file.endsWith(webinf));
+        assertTrue(file.endsWith(webinfClasses), file + " should end with " + webinfClasses);
+        assertFalse(file.endsWith(webinf), file + " should not end with " + webinf);
     }
 
     /**
@@ -94,7 +93,7 @@ public final class ExtendedFileTest {
         String name = dummy.getName();
         File file = new ExtendedFile(dummy.getParent(), "./" + name);
         ObjectTester.assertEquals(new ExtendedFile(dummy), file);
-        assertTrue("expected: " + file + " == " + dummy, file.equals(dummy));
+        assertEquals(file, dummy, "expected: " + file + " == " + dummy);
     }
 
     /**
@@ -104,15 +103,14 @@ public final class ExtendedFileTest {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     @Test
-    @RunTestOn(osName = "Mac", hide = true)
-    @Ignore // runs only on Mac
     public void testEqualsFileOnDifferentPath() throws IOException {
+        assumeTrue(SystemUtils.IS_OS_MAC,"this runs only on Mac");
         String name = dummy.getName();
         File tmp = new ExtendedFile("/tmp", name);
-        tmp.createNewFile();
+        assertTrue(tmp.createNewFile());
         try {
             File privateTmp = new ExtendedFile("/private/tmp", name);
-            assertTrue(privateTmp + " does not exist", privateTmp.exists());
+            assertTrue(privateTmp.exists(), privateTmp + " does not exist");
             assertEquals(tmp, privateTmp);
         } finally {
             tmp.deleteOnExit();
@@ -128,21 +126,21 @@ public final class ExtendedFileTest {
     @Test
     public void testValidateFileExisting() throws FileNotFoundException {
         File existing = new File("src/test/resources/log4j2.xml");
-        assertTrue("should exist: " + existing, existing.exists());
+        assertTrue(existing.exists(), "should exist: " + existing);
         ExtendedFile.validate(existing);
     }
 
 	/**
 	 * Test method for {@link ExtendedFile#validate(File)} with a non
 	 * existing file.
-	 *
-	 * @throws FileNotFoundException the file not found exception
 	 */
-	@Test(expected = FileNotFoundException.class)
-	public void testValidateFileNotExisting() throws FileNotFoundException {
-		File notExisting = new File("/not/existing/file");
-		assertFalse(notExisting + " should not exist for this test", notExisting.exists());
-		ExtendedFile.validate(notExisting);
+	@Test
+	public void testValidateFileNotExisting() {
+	    assertThrows(FileNotFoundException.class, () -> {
+            File notExisting = new File("/not/existing/file");
+            assertFalse(notExisting.exists(), notExisting + " should not exist for this test");
+            ExtendedFile.validate(notExisting);
+        });
 	}
     
     /**
@@ -208,22 +206,19 @@ public final class ExtendedFileTest {
      * In the first version of {@link ExtendedFile#validate(File)} a NPE
      * happens if the given file has no directory. This should not happen
      * again.
-     *
-     * @throws FileNotFoundException the file not found exception
      */
-    @Test(expected = FileNotFoundException.class)
-    public void testValidateFileOnly() throws FileNotFoundException {
-        ExtendedFile.validate(new File("hello.world"));
+    @Test
+    public void testValidateFileOnly() {
+        assertThrows(FileNotFoundException.class, () -> ExtendedFile.validate(new File("hello.world")));
     }
 
     /**
      * Delete dummy file.
      */
-    @AfterClass
+    @AfterAll
     public static void deleteDummyFile() {
         dummy.deleteOnExit();
         LOG.info("File '{}' will be deleted on exit.", dummy);
     }
 
 }
-

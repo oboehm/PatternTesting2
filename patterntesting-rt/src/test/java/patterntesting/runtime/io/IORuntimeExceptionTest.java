@@ -20,12 +20,14 @@
 
 package patterntesting.runtime.io;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.not;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for {@link IORuntimeException}.

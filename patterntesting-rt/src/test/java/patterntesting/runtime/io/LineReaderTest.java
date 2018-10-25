@@ -20,13 +20,15 @@
 
 package patterntesting.runtime.io;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.*;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for {@link LineReader} class.

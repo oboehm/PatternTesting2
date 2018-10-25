@@ -20,18 +20,19 @@
 
 package patterntesting.runtime.io;
 
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.monitor.ClasspathMonitor;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Date;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-
-import patterntesting.runtime.monitor.ClasspathMonitor;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for {@link Resource} class.
@@ -52,7 +53,7 @@ public class ResourceTest {
     @Test
     public void testGetModificationDateOfFile() throws IOException {
         File file = new File("src/test/java/patterntesting/runtime/io/ResourceTest.java");
-        assertTrue("does not exist: " + file, file.exists());
+        assertTrue(file.exists(), "does not exist: " + file);
         Date modified = getModificationTimeOf(file.toURI());
         assertEquals(file.lastModified(), modified.getTime());
     }
@@ -66,7 +67,7 @@ public class ResourceTest {
     public void testGetModificationDateOfJarResource() throws IOException {
         URI uri = ClasspathMonitor.getInstance().whichClass(Logger.class);
         Date modified = getModificationTimeOf(uri);
-        assertNotNull("modification time expected for " + uri, modified);
+        assertNotNull(modified, "modification time expected for " + uri);
     }
 
     private static Date getModificationTimeOf(final URI uri) throws IOException {
