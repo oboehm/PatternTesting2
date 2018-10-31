@@ -20,14 +20,18 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.*;
-import java.util.*;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.*;
 
-import org.apache.logging.log4j.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * With the NetworkTester you can assert if a host is online or offline.
@@ -39,7 +43,7 @@ import org.apache.logging.log4j.*;
 public final class NetworkTester {
 
     private static final Logger LOG = LogManager.getLogger(NetworkTester.class);
-    private static final int CONNECTION_TIMEOUT = 5;
+    private static final int CONNECTION_TIMEOUT = 2;
 
     /** Utility class - no need to instantiate it. */
     private NetworkTester() {
@@ -55,6 +59,16 @@ public final class NetworkTester {
     }
 
     /**
+     * Checks if the given host is online.
+     *
+     * @param host the hostname or IP address
+     * @since 2.0
+     */
+    public static boolean isOnline(String host) {
+        return isOnline(host, CONNECTION_TIMEOUT, TimeUnit.MINUTES);
+    }
+
+    /**
      * Asserts, that the given host is online. The given time is the maximal
      * time we try to connect to the given host.
      *
@@ -63,8 +77,21 @@ public final class NetworkTester {
      * @param unit the time unit
      */
     public static void assertOnline(String host, int time, TimeUnit unit) {
+        assertTrue(host + " is offline", isOnline(host, time, unit));
+    }
+
+    /**
+     * Checks if the given host is online. The given time is the maximal
+     * time we try to connect to the given host.
+     *
+     * @param host hostname or ip address
+     * @param time how long should we try to connect to host?
+     * @param unit the time unit
+     * @since 2.0
+     */
+    public static boolean isOnline(String host, int time, TimeUnit unit) {
         PortScanner scanner = scanPortsOf(host, time, unit);
-        assertTrue(host + " is offline", scanner.openPortDetected());
+        return scanner.openPortDetected();
     }
 
     private static PortScanner scanPortsOf(String host, int timeout, TimeUnit unit) {
@@ -265,8 +292,8 @@ public final class NetworkTester {
          * {@link ExecutorService} together with a thread pool of 512 threads
          * (1000 threads didn't work).
          *
-         * @param timeout
-         * @param unit
+         * @param timeout timeout
+         * @param unit    time unit
          */
         public void scanPorts(int timeout, TimeUnit unit) {
             endTime = System.currentTimeMillis() + unit.toMillis(timeout);

@@ -22,7 +22,6 @@ package patterntesting.runtime.junit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.IntegrationTest;
 
@@ -32,6 +31,7 @@ import java.net.*;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 /**
  * Junit tests for {@link NetworkTester} class.
@@ -48,6 +48,7 @@ public final class NetworkTesterTest {
      */
     @Test
     public void testAssertExists() {
+        assumeTrue(NetworkTester.isOnline("patterntesting.org"), "patterntesting.org is offline");
         URI uri = URI.create("http://patterntesting.org");
         NetworkTester.assertExists(uri);
     }
@@ -84,11 +85,9 @@ public final class NetworkTesterTest {
     /**
      * Test method for {@link NetworkTester#assertOnline(InetAddress, int)}.
      * To get a port for testing we ask the 'netstat' command.
-     *
-     * @throws UnknownHostException should not happen
      */
     @Test
-    public void testAssertOnlineInetAddressPort() throws UnknownHostException {
+    public void testAssertOnlineInetAddressPort() {
         checkAssertOnline(InetAddress.getLoopbackAddress(), 135);
     }
 
@@ -121,7 +120,6 @@ public final class NetworkTesterTest {
      * @throws UnknownHostException if localhost is unknown
      */
     @Test
-    @Ignore
     public void testAssertOnlineInetAddress() throws UnknownHostException {
         NetworkTester.assertOnline(InetAddress.getLocalHost());
     }
