@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.jmx;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.monitor.ClasspathMonitor;
 import patterntesting.runtime.monitor.ProfileStatistic;
 import patterntesting.runtime.monitor.ProfileStatisticMBean;
@@ -31,7 +31,7 @@ import javax.management.MBeanAttributeInfo;
 import javax.management.MBeanOperationInfo;
 import javax.management.NotCompliantMBeanException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for {@link AnnotatedStandardMBean} class.
@@ -44,11 +44,11 @@ public final class AnnotatedStandardMBeanTest {
     private AnnotatedStandardMBean mbean;
 
     /**
-     * Sets the up m bean.
+     * Sets the up the MBean for testing.
      *
-     * @throws NotCompliantMBeanException the not compliant m bean exception
+     * @throws NotCompliantMBeanException should not happen
      */
-    @Before
+    @BeforeEach
     public void setUpMBean() throws NotCompliantMBeanException {
         mbean = new AnnotatedStandardMBean(ProfileStatistic.getInstance(),
                 ProfileStatisticMBean.class);

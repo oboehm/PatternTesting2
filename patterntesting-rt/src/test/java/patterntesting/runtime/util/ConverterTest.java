@@ -23,7 +23,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +38,10 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.startsWith;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Class ConverterTest.
@@ -159,8 +162,8 @@ public final class ConverterTest {
     @Test
     public void testToShortString() {
         String shortString = Converter.toShortString("a very long string which should be abbreviated");
-        assertTrue(shortString, shortString.startsWith("a very long"));
-        assertTrue(shortString, shortString.endsWith("..."));
+        assertThat(shortString, startsWith("a very long"));
+        assertThat(shortString, endsWith("..."));
     }
 
     /**
@@ -190,8 +193,7 @@ public final class ConverterTest {
     @Test
     public void testToShortObject() {
         String s = Converter.toShortString(this);
-        assertTrue(s + " should not start with classname only",
-                s.startsWith(this.getClass().getSimpleName()));
+        assertThat(s, startsWith(this.getClass().getSimpleName()));
     }
     
     /**
@@ -248,8 +250,8 @@ public final class ConverterTest {
         stacktrace[0] = new StackTraceElement("ClassA", "methodA", "ClassA.java", 12);
         stacktrace[1] = new StackTraceElement("B", "b", "B.java", 34);
         String s = Converter.toLongString(stacktrace);
-        assertTrue(s, s.startsWith("\tat " + stacktrace[0]));
-        assertTrue(s, s.trim().endsWith("\n\tat " + stacktrace[1]));
+        assertThat(s, startsWith("\tat " + stacktrace[0]));
+        assertThat(s.trim(), endsWith("\n\tat " + stacktrace[1]));
     }
 
     /**
@@ -332,9 +334,7 @@ public final class ConverterTest {
 		File file = Converter.toFile(uri);
 		LOG.info("file=" + file);
 		String filename = file.toString();
-        assertTrue(file + " does not start with 'C:'",
-                filename.startsWith("C:")
-                || filename.startsWith("/C:"));
+        assertTrue(filename.startsWith("C:") || filename.startsWith("/C:"), file + " does not start with 'C:'");
 	}
 
 	/**

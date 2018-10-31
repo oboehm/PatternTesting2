@@ -23,7 +23,7 @@ package patterntesting.runtime.junit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.IntegrationTest;
 
 import java.io.File;
@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.net.*;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Junit tests for {@link NetworkTester} class.
@@ -58,7 +58,7 @@ public final class NetworkTesterTest {
     @Test
     public void testAssertExistsFile() {
         File file = new File("pom.xml");
-        assertTrue("should exist: " + file, file.exists());
+        assertTrue(file.exists(), "should exist: " + file);
         NetworkTester.assertExists(file.toURI());
     }
 

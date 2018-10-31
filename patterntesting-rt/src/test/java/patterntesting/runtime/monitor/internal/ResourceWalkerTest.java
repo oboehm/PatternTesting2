@@ -20,20 +20,21 @@
 
 package patterntesting.runtime.monitor.internal;
 
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.core.StringEndsWith.endsWith;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
+import org.apache.commons.io.filefilter.DirectoryFileFilter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
-import org.apache.commons.io.filefilter.DirectoryFileFilter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.StringEndsWith.endsWith;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Unit-Tests fuer {@link ResourceWalker} class.
@@ -74,7 +75,7 @@ public final class ResourceWalkerTest {
 
     private static Collection<String> getResourcesFrom(ResourceWalker walker) throws IOException {
         Collection<String> resources = walker.getResources();
-        assertFalse("resources expected", resources.isEmpty());
+        assertThat(resources, not(empty()));
         LOG.info("{} resources found: {}", resources.size(), resources);
         for (String rsc : resources) {
             assertThat(rsc, not(endsWith(".class")));
@@ -92,7 +93,7 @@ public final class ResourceWalkerTest {
         ResourceWalker walker = new ResourceWalker(CLASSES_DIR, DirectoryFileFilter.DIRECTORY);
         Collection<String> packages = walker.getPackages();
         assertThat(packages, hasItem("patterntesting/"));
-        assertFalse("contain null values: " + packages, packages.contains(null));
+        assertFalse(packages.contains(null), "contains null values: " + packages);
         LOG.info("{} packages found: {}", packages.size(), packages);
     }
 

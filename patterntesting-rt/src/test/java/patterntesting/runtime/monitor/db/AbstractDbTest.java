@@ -20,13 +20,21 @@
 
 package patterntesting.runtime.monitor.db;
 
-import static org.junit.Assert.assertFalse;
-
-import java.sql.*;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.*;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 
 /**
  * Common super class for JUnit tests which need a database for testing.
@@ -75,7 +83,7 @@ public abstract class AbstractDbTest {
      * @throws ClassNotFoundException the class not found exception
      * @throws SQLException the SQL exception
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpDB() throws ClassNotFoundException, SQLException {
         if (JDBC_URL.startsWith("jdbc:jamon")) {
             Class.forName("com.jamonapi.proxy.JAMonDriver");
@@ -102,7 +110,7 @@ public abstract class AbstractDbTest {
      *
      * @throws SQLException the sQL exception
      */
-    @Before
+    @BeforeEach
     public void setUpConnection() throws SQLException {
         connection = DriverManager.getConnection(JDBC_URL);
         LOG.info("Got {} for URL \"{}\".", connection, JDBC_URL);
@@ -116,7 +124,7 @@ public abstract class AbstractDbTest {
     @Test
     public void testToString() {
         String s = this.getObject().toString();
-        assertFalse("looks like default implementation: \"" + s + '"', s.contains("@"));
+        assertThat("looks like default implementation", s, not(containsString("@")));
         LOG.info("s = \"{}\"", s);
     }
 
@@ -125,7 +133,7 @@ public abstract class AbstractDbTest {
      *
      * @throws SQLException the sQL exception
      */
-    @After
+    @AfterEach
     public void closeConnection() throws SQLException {
         proxy.close();
     }

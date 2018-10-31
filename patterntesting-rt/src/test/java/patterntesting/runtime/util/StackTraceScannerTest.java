@@ -20,12 +20,13 @@
 
 package patterntesting.runtime.util;
 
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
 
 import java.util.regex.Pattern;
 
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * JUnit tests for {@link StackTraceScanner}.

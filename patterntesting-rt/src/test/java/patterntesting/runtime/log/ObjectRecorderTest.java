@@ -18,15 +18,14 @@
 
 package patterntesting.runtime.log;
 
-import static org.junit.Assert.assertTrue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.mock.JoinPointMock;
 
 import java.io.File;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-
-import patterntesting.runtime.mock.JoinPointMock;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * JUnit tests for {@link ObjectRecorder} class.
@@ -52,7 +51,7 @@ public class ObjectRecorderTest {
         recorder.log(new JoinPointMock("two"), "d");
         recorder.log(new JoinPointMock("two"), "e");
         recorder.close();
-        assertTrue(record + " does not exist", record.exists());
+        assertTrue(record.exists(), record + " does not exist");
     }
 
     /**

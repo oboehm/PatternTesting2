@@ -19,14 +19,18 @@
  */
 package patterntesting.runtime;
 
-import static org.junit.Assert.*;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
-import org.junit.*;
-
-import patterntesting.runtime.init.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import patterntesting.runtime.init.CrashBean;
+import patterntesting.runtime.init.RunOnInitializerBug;
 import patterntesting.runtime.util.Assertions;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * When a class fails during static initialization (e.g. during a static block
@@ -45,7 +49,7 @@ public final class InitializationTest {
 	/**
 	 * Setup before class.
 	 */
-	@BeforeClass
+	@BeforeAll
 	public static void setupBeforeClass() {
 		try {
 			Class<?> cl = Class.forName(testClassName);
@@ -91,7 +95,7 @@ public final class InitializationTest {
      */
     @Test
     public void testAssertions() {
-        assertTrue("assertions must be enabled", Assertions.ENABLED);
+        assertTrue(Assertions.ENABLED, "assertions must be enabled");
     }
 
 	/**
@@ -106,8 +110,7 @@ public final class InitializationTest {
 	    } catch (AssertionError expected) {
 	        String msg = expected.getMessage();
 	        LOG.info(msg);
-	        assertTrue('"' + msg + "\" does not contain unitialized variable",
-                    StringUtils.contains(msg, "value"));
+	        assertThat(msg, containsString("value"));
 	    }
 	}
 

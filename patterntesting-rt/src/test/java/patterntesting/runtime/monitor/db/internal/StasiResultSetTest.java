@@ -20,16 +20,17 @@
 
 package patterntesting.runtime.monitor.db.internal;
 
-import static org.junit.Assert.*;
-
-import java.sql.*;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.After;
-import org.junit.Test;
-
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.monitor.db.AbstractDbTest;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@link StasiResultSet} class.
@@ -67,7 +68,7 @@ public final class StasiResultSetTest extends AbstractDbTest {
         resultSet = getResultSetFor("SELECT * FROM persons WHERE country = 'DE'");
         while (resultSet.next()) {
             int id = resultSet.getInt(1);
-            assertTrue("not > 0: " + id, id > 0);
+            assertTrue(id > 0, "not > 0: " + id);
             String name = resultSet.getString(2);
             Object obj = resultSet.getObject(2);
             assertEquals(name, obj);
@@ -86,13 +87,13 @@ public final class StasiResultSetTest extends AbstractDbTest {
         resultSet = getResultSetFor("SELECT * FROM persons WHERE id = 1001");
         StasiResultSet srs = (StasiResultSet) resultSet;
         ResultSet wrapped = srs.getWrappedResultSet();
-        assertTrue("should be before first", srs.isBeforeFirst());
-        assertTrue("should be before first", wrapped.isBeforeFirst());
-        assertTrue("result expected", srs.next());
-        assertTrue("should be first", srs.isFirst());
-        assertTrue("should be last", srs.isLast());
-        assertFalse("no result expected", srs.next());
-        assertTrue("should be after last", srs.isAfterLast());
+        assertTrue(srs.isBeforeFirst(), "should be before first");
+        assertTrue(wrapped.isBeforeFirst(), "should be before first");
+        assertTrue(srs.next(), "result expected");
+        assertTrue(srs.isFirst(), "should be first");
+        assertTrue(srs.isLast(), "should be last");
+        assertFalse(srs.next(), "no result expected");
+        assertTrue(srs.isAfterLast(), "should be after last");
     }
 
     /**
@@ -104,7 +105,7 @@ public final class StasiResultSetTest extends AbstractDbTest {
     public void testToStringWithSQL() throws SQLException {
         resultSet = getResultSetFor("SELECT * FROM country");
         String s = resultSet.toString();
-        assertFalse("looks like default implementation: " + s, s.contains("@"));
+        assertFalse(s.contains("@"), "looks like default implementation: " + s);
         LOG.info("s = \"{}\"", s);
     }
 
@@ -119,7 +120,7 @@ public final class StasiResultSetTest extends AbstractDbTest {
      *
      * @throws SQLException the SQL exception
      */
-    @After
+    @AfterEach
     public void closeResultSet() throws SQLException {
         if (this.resultSet != null) {
             this.resultSet.close();

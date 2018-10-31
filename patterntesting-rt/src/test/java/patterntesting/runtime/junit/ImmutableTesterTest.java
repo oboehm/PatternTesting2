@@ -18,11 +18,12 @@
 
 package patterntesting.runtime.junit;
 
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.io.LineReader;
+
 import javax.annotation.concurrent.Immutable;
 
-import org.junit.Test;
-
-import patterntesting.runtime.io.LineReader;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit tests for {@link ImmutableTester} class.
@@ -44,9 +45,9 @@ public final class ImmutableTesterTest {
 	 * The LineReader class is not immutable. So we expect an
 	 * {@link AssertionError} here.
 	 */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotImmutable() {
-    	ImmutableTester.assertImmutable(LineReader.class);
+        assertThrows(AssertionError.class, () -> ImmutableTester.assertImmutable(LineReader.class));
     }
 
     /**

@@ -19,17 +19,20 @@
  */
 package patterntesting.runtime.util;
 
-import static org.junit.Assert.*;
-
-import java.awt.AWTEvent;
-import java.awt.event.TextEvent;
-import java.lang.reflect.*;
-import java.util.*;
-
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
+
+import java.awt.*;
+import java.awt.event.TextEvent;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Collection;
+import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Class ReflectionHelperTest.
@@ -184,7 +187,7 @@ public final class ReflectionHelperTest {
     @Test
     public void testHasId() {
         Date now = new Date();
-        assertFalse("has no id: " + now, ReflectionHelper.hasId(now));
+        assertFalse(ReflectionHelper.hasId(now), "has no id: " + now);
     }
 
     /**
@@ -193,7 +196,7 @@ public final class ReflectionHelperTest {
     @Test
     public void testGetIdFromField() {
         AWTEvent event = new TextEvent("hello", 4711);
-        assertTrue("has id: " + event, ReflectionHelper.hasId(event));
+        assertTrue(ReflectionHelper.hasId(event), "has id: " + event);
         assertEquals(4711, ReflectionHelper.getId(event));
     }
 
@@ -203,16 +206,16 @@ public final class ReflectionHelperTest {
     @Test
     public void testGetIdFromGetter() {
         Thread thread = Thread.currentThread();
-        assertTrue("has id: " + thread, ReflectionHelper.hasId(thread));
+        assertTrue(ReflectionHelper.hasId(thread), "has id: " + thread);
         assertEquals(thread.getId(), ReflectionHelper.getId(thread));
     }
     
     /**
      * Test method for {@link ReflectionHelper#getId(Object)}.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetIdNotExisting() {
-        ReflectionHelper.getId(this);
+        assertThrows(IllegalArgumentException.class, () -> ReflectionHelper.getId(this));
     }
 
 }

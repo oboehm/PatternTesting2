@@ -20,15 +20,20 @@
 
 package patterntesting.runtime.monitor.db.internal;
 
-import static org.junit.Assert.*;
-
-import java.sql.*;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.*;
-
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.monitor.db.AbstractDbTest;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@link StasiStatement} class.
@@ -61,7 +66,7 @@ public final class StasiStatementTest extends AbstractDbTest {
      *
      * @throws SQLException the SQL exception
      */
-    @Before
+    @BeforeEach
     public void setUpStatement() throws SQLException {
         statement = (StasiStatement) this.proxy.createStatement();
     }
@@ -89,7 +94,7 @@ public final class StasiStatementTest extends AbstractDbTest {
         } catch (SQLException expected) {
             log.debug("SQLException expected.", expected);
             String msg = expected.getMessage();
-            assertTrue(msg, msg.contains(sql));
+            assertThat(msg, containsString(sql));
         }
     }
 
@@ -112,7 +117,7 @@ public final class StasiStatementTest extends AbstractDbTest {
         String sql = "SELECT * FROM persons WHERE id = 1001";
         ResultSet query = stmt.executeQuery(sql);
         try {
-            assertTrue("result expected", query.next());
+            assertTrue(query.next(), "result expected");
             return query.getInt("id");
         } finally {
             query.close();
@@ -138,7 +143,7 @@ public final class StasiStatementTest extends AbstractDbTest {
     @Test
     public void testIsWrapper() throws SQLException {
         Statement wrappedStatement = statement.getStatement();
-        assertTrue("true expected for " + wrappedStatement, statement.isWrapperFor(wrappedStatement.getClass()));
+        assertTrue(statement.isWrapperFor(wrappedStatement.getClass()), "true expected for " + wrappedStatement);
     }
 
     /**
@@ -157,7 +162,7 @@ public final class StasiStatementTest extends AbstractDbTest {
      *
      * @throws SQLException the sQL exception
      */
-    @After
+    @AfterEach
     public void closeStatement() throws SQLException {
         this.statement.close();
     }

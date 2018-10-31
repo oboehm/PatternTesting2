@@ -22,7 +22,7 @@ package patterntesting.runtime.monitor;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.util.Converter;
 
 import java.io.File;
@@ -33,8 +33,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@link ResourcepathMonitorTest} class.
@@ -165,10 +166,12 @@ public final class ResourcepathMonitorTest extends AbstractMonitorTest {
      * If a class or resource is not found you should get a
      * "NoSuchElementException" here.
      */
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void testIsDoubletNirwana() {
-        LOG.info("testIsDoubletNirwana() is started.");
-        monitor.isDoublet("Nirwana");
+        assertThrows(NoSuchElementException.class, () -> {
+            LOG.info("testIsDoubletNirwana() is started.");
+            monitor.isDoublet("Nirwana");
+        });
     }
 
     /**
@@ -215,10 +218,10 @@ public final class ResourcepathMonitorTest extends AbstractMonitorTest {
     @Test
     public void testGetDoubletResourcepath() {
         String[] doubletPath = monitor.getDoubletResourcepath();
-        assertTrue("no empty array expected", doubletPath.length > 0);
+        assertThat("no empty array expected", doubletPath.length, greaterThan(0));
         LOG.info("{} pathes with doublet resources found.", doubletPath.length);
-        assertTrue("too much pathes found",
-                doubletPath.length < ClasspathMonitor.getInstance().getClasspath().length);
+        assertThat("too much pathes found", doubletPath.length,
+                lessThan(ClasspathMonitor.getInstance().getClasspath().length));
     }
 
     /**
@@ -271,7 +274,7 @@ public final class ResourcepathMonitorTest extends AbstractMonitorTest {
     public void testRegisterAsMBean() {
         LOG.info("testRegisterAsMBean() is started.");
         ResourcepathMonitor.registerAsMBean();
-        assertTrue(monitor + " is not registered as MBean", ResourcepathMonitor.isRegisteredAsMBean());
+        assertTrue(ResourcepathMonitor.isRegisteredAsMBean(), monitor + " is not registered as MBean");
         ResourcepathMonitor.unregisterAsMBean();
     }
     

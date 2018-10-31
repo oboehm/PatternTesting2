@@ -20,19 +20,21 @@
 
 package patterntesting.runtime.monitor.db;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.io.File;
-import java.io.IOException;
-import java.sql.*;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.monitor.AbstractMonitorTest;
 
 import javax.management.openmbean.OpenDataException;
 import javax.management.openmbean.TabularData;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-import org.junit.Test;
-
-import patterntesting.runtime.monitor.AbstractMonitorTest;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit tests for {@link ConnectionMonitor} class.
@@ -75,7 +77,7 @@ public class ConnectionMonitorTest extends AbstractDbTest {
     @Test
     public void testGetLastCallerStacktrace() {
         StackTraceElement[] stacktrace = monitor.getLastCallerStacktrace();
-        assertTrue("expected: valid stacktrace", stacktrace.length > 0);
+        assertThat(stacktrace, not(emptyArray()));
     }
 
     /**
@@ -100,15 +102,15 @@ public class ConnectionMonitorTest extends AbstractDbTest {
         int expected = monitor.getSumOfConnections() - monitor.getOpenConnections();
         int closedConnections = monitor.getClosedConnections();
         assertEquals(expected, closedConnections);
-        assertTrue("should be >= 0: " + closedConnections, closedConnections >= 0);
+        assertThat(closedConnections, greaterThanOrEqualTo(0));
     }
 
     /**
      * Test method for {@link ConnectionMonitor#assertConnectionsClosed()}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertConnectionsClosed() {
-        ConnectionMonitor.assertConnectionsClosed();
+        assertThrows(AssertionError.class, () -> ConnectionMonitor.assertConnectionsClosed());
     }
 
     /**
@@ -117,7 +119,7 @@ public class ConnectionMonitorTest extends AbstractDbTest {
     @Test
     public void testGetCallerOf() {
         StackTraceElement caller = ConnectionMonitor.getCallerOf(connection);
-        assertEquals("wrong caller: " + caller, "setUpConnection", caller.getMethodName());
+        assertEquals(caller.getMethodName(), "setUpConnection", "wrong caller: " + caller);
     }
 
     /**
@@ -174,7 +176,8 @@ public class ConnectionMonitorTest extends AbstractDbTest {
     }
 
     /**
-     * Test method for {@link AbstractMonitor#dumpMe(File)}.
+     * Test method for Implementation of
+     * {@link clazzfish.monitor.AbstractMonitor#dumpMe(File)}.
      *
      * @throws IOException Signals that an I/O exception has occurred.
      */

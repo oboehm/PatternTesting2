@@ -19,11 +19,11 @@
  */
 package patterntesting.runtime.jmx;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import java.util.jar.Manifest;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * JUnit tests for {@link MBeanHelper} class.

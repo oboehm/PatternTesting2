@@ -19,14 +19,13 @@
  */
 package patterntesting.runtime.util.reflect;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Class ConstructorSignatureImplTest.
@@ -45,7 +44,7 @@ public class ConstructorSignatureImplTest {
      *
      * @throws Exception the exception
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         testConstructor = String.class.getConstructor(new Class[0]);
         signature = new ConstructorSignatureImpl(testConstructor);
@@ -112,9 +111,9 @@ public class ConstructorSignatureImplTest {
     /**
      * Test method for {@link ConstructorSignatureImpl#getParameterNames()}.
      */
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public final void testGetParameterNames() {
-        assertNotNull(signature.getParameterNames());
+        assertThrows(UnsupportedOperationException.class, () -> assertNotNull(signature.getParameterNames()));
     }
 
     /**

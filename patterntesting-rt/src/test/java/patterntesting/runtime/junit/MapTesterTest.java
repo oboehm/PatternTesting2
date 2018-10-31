@@ -20,9 +20,13 @@
 
 package patterntesting.runtime.junit;
 
-import java.util.*;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Unit tests for {@link MapTester} class.
@@ -72,31 +76,37 @@ public class MapTesterTest {
      * This is another test case for <a
      * href="https://sourceforge.net/p/patterntesting/bugs/28/">bug 28</a>.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualsWithNullValue() {
-        fill(m1, "one", 1, "two", null);
-        fill(m2, "two", 2, "one", 1);
-        MapTester.assertEquals(m1, m2);
+        assertThrows(AssertionError.class, () -> {
+            fill(m1, "one", 1, "two", null);
+            fill(m2, "two", 2, "one", 1);
+            MapTester.assertEquals(m1, m2);
+        });
     }
 
     /**
      * Test method for {@link MapTester#assertEquals(Map, Map)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualsValues() {
-        fill(m1, "one", 1, "two", 2, "three", 3);
-        fill(m2, "one", 1, "two", 2, "three", 4711);
-        MapTester.assertEquals(m1, m2);
+        assertThrows(AssertionError.class, () -> {
+            fill(m1, "one", 1, "two", 2, "three", 3);
+            fill(m2, "one", 1, "two", 2, "three", 4711);
+            MapTester.assertEquals(m1, m2);
+        });
     }
 
     /**
      * Test method for {@link MapTester#assertEquals(Map, Map)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualsKeys() {
-        fill(m1, "one", 1, "two", 2, "three", 3);
-        fill(m2, "one", 1, "two", 2, "four", 3);
-        MapTester.assertEquals(m1, m2);
+        assertThrows(AssertionError.class, () -> {
+            fill(m1, "one", 1, "two", 2, "three", 3);
+            fill(m2, "one", 1, "two", 2, "four", 3);
+            MapTester.assertEquals(m1, m2);
+        });
     }
 
     /**
@@ -112,11 +122,13 @@ public class MapTesterTest {
     /**
      * Test method for {@link MapTester#assertEqualKeys(Map, Map)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualKeys() {
-        fill(m1, "one", -1, "two", -2);
-        fill(m2, "two", 22, "three", 3);
-        MapTester.assertEqualKeys(m1, m2);
+        assertThrows(AssertionError.class, () -> {
+            fill(m1, "one", -1, "two", -2);
+            fill(m2, "two", 22, "three", 3);
+            MapTester.assertEqualKeys(m1, m2);
+        });
     }
 
     /**
@@ -132,11 +144,13 @@ public class MapTesterTest {
     /**
      * Test method for {@link MapTester#assertEqualValues(Map, Map)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualValues() {
-        fill(m1, "one", 1, "two", 2);
-        fill(m2, "two", 2, "three", 3);
-        MapTester.assertEqualValues(m1, m2);
+        assertThrows(AssertionError.class, () -> {
+            fill(m1, "one", 1, "two", 2);
+            fill(m2, "two", 2, "three", 3);
+            MapTester.assertEqualValues(m1, m2);
+        });
     }
 
     private static void fill(final Map<? extends Object, ? extends Object> map, final Object... keyValues) {

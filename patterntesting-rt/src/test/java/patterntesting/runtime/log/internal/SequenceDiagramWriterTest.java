@@ -21,7 +21,7 @@ package patterntesting.runtime.log.internal;
 import java.io.File;
 
 import org.aspectj.lang.Signature;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import patterntesting.runtime.junit.FileTester;
 import patterntesting.runtime.log.SequenceDiagramTest;

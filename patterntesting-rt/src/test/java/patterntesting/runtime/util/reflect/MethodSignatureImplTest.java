@@ -19,13 +19,15 @@
  */
 package patterntesting.runtime.util.reflect;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Class MethodSignatureImplTest.
@@ -44,7 +46,7 @@ public class MethodSignatureImplTest {
      *
      * @throws Exception the exception
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         testMethod = String.class.getMethod("hashCode", new Class[0]);
         signature = new MethodSignatureImpl(testMethod);
@@ -119,9 +121,9 @@ public class MethodSignatureImplTest {
     /**
      * Test method for {@link MethodSignatureImpl#getParameterNames()}.
      */
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public final void testGetParameterNames() {
-        assertNotNull(signature.getParameterNames());
+        assertThrows(UnsupportedOperationException.class, () -> assertNotNull(signature.getParameterNames()));
     }
 
     /**
@@ -138,7 +140,7 @@ public class MethodSignatureImplTest {
     @Test
     public final void testToShortString() {
         String shortString = signature.toShortString();
-        assertTrue("shorter string expected: " + shortString, shortString.length() <= signature.toString().length());
+        assertThat(shortString.length(), lessThanOrEqualTo(signature.toString().length()));
     }
 
     /**

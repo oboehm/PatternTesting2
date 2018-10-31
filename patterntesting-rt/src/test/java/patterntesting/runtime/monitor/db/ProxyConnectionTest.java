@@ -20,13 +20,13 @@
 
 package patterntesting.runtime.monitor.db;
 
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 
 import java.sql.*;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit tests for {@link ProxyConnection} class.
@@ -74,9 +74,9 @@ public class ProxyConnectionTest extends AbstractDbTest {
      *
      * @throws SQLException the sQL exception
      */
-    @Test(expected = SQLSyntaxErrorException.class)
+    @Test
     public void testInvokePreparedStatementWithWrongSyntax() throws SQLException {
-        proxy.prepareStatement("create table with wrong syntax");
+        assertThrows(SQLSyntaxErrorException.class, () -> proxy.prepareStatement("create table with wrong syntax"));
     }
 
     /**
@@ -104,10 +104,10 @@ s     */
     public void testClose() throws SQLException {
         Connection conn = ProxyConnection.newInstance(proxy);
         try {
-        assertFalse("should be not closed: " + conn, conn.isClosed());
+        assertFalse(conn.isClosed(), "should be not closed: " + conn);
         } finally {
             conn.close();
-            assertTrue("should be closed:", conn.isClosed());
+            assertTrue(conn.isClosed(), "should be closed:");
         }
     }
 

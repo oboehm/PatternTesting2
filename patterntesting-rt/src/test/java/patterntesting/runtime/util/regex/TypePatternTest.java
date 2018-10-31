@@ -20,11 +20,11 @@
 
 package patterntesting.runtime.util.regex;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Junit tests for {@link TypePattern} class.
@@ -40,8 +40,7 @@ public class TypePatternTest {
     @Test
     public void testMatchesObject() {
         TypePattern pattern = new TypePattern("java.util.Date");
-        assertTrue("expected: " + pattern + " matches", pattern.matches(Date.class));
+        assertTrue(pattern.matches(Date.class), "expected: " + pattern + " matches");
     }
 
 }
-

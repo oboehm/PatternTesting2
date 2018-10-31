@@ -19,15 +19,14 @@
  */
 package patterntesting.runtime.monitor;
 
-import static org.junit.Assert.*;
+import com.jamonapi.Monitor;
+import com.jamonapi.MonitorFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import com.jamonapi.Monitor;
-import com.jamonapi.MonitorFactory;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@link JamonMonitor} class.
@@ -43,7 +42,7 @@ public final class JamonMonitorTest extends AbstractProfileMonitorTest {
     /**
      * Sets up the {@link JamonMonitor} for testing.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         Monitor monitor = MonitorFactory.getMonitor();
         jamonMon = new JamonMonitor(monitor);
@@ -57,9 +56,9 @@ public final class JamonMonitorTest extends AbstractProfileMonitorTest {
     @Test
     public void testDisableEnable() {
         jamonMon.disable();
-        assertFalse("disabled expected for " + jamonMon, jamonMon.isEnabled());
+        assertFalse(jamonMon.isEnabled(), "disabled expected for " + jamonMon);
         jamonMon.enable();
-        assertTrue("enabled expected for " + jamonMon, jamonMon.isEnabled());
+        assertTrue(jamonMon.isEnabled(), "enabled expected for " + jamonMon);
     }
 
     /**

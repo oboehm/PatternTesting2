@@ -24,12 +24,12 @@ import clazzfish.monitor.AbstractMonitor;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@link AbstractMonitor} class.
@@ -68,9 +68,9 @@ public abstract class AbstractMonitorTest {
     public static void testAddAsShutdownHook(final AbstractMonitor mon) {
         LOG.info("testAddAsShutdownHook() is started with {}.", mon);
         mon.addMeAsShutdownHook();
-        assertTrue(mon + " should be registered as shutdown hook", mon.isShutdownHook());
+        assertTrue(mon.isShutdownHook(), mon + " should be registered as shutdown hook");
         mon.removeMeAsShutdownHook();
-        assertFalse(mon + " should be de-registered as shutdown hook", mon.isShutdownHook());
+        assertFalse(mon.isShutdownHook(), mon + " should be de-registered as shutdown hook");
     }
 
     /**
@@ -88,9 +88,9 @@ public abstract class AbstractMonitorTest {
     @Test
     public void testRegisterMeAsMBean() {
         monitor.registerMeAsMBean();
-        assertTrue("not registered: " + monitor, monitor.isMBean());
+        assertTrue(monitor.isMBean(), "not registered: " + monitor);
         monitor.unregisterMeAsMBean();
-        assertFalse("registered: " + monitor, monitor.isMBean());
+        assertFalse(monitor.isMBean(), "registered: " + monitor);
     }
 
     /**
@@ -122,9 +122,9 @@ public abstract class AbstractMonitorTest {
     private static void checkDumpDir(File dumpDir, int expected) throws IOException {
         try {
             LOG.info("Result was dumped to '{}'.", dumpDir);
-            assertTrue("not a directory: " + dumpDir, dumpDir.isDirectory());
+            assertTrue(dumpDir.isDirectory(), "not a directory: " + dumpDir);
             File[] dumpFiles = dumpDir.listFiles();
-            assertEquals(dumpDir + ": ", expected, dumpFiles.length);
+            assertEquals(expected, dumpFiles.length, dumpDir + ": ");
         } finally {
             FileUtils.deleteDirectory(dumpDir);
             LOG.info("Directory '{}' is deleted.", dumpDir);

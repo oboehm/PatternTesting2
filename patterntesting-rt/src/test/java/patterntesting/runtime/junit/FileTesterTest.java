@@ -20,17 +20,19 @@
 
 package patterntesting.runtime.junit;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.util.StringConverter;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-
-import patterntesting.runtime.util.StringConverter;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * UnitTests for {@link FileTester} class.
@@ -75,7 +77,7 @@ public final class FileTesterTest {
     @Test
     public void testAssertContentEqualsWithIOException() {
         File notExisting = new File("/not/existing");
-        assertFalse("should not exist for this test: " + notExisting, notExisting.exists());
+        assertFalse(notExisting.exists(), "should not exist for this test: " + notExisting);
         try {
             FileTester.assertContentEquals(FILE1, notExisting, StandardCharsets.UTF_8);
             fail("AssertionError expected");
@@ -143,14 +145,14 @@ public final class FileTesterTest {
             fail("AssertionError expected");
         } catch (AssertionError expected) {
             checkAssertionError(expected);
-            assertTrue("line expected: " + expected.getMessage(), expected.getMessage().contains("line 4/5"));
+            assertTrue(expected.getMessage().contains("line 4/5"), "line expected: " + expected.getMessage());
         }
     }
 
     private static void checkAssertionError(final AssertionError expected) {
         String msg = expected.getMessage();
         LOG.info(msg);
-        assertTrue(msg, msg.contains("line"));
+        assertThat(msg, containsString("line"));
     }
 
     /**

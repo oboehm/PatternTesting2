@@ -20,17 +20,17 @@ package patterntesting.runtime.monitor;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Unit tests for {@link ProfileMonitorFactory}.
@@ -140,14 +140,14 @@ public abstract class ProfileMonitorFactoryTest {
 	@Test
 	public void testToString() {
 		String s = factory.toString();
-		assertFalse("looks like default implementation: " + s, s.contains("@"));
+		assertFalse(s.contains("@"), "looks like default implementation: " + s);
 		LOG.info("s = \"{}\"", s);
 	}
 
 	/**
 	 * Resets the factory to a default value for tests after this class.
 	 */
-	@After
+	@AfterEach
 	public void resetFactory() {
 		factory.setMaxNumMonitors(0);
 	}

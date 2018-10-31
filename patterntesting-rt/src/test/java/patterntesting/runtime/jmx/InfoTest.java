@@ -18,17 +18,19 @@
 
 package patterntesting.runtime.jmx;
 
-import static org.junit.Assert.*;
-
-import java.net.URI;
-import java.util.*;
-import java.util.jar.Manifest;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
+
+import java.net.URI;
+import java.util.Date;
+import java.util.Properties;
+import java.util.SortedMap;
+import java.util.jar.Manifest;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@link Info} class.
@@ -47,8 +49,8 @@ public final class InfoTest {
     @Test
     public void testGetVersion() {
         String version = info.getVersion();
-        assertTrue("version should be not empty", StringUtils.isNotBlank(version));
-        assertFalse(version + " version", version.equalsIgnoreCase("unknown"));
+        assertTrue(StringUtils.isNotBlank(version),"version should be not empty");
+        assertFalse(version.equalsIgnoreCase("unknown"),version + " version");
         LOG.info("version = {}", version);
     }
 
@@ -58,7 +60,7 @@ public final class InfoTest {
     @Test
     public void testGetBuildTime() {
         Date buildTime = info.getBuildTime();
-        assertNotNull("invalid: " + buildTime, buildTime);
+        assertNotNull(buildTime, "invalid: " + buildTime);
         LOG.info("buildTime = {}", buildTime);
     }
 
@@ -81,8 +83,8 @@ public final class InfoTest {
 
     private static void checkManifest(final Info buildInfo) {
         Manifest manifest = buildInfo.getManifest();
-        assertNotNull("manifest expected", manifest);
-        assertFalse("empty " + manifest, manifest.getMainAttributes().isEmpty());
+        assertNotNull(manifest, "manifest expected");
+        assertFalse(manifest.getMainAttributes().isEmpty(), "empty " + manifest);
     }
 
     /**
@@ -92,7 +94,7 @@ public final class InfoTest {
     @Test
     public void testGetManifestURI() {
     	URI uri = info.getManifestURI();
-    	assertNotNull("URI expected", uri);
+    	assertNotNull(uri, "URI expected");
     	LOG.info("uri = {}", uri);
     }
 
@@ -102,7 +104,7 @@ public final class InfoTest {
     @Test
     public void testGetProperties() {
         Properties props = info.getProperties();
-        assertFalse("properties should be not empty", props.isEmpty());
+        assertFalse(props.isEmpty(), "properties should be not empty");
         LOG.info("Build properties = {}", props);
     }
 
@@ -112,7 +114,7 @@ public final class InfoTest {
     @Test
     public void testGetInfos() {
         SortedMap<String, String> infos = info.getInfos();
-        assertTrue("unsorted: " + infos, infos.firstKey().compareTo(infos.lastKey()) < 0);
+        assertTrue( infos.firstKey().compareTo(infos.lastKey()) < 0, "unsorted: " + infos);
     }
 
     /**

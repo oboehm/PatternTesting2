@@ -20,14 +20,14 @@
 
 package patterntesting.runtime;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import patterntesting.runtime.annotation.TimeMachine;
 import patterntesting.runtime.util.Converter;

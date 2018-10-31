@@ -22,16 +22,16 @@ package patterntesting.runtime.monitor.internal;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.junit.CollectionTester;
 import patterntesting.runtime.log.LogWatch;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 
 /**
  * Unit tests for {@link DoubletDigger} class.
@@ -61,7 +61,7 @@ public final class DoubletDiggerTest {
     @Test
     public void testToString() {
         String s = digger.toString();
-        assertFalse("looks like default implementation: " + s, s.contains("DoubletDigger@"));
+        assertThat("looks like default implementation", s, not(containsString("DoubletDigger@")));
         LOG.info("s = \"{}\"", s);
     }
 

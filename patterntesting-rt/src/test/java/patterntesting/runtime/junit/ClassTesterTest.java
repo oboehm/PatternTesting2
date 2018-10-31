@@ -18,15 +18,16 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -45,7 +46,7 @@ public final class ClassTesterTest {
      *
      * @throws ClassNotFoundException the class not found exception
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpClassTester() throws ClassNotFoundException {
         classTester = new ClassTester("patterntesting.runtime.monitor.ClasspathMonitor");
     }
@@ -58,7 +59,7 @@ public final class ClassTesterTest {
         Set<Class<?>> dependencies = classTester.getDependencies();
         int size = dependencies.size();
         LOG.info(classTester.getClassName() + " depends on " + size + " other classes");
-        assertTrue("only " + size + " dependent classed detected", size > 5);
+        assertThat("only " + size + " dependent classed detected", size, greaterThan(5));
     }
 
     /**
@@ -81,22 +82,18 @@ public final class ClassTesterTest {
 
 	/**
 	 * Test method for {@link ClassTester#tryStaticInitializer(String)}.
-	 *
-	 * @throws ClassNotFoundException the class not found exception
 	 */
-	@Test(expected = ClassNotFoundException.class)
+	@Test
 	public void testTryStaticInitializerWithMissingClass() throws ClassNotFoundException {
-		ClassTester.tryStaticInitializer("does.not.exist");
+		assertThrows(ClassNotFoundException.class, () -> ClassTester.tryStaticInitializer("does.not.exist"));
 	}
 
 	/**
 	 * Test method for {@link ClassTester#tryStaticInitializer(String)}.
-	 *
-	 * @throws ClassNotFoundException the class not found exception
 	 */
-	@Test(expected = AssertionError.class)
+	@Test
 	public void testTryStaticInitializer() throws ClassNotFoundException {
-		ClassTester.tryStaticInitializer("patterntesting.runtime.junit.test.Unloadable");
+		assertThrows(AssertionError.class, () -> ClassTester.tryStaticInitializer("patterntesting.runtime.junit.test.Unloadable"));
 	}
 
 	/**
@@ -107,7 +104,7 @@ public final class ClassTesterTest {
 	@Test
 	public void testGetDependenciesOf() throws ClassNotFoundException {
 	    Set<Class<?>> dependencies = ClassTester.getDependenciesOf(this.getClass().getName());
-        assertFalse("non empty set expected", dependencies.isEmpty());
+        assertFalse(dependencies.isEmpty(), "non empty set expected");
         LOG.info("dependencies = {}", dependencies);
 	}
 

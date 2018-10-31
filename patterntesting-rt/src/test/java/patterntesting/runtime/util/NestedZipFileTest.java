@@ -20,15 +20,22 @@
 
 package patterntesting.runtime.util;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Enumeration;
-import java.util.zip.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
 
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for {@link NestedZipFile} class.
@@ -94,17 +101,19 @@ public final class NestedZipFileTest {
      * 
      * @throws IOException expected Exception
      */
-    @Test(expected = FileNotFoundException.class)
+    @Test
     public void testNestedZipNotExisting() throws IOException {
-        File notExistingZip = new File(WORLD_WAR, "!/not/existing.zip");
-        listContentOf(notExistingZip);
+        assertThrows(FileNotFoundException.class, () -> {
+            File notExistingZip = new File(WORLD_WAR, "!/not/existing.zip");
+            listContentOf(notExistingZip);
+        });
     }
 
     private static void listContentOf(File zipFile) throws IOException, ZipException {
         try (NestedZipFile nested = new NestedZipFile(zipFile)) {
             LOG.info("Reading {}...", nested);
             Enumeration<? extends ZipEntry> entries = nested.entries();
-            assertTrue("entries in " + nested + " expected", entries.hasMoreElements());
+            assertTrue(entries.hasMoreElements(), "entries in " + nested + " expected");
             while(entries.hasMoreElements()) {
                 LOG.info("ZipFile has entry {}.", entries.nextElement());
             }
@@ -121,7 +130,7 @@ public final class NestedZipFileTest {
     public void testNestedZipFileMode() throws IOException {
         File warFile = new File(WORLD_EAR, "!/world.war");
         try (NestedZipFile nestedWarFile = new NestedZipFile(warFile, ZipFile.OPEN_READ)) {
-            assertTrue("entries in " + nestedWarFile + " expected", nestedWarFile.entries().hasMoreElements());
+            assertTrue(nestedWarFile.entries().hasMoreElements(), "entries in " + nestedWarFile + " expected");
         }
     }
 

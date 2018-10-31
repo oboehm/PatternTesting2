@@ -22,7 +22,7 @@ package patterntesting.runtime.junit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.junit.test.Person;
 import patterntesting.runtime.junit.test.Sheep;
@@ -31,7 +31,9 @@ import java.io.NotSerializableException;
 import java.io.Serializable;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit tests for SerializableTester class.
@@ -78,10 +80,12 @@ public final class SerializableTesterTest implements Serializable {
      *
      * @throws NotSerializableException if test object can't be serialized
      */
-    @Test(expected = NotSerializableException.class)
+    @Test
     public void testAssertSerializationObject() throws NotSerializableException {
-        assertNotNull(sheep);
-        SerializableTester.assertSerialization(this);
+        assertThrows(NotSerializableException.class, () -> {
+            assertNotNull(sheep);
+            SerializableTester.assertSerialization(this);
+        });
     }
     
     /**
@@ -91,9 +95,9 @@ public final class SerializableTesterTest implements Serializable {
      * 
      * @throws NotSerializableException if test object can't be serialized
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertSerializationWithTransientAttribute() throws NotSerializableException {
-        SerializableTester.assertSerialization(Person.class);
+        assertThrows(AssertionError.class, () -> SerializableTester.assertSerialization(Person.class));
     }
 
     /**
@@ -105,9 +109,9 @@ public final class SerializableTesterTest implements Serializable {
      *
      * @throws NotSerializableException if test object can't be serialized
      */
-    @Test(expected = NotSerializableException.class)
+    @Test
     public void testAssertSerializationClass() throws NotSerializableException {
-        SerializableTester.assertSerialization(this.getClass());
+        assertThrows(NotSerializableException.class, () -> SerializableTester.assertSerialization(this.getClass()));
     }
 
     /**
@@ -127,7 +131,7 @@ public final class SerializableTesterTest implements Serializable {
     public void testGetSizeOf() {
         int size = SerializableTester.getSizeOf(String.class);
         LOG.info("Size of {} is {}.", String.class, size);
-        assertTrue("expected: size > 0", size > 0);
+        assertThat(size, greaterThan(0));
     }
 
 }

@@ -24,7 +24,7 @@ import org.apache.catalina.loader.ParallelWebappClassLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hamcrest.Matcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.monitor.loader.CompoundClassLoader;
 import patterntesting.runtime.monitor.loader.WebappClassLoader;
 
@@ -33,8 +33,8 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for {@link ClassloaderType}.
@@ -116,7 +116,7 @@ public class ClassloaderTypeTest {
     }
 
     private static void checkIsSupported(final String classname, final boolean expected) {
-        assertEquals(classname, ClassloaderType.isSupported(classname), expected);
+        assertEquals(ClassloaderType.isSupported(classname), expected, classname);
     }
 
     /**

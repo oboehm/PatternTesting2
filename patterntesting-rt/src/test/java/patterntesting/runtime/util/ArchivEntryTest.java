@@ -19,19 +19,31 @@
  */
 package patterntesting.runtime.util;
 
-import static org.junit.Assert.*;
-
-import java.io.*;
-import java.net.*;
-import java.nio.charset.StandardCharsets;
-import java.util.zip.*;
-
-import org.apache.commons.io.*;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
-import org.junit.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.junit.ArrayTester;
+import patterntesting.runtime.junit.FileTester;
+import patterntesting.runtime.junit.ObjectTester;
 
-import patterntesting.runtime.junit.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 /**
@@ -58,7 +70,7 @@ public final class ArchivEntryTest {
      * @throws URISyntaxException the URI syntax exception
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws URISyntaxException, IOException {
         zipEntry = new ArchivEntry(new URI("zip:file:/tmp/hugo.zip!boss"));
         mavenRepositoryDir = Environment.getLocalMavenRepositoryDir();
@@ -88,7 +100,7 @@ public final class ArchivEntryTest {
             entry.getZipFile();
         } catch (IOException expected) {
             String msg = expected.getMessage();
-            assertTrue("file missing in \"" + msg + '"', msg.contains(nonexisting.getPath()));
+            assertThat(msg, containsString(nonexisting.getPath()));
         }
     }
 
@@ -144,7 +156,7 @@ public final class ArchivEntryTest {
         File file = new File("/tmp/klein");
         ArchivEntry fileEntry = new ArchivEntry(file.toURI());
         assertEquals(file.getCanonicalFile(), fileEntry.getFileArchiv().getCanonicalFile());
-        assertTrue(fileEntry.getEntry(), StringUtils.isEmpty(fileEntry.getEntry()));
+        assertTrue(StringUtils.isEmpty(fileEntry.getEntry()), fileEntry.getEntry());
     }
 
     /**
@@ -301,7 +313,7 @@ public final class ArchivEntryTest {
      */
     @Test
     public void testEqualsWithDifferentJars() throws IOException {
-        assertTrue(log1jar + " for testing is missing", log1jar.exists());
+        assertTrue(log1jar.exists(), log1jar + " for testing is missing");
         File copiedJar = File.createTempFile("copiedLog1", ".jar");
         String entry = "!/org/apache/commons/logging/Log.class";
         ArchivEntry log1Entry = new ArchivEntry(toJarFileURI(log1jar, entry));
@@ -458,7 +470,7 @@ public final class ArchivEntryTest {
     
     private static ArchivEntry createWorldWarAchivEntry(String postfix) {
         File warFile = new File("src/test/resources/patterntesting/runtime/monitor/world.war");
-        assertTrue("should exist: " + warFile, warFile.exists());
+        assertTrue(warFile.exists(), "should exist: " + warFile);
         URI uri = URI.create("jar:" + warFile.toURI() + "!/WEB-INF/lib/" + postfix);
         return new ArchivEntry(uri);
     }

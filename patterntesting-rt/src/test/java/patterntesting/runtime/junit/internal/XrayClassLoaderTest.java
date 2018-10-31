@@ -20,7 +20,9 @@
 
 package patterntesting.runtime.junit.internal;
 
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -28,9 +30,10 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Set;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * The Class XrayClassLoaderTest.
@@ -58,7 +61,7 @@ public final class XrayClassLoaderTest  {
         Class<?> loaded = classLoader.loadClass("patterntesting.runtime.monitor.ClasspathMonitor");
         assertNotNull(loaded);
         Set<Class<?>> loadedClasses = classLoader.getLoadedClasses();
-        assertTrue(loadedClasses.size() + " class(es) loaded", loadedClasses.size() > 1);
+        assertThat(loadedClasses.size(), greaterThan(1));
         log.info("loaded classes:");
         for (Class<?> cl : loadedClasses) {
             log.info("\t" + cl);

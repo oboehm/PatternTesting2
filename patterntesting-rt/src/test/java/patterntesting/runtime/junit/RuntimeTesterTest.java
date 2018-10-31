@@ -20,7 +20,9 @@
 
 package patterntesting.runtime.junit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit test for RuntimeTester.
@@ -47,9 +49,9 @@ public final class RuntimeTesterTest {
      * Here we require more max memory as the VM could give us. So we
      * exepect an AssertionError.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertMaxMemoryShouldFail() {
-        RuntimeTester.assertMaxMemory(maxMemory * 2);
+        assertThrows(AssertionError.class, () -> RuntimeTester.assertMaxMemory(maxMemory * 2));
     }
 
     /**
@@ -67,9 +69,9 @@ public final class RuntimeTesterTest {
      * Here we require max memory and all of it should not be available
      * as free memory.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertFreeMemoryShouldFail() {
-        RuntimeTester.assertFreeMemory(maxMemory);
+        assertThrows(AssertionError.class, () -> RuntimeTester.assertFreeMemory(maxMemory));
     }
 
 }

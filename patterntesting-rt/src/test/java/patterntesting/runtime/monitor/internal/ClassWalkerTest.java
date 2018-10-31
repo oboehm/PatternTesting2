@@ -19,16 +19,16 @@
  */
 package patterntesting.runtime.monitor.internal;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The Class ClassWalkerTest.
@@ -50,13 +50,12 @@ public class ClassWalkerTest {
     @Test
     public final void testGetClasses() throws IOException {
         Collection<String> classes = classWalker.getClasses();
-        assertTrue("no classes found", classes.size() > 0);
+        assertTrue(classes.size() > 0, "no classes found");
         log.info(classes.size() + " classes found in "
                 + startDir.getAbsolutePath());
         log.info("{}", classes);
         String firstClass = classes.iterator().next();
-        assertFalse(firstClass + " is not a classname", firstClass
-                .startsWith("."));
+        assertFalse(firstClass.startsWith("."), firstClass + " is not a classname");
     }
 
 }

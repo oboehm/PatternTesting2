@@ -19,18 +19,17 @@
  */
 package patterntesting.runtime.monitor;
 
-import static org.easymock.EasyMock.createMock;
-import static org.junit.Assert.assertEquals;
+import org.aspectj.lang.Signature;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.junit.ComparableTester;
 
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentSkipListSet;
 
-import org.aspectj.lang.Signature;
-import org.junit.Before;
-import org.junit.Test;
-
-import patterntesting.runtime.junit.ComparableTester;
+import static org.easymock.EasyMock.createMock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The Class SimpleProfileMonitorTest.
@@ -46,7 +45,7 @@ public final class SimpleProfileMonitorTest extends AbstractProfileMonitorTest {
     /**
      * Sets up the {@link SimpleProfileMonitor} for testing.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         this.setProfileMonitor(new SimpleProfileMonitor());
     }

@@ -20,13 +20,15 @@
 
 package patterntesting.runtime.junit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.junit.test.BlackSheep;
 import patterntesting.runtime.junit.test.Person;
 import patterntesting.runtime.junit.test.Sheep;
 
 import java.util.regex.Pattern;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit test for {@link ComparableTester}.
@@ -50,11 +52,13 @@ public class ComparableTesterTest {
     /**
      * Test method for {@link ComparableTester#assertCompareTo(Comparable, Comparable)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertCompareToFailing() {
-        Sheep dolly = new Sheep("Dolly");
-        Sheep daisy = new Sheep("Daisy");
-        ComparableTester.assertCompareTo(dolly, daisy);
+        assertThrows(AssertionError.class, () -> {
+            Sheep dolly = new Sheep("Dolly");
+            Sheep daisy = new Sheep("Daisy");
+            ComparableTester.assertCompareTo(dolly, daisy);
+        });
     }
 
     /**
@@ -86,9 +90,9 @@ public class ComparableTesterTest {
     /**
      * Test method for {@link ComparableTester#assertCompareTo(Package)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertCompareToPackage() {
-        ComparableTester.assertCompareTo(this.getClass().getPackage());
+        assertThrows(AssertionError.class, () -> ComparableTester.assertCompareTo(this.getClass().getPackage()));
     }
 
 }

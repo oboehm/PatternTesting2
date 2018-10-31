@@ -24,7 +24,7 @@ import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import patterntesting.runtime.annotation.DontTraceMe;
 import patterntesting.runtime.annotation.TraceMe;

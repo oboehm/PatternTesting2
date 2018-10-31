@@ -20,13 +20,17 @@
 
 package patterntesting.runtime.util;
 
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@link Environment} class.
@@ -46,8 +50,8 @@ public final class EnvironmentTest {
         String name = Environment.getName();
         LOG.info("environment name: " + name);
         String cloader = Environment.getClassLoader().getClass().getName();
-        assertTrue(name + " does not match " + cloader, cloader.startsWith(name));
-        assertFalse(name + " has a '$' inside", name.indexOf('$') >= 0);
+        assertThat(cloader, startsWith(name));
+        assertThat(name, not(containsString("$")));
     }
 
     /**
@@ -56,7 +60,7 @@ public final class EnvironmentTest {
     @Test
     public void testMatchesOneOf() {
         String[] props = {"java.home"};
-        assertTrue("'java.home' should exist", Environment.matchesOneOf(props));
+        assertTrue(Environment.matchesOneOf(props), "'java.home' should exist");
     }
 
     /**
@@ -66,8 +70,7 @@ public final class EnvironmentTest {
     public void testDoesNotMatches() {
         String[] props = {"nir.wana"};
         if (System.getProperty(props[0]) == null) {
-            assertFalse("'nir.wana' should not exist", Environment
-                    .matchesOneOf(props));
+            assertFalse(Environment.matchesOneOf(props), "'nir.wana' should not exist");
         }
     }
 
@@ -79,17 +82,16 @@ public final class EnvironmentTest {
         String testProp = "testStupidProperty";
         unsetSystemProperty(testProp);
         System.setProperty(testProp, "");
-        assertTrue("empty property should be considered as 'true'",
-                Environment.isPropertyEnabled(testProp));
+        assertTrue(Environment.isPropertyEnabled(testProp), "empty property should be considered as 'true'");
         System.setProperty(testProp, "true");
-        assertTrue(testProp + "=true", Environment.isPropertyEnabled(testProp));
+        assertTrue(Environment.isPropertyEnabled(testProp), testProp + "=true");
         unsetSystemProperty(testProp);
     }
 
     private static void unsetSystemProperty(final String name) {
         Properties props = System.getProperties();
         props.remove(name);
-        assertFalse(name + " is not set", Environment.isPropertyEnabled(name));
+        assertFalse(Environment.isPropertyEnabled(name), name + " is not set");
     }
 
     /**
@@ -99,8 +101,7 @@ public final class EnvironmentTest {
     @Test
     public synchronized void testLoadProperties() throws IOException {
         Environment.loadProperties("test.properties");
-        assertTrue("see test.properties", Environment
-                .isPropertyEnabled("my.little.test.property"));
+        assertTrue(Environment.isPropertyEnabled("my.little.test.property"), "see test.properties");
         unsetSystemProperty("my.little.test.property");
     }
 
@@ -111,8 +112,7 @@ public final class EnvironmentTest {
     @Test
     public synchronized void testLoadPropertiesViaClassloader() throws IOException {
         Environment.loadProperties("/patterntesting/runtime/util/test.properties");
-        assertTrue("see test.properties", Environment
-                .isPropertyEnabled("my.little.test.property"));
+        assertTrue(Environment.isPropertyEnabled("my.little.test.property"), "see test.properties");
         unsetSystemProperty("my.little.test.property");
     }
 
@@ -137,7 +137,7 @@ public final class EnvironmentTest {
     @Test
     public void testGetLocalMavenRepositoryDir() throws IOException {
         File repoDir = Environment.getLocalMavenRepositoryDir();
-        assertTrue("not a directory: " + repoDir, repoDir.isDirectory());
+        assertTrue(repoDir.isDirectory(), "not a directory: " + repoDir);
         LOG.debug("Local maven repository is at {}.", repoDir);
     }
 

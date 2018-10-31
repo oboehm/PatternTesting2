@@ -1,17 +1,18 @@
 package patterntesting.runtime.monitor.internal;
 
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.util.Converter;
 
 import java.io.File;
-import java.net.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Enumeration;
 
-import org.junit.Test;
-
-import patterntesting.runtime.util.Converter;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * The Class AbstractDiggerTest provides some common constants and setup

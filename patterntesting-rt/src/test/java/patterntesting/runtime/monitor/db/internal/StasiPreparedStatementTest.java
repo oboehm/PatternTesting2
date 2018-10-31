@@ -20,15 +20,18 @@
 
 package patterntesting.runtime.monitor.db.internal;
 
-import static org.junit.Assert.*;
-
-import java.sql.*;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.monitor.db.AbstractDbTest;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@link StasiPreparedStatement} class.
@@ -96,7 +99,7 @@ public class StasiPreparedStatementTest extends AbstractDbTest {
         } catch (SQLException expected) {
             LOG.debug("SQLException expected", expected);
             String msg = expected.getMessage();
-            assertTrue(msg, msg.contains("INSERT INTO country"));
+            assertThat(msg, containsString("INSERT INTO country"));
         } finally {
             stmt.close();
         }
@@ -124,7 +127,7 @@ public class StasiPreparedStatementTest extends AbstractDbTest {
         stmt.setInt(1, 1001);
         ResultSet query = stmt.executeQuery();
         try {
-            assertTrue("result expected", query.next());
+            assertTrue(query.next(), "result expected");
             assertEquals(1001, query.getInt("id"));
         } finally {
             query.close();

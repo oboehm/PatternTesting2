@@ -20,12 +20,12 @@
 
 package patterntesting.runtime.monitor;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.assertThat;
 
 /**
  * Unit tests for {@link JamonMonitorFactory} class.

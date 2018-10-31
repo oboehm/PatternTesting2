@@ -21,12 +21,15 @@ package patterntesting.runtime.monitor;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.IntegrationTest;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThan;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The Class MemoryGuardTest.
@@ -46,8 +49,8 @@ public final class MemoryGuardTest {
     public void testGetFreeMemoryInPercent() {
         int rate = MemoryGuard.getFreeMemoryInPercent();
         LOG.info("free memory: " + rate + " %");
-        assertTrue(rate + " should be positiv", rate >= 0);
-        assertTrue(rate + " < 100 expected", rate <= 100);
+        assertThat(rate, greaterThanOrEqualTo(0));
+        assertThat(rate, lessThan(100));
     }
 
     /**
@@ -127,7 +130,7 @@ public final class MemoryGuardTest {
      *
      * @throws InterruptedException the interrupted exception
      */
-    @AfterClass
+    @AfterAll
     public static void stopBackgroundLogger() throws InterruptedException {
         MemoryGuard.logFreeMemory(0);
         try {

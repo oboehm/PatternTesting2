@@ -18,11 +18,17 @@
 
 package patterntesting.runtime.util;
 
-import javax.validation.*;
-import javax.validation.constraints.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Unit tests for {@link AssertArg} class.
@@ -37,7 +43,7 @@ public class AssertArgTest {
     /**
      * Sets the up validator.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpValidator() {
         ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
         validator = vf.getValidator();
@@ -46,10 +52,12 @@ public class AssertArgTest {
     /**
      * Test method for {@link AssertArg#isValid(Object, Validator)}.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testIsValid() {
-        final DummyUser argument = new DummyUser();
-        AssertArg.isValid(argument, validator);
+        assertThrows(IllegalArgumentException.class, () -> {
+            final DummyUser argument = new DummyUser();
+            AssertArg.isValid(argument, validator);
+        });
     }
 
     /**

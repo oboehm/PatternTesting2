@@ -20,7 +20,9 @@
 
 package patterntesting.runtime.junit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Unit tests for {@link StringTester} class.
@@ -40,9 +42,9 @@ public class StringTesterTest {
     /**
      * Test method for {@link StringTester#assertNotEmpty(String)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEmptyWithEmpty() {
-        StringTester.assertNotEmpty("");
+        assertThrows(AssertionError.class, () -> StringTester.assertNotEmpty(""));
     }
 
     /**

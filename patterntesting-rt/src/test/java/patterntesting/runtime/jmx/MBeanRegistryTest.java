@@ -19,16 +19,15 @@
  */
 package patterntesting.runtime.jmx;
 
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.jmx.demo.Jim;
 
 import javax.management.JMException;
 import javax.management.ObjectName;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-
-import patterntesting.runtime.jmx.demo.Jim;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Class MBeanRegistryTest.

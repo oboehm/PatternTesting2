@@ -19,17 +19,15 @@
  */
 package patterntesting.runtime;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.annotation.NotYetImplemented;
 
 import java.util.AbstractCollection;
 import java.util.Iterator;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-
-import patterntesting.runtime.annotation.NotYetImplemented;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Class NotYetImplementedTest.
@@ -77,10 +75,12 @@ public class NotYetImplementedTest extends AbstractCollection<String> {
 	/**
 	 * Test implementation.
 	 */
-    @Test(expected = RuntimeException.class)
+    @Test
 	public final void testImplementation() {
-		iterator();
-		size();
+        assertThrows(RuntimeException.class, () -> {
+            iterator();
+            size();
+        });
 	}
 
 	/**

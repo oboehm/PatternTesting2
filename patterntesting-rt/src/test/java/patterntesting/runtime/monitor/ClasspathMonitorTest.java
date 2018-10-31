@@ -22,9 +22,9 @@ package patterntesting.runtime.monitor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.SkipTestOn;
 import patterntesting.runtime.io.ExtendedFile;
 import patterntesting.runtime.junit.CollectionTester;
@@ -39,8 +39,9 @@ import java.net.URL;
 import java.util.*;
 import java.util.jar.JarFile;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Class ClasspathMonitorTest.
@@ -59,7 +60,7 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
      * Here we get the instance and measure the time for the
      * {@link #testGetInstancePerformance()} method.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() {
         long t0 = System.currentTimeMillis();
         cpMon = ClasspathMonitor.getInstance();
@@ -72,7 +73,7 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
      *
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() throws IOException {
         ProfileStatistic.getInstance().dumpStatistic();
         LOG.info("ClasspathMonitorTest is teared down with dumped statistic.");
@@ -102,7 +103,7 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
     @Test
     public void testGetInstancePerformance() {
         LOG.info(instanceTime + " ms needed to get instance");
-        assertTrue("more than 500 ms needed (" + instanceTime + " ms)", instanceTime < 500);
+        assertThat("needs too long (> 500 ms)", instanceTime, lessThan(500L));
     }
 
     /**
@@ -113,8 +114,7 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
         LOG.info("testWhichClass() is started.");
         String className = "java.lang.String";
         URI classURI = cpMon.whichClass(className);
-        assertTrue(className + " not found (" + classURI + ")",
-                classURI.toString().endsWith("java/lang/String.class"));
+        assertThat(classURI.toString(), endsWith("java/lang/String.class"));
     }
 
     /**
@@ -230,8 +230,8 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
     @SkipTestOn(javaVendor = "IBM")
     public void testIsLoaded() {
         LOG.info("testIsLoaded() is started.");
-        assertTrue(this.getClass() + " is loaded", cpMon.isLoaded(this.getClass().getName()));
-        assertFalse("non existing classname", cpMon.isLoaded("nir.wa.na"));
+        assertTrue(cpMon.isLoaded(this.getClass().getName()));
+        assertFalse(cpMon.isLoaded("nir.wa.na"), "non existing classname");
     }
 
     /**
@@ -244,8 +244,7 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
         String[] unusedClasses = cpMon.getUnusedClasses();
         LOG.info(unusedClasses.length + " unused classes found");
         String[] allClasses = cpMon.getClasspathClasses();
-        assertTrue("unused Classes (" + unusedClasses.length + ") must be < " + allClasses.length,
-                unusedClasses.length < allClasses.length);
+        assertThat(unusedClasses.length, lessThan(allClasses.length));
     }
 
     /**
@@ -255,7 +254,7 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
     public void testGetClasspathClasses() {
         LOG.info("testGetClasspathClasses() is started.");
         String[] allClasses = cpMon.getClasspathClasses();
-        assertTrue("no classes found?", allClasses.length > 0);
+        assertThat(allClasses.length, greaterThan(0));
     }
 
     /**
@@ -275,7 +274,7 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
         LOG.info("testGetClassloaderInfo() is started.");
         String info = cpMon.getClassloaderInfo();
         LOG.info("classloader info: " + info);
-        assertTrue("empty classloader info", StringUtils.isNotEmpty(info));
+        assertTrue(StringUtils.isNotEmpty(info), "empty classloader info");
     }
 
     /**
@@ -358,7 +357,7 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
         Collection<File> used = getAsFiles(cpMon.getUsedClasspath());
         Collection<File> unused = getAsFiles(cpMon.getUnusedClasspath());
         for (File file : unused) {
-			assertFalse(file + " is not in used classpath expected", used.contains(file));
+			assertFalse(used.contains(file), file + " is not in used classpath expected");
 		}
         LOG.info("No conflict between used ({} entries) and unused ({} entries) found.", used.size(), unused.size());
     }
@@ -415,7 +414,7 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
     private void checkClasspath(final String[] classpath) {
         for (int i = 0; i < classpath.length; i++) {
             LOG.debug(classpath[i]);
-            assertTrue("element " + i + " is empty", StringUtils.isNotEmpty(classpath[i]));
+            assertTrue(StringUtils.isNotEmpty(classpath[i]), "element " + i + " is empty");
             assertFalse(classpath[i].endsWith(File.separator));
         }
     }
@@ -492,7 +491,7 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
         for (String entry : entries) {
             LOG.info(entry);
         }
-        assertTrue("no Manifest entries found for " + clazz, entries.length > 0);
+        assertThat("no Manifest entries found for " + clazz, entries.length, greaterThan(0));
     }
 
     /**
@@ -562,7 +561,7 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
     public void testRegisterAsMBean() {
         LOG.info("testRegisterAsMBean() is started.");
         ClasspathMonitor.registerAsMBean();
-        assertTrue(cpMon + " is not registered as MBean", ClasspathMonitor.isRegisteredAsMBean());
+        assertTrue(ClasspathMonitor.isRegisteredAsMBean(), cpMon + " is not registered as MBean");
         ClasspathMonitor.unregisterAsMBean();
     }
 
@@ -573,7 +572,7 @@ public final class ClasspathMonitorTest extends AbstractMonitorTest {
     public void testRegisterAsMBeanString() {
         LOG.info("testRegisterAsMBeanString() is started.");
         ClasspathMonitor.registerAsMBean("test.ClasspathMonitor");
-        assertTrue(cpMon + " is not registered as MBean", ClasspathMonitor.isRegisteredAsMBean());
+        assertTrue(ClasspathMonitor.isRegisteredAsMBean(), cpMon + " is not registered as MBean");
         ClasspathMonitor.unregisterAsMBean();
     }
 

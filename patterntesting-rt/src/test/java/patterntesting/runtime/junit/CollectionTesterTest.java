@@ -20,9 +20,11 @@
 
 package patterntesting.runtime.junit;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.*;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit tests for {@link CollectionTester} class.
@@ -45,21 +47,25 @@ public final class CollectionTesterTest {
     /**
      * Test method for {@link CollectionTester#assertEquals(java.util.Collection, java.util.Collection)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEquals() {
-        Collection<String> c1 = Arrays.asList("one", "two", "three");
-        Collection<String> c2 = Arrays.asList("one", "two", "four");
-        CollectionTester.assertEquals(c1, c2);
+        assertThrows(AssertionError.class, () -> {
+            Collection<String> c1 = Arrays.asList("one", "two", "three");
+            Collection<String> c2 = Arrays.asList("one", "two", "four");
+            CollectionTester.assertEquals(c1, c2);
+        });
     }
 
     /**
      * Test method for {@link CollectionTester#assertEquals(java.util.Collection, java.util.Collection)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualsSize() {
-        Collection<String> c1 = Arrays.asList("one", "two", "three");
-        Collection<String> c2 = Arrays.asList("one", "two");
-        CollectionTester.assertEquals(c1, c2);
+        assertThrows(AssertionError.class, () -> {
+            Collection<String> c1 = Arrays.asList("one", "two", "three");
+            Collection<String> c2 = Arrays.asList("one", "two");
+            CollectionTester.assertEquals(c1, c2);
+        });
     }
 
     /**
@@ -80,11 +86,13 @@ public final class CollectionTesterTest {
      *
      * @since 1.4 (19.12.2013)
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualsWithSet() {
-        Set<String> s1 = new HashSet<>(Arrays.asList("one", "two", "three"));
-        Set<String> s2 = new HashSet<>(Arrays.asList("one", "two", "four"));
-        CollectionTester.assertEquals(s1, s2);
+        assertThrows(AssertionError.class, () -> {
+            Set<String> s1 = new HashSet<>(Arrays.asList("one", "two", "three"));
+            Set<String> s2 = new HashSet<>(Arrays.asList("one", "two", "four"));
+            CollectionTester.assertEquals(s1, s2);
+        });
     }
 
 }

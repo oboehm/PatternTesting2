@@ -20,7 +20,9 @@
 
 package patterntesting.runtime.junit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit tests for {@link ArrayTester} class.
@@ -44,41 +46,49 @@ public final class ArrayTesterTest {
     /**
      * Test method for {@link ArrayTester#assertEquals(Object[], Object[])}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEquals() {
-        String[] a1 = { "one", "two", "three" };
-        String[] a2 = { "one", "two", "four" };
-        ArrayTester.assertEquals(a1, a2);
+        assertThrows(AssertionError.class, () -> {
+            String[] a1 = {"one", "two", "three"};
+            String[] a2 = {"one", "two", "four"};
+            ArrayTester.assertEquals(a1, a2);
+        });
     }
 
     /**
      * Test method for {@link ArrayTester#assertEquals(Object[], Object[])}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualsSize() {
-        String[] a1 = { "one", "two", "three" };
-        String[] a2 = { "one", "two" };
-        ArrayTester.assertEquals(a1, a2);
+        assertThrows(AssertionError.class, () -> {
+            String[] a1 = {"one", "two", "three"};
+            String[] a2 = {"one", "two"};
+            ArrayTester.assertEquals(a1, a2);
+        });
     }
 
     /**
      * Test method for {@link ArrayTester#assertEquals(Object[], Object[])}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualsByteArray() {
-        byte[] a1 = { 1, 2, 3 };
-        byte[] a2 = { 1, 2, 4 };
-        ArrayTester.assertEquals(a1, a2);
+        assertThrows(AssertionError.class, () -> {
+            byte[] a1 = { 1, 2, 3 };
+            byte[] a2 = { 1, 2, 4 };
+            ArrayTester.assertEquals(a1, a2);
+        });
     }
 
     /**
      * Test method for {@link ArrayTester#assertEquals(Object[], Object[])}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualsSizeByteArray() {
-        byte[] a1 = { 1, 2, 3 };
-        byte[] a2 = { 1, 2 };
-        ArrayTester.assertEquals(a1, a2);
+        assertThrows(AssertionError.class, () -> {
+            byte[] a1 = {1, 2, 3};
+            byte[] a2 = {1, 2};
+            ArrayTester.assertEquals(a1, a2);
+        });
     }
 
 }

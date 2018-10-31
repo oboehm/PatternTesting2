@@ -19,15 +19,16 @@
  */
 package patterntesting.runtime.util;
 
-import static org.junit.Assert.assertTrue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.log.LogWatch;
 
 import java.util.concurrent.TimeUnit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-
-import patterntesting.runtime.log.LogWatch;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The Class ThreadUtilTest.
@@ -100,7 +101,7 @@ public class ThreadUtilTest {
         LogWatch watch = new LogWatch();
         ThreadUtil.sleep(1, unit);
         long delta = watch.getTimeInNanos();
-		assertTrue("positiv number expected: " + delta, delta > 0);
+        assertThat(delta, greaterThan(0L));
 		LOG.info("Sleep of 1 {} needs {} ({} ns).", unit, watch, delta);
     }
 

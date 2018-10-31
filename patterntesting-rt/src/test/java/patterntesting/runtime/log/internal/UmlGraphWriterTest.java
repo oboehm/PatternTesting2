@@ -25,7 +25,7 @@ import static patterntesting.runtime.log.SequenceDiagramTest.IGNORED_LINES;
 import java.io.File;
 import java.nio.charset.Charset;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import patterntesting.runtime.junit.FileTester;
 

@@ -20,15 +20,15 @@
 
 package patterntesting.runtime;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileFilter;
 
-import org.apache.commons.io.filefilter.FileFilterUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * This tests checks some preconditions for PatternTesting Runtime. If one of

@@ -20,15 +20,18 @@
 
 package patterntesting.runtime.monitor.db;
 
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 
 import java.sql.*;
 import java.util.Enumeration;
 import java.util.Properties;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@link ProxyDriver} class.
@@ -62,7 +65,7 @@ public final class ProxyDriverTest extends AbstractDbTest {
     @Test
     public void testAcceptsURL() throws SQLException {
         String url = JDBC_PROXY_HSQLDB;
-        assertTrue(driver + " accepts not \"" + url + "\" as URL", driver.acceptsURL(url));
+        assertTrue(driver.acceptsURL(url), driver + " accepts not \"" + url + "\" as URL");
         log.info("{} accepts \"{}\" as URL.", driver, url);
     }
 
@@ -126,7 +129,7 @@ public final class ProxyDriverTest extends AbstractDbTest {
     public void testGetPropertyInfo() throws SQLException {
         DriverPropertyInfo[] infos = driver.getPropertyInfo(JDBC_PROXY_HSQLDB, new Properties());
         assertNotNull(infos);
-        assertTrue("no property info received", infos.length > 0);
+        assertThat("no property info received", infos.length, greaterThan(0));
         for (int i = 0; i < infos.length; i++) {
             log.info("info[{}] = \"{}\"", i, infos[i]);
         }
@@ -138,7 +141,7 @@ public final class ProxyDriverTest extends AbstractDbTest {
     @Test
     public void testGetMajorVersion() {
         int version = driver.getMajorVersion();
-        assertTrue("invalid major version: " + version, version > 0);
+        assertThat("invalid major version: " + version, version, greaterThan(0));
     }
 
     /**
@@ -147,7 +150,7 @@ public final class ProxyDriverTest extends AbstractDbTest {
     @Test
     public void testGetMinorVersion() {
         int version = driver.getMinorVersion();
-        assertTrue("invalid minor version: " + version, version > 0);
+        assertThat("invalid minor version: " + version, version, greaterThan(0));
     }
 
     /**
@@ -159,7 +162,7 @@ public final class ProxyDriverTest extends AbstractDbTest {
     public void testToString() {
         String version = driver.getMajorVersion() + "." + driver.getMinorVersion();
         String s = driver.toString();
-        assertTrue(s + ": contains not " + version, s.contains(version));
+        assertThat(s, containsString(version));
     }
 
     /**
@@ -167,7 +170,7 @@ public final class ProxyDriverTest extends AbstractDbTest {
      */
     @Test
     public void testJdbcCompliant() {
-        assertTrue(driver + " is not JDBC compliant", driver.jdbcCompliant());
+        assertTrue(driver.jdbcCompliant(),driver + " is not JDBC compliant");
     }
 
     /**
@@ -192,9 +195,9 @@ public final class ProxyDriverTest extends AbstractDbTest {
      * Here we want to see if the exception handling works correct and we'll
      * got no {@link StackOverflowError}.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetUnknownDriverName() {
-        ProxyDriver.getRealDriverName("jdbc:proxy:unknown");
+        assertThrows(IllegalArgumentException.class, () -> ProxyDriver.getRealDriverName("jdbc:proxy:unknown"));
     }
 
     /**
@@ -260,9 +263,9 @@ public final class ProxyDriverTest extends AbstractDbTest {
     public void testRegistration() {
     	ProxyDriver.register();
     	Enumeration<Driver> drivers = DriverManager.getDrivers();
-    	assertTrue("no driver registered", drivers.hasMoreElements());
+    	assertTrue(drivers.hasMoreElements(), "no driver registered");
     	Driver firstDriver = drivers.nextElement();
-    	assertEquals("ProxyDriver is not the first driver", ProxyDriver.class, firstDriver.getClass());
+    	assertEquals(ProxyDriver.class, firstDriver.getClass(), "ProxyDriver is not the first driver");
     }
 
 }

@@ -19,17 +19,16 @@
  */
 package patterntesting.runtime.monitor;
 
-import static org.junit.Assert.*;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.junit.ObjectTester;
+import patterntesting.runtime.util.ThreadUtil;
 
 import java.util.Date;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
-
-import patterntesting.runtime.junit.ObjectTester;
-import patterntesting.runtime.util.ThreadUtil;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Class ProfileMonitorTest.
@@ -109,10 +108,10 @@ public abstract class AbstractProfileMonitorTest {
         profMon.stop();
         String time = profMon.getLastTime();
         LOG.info("time = {}", time);
-        assertFalse("expected: 0 ms", time.equals("0.0 ms"));
-        assertFalse("expected: 0 ms", time.equals("0.000 ms"));
+        assertFalse(time.equals("0.0 ms"), "expected: 0 ms");
+        assertFalse(time.equals("0.000 ms"), "expected: 0 ms");
         if (!time.equals("0 ms")) {
-            assertTrue("expected format: #.### ms", time.matches("0\\.\\d+ ms"));
+            assertTrue(time.matches("0\\.\\d+ ms"), "expected format: #.### ms");
         }
     }
 
@@ -135,7 +134,7 @@ public abstract class AbstractProfileMonitorTest {
     @Test
     public final void testGetActive() {
     	double active = profMon.getActive();
-    	assertTrue("positive number expected: " + active, active >= 0.0);
+    	assertTrue(active >= 0.0, "positive number expected: " + active);
     }
 
     /**
@@ -148,7 +147,7 @@ public abstract class AbstractProfileMonitorTest {
         profMon.start();
         profMon.stop();
         Date lastAccess = profMon.getLastAccess();
-        assertTrue("expected: " + firstAccess + " < " + lastAccess, !firstAccess.after(lastAccess));
+        assertTrue(!firstAccess.after(lastAccess), "expected: " + firstAccess + " < " + lastAccess);
     }
 
     /**
@@ -157,7 +156,7 @@ public abstract class AbstractProfileMonitorTest {
     @Test
     public final void testGetUnits() {
     	String units = profMon.getUnits();
-    	assertTrue("units expected", StringUtils.isNotEmpty(units));
+    	assertTrue(StringUtils.isNotEmpty(units), "units expected");
     	LOG.info("units = {}", units);
     }
 
@@ -179,7 +178,7 @@ public abstract class AbstractProfileMonitorTest {
     	String normalString = profMon.toString();
     	String shortString = profMon.toShortString();
     	LOG.info("profMon = \"{}\"", shortString);
-    	assertTrue("too long: " + shortString, shortString.length() <= normalString.length());
+    	assertTrue(shortString.length() <= normalString.length(), "too long: " + shortString);
     }
 
     /**

@@ -20,7 +20,7 @@
 
 package patterntesting.runtime.junit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.annotation.SkipTestOn;
 import patterntesting.runtime.init.Crash;
@@ -32,8 +32,7 @@ import java.io.NotSerializableException;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test for ObjectTester class.
@@ -56,9 +55,9 @@ public final class ObjectTesterTest {
     /**
      * Test method for {@link ObjectTester#assertEquals(Object, Object)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertInequality() {
-        ObjectTester.assertEquals("hello", "world");
+        assertThrows(AssertionError.class, () -> ObjectTester.assertEquals("hello", "world"));
     }
 
     /**
@@ -72,9 +71,9 @@ public final class ObjectTesterTest {
     /**
      * Test method for {@link ObjectTester#assertNotEquals(Object, Object)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertNotEqualsWithEquals() {
-        ObjectTester.assertNotEquals("hello", "hello");
+        assertThrows(AssertionError.class, () -> ObjectTester.assertNotEquals("hello", "hello"));
     }
 
     /**
@@ -103,30 +102,34 @@ public final class ObjectTesterTest {
      *
      * @since 1.2.20
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertEqualsNull() {
-        ObjectTester.assertEquals(PredictableLottery.class);
-        Lottery lottery = new PredictableLottery();
-        assertFalse(lottery.equals(null));
+        assertThrows(AssertionError.class, () -> {
+            ObjectTester.assertEquals(PredictableLottery.class);
+            Lottery lottery = new PredictableLottery();
+            assertFalse(lottery.equals(null));
+        });
     }
 
     /**
      * Two sheeps with the same name should be equals. But the sheep class
      * hasn't overwritten this method so we expect an error here.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertEqualsSheep() {
-        Sheep sh1 = new Sheep("Dolly");
-        Sheep sh2 = new Sheep("Dolly");
-        ObjectTester.assertEquals(sh1, sh2);
+        assertThrows(AssertionError.class, () -> {
+            Sheep sh1 = new Sheep("Dolly");
+            Sheep sh2 = new Sheep("Dolly");
+            ObjectTester.assertEquals(sh1, sh2);
+        });
     }
 
     /**
      * Also for the Sheep class we expect an error.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertEqualsSheepClass() {
-        ObjectTester.assertEquals(Sheep.class);
+        assertThrows(AssertionError.class, () -> ObjectTester.assertEquals(Sheep.class));
     }
 
     /**
@@ -175,16 +178,18 @@ public final class ObjectTesterTest {
     /**
      * Test method for {@link ObjectTester#assertEquals(Package)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertEqualsOfPackageFailure() {
-        synchronized (ObjectTesterTest.class) {
-            hasCorrectHashCode = false;
-            try {
-                ObjectTester.assertEqualsOfPackage("patterntesting.runtime.junit");
-            } finally {
-                hasCorrectHashCode = true;
+        assertThrows(AssertionError.class, () -> {
+            synchronized (ObjectTesterTest.class) {
+                hasCorrectHashCode = false;
+                try {
+                    ObjectTester.assertEqualsOfPackage("patterntesting.runtime.junit");
+                } finally {
+                    hasCorrectHashCode = true;
+                }
             }
-        }
+        });
     }
 
     /**
@@ -231,8 +236,8 @@ public final class ObjectTesterTest {
     @Test
     public void testHasToStringDefaultImpl() {
         String msg = this + " has toString() not overwritten";
-        assertTrue(msg, ObjectTester.hasToStringDefaultImpl(this));
-        assertTrue(msg, ObjectTester.hasToStringDefaultImpl(this.getClass()));
+        assertTrue(ObjectTester.hasToStringDefaultImpl(this), msg);
+        assertTrue(ObjectTester.hasToStringDefaultImpl(this.getClass()), msg);
     }
 
     /**

@@ -22,7 +22,7 @@ package patterntesting.runtime.net;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.util.Converter;
 
@@ -30,8 +30,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Collection;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The Class LocalhostTest.
@@ -50,8 +50,7 @@ public final class LocalhostTest {
     public void testGetInetAddresses() {
         Collection<InetAddress> addresses = Localhost.getInetAddresses();
         log.info("host addresses: " + addresses);
-        assertFalse("I guess your host should have at least one address!",
-                addresses.isEmpty());
+        assertFalse(addresses.isEmpty(), "I guess your host should have at least one address!");
     }
 
     /**
@@ -61,8 +60,7 @@ public final class LocalhostTest {
     @Test
     @IntegrationTest("needs too long in some networks (> 2 seconds)")
     public void testMatches() throws UnknownHostException {
-        assertTrue(InetAddress.getLocalHost() + " should match 127.0.0.1",
-                Localhost.matches("127.0.0.1"));
+        assertTrue(Localhost.matches("127.0.0.1"), InetAddress.getLocalHost() + " should match 127.0.0.1");
     }
 
     /**
@@ -71,8 +69,7 @@ public final class LocalhostTest {
     @Test
     @IntegrationTest("needs too long (> 2 seconds)")
     public void testDontMatches() {
-        assertFalse("unknown host should not match", Localhost
-                .matches("unknown"));
+        assertFalse(Localhost.matches("unknown"), "unknown host should not match");
     }
 
     /**
@@ -82,8 +79,7 @@ public final class LocalhostTest {
     @IntegrationTest("needs too long (> 2 seconds)")
     public void testMatchesHosts() {
         String[] hosts = {"unknown", "unknown.nowhere"};
-        assertFalse(Converter.toString(hosts) + " should not match", Localhost
-                .matches(hosts));
+        assertFalse(Localhost.matches(hosts), Converter.toString(hosts) + " should not match");
     }
 
 }

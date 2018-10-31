@@ -22,7 +22,7 @@ package patterntesting.runtime.junit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.junit.test.BlackSheep;
 import patterntesting.runtime.junit.test.Sheep;
@@ -33,8 +33,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test for CloneableTester class.
@@ -107,9 +106,9 @@ public final class CloneableTesterTest implements Cloneable {
     /**
      * Test method for {@link CloneableTester#assertCloning(Package)}.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testAssertCloningPackage() {
-        CloneableTester.assertCloning(Sheep.class.getPackage());
+        assertThrows(AssertionError.class, () -> CloneableTester.assertCloning(Sheep.class.getPackage()));
     }
 
     /**

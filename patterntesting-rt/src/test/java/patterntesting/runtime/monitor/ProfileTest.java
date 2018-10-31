@@ -22,8 +22,8 @@ package patterntesting.runtime.monitor;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.JUnitCore;
 import patterntesting.runtime.annotation.ProfileMe;
 
@@ -31,7 +31,7 @@ import javax.management.JMException;
 import javax.management.MBeanServer;
 import java.lang.management.ManagementFactory;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Class ProfileTest.
@@ -51,7 +51,7 @@ public final class ProfileTest {
      * A method of the Dummy class is called so that the ProflieStatistic for
      * it is activated.
      */
-    @BeforeClass
+    @BeforeAll
     public static void registerDummy() {
         Dummy.hello();
     }
@@ -128,7 +128,7 @@ public final class ProfileTest {
                 statistic.logStatistic();
                 fail("callDummy() does not appear in statistic.");
             }
-            assertTrue("no hit received for " + monitor, monitor.getHits() > 0);
+            assertTrue(monitor.getHits() > 0, "no hit received for " + monitor);
         }
     }
 
@@ -186,7 +186,7 @@ public final class ProfileTest {
     private void check0HitsConstructor() {
         Dummy.hello();
         ProfileMonitor monitor = statistic.getProfileMonitor("new " + Dummy.class.getName() + "()");
-        assertTrue("hits recorded with " + monitor, monitor == null || monitor.getHits() == 0);
+        assertTrue(monitor == null || monitor.getHits() == 0, "hits recorded with " + monitor);
     }
 
     /**
@@ -203,7 +203,7 @@ public final class ProfileTest {
     private static void checkDummyNotCalled(final String method) {
         synchronized (statistic) {
             ProfileMonitor monitor = statistic.getProfileMonitor(Dummy.class, method);
-            assertTrue("hits recorded with " + monitor, monitor == null || monitor.getHits() == 0);
+            assertTrue(monitor == null || monitor.getHits() == 0, "hits recorded with " + monitor);
         }
     }
 
@@ -216,7 +216,7 @@ public final class ProfileTest {
     private static void checkNotProfiled(final Class<?> cl, final String method) {
         synchronized (statistic) {
             ProfileMonitor monitor = statistic.getProfileMonitor(cl, method);
-            assertNull("found: " + monitor, monitor);
+            assertNull(monitor, "found: " + monitor);
         }
     }
 

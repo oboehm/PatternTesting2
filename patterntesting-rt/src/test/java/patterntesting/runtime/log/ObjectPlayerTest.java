@@ -18,7 +18,7 @@
 
 package patterntesting.runtime.log;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +26,7 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.*;
 import org.aspectj.lang.JoinPoint;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import patterntesting.runtime.junit.ObjectTester;
 import patterntesting.runtime.mock.JoinPointMock;

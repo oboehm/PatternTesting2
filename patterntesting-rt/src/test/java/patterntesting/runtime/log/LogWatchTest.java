@@ -20,14 +20,15 @@
 
 package patterntesting.runtime.log;
 
-import static org.junit.Assert.*;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.util.ThreadUtil;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for {@link LogWatch} class.
@@ -44,7 +45,7 @@ public class LogWatchTest {
     /**
      * Sets the up the {@link LogWatch} and starts it automatically.
      */
-    @Before
+    @BeforeEach
     public void setUpWatch() {
         watch = new LogWatch();
     }
@@ -57,7 +58,7 @@ public class LogWatchTest {
         ThreadUtil.sleep();
         watch.stop();
         String s = watch.toString();
-        assertFalse(s, s.contains("[default]:"));
+        assertThat(s, not(containsString("[default]:")));
         log.info("watch = {}.", watch);
     }
 
@@ -69,7 +70,7 @@ public class LogWatchTest {
     public void testShortTime() {
         watch.stop();
         String s = watch.toString();
-        assertFalse("not exact: " + s, s.equals("0 ms"));
+        assertThat("not exact", s, not(equalTo("0 ms")));
         log.info("watch = {}.", watch);
     }
 
@@ -82,7 +83,7 @@ public class LogWatchTest {
         long t1 = watch.getTimeInNanos();
         ThreadUtil.sleep();
         long t2 = watch.getTimeInNanos();
-        assertTrue("expected: " + t1 + " < " + t2, t1 < t2);
+        assertThat(t1, lessThan(t2));
     }
 
     /**

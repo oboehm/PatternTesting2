@@ -3,7 +3,7 @@ package patterntesting.runtime.monitor.internal;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.util.CollectionUtils;
 import patterntesting.runtime.annotation.SkipTestOn;
 import patterntesting.runtime.jmx.MBeanHelper;
@@ -22,7 +22,8 @@ import java.util.*;
 
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Here we test some methods from ClasspathDigger.
@@ -51,7 +52,7 @@ public final class ClasspathDiggerTest extends AbstractDiggerTest {
      */
     @Test
     public void testIsClassloaderSupported() {
-        assertTrue(digger.getClassLoader() + " is not supported", digger.isClassloaderSupported());
+        assertTrue(digger.isClassloaderSupported(), digger.getClassLoader() + " is not supported");
         LOG.info(digger + " supports the given classloader");
     }
 
@@ -99,7 +100,7 @@ public final class ClasspathDiggerTest extends AbstractDiggerTest {
 
     private void checkIsLoaded(final Class<?> testClass) {
         String classname = testClass.getName();
-        assertTrue(classname, digger.isLoaded(classname));
+        assertTrue(digger.isLoaded(classname), classname);
     }
 
     /**
@@ -124,7 +125,7 @@ public final class ClasspathDiggerTest extends AbstractDiggerTest {
     private static void checkClasspath(final String[] classpath) {
         for (int i = 0; i < classpath.length; i++) {
             File path = new File(classpath[i]);
-            assertTrue("path does not exist: " + path, path.exists());
+            assertTrue(path.exists(), "path does not exist: " + path);
             LOG.info("{}. path: {}", i+1, path);
         }
     }
@@ -243,10 +244,10 @@ public final class ClasspathDiggerTest extends AbstractDiggerTest {
         assertThat(packages.length, not(0));
         List<String> pkgs = CollectionUtils.arrayToList(packages);
         assertThat(pkgs, hasItem("org/junit/"));
-        assertFalse("contains null values: " + pkgs, pkgs.contains(null));
+        assertFalse(pkgs.contains(null), "contains null values: " + pkgs);
         Package[] clPackages = Package.getPackages();
         LOG.info("{} packages found, {} packages loaded.", packages.length, clPackages.length);
-        assertTrue("elements missing in packages", packages.length >= clPackages.length);
+        assertTrue(packages.length >= clPackages.length, "elements missing in packages");
     }
 
     /**
