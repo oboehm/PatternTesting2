@@ -22,7 +22,7 @@ package patterntesting.runtime.log;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 import patterntesting.runtime.annotation.DrawSequenceDiagram;
 import patterntesting.runtime.annotation.IgnoreForSequenceDiagram;
