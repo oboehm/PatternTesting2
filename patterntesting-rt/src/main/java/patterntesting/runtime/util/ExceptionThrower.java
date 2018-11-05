@@ -20,12 +20,12 @@
 
 package patterntesting.runtime.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Test;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.Test;
 
 /**
  * Because we need the functionality of throwing any exception not only in
@@ -82,12 +82,13 @@ public final class ExceptionThrower {
 	 * This method throws the expected exception wrapped into the {@link Test}
 	 * annotation.
 	 *
-	 * @param test
-	 *            with the expected exception
+	 * @param test with the expected exception
+	 * @deprecated JUnit 4 is no longer supported, only JUnit 5   
 	 */
+	@Deprecated
 	public static void provoke(final Test test) {
 		Class<? extends Throwable> expected = test.expected();
-		if ((expected != Test.None.class) && (expected != null)) {
+		if (((expected != null) && (expected != Test.None.class))) {
 			ExceptionThrower.provoke(expected);
 		}
 	}

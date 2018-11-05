@@ -1,4 +1,4 @@
-/**
+/*
  * $Id: LogRuntimeExceptionTest.java,v 1.8 2016/12/18 20:19:36 oboehm Exp $
  *
  * Copyright (c) 2008 by Oliver Boehm
@@ -19,12 +19,13 @@
  */
 package patterntesting.runtime.log;
 
-import static org.junit.Assert.fail;
-
-import org.apache.logging.log4j.*;
-import org.junit.*;
-
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.LogRuntimeException;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * The Class LogRuntimeExceptionTest.
@@ -44,7 +45,7 @@ public class LogRuntimeExceptionTest {
 	/**
 	 * Setup.
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() {
 		testLog = new LogRecorder();
 		logThrowableAspect.setLog(testLog);
@@ -53,7 +54,7 @@ public class LogRuntimeExceptionTest {
 	/**
 	 * Tear down after class.
 	 */
-	@AfterClass
+	@AfterAll
 	public static void tearDownAfterClass() {
 	    logThrowableAspect.setLog(aspectLog);
 	}

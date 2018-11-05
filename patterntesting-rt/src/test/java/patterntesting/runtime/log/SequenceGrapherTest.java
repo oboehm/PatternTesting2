@@ -23,7 +23,7 @@ package patterntesting.runtime.log;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.junit.FileTester;
 import patterntesting.runtime.mock.JoinPointStaticPartMock;
 
@@ -33,7 +33,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * JUnit tests for {@link SequenceGrapher} class.
@@ -66,11 +66,9 @@ public final class SequenceGrapherTest {
      * Test method for {@link SequenceGrapher#SequenceGrapher(File)} with a text
      * file as parameter. For this test we create an empty diagram to see the
      * generated file looks ok.
-     *
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     @Test
-    public void testCreateEmptyTxtFile() throws IOException {
+    public void testCreateEmptyTxtFile() {
         File file = new File("target", "seq-empty.txt");
         SequenceGrapher grapher = new SequenceGrapher(file);
         grapher.close();
@@ -119,11 +117,11 @@ public final class SequenceGrapherTest {
     private void checkCreation(final String filename, final Object... objects) throws IOException {
         File file = new File("target", filename);
         SequenceGrapher grapher = new SequenceGrapher(file);
-        for (int i = 0; i < objects.length; i++) {
-            grapher.createMessage(this, objects[i], new JoinPointStaticPartMock());
+        for (Object object : objects) {
+            grapher.createMessage(this, object, new JoinPointStaticPartMock());
         }
-        for (int i = 0; i < objects.length; i++) {
-            grapher.message(this, objects[i], new JoinPointStaticPartMock("getTime"), new Object[0]);
+        for (Object object : objects) {
+            grapher.message(this, object, new JoinPointStaticPartMock("getTime"), new Object[0]);
         }
         grapher.close();
         removeHeadFrom(file);
@@ -154,9 +152,7 @@ public final class SequenceGrapherTest {
 
     private static void removeHeadFrom(final File file) throws IOException {
         List<String> lines = FileUtils.readLines(file, "ISO-8859-1");
-        for (int i = 0; i < 421; i++) {
-            lines.remove(0);
-        }
+        lines.subList(0, 421).clear();
         FileUtils.writeLines(file, "ISO-8859-1", lines);
     }
 
@@ -236,7 +232,7 @@ public final class SequenceGrapherTest {
     public void testToString() {
         try (SequenceGrapher grapher = new SequenceGrapher()) {
             String s = grapher.toString();
-            assertFalse("looks like default implementation: " + s, s.contains("@"));
+            assertFalse(s.contains("@"), "looks like default implementation: " + s);
             LOG.info("s = \"{}\"", s);
         }
     }

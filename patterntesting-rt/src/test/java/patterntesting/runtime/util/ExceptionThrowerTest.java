@@ -20,9 +20,10 @@
 
 package patterntesting.runtime.util;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The Class ExceptionThrowerTest.
@@ -35,21 +36,9 @@ public final class ExceptionThrowerTest {
     /**
      * Test method for {@link ExceptionThrower#provoke(Class)}.
      */
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testProvoke() {
-        ExceptionThrower.provoke(RuntimeException.class);
-    }
-
-    /**
-     * Test method for {@link ExceptionThrower#provoke(Test)}.
-     *
-     * @throws NoSuchMethodException the no such method exception
-     * @throws SecurityException the security exception
-     */
-    @Test(expected = IllegalStateException.class)
-    public void testProvokeTest() throws NoSuchMethodException, SecurityException {
-        Test test = this.getClass().getMethod("testProvokeTest").getAnnotation(Test.class);
-        ExceptionThrower.provoke(test);
+        assertThrows(RuntimeException.class, () -> ExceptionThrower.provoke(RuntimeException.class));
     }
 
     /**
@@ -60,7 +49,7 @@ public final class ExceptionThrowerTest {
     @Test
     public void testCreate() throws ReflectiveOperationException {
         Throwable t = ExceptionThrower.create(InterruptedException.class);
-        assertTrue(t + ": wrong instance", t instanceof InterruptedException);
+        assertTrue(t instanceof InterruptedException, t + ": wrong instance");
     }
 
 }

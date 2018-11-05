@@ -1,4 +1,4 @@
-/**
+/*
  * $Id: LogThrowableTest.java,v 1.9 2016/12/18 20:19:37 oboehm Exp $
  *
  * Copyright (c) 2008 by Oliver Boehm
@@ -19,15 +19,14 @@
  */
 package patterntesting.runtime.log;
 
-import static org.junit.Assert.*;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.AfterClass;
-import org.junit.Test;
-
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.LogThrowable;
+
+import static org.junit.Assert.*;
 
 /**
  * The Class LogThrowableTest.
@@ -57,7 +56,7 @@ public final class LogThrowableTest {
 	/**
 	 * Tear down after class.
 	 */
-	@AfterClass
+	@AfterAll
 	public static void tearDownAfterClass() {
 	    logThrowableAspect.setLog(aspectLog);
 	}
