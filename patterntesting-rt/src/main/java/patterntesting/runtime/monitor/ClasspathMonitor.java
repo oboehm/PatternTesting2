@@ -54,9 +54,10 @@ import java.util.concurrent.FutureTask;
  * </p>
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.114 $
  * @since 10.02.2009
+ * @deprecated replaced by clazzfish.monitor.{@link clazzfish.monitor.ClasspathMonitor}
  */
+@Deprecated
 public class ClasspathMonitor extends clazzfish.monitor.ClasspathMonitor {
 
 	private static final Logger LOG = LogManager.getLogger(ClasspathMonitor.class);
