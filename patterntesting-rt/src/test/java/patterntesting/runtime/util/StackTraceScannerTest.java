@@ -22,11 +22,15 @@ package patterntesting.runtime.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * JUnit tests for {@link StackTraceScanner}.
@@ -59,7 +63,7 @@ public class StackTraceScannerTest {
     @SuppressWarnings("unused")
     @Test
     public void testFindConstructor() {
-        new StackTraceScannerTest("testFindConstructor");
+        new FindCallerOfCtorTest("testFindConstructor");
     }
 
     /**
@@ -81,14 +85,7 @@ public class StackTraceScannerTest {
     @SuppressWarnings("unused")
     @Test
     public void testGetCallerOfConstructor() {
-        new StackTraceScannerTest("testGetCallerOfConstructor");
-    }
-
-    private StackTraceScannerTest(final String caller) {
-        StackTraceElement ctorElement = StackTraceScanner.findConstructor(StackTraceScannerTest.class);
-        StackTraceElement callerElement = StackTraceScanner.getCallerOfConstructor(StackTraceScannerTest.class);
-        assertEquals(StackTraceScannerTest.class.getName(), ctorElement.getClassName());
-        assertEquals(caller, callerElement.getMethodName());
+        new FindCallerOfCtorTest("testGetCallerOfConstructor");
     }
 
     /**
@@ -111,7 +108,7 @@ public class StackTraceScannerTest {
     public void testGetCallerClassExcluded() {
         Class<?> callerClass = StackTraceScanner.getCallerClass();
         Class<?> callerCallerClass = StackTraceScanner.getCallerClass(new Pattern[0], callerClass);
-        assertFalse("not expected: " + callerClass, callerClass.equals(callerCallerClass));
+        assertThat(callerClass, not(equalTo(callerCallerClass)));
         LOG.info("Caller of {} is {}.", callerClass, callerCallerClass);
     }
 
@@ -124,6 +121,17 @@ public class StackTraceScannerTest {
         StackTraceElement[] stacktrace = StackTraceScanner.getCallerStackTrace();
         Class<?> callerClass = StackTraceScanner.getCallerClass();
         assertEquals(callerClass.getName(), stacktrace[0].getClassName());
+    }
+    
+    
+    static class FindCallerOfCtorTest {
+        public FindCallerOfCtorTest(final String caller) {
+            StackTraceScannerTest test = new StackTraceScannerTest();
+            StackTraceElement ctorElement = StackTraceScanner.findConstructor(FindCallerOfCtorTest.class);
+            StackTraceElement callerElement = StackTraceScanner.getCallerOfConstructor(FindCallerOfCtorTest.class);
+            assertEquals(FindCallerOfCtorTest.class.getName(), ctorElement.getClassName());
+            assertEquals(caller, callerElement.getMethodName());
+        }
     }
 
 }
