@@ -23,7 +23,8 @@ package patterntesting.runtime.monitor.db;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.jmx.MBeanHelper;
 import patterntesting.runtime.monitor.ProfileMonitor;
 import patterntesting.runtime.monitor.ProfileStatistic;
@@ -54,7 +55,7 @@ public class SqlStatisticTest extends ProfileStatisticTest {
         "SELECT a FROM e",
         "SELECT a FROM f"
     };
-    private final SqlStatistic instance = (SqlStatistic) this.getProfileStatistic();
+    private final SqlStatistic instance = SqlStatistic.getInstance();
 
     /**
      * Gets the profile statistic.
@@ -72,6 +73,7 @@ public class SqlStatisticTest extends ProfileStatisticTest {
      *
      * @see ProfileStatisticTest#prepareStatistic()
      */
+    @BeforeEach
     @Override
     public void prepareStatistic() {
         this.startStopMonitors(sqls);

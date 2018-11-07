@@ -26,10 +26,10 @@ import org.aspectj.lang.reflect.AdviceSignature;
 import org.aspectj.lang.reflect.CatchClauseSignature;
 import org.aspectj.lang.reflect.CodeSignature;
 import org.aspectj.lang.reflect.ConstructorSignature;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.jmx.MBeanHelper;
 import patterntesting.runtime.util.SignatureHelper;
 import patterntesting.runtime.util.ThreadUtil;
@@ -42,8 +42,11 @@ import java.lang.management.ManagementFactory;
 import java.util.UUID;
 
 import static org.easymock.EasyMock.createMock;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for {@link ProfileStatistic} class.
@@ -72,7 +75,7 @@ public class ProfileStatisticTest {
     /**
      * Sets up some 5 different monitors for testing.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         signatures[0] = createMock(Signature.class);
         signatures[1] = createMock(AdviceSignature.class);
@@ -85,7 +88,7 @@ public class ProfileStatisticTest {
      * For some tests we need some statistic dates. These are provided by
      * this method.
      */
-    @Before
+    @BeforeEach
     public void prepareStatistic() {
         synchronized (profileStatistic) {
             String[] labels = new String[signatures.length];
@@ -134,7 +137,7 @@ public class ProfileStatisticTest {
             profileStatistic.init(Dummy.class);
             profileStatistic.reset();
             ProfileMonitor[] monitors = profileStatistic.getSortedMonitors();
-            assertTrue(profileStatistic + " should not be empty", monitors.length > 0);
+            assertThat(profileStatistic + " should not be empty", monitors.length, greaterThan(0));
         }
     }
 
@@ -162,7 +165,7 @@ public class ProfileStatisticTest {
             ProfileStatistic statistic = getProfileStatistic();
             double maxAvg = statistic.getMaxAvg();
             log.info("maxAvg: " + maxAvg + " ms from " + statistic.getMaxAvgLabel());
-            assertTrue("maxAvg=" + maxAvg, maxAvg > 0.0);
+            assertThat(maxAvg, greaterThan(0.0));
         }
     }
 
@@ -213,7 +216,7 @@ public class ProfileStatisticTest {
 
     private static void checkDumpfile(final File dumpfile) {
         try {
-            assertTrue(dumpfile + " does not exist", dumpfile.exists());
+            assertTrue(dumpfile.exists(), dumpfile + " does not exist");
             log.info("Statistic was dumped to {} ({} bytes).", dumpfile, dumpfile.length());
         } finally {
             if (dumpfile.delete()) {
@@ -241,7 +244,7 @@ public class ProfileStatisticTest {
         started.stop();
         ProfileMonitor mon = profileStatistic.getProfileMonitor(sig);
         assertEquals(started.getLabel(), mon.getLabel());
-        assertTrue("at least 1 hit expected", mon.getHits() > 0);
+        assertThat("at least 1 hit expected", mon.getHits(), greaterThan(0));
         log.info("mon = {}", mon);
     }
 
@@ -271,7 +274,7 @@ public class ProfileStatisticTest {
 		}
     	ProfileMonitor[] monitors = profileStatistic.getSortedMonitors();
     	log.info("Size of monitors is {}.", monitors.length);
-        assertTrue("expected: " + monitors.length + " <= " + newSize, monitors.length <= newSize);
+    	assertThat(monitors.length, lessThanOrEqualTo(newSize));
     }
 
     /**
@@ -289,13 +292,13 @@ public class ProfileStatisticTest {
     public void testRegisterAsMBean() {
         String mbeanName = "test.monitor.ProfileStatistic";
         ProfileStatistic.registerAsMBean(mbeanName);
-        assertTrue("not registered: " + mbeanName, MBeanHelper.isRegistered(mbeanName));
+        assertTrue(MBeanHelper.isRegistered(mbeanName), "not registered: " + mbeanName);
     }
 
     /**
      * Resets the ProfileStatistc to a default value for tests after this class.
      */
-    @After
+    @AfterEach
     public void resetProfileStatistic() {
         profileStatistic.setMaxSize(100);
     }
