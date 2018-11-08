@@ -20,14 +20,16 @@
 
 package patterntesting.runtime.junit;
 
-import java.util.*;
-import java.util.regex.Pattern;
-
-import org.apache.logging.log4j.*;
-import org.junit.Assert;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Assertions;
 import patterntesting.runtime.monitor.ClasspathMonitor;
 import patterntesting.runtime.util.Converter;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * This utility class checks classes which implements the {@link Comparable}
@@ -62,19 +64,19 @@ public final class ComparableTester extends AbstractTester {
 		int ret2 = c2.compareTo(c1);
 		if (c1.equals(c2)) {
 			String msg = c1.getClass() + ": compareTo(..) should return 0 for equals objects";
-			Assert.assertEquals(msg, 0, ret1);
-			Assert.assertEquals(msg, 0, ret2);
+			Assertions.assertEquals(0, ret1, msg);
+			Assertions.assertEquals(0, ret2, msg);
 		} else {
 			String msg = c1.getClass() + ": compareTo(..) should return not 0 for not equals objects " + c1 + " and "
 					+ c2;
-			Assert.assertTrue(msg, ret1 != 0);
-			Assert.assertTrue(msg, ret2 != 0);
+			Assertions.assertTrue(ret1 != 0, msg);
+			Assertions.assertTrue(ret2 != 0, msg);
 			msg = c1.getClass() + ": <" + c2 + ">.compareTo(<" + c1 + ">) should return " + (-ret2) + " (not " + ret2
 					+ ")";
 			if (ret1 < 0) {
-				Assert.assertTrue(msg, ret2 > 0);
+				Assertions.assertTrue(ret2 > 0, msg);
 			} else {
-				Assert.assertTrue(msg, ret2 < 0);
+				Assertions.assertTrue(ret2 < 0, msg);
 			}
 		}
 		LOG.info("compareTo implementation of " + c1.getClass() + " seems to be ok");

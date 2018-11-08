@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * This tester provides some special assert methods for strings to simplify
@@ -58,7 +58,7 @@ public final class StringTester {
 	 */
 	public static void assertEmpty(final String s) {
 		if (s != null) {
-			assertEquals('"' + s + "\" is not empty", 0, s.length());
+			assertEquals(0, s.length(), '"' + s + "\" is not empty");
 		}
 	}
 

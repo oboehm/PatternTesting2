@@ -20,10 +20,10 @@
 
 package patterntesting.runtime.junit.internal;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.Description;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Unit tests for {@link DescriptionUtils} class.

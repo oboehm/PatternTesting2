@@ -30,8 +30,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.*;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * With the NetworkTester you can assert if a host is online or offline.
@@ -77,7 +77,7 @@ public final class NetworkTester {
      * @param unit the time unit
      */
     public static void assertOnline(String host, int time, TimeUnit unit) {
-        assertTrue(host + " is offline", isOnline(host, time, unit));
+        assertTrue(isOnline(host, time, unit), host + " is offline");
     }
 
     /**
@@ -108,7 +108,7 @@ public final class NetworkTester {
      */
     public static void assertOnline(String host, int port) {
         try {
-            assertTrue(host + ":" + port + " is offline", isOnline(host, port));
+            assertTrue(isOnline(host, port), host + ":" + port + " is offline");
         } catch (IOException ioe) {
             throw new AssertionError(host + ":" + port + " is offline", ioe);
         }
@@ -184,7 +184,7 @@ public final class NetworkTester {
      */
     public static void assertOffline(String host, int time, TimeUnit unit) {
         PortScanner scanner = scanPortsOf(host, time, unit);
-        assertFalse(host + " is online", scanner.openPortDetected());
+        assertFalse(scanner.openPortDetected(), host + " is online");
     }
 
     /**
@@ -195,7 +195,7 @@ public final class NetworkTester {
      */
     public static void assertOffline(String host, int port) {
         try {
-            assertFalse(host + ":" + port + " is online", isOnline(host, port));
+            assertFalse(isOnline(host, port), host + ":" + port + " is online");
         } catch (IOException ioe) {
             LOG.debug(host + ":" + port + " is offline:", ioe);
         }

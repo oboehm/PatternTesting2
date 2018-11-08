@@ -20,19 +20,25 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.Assert.assertFalse;
-
-import java.io.*;
-import java.lang.reflect.*;
-import java.util.*;
-import java.util.regex.Pattern;
-
-import org.apache.logging.log4j.*;
-import org.junit.Assert;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Assertions;
 import patterntesting.runtime.exception.DetailedAssertionError;
 import patterntesting.runtime.monitor.ClasspathMonitor;
-import patterntesting.runtime.util.*;
+import patterntesting.runtime.util.Converter;
+import patterntesting.runtime.util.ReflectionHelper;
+
+import java.io.NotSerializableException;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * This is a utility class to check some important methods of a class like the
@@ -87,10 +93,10 @@ public final class ObjectTester extends AbstractTester {
 				assertAllOfPackage(pkg.getName(), (Pattern) o2);
 			}
 		} else {
-			Assert.assertEquals(o1.getClass() + ": objects are not equals!", o1, o2);
-			Assert.assertEquals(o1.getClass() + ": equals not symmetrical (A == B, but B != A)", o2, o1);
-			Assert.assertEquals(o1.getClass() + ": objects are equals but hashCode differs!", o1.hashCode(),
-					o2.hashCode());
+			Assertions.assertEquals(o1, o2, o1.getClass() + ": objects are not equals!");
+			Assertions.assertEquals(o2, o1, o1.getClass() + ": equals not symmetrical (A == B, but B != A)");
+			Assertions.assertEquals(o1.hashCode(), o2.hashCode(),
+					o1.getClass() + ": objects are equals but hashCode differs!");
 			if (o1 instanceof Comparable<?>) {
 				ComparableTester.assertCompareTo((Comparable<Comparable<?>>) o1, (Comparable<Comparable<?>>) o1);
 			}
@@ -113,10 +119,9 @@ public final class ObjectTester extends AbstractTester {
 	 * @since 1.5
 	 */
 	public static void assertNotEquals(final Object a, final Object b) throws AssertionError {
-		assertFalse("expected: '" + a + "' != '" + b + "'", a.equals(b));
-		assertFalse(
-				a.getClass() + ": equals not symmetrical (A != B, but B == A) with A = '" + a + "' and B = '" + b + "'",
-				b.equals(a));
+		assertFalse(a.equals(b), "expected: '" + a + "' != '" + b + "'");
+		assertFalse(b.equals(a),
+				a.getClass() + ": equals not symmetrical (A != B, but B == A) with A = '" + a + "' and B = '" + b + "'");
 	}
 
 	/**
@@ -128,7 +133,7 @@ public final class ObjectTester extends AbstractTester {
 	 */
 	private static void assertEqualsWithNull(final Object obj) {
 		try {
-			Assert.assertFalse(obj.getClass().getName() + ".equals(null) should return 'false'", obj.equals(null));
+			assertFalse(obj.equals(null), obj.getClass().getName() + ".equals(null) should return 'false'");
 		} catch (RuntimeException re) {
 			throw new DetailedAssertionError(
 					obj.getClass().getName() + ".equals(..) implementation does not check (correct) for null argument",

@@ -20,13 +20,12 @@
 
 package patterntesting.runtime.junit.internal;
 
-import java.lang.reflect.Method;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Logger;
 import org.junit.runners.model.FrameworkMethod;
-
 import patterntesting.annotation.check.runtime.MayReturnNull;
+
+import java.lang.reflect.Method;
 
 /**
  * This is a helper class which contains some static helper methods for JUnit.

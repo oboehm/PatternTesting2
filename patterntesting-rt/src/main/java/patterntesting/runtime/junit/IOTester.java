@@ -20,16 +20,16 @@
 
 package patterntesting.runtime.junit;
 
-import java.io.*;
-import java.nio.charset.Charset;
-import java.util.regex.Pattern;
-
-import org.apache.logging.log4j.*;
-import org.junit.Assert;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Assertions;
 import patterntesting.annotation.check.runtime.MayReturnNull;
 import patterntesting.runtime.io.LineReader;
 import patterntesting.runtime.util.StringConverter;
+
+import java.io.*;
+import java.nio.charset.Charset;
+import java.util.regex.Pattern;
 
 /**
  * With the IOTester you can assert if two files have equals content or if two
@@ -263,7 +263,7 @@ public final class IOTester {
 				if ((line1 == null) && (line2 == null)) {
 					return;
 				}
-				Assert.assertEquals(prefix + lineNo + " -", line1, line2);
+				Assertions.assertEquals(line1, line2, prefix + lineNo + " -");
 			}
 		} catch (IOException ioe) {
 			throw new AssertionError(ioe);
@@ -290,9 +290,9 @@ public final class IOTester {
 					return;
 				}
 				if (r1.getLineNumber() == r2.getLineNumber()) {
-					Assert.assertEquals(prefix + r1.getLineNumber() + " -", line1, line2);
+					Assertions.assertEquals(line1, line2, prefix + r1.getLineNumber() + " -");
 				} else {
-					Assert.assertEquals(prefix + r1.getLineNumber() + "/" + r2.getLineNumber() + " -", line1, line2);
+					Assertions.assertEquals(line1, line2, prefix + r1.getLineNumber() + "/" + r2.getLineNumber() + " -");
 				}
 			}
 		} catch (IOException ioe) {
@@ -367,9 +367,9 @@ public final class IOTester {
 				line1 = converter.convert(line1);
 				line2 = converter.convert(line2);
 				if (r1.getLineNumber() == r2.getLineNumber()) {
-					Assert.assertEquals(prefix + r1.getLineNumber() + " -", line1, line2);
+					Assertions.assertEquals(line1, line2, prefix + r1.getLineNumber() + " -");
 				} else {
-					Assert.assertEquals(prefix + r1.getLineNumber() + "/" + r2.getLineNumber() + " -", line1, line2);
+					Assertions.assertEquals(line1, line2, prefix + r1.getLineNumber() + "/" + r2.getLineNumber() + " -");
 				}
 			}
 		} catch (IOException ioe) {

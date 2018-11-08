@@ -20,15 +20,17 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.jupiter.api.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * JUnit test for IOTester.
@@ -74,7 +76,8 @@ public final class IOTesterTest {
         } catch (AssertionError expected) {
             String msg = expected.getMessage();
             LOG.info(msg);
-            assertEquals("line 4 - expected:<[fourth] line> but was:<[next] line>", msg);
+            assertThat(msg, Matchers.stringContainsInOrder(
+                    Arrays.asList("expected", "fourth", "line", "but was", "next", "line")));
        } finally {
             in1.close();
             in2.close();

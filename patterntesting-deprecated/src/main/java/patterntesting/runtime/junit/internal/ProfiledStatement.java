@@ -20,18 +20,21 @@
 
 package patterntesting.runtime.junit.internal;
 
+import junit.framework.TestCase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.Test.None;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.Statement;
+import org.junit.runners.model.TestClass;
+import patterntesting.annotation.check.runtime.MayReturnNull;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.*;
-import org.junit.Test.None;
-import org.junit.runners.model.*;
-
-import junit.framework.TestCase;
-import patterntesting.annotation.check.runtime.MayReturnNull;
 
 /**
  * The ProfiledStatement measures also the time the different setUp() and
@@ -164,7 +167,7 @@ public class ProfiledStatement extends Statement {
 	/**
 	 * Here we invoke all tearDown() methods.
 	 *
-	 * @param stmt
+	 * @param target
 	 *            the recorded statement
 	 * @throws Throwable
 	 *             if tearDown method has a problem

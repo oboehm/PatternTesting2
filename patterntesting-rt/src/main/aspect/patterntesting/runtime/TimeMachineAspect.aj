@@ -20,13 +20,11 @@
 
 package patterntesting.runtime;
 
-import java.util.Date;
-
 import org.aspectj.lang.annotation.SuppressAjWarnings;
-import org.junit.Test;
-
 import patterntesting.runtime.annotation.TimeMachine;
 import patterntesting.runtime.util.Converter;
+
+import java.util.Date;
 
 /**
  * Together with the {@link TimeMachine} annotation you influence the current

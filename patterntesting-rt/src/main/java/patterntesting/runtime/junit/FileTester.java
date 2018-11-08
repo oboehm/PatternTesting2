@@ -20,15 +20,17 @@
 
 package patterntesting.runtime.junit;
 
-import java.io.*;
+import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.Assertions;
+import patterntesting.runtime.io.ExtendedFile;
+import patterntesting.runtime.io.FileInputStreamReader;
+import patterntesting.runtime.util.StringConverter;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.Reader;
 import java.nio.charset.Charset;
 import java.util.regex.Pattern;
-
-import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
-
-import patterntesting.runtime.io.*;
-import patterntesting.runtime.util.StringConverter;
 
 /**
  * The Class FileTester.
@@ -330,7 +332,7 @@ public class FileTester {
      * @param file2 e.g. file "/a/b/../b/c"
      */
     public static void assertEquals(final File file1, final File file2) {
-        Assert.assertEquals(new ExtendedFile(file1).normalize(), new ExtendedFile(file2).normalize());
+        Assertions.assertEquals(new ExtendedFile(file1).normalize(), new ExtendedFile(file2).normalize());
     }
 
     private static void throwAssertionError(final String msg, final Throwable t) throws AssertionError {

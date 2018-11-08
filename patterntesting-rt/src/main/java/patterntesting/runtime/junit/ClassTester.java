@@ -18,17 +18,16 @@
 
 package patterntesting.runtime.junit;
 
-import static org.junit.Assert.assertEquals;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import patterntesting.runtime.exception.DetailedAssertionError;
+import patterntesting.runtime.junit.internal.XrayClassLoader;
 
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Set;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-
-import patterntesting.runtime.exception.DetailedAssertionError;
-import patterntesting.runtime.junit.internal.XrayClassLoader;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * This tester examines classes. E.g. if looks if classes can be loaded

@@ -20,10 +20,10 @@
 
 package patterntesting.runtime.annotation;
 
-import java.lang.annotation.*;
-
 import org.junit.runners.ParentRunner;
 import org.junit.runners.model.FrameworkMethod;
+
+import java.lang.annotation.*;
 
 /**
  * If you use <code>&#064;RunWith(ProxyRunner.class)</code> use must tell the

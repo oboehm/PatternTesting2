@@ -20,10 +20,10 @@
 
 package patterntesting.runtime.junit.internal;
 
+import org.junit.runners.model.InitializationError;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.runners.model.InitializationError;
 
 /**
  * This error introduced for the support of JUnit 4.7 because in this version
