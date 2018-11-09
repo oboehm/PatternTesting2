@@ -29,7 +29,9 @@ import java.net.URI;
  * @author <a href="ob@aosd.de">oliver</a>
  * @version $Revision: 1.39 $
  * @since 1.6.4
+ * @deprecated replaced by {@link clazzfish.monitor.ResourcepathMonitor}
  */
+@Deprecated
 public class ResourcepathMonitor extends clazzfish.monitor.ResourcepathMonitor {
 
     private static final ResourcepathMonitor INSTANCE;
