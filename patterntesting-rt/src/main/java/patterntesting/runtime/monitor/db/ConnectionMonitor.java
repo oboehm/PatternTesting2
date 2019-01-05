@@ -20,18 +20,16 @@
 
 package patterntesting.runtime.monitor.db;
 
-import java.io.*;
-import java.sql.Connection;
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import javax.management.JMException;
-import javax.management.openmbean.*;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-
+import org.apache.logging.log4j.Logger;
 import patterntesting.runtime.jmx.MBeanHelper;
+
+import javax.management.openmbean.*;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * This is the monitor class for the {@link ProxyConnection} which monitors the
@@ -49,8 +47,10 @@ import patterntesting.runtime.jmx.MBeanHelper;
  * @author oliver (ob@aosd.de)
  * @version $Revision: 1.17 $
  * @since 1.3 (07.10.2012)
+ * @deprecated since 2.0, use {@link clazzfish.jdbc.ConnectionMonitor}
  */
-public class ConnectionMonitor extends clazzfish.monitor.AbstractMonitor implements ConnectionMonitorMBean {
+@Deprecated
+public class ConnectionMonitor extends clazzfish.jdbc.ConnectionMonitor implements ConnectionMonitorMBean {
 
 	private static final Logger LOG = LogManager.getLogger(ConnectionMonitor.class);
 	private static final ConnectionMonitor INSTANCE;
@@ -60,12 +60,6 @@ public class ConnectionMonitor extends clazzfish.monitor.AbstractMonitor impleme
 
 	static {
 		INSTANCE = new ConnectionMonitor();
-		try {
-			MBeanHelper.registerMBean(INSTANCE);
-			LOG.debug("{} created and registered as MBean.", INSTANCE);
-		} catch (JMException e) {
-			LOG.info("{} can't be registered as MBean ({})", INSTANCE, e);
-		}
 	}
 
 	/**
@@ -74,6 +68,7 @@ public class ConnectionMonitor extends clazzfish.monitor.AbstractMonitor impleme
 	 * ConnectionMonitor in patterntesting.runtime.db.
 	 */
 	protected ConnectionMonitor() {
+		super();
 		LOG.trace("New instance of {} created.", ConnectionMonitor.class);
 	}
 
@@ -203,54 +198,6 @@ public class ConnectionMonitor extends clazzfish.monitor.AbstractMonitor impleme
 	}
 
 	/**
-	 * Gets the caller which opens the last connection.
-	 *
-	 * @return the all caller
-	 */
-	@Override
-	public StackTraceElement getLastCaller() {
-		StackTraceElement[] callers = this.getCallers();
-		if (callers.length == 0) {
-			LOG.debug("No open connections - last caller is null.");
-			return null;
-		}
-		return callers[callers.length - 1];
-	}
-
-	/**
-	 * Gets the number of open connections.
-	 *
-	 * @return the open count
-	 * @see ConnectionMonitorMBean#getOpenConnections()
-	 */
-	@Override
-	public int getOpenConnections() {
-		return ConnectionMonitor.openConnections.size();
-	}
-
-	/**
-	 * Gets the number of closed connections.
-	 *
-	 * @return the closed connections
-	 * @since 1.4.1
-	 */
-	@Override
-	public int getClosedConnections() {
-		return this.getSumOfConnections() - this.getOpenConnections();
-	}
-
-	/**
-	 * Gets the total sum of open and closed connections.
-	 *
-	 * @return the sum of connections
-	 * @since 1.4.1
-	 */
-	@Override
-	public int getSumOfConnections() {
-		return sumOfConnections;
-	}
-
-	/**
 	 * Assert that all connections are closed.
 	 */
 	public static void assertConnectionsClosed() {
@@ -260,100 +207,6 @@ public class ConnectionMonitor extends clazzfish.monitor.AbstractMonitor impleme
 			error.setStackTrace(openConnections.iterator().next().getCaller());
 			throw error;
 		}
-	}
-
-	/**
-	 * This toString implementation supports logging and debugging by showing
-	 * the number of open connections.
-	 *
-	 * @return the string
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		int n = this.getOpenConnections();
-		if (n < 1) {
-			return this.getClass().getSimpleName();
-		}
-		return this.getClass().getSimpleName() + " watching " + n + " connection(s)";
-	}
-
-	/**
-	 * This operation dumps the different MBean attributes to the given
-	 * directory.
-	 *
-	 * @param dumpDir
-	 *            the directory where the attributes are dumped to.
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	@Override
-	public void dumpMe(final File dumpDir) throws IOException {
-		super.dumpMe(dumpDir);
-		dumpArray(this.getCallers(), dumpDir, "callers");
-		dumpArray(this.getLastCallerStacktrace(), dumpDir, "lastCallerStracktrace");
-		dumpArray(openConnections.toArray(), dumpDir, "openConnections");
-		dumpArray(getCallerStacktraceDumps().toArray(), dumpDir, "callerStacktraces");
-	}
-
-	/**
-	 * Logs the different array to the log output.
-	 */
-	@Override
-	public void logMe() {
-		try {
-			StringWriter writer = new StringWriter();
-			dumpArray(this.getCallers(), new BufferedWriter(writer), "callers");
-			dumpArray(this.getLastCallerStacktrace(), new BufferedWriter(writer), "lastCallerStracktrace");
-			dumpArray(openConnections.toArray(), new BufferedWriter(writer), "openConnections");
-			dumpArray(getCallerStacktraceDumps().toArray(), new BufferedWriter(writer), "callerStacktraces");
-			LOG.info(writer.toString());
-		} catch (IOException cannothappen) {
-			LOG.warn("Cannot dump resources:", cannothappen);
-		}
-	}
-
-	/**
-	 * Log the caller stacktraces.
-	 *
-	 * @see ConnectionMonitorMBean#logCallerStacktraces()
-	 * @since 1.6.1
-	 */
-	@Override
-	public void logCallerStacktraces() {
-		for (String dump : getCallerStacktraceDumps()) {
-			LOG.info(dump);
-		}
-	}
-
-	private static List<String> getCallerStacktraceDumps() {
-		List<String> connectionStacktraces = new ArrayList<>();
-		for (ProxyConnection proxy : openConnections) {
-			StringBuilder buf = new StringBuilder();
-			StackTraceElement[] stacktrace = proxy.getCaller();
-			for (StackTraceElement element : stacktrace) {
-				buf.append("\n\tat ");
-				buf.append(element);
-			}
-			connectionStacktraces.add(proxy + " was called " + buf);
-		}
-		return connectionStacktraces;
-	}
-
-	/**
-	 * This method is called when the ConnectionMonitor is registered as
-	 * shutdown hook.
-	 *
-	 * @see java.lang.Thread#run()
-	 */
-	@Override
-	public void run() {
-		super.run();
-		LOG.info("---->>>>---->>>>----    {} of {} connection(s) are still open    ---->>>>---->>>>----",
-				openConnections.size(), sumOfConnections);
-		this.logCallerStacktraces();
-		LOG.info("----<<<<----<<<<----    {} of {} connection(s) are still open    ----<<<<----<<<<----",
-				openConnections.size(), sumOfConnections);
 	}
 
 }

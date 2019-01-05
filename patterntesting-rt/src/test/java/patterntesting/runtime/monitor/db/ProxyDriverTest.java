@@ -44,7 +44,7 @@ public final class ProxyDriverTest extends AbstractDbTest {
 
     private static final String JDBC_PROXY_HSQLDB = "jdbc:proxy:hsqldb:mem:testdb";
     private static final Logger log = LogManager.getLogger(ProxyDriverTest.class);
-    private static final ConnectionMonitorMBean connectionMonitor = ConnectionMonitor.getInstance();
+    private static final ConnectionMonitor connectionMonitor = ConnectionMonitor.getInstance();
     private static final ProxyDriver driver = new ProxyDriver();
 
     /**
