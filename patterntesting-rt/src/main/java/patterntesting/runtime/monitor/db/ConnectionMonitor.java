@@ -22,13 +22,9 @@ package patterntesting.runtime.monitor.db;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import patterntesting.runtime.jmx.MBeanHelper;
 
-import javax.management.openmbean.*;
 import java.sql.Connection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -122,91 +118,14 @@ public class ConnectionMonitor extends clazzfish.jdbc.ConnectionMonitor implemen
 	 * @return the caller of the connection
 	 */
 	public static StackTraceElement getCallerOf(final Connection connection) {
-		for (ProxyConnection proxy : openConnections) {
-			if (proxy.getConnection().equals(connection)) {
-				return proxy.getCaller()[0];
-			}
-		}
-		throw new IllegalArgumentException("not monitored or closed: " + connection);
-	}
-
-	/**
-	 * Gets the callers.
-	 *
-	 * @return the callers
-	 * @see ConnectionMonitorMBean#getCallers()
-	 */
-	@Override
-	public StackTraceElement[] getCallers() {
-		StackTraceElement[] callers = new StackTraceElement[openConnections.size()];
-		int i = 0;
-		for (ProxyConnection proxy : openConnections) {
-			callers[i] = proxy.getCaller()[0];
-			i++;
-		}
-		return callers;
-	}
-
-	/**
-	 * Gets the stacktrace of the caller which opens the last connection.
-	 *
-	 * @return the all caller
-	 */
-	@Override
-	public StackTraceElement[] getLastCallerStacktrace() {
-		ProxyConnection lastConnection = openConnections.get(openConnections.size() - 1);
-		return lastConnection.getCaller();
-	}
-
-	/**
-	 * Gets the caller stacktraces of all connections.
-	 *
-	 * @return stacktraces of all callers
-	 * @throws OpenDataException
-	 *             the open data exception
-	 */
-	@Override
-	public TabularData getCallerStacktraces() throws OpenDataException {
-		String[] itemNames = { "Caller", "Stacktrace" };
-		String[] itemDescriptions = { "caller name", "stacktrace" };
-		try {
-			OpenType<?>[] itemTypes = { SimpleType.STRING, new ArrayType<String>(1, SimpleType.STRING) };
-			CompositeType rowType = new CompositeType("propertyType", "property entry", itemNames, itemDescriptions,
-					itemTypes);
-			TabularDataSupport data = MBeanHelper.createTabularDataSupport(rowType, itemNames);
-			for (ProxyConnection proxy : openConnections) {
-				StackTraceElement[] stacktrace = proxy.getCaller();
-				Map<String, Object> map = new HashMap<>();
-				map.put("Caller", stacktrace[0].toString());
-				map.put("Stacktrace", toStringArray(stacktrace));
-				CompositeDataSupport compData = new CompositeDataSupport(rowType, map);
-				data.put(compData);
-			}
-			return data;
-		} catch (OpenDataException ex) {
-			LOG.warn("Cannot get caller stacktraces of " + openConnections.size() + " open connections.", ex);
-			throw ex;
-		}
-	}
-
-	private static String[] toStringArray(final StackTraceElement[] stacktrace) {
-		String[] array = new String[stacktrace.length];
-		for (int i = 0; i < stacktrace.length; i++) {
-			array[i] = stacktrace[i].toString();
-		}
-		return array;
+		return clazzfish.jdbc.ConnectionMonitor.getCallerOf(connection);
 	}
 
 	/**
 	 * Assert that all connections are closed.
 	 */
 	public static void assertConnectionsClosed() {
-		int count = INSTANCE.getOpenConnections();
-		if (count > 0) {
-			AssertionError error = new AssertionError(count + " connection(s) not closed");
-			error.setStackTrace(openConnections.iterator().next().getCaller());
-			throw error;
-		}
+		clazzfish.jdbc.ConnectionMonitor.assertConnectionsClosed();
 	}
 
 }

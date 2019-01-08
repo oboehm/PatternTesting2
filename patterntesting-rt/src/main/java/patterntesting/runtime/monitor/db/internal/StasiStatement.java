@@ -20,14 +20,15 @@
 
 package patterntesting.runtime.monitor.db.internal;
 
-import java.sql.*;
-
-import org.apache.logging.log4j.*;
-
+import clazzfish.jdbc.monitor.ProfileMonitor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import patterntesting.runtime.log.LogWatch;
-import patterntesting.runtime.monitor.ProfileMonitor;
-import patterntesting.runtime.monitor.db.*;
+import patterntesting.runtime.monitor.db.ProxyConnection;
+import patterntesting.runtime.monitor.db.SqlStatistic;
 import patterntesting.runtime.util.Converter;
+
+import java.sql.*;
 
 /**
  * A simple wrapper for {@link Statement} to be able to find resource problems

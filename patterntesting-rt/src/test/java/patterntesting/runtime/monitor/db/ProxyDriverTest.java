@@ -265,7 +265,7 @@ public final class ProxyDriverTest extends AbstractDbTest {
     	Enumeration<Driver> drivers = DriverManager.getDrivers();
     	assertTrue(drivers.hasMoreElements(), "no driver registered");
     	Driver firstDriver = drivers.nextElement();
-    	assertEquals(ProxyDriver.class, firstDriver.getClass(), "ProxyDriver is not the first driver");
+    	assertEquals("ProxyDriver", firstDriver.getClass().getSimpleName(), "ProxyDriver is not the first driver");
     }
 
 }

@@ -20,15 +20,14 @@
 
 package patterntesting.runtime.monitor.db;
 
+import clazzfish.jdbc.monitor.ProfileMonitor;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.jmx.MBeanHelper;
-import patterntesting.runtime.monitor.ProfileMonitor;
 import patterntesting.runtime.monitor.ProfileStatistic;
-import patterntesting.runtime.monitor.ProfileStatisticTest;
 
 import javax.management.openmbean.TabularData;
 import java.io.File;
@@ -36,8 +35,11 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.lessThan;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for {@link SqlStatistic} class.
@@ -45,7 +47,7 @@ import static org.junit.Assert.*;
  * @author oliver
  * @since 1.4.2 (16.04.2014)
  */
-public class SqlStatisticTest extends ProfileStatisticTest {
+public class SqlStatisticTest {
 
     private static Logger log = LogManager.getLogger(SqlStatisticTest.class);
     private static String[] sqls = {
@@ -55,28 +57,38 @@ public class SqlStatisticTest extends ProfileStatisticTest {
         "SELECT a FROM e",
         "SELECT a FROM f"
     };
-    private final SqlStatistic instance = SqlStatistic.getInstance();
-
-    /**
-     * Gets the profile statistic.
-     *
-     * @return the profile statistic
-     * @see ProfileStatisticTest#getProfileStatistic()
-     */
-    @Override
-    protected ProfileStatistic getProfileStatistic() {
-        return SqlStatistic.getInstance();
-    }
+    private SqlStatistic instance;
 
     /**
      * Prepare statistic.
-     *
-     * @see ProfileStatisticTest#prepareStatistic()
      */
     @BeforeEach
-    @Override
     public void prepareStatistic() {
+        instance = SqlStatistic.getInstance();
         this.startStopMonitors(sqls);
+    }
+
+    /**
+     * Starts the monitors for the given labels.
+     *
+     * @param labels the labels
+     */
+    private void startStopMonitors(final String... labels) {
+        ProfileMonitor[] monitors = new ProfileMonitor[labels.length];
+        int[] hits = new int[labels.length];
+        for (int i = 0; i < labels.length; i++) {
+            monitors[i] = this.instance.startProfileMonitorFor(labels[i]);
+            hits[i] = monitors[i].getHits();
+        }
+        int n = instance.getMonitors().length;
+        for (int i = 0; i < labels.length; i++) {
+            monitors[i].stop();
+            log.info("monitor[" + i + "] = " + monitors[i]);
+            if (n < instance.getMaxSize()) {
+                assertEquals(hits[i] + 1, monitors[i].getHits());
+            }
+            assertTrue(monitors[i].getLastValue() >= 0.0);
+        }
     }
 
     /**
@@ -92,7 +104,6 @@ public class SqlStatisticTest extends ProfileStatisticTest {
      * needed after a reset. Unfortunately with JAMon 2.81 an exception entry
      * is added to the list of monitors - this is accepted in this test.
      */
-    @Override
     @Test
     public final void testReset() {
         instance.reset();
@@ -106,7 +117,7 @@ public class SqlStatisticTest extends ProfileStatisticTest {
     @Test
     public void testToString() {
         String s = instance.toString();
-        assertTrue(s, s.contains("SqlStatistic"));
+        assertTrue(s.contains("SqlStatistic"), s);
         log.info("s = \"{}\"", s);
     }
 
@@ -130,26 +141,21 @@ public class SqlStatisticTest extends ProfileStatisticTest {
         assertEquals("DROP table dummy", mon.getLabel());
     }
 
-    /**
-     * Test method for {@link SqlStatistic#getProfileMonitor(String)}.
-     */
-    @Override
 	@Test
     public void testGetProfileMonitor() {
         String sql = sqls[0];
         ProfileMonitor started = SqlStatistic.start(sql);
         started.stop();
-        ProfileMonitor mon = instance.getProfileMonitor(sql);
+        ProfileMonitor mon = instance.getMonitor(sql);
         assertNotNull(mon);
         assertEquals(started.getLabel(), mon.getLabel());
-        assertTrue("at least 1 hit expected", mon.getHits() > 0);
+        assertTrue(mon.getHits() > 0, "at least 1 hit expected");
         log.info("mon = {}", mon);
     }
 
     /**
      * Test register as shutdown hook.
      */
-    @Override
 	@Test
     public void testRegisterAsShutdownHook() {
         SqlStatistic.addAsShutdownHook();
@@ -163,45 +169,36 @@ public class SqlStatisticTest extends ProfileStatisticTest {
     @Test
     public void testInstance() {
         checkHits(instance, sqls[0], true);
-        checkHits(ProfileStatistic.getInstance(), sqls[0], false);
     }
 
-    private static void checkHits(final ProfileStatistic statistic, final String label, final boolean expected) {
-        ProfileMonitor mon = statistic.getProfileMonitor(label);
+    private static void checkHits(final SqlStatistic statistic, final String label, final boolean expected) {
+        ProfileMonitor mon = statistic.getMonitor(label);
         if (expected) {
-            assertTrue("hits expected for " + mon, mon.getHits() > 0);
+            assertTrue(mon.getHits() > 0, "hits expected for " + mon);
         } else {
-            assertTrue("no hits expected for " + mon, (mon == null) || (mon.getHits() == 0));
+            assertTrue((mon == null) || (mon.getHits() == 0), "no hits expected for " + mon);
         }
     }
 
-    /**
-     * Test method for {@link SqlStatistic#dumpStatisticTo(File)}. For the SQL
-     * statistic it is imporant that the label is quoted because a semicolon
-     * (";") could be part of a SQL statement. This is tested here.
-     *
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     @Test
     public void testDumpStatisticToFile() throws IOException {
         File dumpFile = new File("target", "sql-stat.csv");
-        instance.dumpStatisticTo(dumpFile);
+        instance.dumpMe(dumpFile);
         List<String> lines = FileUtils.readLines(dumpFile, StandardCharsets.UTF_8);
         for (int i = 1; i < lines.size(); i++) {
             String line = lines.get(i);
-            assertTrue("line " + i + ": " + line, line.startsWith("\""));
+            assertTrue(line.startsWith("\""), "line " + i + ": " + line);
         }
     }
 
     /**
      * Test method for {@link SqlStatistic#registerAsMBean(String)}.
      */
-    @Override
 	@Test
     public void testRegisterAsMBean() {
         String mbeanName = "test.mon.SqlStat";
         SqlStatistic.registerAsMBean(mbeanName);
-        assertTrue("not registered: " + mbeanName, MBeanHelper.isRegistered(mbeanName));
+        assertTrue(MBeanHelper.isRegistered(mbeanName), "not registered: " + mbeanName);
     }
 
 }

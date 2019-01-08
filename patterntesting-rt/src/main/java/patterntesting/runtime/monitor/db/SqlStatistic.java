@@ -20,17 +20,18 @@
 
 package patterntesting.runtime.monitor.db;
 
-import java.util.regex.Pattern;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-
-import patterntesting.runtime.monitor.ProfileMonitor;
+import org.apache.logging.log4j.Logger;
+import clazzfish.jdbc.monitor.ProfileMonitor;
 import patterntesting.runtime.monitor.ProfileStatistic;
 import patterntesting.runtime.monitor.db.internal.StasiPreparedStatement;
 import patterntesting.runtime.monitor.db.internal.StasiStatement;
 import patterntesting.runtime.util.Converter;
 import patterntesting.runtime.util.StackTraceScanner;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.regex.Pattern;
 
 /**
  * This class monitors and measures SQL statements. To be able to distinguish
@@ -39,8 +40,10 @@ import patterntesting.runtime.util.StackTraceScanner;
  *
  * @author oliver
  * @since 1.4.2 (16.04.2014)
+ * @deprecated since 2.0, use {@link clazzfish.jdbc.SqlStatistic}
  */
-public class SqlStatistic extends ProfileStatistic implements SqlStatisticMBean {
+@Deprecated
+public class SqlStatistic extends clazzfish.jdbc.AbstractStatistic implements SqlStatisticMBean {
 
 	private static final Logger LOG = LogManager.getLogger(SqlStatistic.class);
 	private static final SqlStatistic SQL_INSTANCE;
@@ -92,6 +95,37 @@ public class SqlStatistic extends ProfileStatistic implements SqlStatisticMBean 
 		synchronized (SqlStatistic.class) {
 			this.resetRootMonitor();
 		}
+	}
+
+	/**
+	 * Log statistic.
+	 */
+	@Override
+	public void logStatistic() {
+		logMe();
+	}
+
+	/**
+	 * Dump statistic.
+	 *
+	 * @return the name of the dump file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	@Override
+	public File dumpStatistic() throws IOException {
+		return dumpMe();
+	}
+
+	/**
+	 * This operation dumps the statistic to the given file.
+	 *
+	 * @param filename the file name
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @since 1.5
+	 */
+	@Override
+	public void dumpStatistic(String filename) throws IOException {
+		dumpMe(new File(filename));
 	}
 
 	/**
@@ -153,7 +187,7 @@ public class SqlStatistic extends ProfileStatistic implements SqlStatisticMBean 
 	 * @see #dumpStatistic()
 	 */
 	public static void addAsShutdownHook() {
-		addAsShutdownHook(SQL_INSTANCE);
+		Runtime.getRuntime().addShutdownHook(SQL_INSTANCE);
 	}
 
 }

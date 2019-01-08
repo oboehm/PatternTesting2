@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import patterntesting.runtime.log.LogWatch;
-import patterntesting.runtime.monitor.ProfileMonitor;
+import clazzfish.jdbc.monitor.ProfileMonitor;
 import patterntesting.runtime.monitor.db.SqlStatistic;
 
 import java.io.InputStream;
