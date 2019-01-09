@@ -20,12 +20,10 @@
 
 package patterntesting.runtime.monitor.db;
 
+import clazzfish.jdbc.monitor.ProfileMonitor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import clazzfish.jdbc.monitor.ProfileMonitor;
 import patterntesting.runtime.monitor.ProfileStatistic;
-import patterntesting.runtime.monitor.db.internal.StasiPreparedStatement;
-import patterntesting.runtime.monitor.db.internal.StasiStatement;
 import patterntesting.runtime.util.Converter;
 import patterntesting.runtime.util.StackTraceScanner;
 
@@ -170,7 +168,7 @@ public class SqlStatistic extends clazzfish.jdbc.AbstractStatistic implements Sq
 					+ mon.getLastTime();
 			if (LOG.isTraceEnabled()) {
 				StackTraceElement[] stacktrace = StackTraceScanner.getCallerStackTrace(new Pattern[0],
-						SqlStatistic.class, StasiStatement.class, StasiPreparedStatement.class);
+						SqlStatistic.class, clazzfish.jdbc.internal.StasiStatement.class, clazzfish.jdbc.internal.StasiPreparedStatement.class);
 				LOG.trace("{}\n\t{}", msg, Converter.toLongString(stacktrace).trim());
 			} else {
 				LOG.debug("{}.", msg);

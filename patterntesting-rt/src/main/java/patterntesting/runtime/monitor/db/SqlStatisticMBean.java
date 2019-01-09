@@ -28,7 +28,9 @@ import patterntesting.runtime.monitor.ProfileStatisticMBean;
  *
  * @author oliver
  * @since 1.4.2 (16.04.2014)
+ * @deprecated since 2.0, use {@link clazzfish.jdbc.SqlStatisticMBean}
  */
+@Deprecated
 @Description("SQL statistic for different SQL statements")
 public interface SqlStatisticMBean extends ProfileStatisticMBean {
 

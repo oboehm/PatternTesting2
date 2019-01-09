@@ -23,5 +23,6 @@
  *
  * @author oliver
  * @since 0.8
+ * @deprecated since 2.0, use {@link clazzfish.jdbc}
  */
 package patterntesting.runtime.monitor.db;
