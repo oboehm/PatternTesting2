@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 	Project Object Model (POM) for PatternTesting
 	If you are behind a proxy try the following command:
@@ -63,6 +63,8 @@
    -->
 
   <properties>
+
+    <maven.version>3.0.5</maven.version>
     <commons.docEncoding>${commons.encoding}</commons.docEncoding>
 
     <!--
@@ -89,9 +91,9 @@
     -->
     <patterntesting.site.dir>${htdocs.dir}/builds/patterntesting</patterntesting.site.dir>
     <patterntesting.site.url>file:${patterntesting.site.dir}</patterntesting.site.url>
-    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
     <!-- ignore violations -->
     <sonar.issue.ignore.multicriteria>1,2,3,4,5,6,7,8,9,10,11,12,106,112,1312,1313,1698,1872,2159,2232,2250,2259,2384,2386</sonar.issue.ignore.multicriteria>
     <sonar.issue.ignore.multicriteria.1.resourceKey>**</sonar.issue.ignore.multicriteria.1.resourceKey>
@@ -618,6 +620,31 @@
         </configuration>
       </plugin>
 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.0.0-M2</version>
+        <executions>
+          <execution>
+            <id>enforce</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>${maven.version}</version>
+                </requireMavenVersion>
+                <requireJavaVersion>
+                  <version>${maven.compile.target}</version>
+                </requireJavaVersion>
+                <dependencyConvergence />
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
       <!-- set JDK level, see http://maven.apache.org/general.html#Compiling-J2SE-5 -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -791,7 +818,6 @@
 
   </build>
 
-  
   <reporting>
     <plugins>
       <plugin>

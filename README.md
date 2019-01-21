@@ -22,6 +22,7 @@ The plans for version 2 are:
 
 * foreign classes like ClasspathMonitor will be moved to a separate project
 * deprecated methods and classes will be removed
+* move to JUnit 5
 * code will be prepared for Java 9 module system
 * consolidation of the different document parts
 
