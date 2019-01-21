@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>Maven plugin</title>
+    <author email="vmassol@apache.org">Vincent Massol</author>
+  </properties>
+
+  <body>
+
+    <section name="Maven plugin - Overview">
+      <p>
+        This Maven plugin allows to execute Pattern Tests and generate an HTML
+        report of the result.
+      </p>
+      <p>
+        <i>The Maven plugin is still not ported to Maven 2 and missing in this
+        version. This document still describes the plugin of Maven 1
+        (it is here to avoid to get lost).</i>
+      </p>
+    </section>
+
+    <section name="Installation">
+      <p>
+        Download it and copy the jar directly into your 
+        <code>MAVEN_HOME/plugins</code> directory. That's all.
+      </p>
+    </section>
+
+    <section name="Using it">
+      <p>
+        First, you should check the Sample application which demonstrates how
+        to use it.
+      </p>
+      <p>
+        Here are the steps to use it:
+      </p>
+      <ul>
+        <li>
+          Create a <code>src/test-aspect</code> directory and put your own
+          Pattern Tests here. This is also where you write Aspects that 
+          extends the abstract ones provided by the PatternTesting framework.
+          Note that you can change this location by creating a 
+          <code>maven.patterntesting.src</code> property in your
+          <code>project.properties</code>.
+        </li>
+        <li>
+          Type <code>maven patterntesting</code>. That will produce a raw
+          XML file containing the pattern test violations.
+        </li>        
+        <li>
+          Type <code>maven site</code> to generate the HTML report.
+        </li>
+      </ul>    
+      <p>
+        That's all really! Simple, no?
+      </p>     
+    </section>
+    
+    <!-- copied from: plugins/maven/xdocs/goals.xml -->
+    <section name="PatternTesting Goals">
+      <subsection name="General Settings">
+        <table>
+          <tr>
+            <th>Goal</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td>patterntesting</td>
+            <td>This is the default goal of the plugin and simply attains the goal patterntesting:generate.</td>
+          </tr>
+          <tr>
+            <td>patterntesting:generate</td>
+            <td>Compile and Run pattern tests, generate XML reports if using XMLFormatter.</td>
+          </tr>
+          <tr>
+           <td>patterntesting:runtime-test</td>
+           <td>Compile pattern tests, run pattern tests with test suite, and generate XML reports.</td>
+          </tr>
+        </table>
+      </subsection>
+    </section>
+
+    <!-- copied from: plugins/maven/xdocs/properties.xml -->
+    <section name="PatternTesting Properties">
+      <subsection name="General Settings">
+        <table>
+          <tr>
+            <th>Property name</th>
+            <th>Optional?</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td>maven.patterntesting.src</td>
+            <td>Yes</td>
+            <td>
+              <p>Location of project pattern tests.  
+                  Default value is
+                <code>${maven.src.dir}/test-aspect</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>maven.patterntesting.build.template.dest</td>
+            <td>No</td>
+            <td>
+              <p>Output dir for the template aspects.  
+                  Default value is
+                <code>${maven.build.dir}/patterntesting/template</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>maven.patterntesting.build.dest</td>
+            <td>No</td>
+            <td>
+              <p>Output dir for compiled classes.  
+                  Default value is
+                <code>${maven.build.dir}/patterntesting/classes</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>maven.patterntesting.failonerror</td>
+            <td>No</td>
+            <td>
+              <p>Decide whether to stop the build if Ajc fails.  
+                  Default value is
+                <code>false</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>maven.patterntesting.src.templates</td>
+            <td>No</td>
+            <td>
+              <p>Location of the Pattern Tests Maven Templates (these are aspects 
+                      that extend the generic aspects found in 
+                      <code>${maven.patterntesting.src.suites}</code> and use <code>@xxx@</code> Ant token filters
+                      for defining where to apply the aspects..  
+                  Default value is
+                <code>aspect-template</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>maven.patterntesting.excludes</td>
+            <td>No</td>
+            <td>
+              <p>List of files to exclude from the ajc compilation.  
+                  Default value is
+                <code>**/package.html</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>maven.patterntesting.includes</td>
+            <td>No</td>
+            <td>
+              <p>List of files to include in the ajc compilation.  
+                  Default value is
+                <code>**/*.java,**/*.aj</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>maven.patterntesting.conf.template</td>
+            <td>No</td>
+            <td>
+                <p>Location of properties file that is used internally by the plugin to create
+                        Ant filters for the template properties.  
+                    Default value is
+                  <code>${maven.build.dir}/patterntesting/patterntesting.properties</code>.</p>
+    
+              </td>
+            </tr>
+            <tr>
+              <td>maven.patterntesting.formatter</td>
+              <td>No</td>
+            <td>
+              <p>Legal values are <code>xml</code> and <code>plain</code>.  
+                Default value is
+                <code>xml</code>.</p>
+            </td>
+          </tr>
+        </table>
+      </subsection>
+    </section>
+
+  </body>
+</document>

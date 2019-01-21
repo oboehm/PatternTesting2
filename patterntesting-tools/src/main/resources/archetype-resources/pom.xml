@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    $Id: pom.xml,v 1.5 2015/05/29 18:43:45 oboehm Exp $
+
+	This is a simple POM for a Java/AspectJ project where PatternTesting
+    is enabled.
+	
+    (c)reated 12-Jan-11 by ob@aosd.de
+	last up$Date: 2015/05/29 18:43:45 $ by $Author: oboehm $
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>${artifactId}</name>
+  
+  <description>
+    This is a simple hello-world example as described in
+    http://patterntesting.sourceforge.net/wiki/index.php/Hello_World.
+  </description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.patterntesting</groupId>
+      <artifactId>patterntesting-rt</artifactId>
+      <version>${archetypeVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.patterntesting</groupId>
+      <artifactId>patterntesting-check-ct</artifactId>
+      <version>${archetypeVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.patterntesting</groupId>
+      <artifactId>patterntesting-check-rt</artifactId>
+      <version>${archetypeVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.patterntesting</groupId>
+      <artifactId>patterntesting-concurrent</artifactId>
+      <version>${archetypeVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.patterntesting</groupId>
+      <artifactId>patterntesting-exception</artifactId>
+      <version>${archetypeVersion}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Java compiler -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <!-- AspectJ compiler with PatternTesting libs enabled -->
+       <plugin>
+        <groupId>org.patterntesting</groupId>
+        <artifactId>patterntesting-tools</artifactId>
+        <version>${archetypeVersion}</version>
+        <configuration>
+        </configuration>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>

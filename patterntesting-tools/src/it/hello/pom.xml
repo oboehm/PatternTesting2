@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.patterntesting.samples</groupId>
+  <artifactId>hello</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <description>
+    This is a simple hello-world example as described in
+    http://patterntesting.sourceforge.net/wiki/index.php/Hello_World.
+  </description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.patterntesting</groupId>
+        <artifactId>patterntesting-tools</artifactId>
+        <version>@pom.version@</version>
+        <configuration>
+        </configuration>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.patterntesting</groupId>
+      <artifactId>patterntesting-rt</artifactId>
+      <version>@pom.version@</version>
+    </dependency>
+    <dependency>
+      <groupId>org.patterntesting</groupId>
+      <artifactId>patterntesting-check-ct</artifactId>
+      <version>@pom.version@</version>
+    </dependency>
+    <dependency>
+      <groupId>org.patterntesting</groupId>
+      <artifactId>patterntesting-check-rt</artifactId>
+      <version>@pom.version@</version>
+    </dependency>
+    <dependency>
+      <groupId>org.patterntesting</groupId>
+      <artifactId>patterntesting-concurrent</artifactId>
+      <version>@pom.version@</version>
+    </dependency>
+    <dependency>
+      <groupId>org.patterntesting</groupId>
+      <artifactId>patterntesting-exception</artifactId>
+      <version>@pom.version@</version>
+    </dependency>
+  </dependencies>
+
+</project>
+

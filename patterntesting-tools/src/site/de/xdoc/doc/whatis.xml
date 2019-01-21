@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>Was ist PatternTesting-Tools?</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <section name="Einf&#252;hrung">
+
+      <p>
+        Es gibt Plugins, um PatternTesting aus Ant-Skripte oder
+        Maven-Builds auszuf&#252;hren. Diese Plugins findest du hier.
+        Momentan existiert allerdings erst eine Ant-Erweiterung.
+      </p>
+
+    </section>
+
+    <section name="Beispiele">
+
+      <p>
+        Hier ein Beispiel, wie man es aus einem Ant-Skript heraus
+        verwendet:
+      </p>
+
+<source><![CDATA[
+<taskdef name="ajcxml" classname="patterntesting.tool.aspectj.AjcXmlTask" >
+    <classpath>
+        <pathelement path="${java.class.path}"/>
+    </classpath>
+</taskdef>
+
+<ajcxml destdir="${target.classes.dir}" resultFile="output.xml">
+    <src path="${src.dir}"/>
+    <classpath>
+        <path refid="classpath"/>
+    </classpath>
+</ajcxml>
+]]></source>
+      
+    </section>
+
+  </body>
+
+</document>

@@ -1,0 +1,32 @@
+<!-- 
+    This archetype-metadata.xml was created using
+    http://maven.apache.org/archetype/archetype-common/archetype-descriptor.html
+ -->
+
+<archetype-descriptor xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd"
+  name="patterntesting-tools-archetype" >
+
+  <requiredProperties>
+    <requiredProperty key="groupId">
+      <defaultValue>org.patterntesting.samples</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="artifactId">
+      <defaultValue>hello-world</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="package">
+      <defaultValue>${groupId}</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
+
+  <fileSets>
+    <!-- this fileset will be stored in src/main/java/$package -->
+    <fileSet filtered="true" packaged="true" encoding="UTF-8">
+      <directory>src/main/java</directory>
+      <includes>
+        <include>*.java</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+
+</archetype-descriptor>

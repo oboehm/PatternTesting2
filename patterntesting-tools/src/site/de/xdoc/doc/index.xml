@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>PatternTesting-Tools</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <section name="Tools - &#220;bersicht">
+
+      <p>
+        Einige Werkzeuge spezielle f&#252;r Build-Aufgaben stehen
+        zur Verf&#252;gung:
+      </p>
+      
+      <ul>
+        <li>
+          <a href="aspectj.html">AspectJ- und Ant-Erweiterung</a>
+        </li>
+        <li>
+          <a href="maven.html">Maven plugin</a>
+        </li>
+      </ul>
+
+    </section>
+
+  </body>
+  
+</document>

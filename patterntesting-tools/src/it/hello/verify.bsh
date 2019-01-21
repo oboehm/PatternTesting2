@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+import java.util.regex.*;
+
+import org.codehaus.plexus.util.*;
+
+try
+{
+    File classFile = new File( basedir, "target/classes/patterntesting/sample/World.class" );
+    System.out.println( "Checking " + classFile + "..." );
+    if ( !classFile.exists() )
+    {
+        System.err.println("FAILED! (World.class does not exist)");
+        return false;
+    }
+    long length = classFile.length();
+    System.out.println("World.class exists and has " + length + " bytes");
+    if (length < 5000) {
+        System.err.println("World.class is too short -> probably not weaved!");
+        return false;
+    }
+    System.out.println("SUCCESS!");
+    return true;
+}
+catch( Throwable t )
+{
+    t.printStackTrace();
+    return false;
+}
+
+return true;

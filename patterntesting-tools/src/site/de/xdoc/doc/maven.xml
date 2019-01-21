@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>Maven-Plugin</title>
+    <author email="ob@aosd.de">Oli B.</author>
+  </properties>
+
+  <body>
+
+    <section name="Maven-Plugin - &#220;bersicht">
+      <p>
+        Dieses Maven-Plugin erlaubt die Ausf&#252;hrung von Pattern-Tests
+        und erzeugt dabei einen HTML-Report des Ergebnisses.
+      </p>
+      <p>
+        <i>Das Maven-Plugin wurde immer noch nicht nach Maven 2 portiert
+        und fehlt noch in dieser Version. Dieses Dokument dient momentan
+        nur als Platzhalter.</i>
+      </p>
+    </section>
+
+  </body>
+
+</document>

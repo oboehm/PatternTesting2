@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+
+<!-- 
+    $Id: changes.xml,v 1.47 2017/11/09 20:34:57 oboehm Exp $
+    
+    A kind of release notes. This document describes the changes in the
+    different releases.
+    
+    see http://maven.apache.org/plugins/maven-changes-plugin/usage.html
+    see http://maven.apache.org/plugins/maven-changes-plugin/changes.html
+ -->
+
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+
+  <properties>
+    <title>Main changes</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <release version="1.8.0" date="11-Nov-2017"
+             description="last version with CVS">
+    </release>
+
+    <release version="1.7.0" date="06-Jan-2017"
+             description="Java 7 version">
+      <action dev="oboehm" date="2016-12-30" type="update">
+        Dependency to SLF4J removed.
+      </action>
+      <action dev="oboehm" date="2016-12-04" type="update">
+        Switched to Log4j 2.
+      </action>
+    </release>
+
+    <release version="1.6.0" date="06-Jan-2016"
+             description="Java 6 version">
+      <action dev="oboehm" date="2015-12-30" type="update">
+        Java 5 will be no longer supported.
+      </action>
+    </release>
+
+    <release version="1.5.2" date="04-Jul-2015"
+             description="bug fix">
+      <action dev="oboehm" date="2015-06-25" type="update">
+        Only version updated.
+      </action>
+    </release>
+
+    <release version="1.5.0" date="06-Jan-2015"
+             description="PatternTesting Benchmark project added for micro-benchmarking">
+      <action dev="oboehm" date="2014-06-16" type="update">
+        Only version updated.
+      </action>
+    </release>
+
+    <release version="1.2.0" date="06-Jan-2012"
+             description="OSGi bundle">
+      <action dev="oboehm" date="2012-01-02" type="update">
+        The root directory "/patterntesting" as default for log reports is
+        no longer used. The result file "patterntesting.xml" will no always
+        be placed in the tmp directory.
+      </action>
+      <action dev="oboehm" date="2011-12-20" type="add">
+        No meta informatation for OSGi provided because maven-plugin type
+        is not supported.
+      </action>
+      <action dev="oboehm" date="2011-07-18" type="update">
+        Switched from commons-logging to SLF4J.
+      </action>
+    </release>
+
+    <release version="1.1.0" date="22-Apr-2011"
+             description="version for Stuttgarter Test-Tage 2011">
+      <action dev="oboehm" date="2011-02-22" type="add">
+        Begin with Maven plugin for compiling with PatternTesting libs.
+      </action>
+      <action dev="oboehm" date="2011-01-06" type="add">
+        Begin with some HTML utilities like UmlautEncoder.
+      </action>
+      <action dev="oboehm" date="2010-12-29" type="fix" issue="2859550">
+        StringUtil class removed.
+      </action>
+    </release>
+
+    <release version="1.0.1" date="18-Jul-2010"
+             description="the version after JFS 2010">
+      <action dev="oboehm" date="2010-07-15" type="update" >
+        Additional synchronization for JUnit tests running in parallel.
+      </action>
+    </release>
+
+    <release version="1.0.0" date="20-Jun-2010"
+             description="first org.patterntesting version">
+      <action dev="oboehm" date="2010-04-20" issue="2895287" type="fix"
+              system="Sourceforge" >
+        Fails no longer with a RuntimeExcpetion if AspectJ classes are
+        found not in aspectjrt.jar but aspectjrt-x.x.x.jar.
+      </action>
+      <action dev="oboehm" date="2010-03-08">
+        No longer OutputStream in AjcXml used but Writer class.
+        And there is now a getResult() provided where you can get
+        the result of the last compilation.
+      </action>
+      <action dev="oboehm" date="2010-01-05">
+        GroupId changed to "org.patterntesting".
+      </action>
+    </release>
+
+    <release version="0.9.9" date="30-Dec-2009"
+             description="Silvester version">
+      <action dev="oboehm" issue="2859556" type="fix" 
+              system="Sourceforge" date="2009-12-28">
+        PMD warnings fixed.
+      </action>
+    </release>
+
+    <release version="0.9.8" date="20-Dec-2009"
+             description="Christmas version">
+      <action dev="oboehm" type="update" date="2009-09-18">
+        Javadoc warnings and errors fixed.
+      </action>
+    </release>
+
+    <release version="0.9.0" date="01-Mar-2009"
+             description="spring release">
+      <action dev="oboehm" type="update">
+        Update to Ant 1.7.1
+      </action>
+    </release>
+    
+    <release version="0.8.0" date="12-Dec-2008"
+             description="project split">
+      <action dev="oboehm" type="add">
+        The project was splitted in several subparts:
+        patterntesting-parent,
+        patterntesting-rt (runtime),
+        patterntesting-check,
+        patterntesting-tools,
+        patterntesting-samples.
+      </action>
+      <action dev="oboehm" type="update">
+        The Ant extension together with the JUnit tests are extracted to
+        this subproject and has now patterntesting.tool.aspectj
+        as package name.
+      </action>
+      <action dev="oboehm" type="remove">
+        The Maven plugin was not taken over because it is still a Maven-1
+        plugin. The Maven-2 port will come in one of the next releases
+        (perhaps).
+      </action>
+    </release>
+
+    <release version="0.6.x" date="2008"
+             description="before the split (see patterntesting-parent)" >
+      <action dev="oboehm" type="update">
+        See patterntesting-parent for the history.
+      </action>
+    </release>
+
+  </body>
+
+</document>

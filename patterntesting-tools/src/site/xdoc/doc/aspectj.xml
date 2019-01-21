@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>AspectJ Extension</title>
+    <author email="vmassol@apache.org">Vincent Massol</author>
+  </properties>
+
+  <body>
+
+    <section name="AspectJ extension - Overview">
+      <p>
+        This framework is an extension to the AspectJ compiler which allows 
+        to output Ajc errors messages in XML format. It is implemented as an
+        extension of the AspectJ Ajc Ant task.
+      </p>
+    </section>
+
+    <section name="Example">
+
+      <p>
+        Here is an example on how to use it from a java application:
+      </p>
+
+<source><![CDATA[
+AjcXml compiler = new AjcXml();
+
+compiler.createSrc().setPath("src/aspect");
+compiler.setDestdir("target/classes");
+compiler.setResultFile("result.xml");
+
+compiler.execute();
+]]></source>
+
+      <p>
+        Here is an example on how to use it from an Ant script:
+      </p>
+
+<source><![CDATA[
+<taskdef name="ajcxml" classname="patterntesting.tool.aspectj.AjcXmlTask" >
+    <classpath>
+        <pathelement path="${aspectj.home}/lib/aspectjtools.jar" />
+        <pathelement path="${m2.repo}/commons-io/commons-io/1.4/commons-io-1.4.jar" />
+        <pathelement path="${m2.repo}/commons-lang/commons-lang/2.3/commons-lang-2.3.jar" />
+        <pathelement path="${m2.repo}/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
+        <pathelement path="${m2.repo}/org/patterntesting/patterntesting-rt/1.0.0-SNAPSHOT/patterntesting-rt-1.0.0-SNAPSHOT.jar" />
+        <pathelement path="${m2.repo}/org/patterntesting/patterntesting-tools/1.0.0-SNAPSHOT/patterntesting-tools-1.0.0-SNAPSHOT.jar" />
+        <pathelement path="${target.classes.dir}"/>
+    </classpath>
+</taskdef>
+
+<target name="compile.ajcxml" depends="init"
+        description="compile sources with AjcXmlTask" >
+    <ajcxml destdir="${target.classes.dir}" resultFile="target/patterntesting-output.xml">
+        <src path="src/test/sample"/>
+        <classpath>
+            <pathelement path="${aspectj.home}/lib/aspectjrt.jar" />
+        </classpath>
+    </ajcxml>
+</target>
+]]></source>
+
+      <p>
+        The default output format of the resulting file is XML.
+        If you want it as plain text, use the attribute
+        "formatter" with the value "plain".
+      </p>
+      
+<source><![CDATA[
+<target name="compile.ajcxml.plain" depends="init"
+        description="compile sources with AjcXmlTask (with plain text as output)" >
+    <ajcxml destdir="${target.classes.dir}" resultFile="target/patterntesting-output.txt"
+           formatter="plain">
+        <src path="src/test/sample"/>
+        <classpath>
+            <pathelement path="${aspectj.home}/lib/aspectjrt.jar" />
+        </classpath>
+    </ajcxml>
+</target>
+]]></source>
+                 
+    </section>
+
+    <section name="Usages">
+      <p>
+        It can be used in Test Cases if you wish to assert results of 
+        AspectJ compilation. For example, if you're expecting an Aspect
+        to produce a compilation error, you will be able to assert the
+        XML result by either comparing the XML string or better by using
+        <a href="http://xmlunit.sf.net">XMLUnit</a>.       
+      </p>
+      <p>
+        In addition, it is useful if you need to produce reports about the
+        result of the compilation. You can easily use 
+        <a href="http://jakarta.apache.org/velocity/dvsl/index.html">DVSL</a> 
+        to transform the XML into an HTML report.
+      </p>
+    </section>
+
+  </body>
+</document>

@@ -53,6 +53,7 @@
   <modules>
     <module>doc</module>
     <module>patterntesting-rt</module>
+    <module>patterntesting-tools</module>
     <module>patterntesting-deprecated</module>
   </modules>
 

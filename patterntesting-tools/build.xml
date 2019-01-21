@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="patterntesting-tools" basedir="." default="init">
+
+	<description>
+	    This is an example how to use PatternTesting Tools inside an Ant script.
+	    It is also used as an additional test for PatternTesting Tools.
+    </description>
+
+	<property name="aspectj.home" value="/usr/java/aspectj" />
+	<property name="m2.repo" value="${user.home}/.m2/repository" />
+	<property name="target.classes.dir" value="target/classes"/>
+	
+	<taskdef resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties">
+		<classpath>
+			<pathelement path="${aspectj.home}/lib/aspectjtools.jar" />
+		</classpath>
+	</taskdef>
+
+	<target name="init">
+		 <mkdir dir="target/classes"/>
+	</target>
+
+	<target name="compile.ajc" depends="init"
+	        description="compile sources with AspectJ">
+		<echo>
+	       Don't be suprised if you see 6 compiler errors and warnings afterwards.
+	       This is an example for exactly that use case!
+		</echo>
+		<iajc srcdir="src/test/sample" destdir="${target.classes.dir}">
+			<classpath>
+				<pathelement path="${aspectj.home}/lib/aspectjrt.jar" />
+			</classpath>
+		</iajc>
+	</target>
+	
+	<!--
+	    Now follows the example how to integrate the AjcXmlTaks of
+	    PatternTesting Tools...
+	-->
+	<taskdef name="ajcxml" classname="patterntesting.tool.aspectj.AjcXmlTask" >
+	    <classpath>
+            <pathelement path="${aspectj.home}/lib/aspectjtools.jar" />
+            <pathelement path="${m2.repo}/commons-io/commons-io/1.4/commons-io-1.4.jar" />
+            <pathelement path="${m2.repo}/commons-lang/commons-lang/2.3/commons-lang-2.3.jar" />
+            <pathelement path="${m2.repo}/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
+            <pathelement path="${m2.repo}/org/patterntesting/patterntesting-rt/1.0.0-SNAPSHOT/patterntesting-rt-1.0.0-SNAPSHOT.jar" />
+	        <pathelement path="${target.classes.dir}"/>
+	    </classpath>
+	</taskdef>
+
+	<target name="compile.ajcxml" depends="init"
+		    description="compile sources with AjcXmlTask" >
+    	<ajcxml destdir="${target.classes.dir}" resultFile="target/patterntesting-output.xml">
+    	    <src path="src/test/sample"/>
+    	    <classpath>
+                <pathelement path="${aspectj.home}/lib/aspectjrt.jar" />
+    	    </classpath>
+    	</ajcxml>
+	</target>
+
+	<target name="compile.ajcxml.plain" depends="init"
+            description="compile sources with AjcXmlTask (with plain text as output)" >
+        <ajcxml destdir="${target.classes.dir}" resultFile="target/patterntesting-output.txt"
+        	   formatter="plain">
+            <src path="src/test/sample"/>
+            <classpath>
+                <pathelement path="${aspectj.home}/lib/aspectjrt.jar" />
+            </classpath>
+        </ajcxml>
+    </target>
+
+</project>
