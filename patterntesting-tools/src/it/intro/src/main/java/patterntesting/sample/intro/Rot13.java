@@ -20,13 +20,11 @@
 
 package patterntesting.sample.intro;
 
-import java.io.*;
-import java.net.URI;
-
 import org.apache.commons.io.FileUtils;
-import org.apache.http.client.*;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.*;
+
+import java.io.IOException;
+import java.net.URI;
 
 /**
  * The Rot13 algorithm is a very simple algorithm for crypting. It simple

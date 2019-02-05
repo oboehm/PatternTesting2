@@ -137,151 +137,205 @@
     <dependency>
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.ant</groupId>
-      <artifactId>ant-launcher</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>de.aosd.clazzfish</groupId>
-      <artifactId>clazzfish-monitor</artifactId>
-    </dependency>
-    <!-- Mocking -->
-    <dependency>
-      <groupId>org.easymock</groupId>
-      <artifactId>easymock</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
+      <version>1.10.1</version>
     </dependency>
     <!-- Maven plugin dependencies -->
     <dependency>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>aspectj-maven-plugin</artifactId>
       <type>maven-plugin</type>
-      <version>1.11</version>
       <exclusions>
         <exclusion>
-          <groupId>org.codehaus.plexus</groupId>
-          <artifactId>plexus-container-default</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.maven</groupId>
-          <artifactId>maven-settings</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.codehaus.plexus</groupId>
           <artifactId>plexus-utils</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.maven</groupId>
-          <artifactId>maven-repository-metadata</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.maven.wagon</groupId>
-          <artifactId>wagon-provider-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-collections</groupId>
-          <artifactId>commons-collections</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.maven</groupId>
-          <artifactId>maven-model</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-lang</groupId>
-          <artifactId>commons-lang</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.velocity</groupId>
-          <artifactId>velocity</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.maven.doxia</groupId>
-          <artifactId>doxia-sink-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.maven</groupId>
-          <artifactId>maven-plugin-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-digester</groupId>
-          <artifactId>commons-digester</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-validator</groupId>
-          <artifactId>commons-validator</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.maven</groupId>
-          <artifactId>maven-artifact</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>org.codehaus.plexus</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-lang</artifactId>
+          <groupId>commons-lang</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-validator</artifactId>
+          <groupId>commons-validator</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>plexus-container-default</artifactId>
+          <groupId>org.codehaus.plexus</groupId>
+        </exclusion>
+        <exclusion>
           <artifactId>plexus-interpolation</artifactId>
+          <groupId>org.codehaus.plexus</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>doxia-sink-api</artifactId>
+          <groupId>org.apache.maven.doxia</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>maven-model</artifactId>
+          <groupId>org.apache.maven</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-collections</artifactId>
+          <groupId>commons-collections</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>velocity</artifactId>
+          <groupId>org.apache.velocity</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>maven-artifact</artifactId>
+          <groupId>org.apache.maven</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>wagon-provider-api</artifactId>
+          <groupId>org.apache.maven.wagon</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>maven-plugin-api</artifactId>
+          <groupId>org.apache.maven</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>maven-settings</artifactId>
+          <groupId>org.apache.maven</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-digester</artifactId>
+          <groupId>commons-digester</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>maven-repository-metadata</artifactId>
+          <groupId>org.apache.maven</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>plexus-component-annotations</artifactId>
+          <groupId>org.codehaus.plexus</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>maven-core</artifactId>
+          <groupId>org.apache.maven</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>maven-model-builder</artifactId>
+          <groupId>org.apache.maven</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>plexus-classworlds</artifactId>
+          <groupId>org.codehaus.plexus</groupId>
+        </exclusion>
+      </exclusions>
+      <version>1.11</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-core</artifactId>
+      <version>${maven.version}</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>plexus-component-annotations</artifactId>
+          <groupId>org.codehaus.plexus</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>plexus-utils</artifactId>
+          <groupId>org.codehaus.plexus</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>guava</artifactId>
+          <groupId>com.google.guava</groupId>
         </exclusion>
       </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
-      <artifactId>maven-plugin-api</artifactId>
-      <version>3.6.0</version>
+      <artifactId>maven-model</artifactId>
+      <version>${maven.version}</version>
+      <scope>provided</scope>
       <exclusions>
         <exclusion>
-          <groupId>org.codehaus.plexus</groupId>
           <artifactId>plexus-utils</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>org.codehaus.plexus</groupId>
-          <artifactId>plexus-classworlds</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.plugin-tools</groupId>
       <artifactId>maven-plugin-annotations</artifactId>
-      <version>3.5.2</version>
+      <scope>provided</scope>
       <exclusions>
         <exclusion>
-          <groupId>org.apache.maven</groupId>
           <artifactId>maven-artifact</artifactId>
+          <groupId>org.apache.maven</groupId>
         </exclusion>
-      </exclusions>
+      </exclusions><!-- annotations are needed only to build the plugin -->
+      <version>3.5.2</version>
+    </dependency>
+    <!-- Testing, Mocking -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.maven.resolver</groupId>
-      <artifactId>maven-resolver-api</artifactId>
-      <version>1.3.1</version>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.plugin-testing</groupId>
       <artifactId>maven-plugin-testing-harness</artifactId>
-      <version>3.3.0</version>       
       <scope>test</scope>
+      <version>2.1</version>
       <exclusions>
         <exclusion>
-          <groupId>commons-io</groupId>
-          <artifactId>commons-io</artifactId>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
         </exclusion>
         <exclusion>
           <groupId>org.codehaus.plexus</groupId>
           <artifactId>plexus-utils</artifactId>
         </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.aether</groupId>
+      <artifactId>aether-api</artifactId>
+      <version>1.13.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.aether</groupId>
+      <artifactId>aether-impl</artifactId>
+      <version>1.13.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-aether-provider</artifactId>
+      <version>3.3.9</version>
+      <exclusions>
         <exclusion>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
+          <artifactId>plexus-component-annotations</artifactId>
+          <groupId>org.codehaus.plexus</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>plexus-utils</artifactId>
+          <groupId>org.codehaus.plexus</groupId>
         </exclusion>
       </exclusions>
     </dependency>
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
-      <artifactId>plexus-utils</artifactId>
-      <version>3.1.0</version>
+      <artifactId>plexus-component-annotations</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.wagon</groupId>
+      <artifactId>wagon-provider-api</artifactId>
+      <version>3.3.1</version>
+    </dependency>
+    <!-- logging -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.25</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -391,27 +445,21 @@
           </execution>
         </executions>
       </plugin>
+      <!-- see https://stackoverflow.com/questions/18999401/basic-maven-plugin-project-not-working-mojo-plugin-descriptors-not-generating -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-enforcer-plugin</artifactId>
-        <version>3.0.0-M2</version>
+        <artifactId>maven-plugin-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <!-- see http://jira.codehaus.org/browse/MNG-5346 -->
+          <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+        </configuration>
         <executions>
           <execution>
-            <id>enforce</id>
+            <id>mojo-descriptor</id>
             <goals>
-              <goal>enforce</goal>
+              <goal>descriptor</goal>
             </goals>
-            <configuration>
-              <rules>
-                <requireMavenVersion>
-                  <version>${mavenVersion}</version>
-                </requireMavenVersion>
-                <requireJavaVersion>
-                  <version>${mojo.java.target}</version>
-                </requireJavaVersion>
-                <dependencyConvergence />
-              </rules>
-            </configuration>
           </execution>
         </executions>
       </plugin>

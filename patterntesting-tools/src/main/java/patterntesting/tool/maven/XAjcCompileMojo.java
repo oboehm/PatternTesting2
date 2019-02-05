@@ -20,14 +20,18 @@
 
 package patterntesting.tool.maven;
 
-import java.util.*;
-
-import org.apache.commons.lang3.*;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugins.annotations.*;
-import org.codehaus.mojo.aspectj.*;
-
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.ResolutionScope;
+import org.codehaus.mojo.aspectj.AjcCompileMojo;
+import org.codehaus.mojo.aspectj.Module;
 import patterntesting.runtime.NullConstants;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Weaves all main classes and adds the PatternTesting aspect libraries.
@@ -46,7 +50,6 @@ public class XAjcCompileMojo extends AjcCompileMojo {
      * Sets the compliance level.
      *
      * @param level e.g. "1.5" for Java 5
-     * @see org.codehaus.mojo.aspectj.AbstractAjcCompiler#setComplianceLevel(java.lang.String)
      */
     @Override
     public void setComplianceLevel(final String level) {
@@ -75,7 +78,6 @@ public class XAjcCompileMojo extends AjcCompileMojo {
      * Sets the target level.
      *
      * @param level e.g. "1.5" for Java 5
-     * @see org.codehaus.mojo.aspectj.AbstractAjcCompiler#setTarget(java.lang.String)
      */
     @Override
     public void setTarget(final String level) {
@@ -99,7 +101,6 @@ public class XAjcCompileMojo extends AjcCompileMojo {
      * Sets the source level.
      *
      * @param level e.g. "1.5" for Java 5
-     * @see org.codehaus.mojo.aspectj.AbstractAjcCompiler#setSource(java.lang.String)
      */
     @Override
     public void setSource(final String level) {

@@ -19,14 +19,16 @@
  */
 package patterntesting.tool.aspectj;
 
-import java.io.*;
-import java.util.*;
-
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.aspectj.lang.reflect.SourceLocation;
-
 import patterntesting.runtime.io.ExtendedFile;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 
 /**
@@ -47,12 +49,10 @@ public final class Logger {
 
     private Logger() {
         this.reset();
-        try {
-            OutputStream ostream = new FileOutputStream(this.resultFile);
+        try (OutputStream ostream = new FileOutputStream(this.resultFile)) {
             this.write(ostream);
-            IOUtils.closeQuietly(ostream);
-        } catch (FileNotFoundException fnfe) {
-            LOG.warn("Cannot write to '{}':", this.resultFile, fnfe);
+        } catch (IOException ex) {
+            LOG.warn("Cannot write to '{}':", this.resultFile, ex);
         }
     }
 
