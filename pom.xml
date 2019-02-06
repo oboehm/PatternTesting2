@@ -65,7 +65,7 @@
 
   <properties>
 
-    <maven.version>3.0.5</maven.version>
+    <maven.version>3.3.9</maven.version>
     <commons.docEncoding>${commons.encoding}</commons.docEncoding>
 
     <!--
@@ -200,11 +200,6 @@
         <groupId>commons-logging</groupId>
         <artifactId>commons-logging</artifactId>
         <version>1.1.1</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-io</groupId>
-        <artifactId>commons-io</artifactId>
-        <version>[1.4,)</version>
       </dependency>
       <dependency>
         <groupId>com.ecyrd.speed4j</groupId>
@@ -782,6 +777,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.2</version>
         <configuration>
           <append>true</append>
         </configuration>
