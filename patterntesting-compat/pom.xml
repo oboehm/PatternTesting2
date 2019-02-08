@@ -18,6 +18,10 @@
             <artifactId>patterntesting-rt</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.patterntesting</groupId>
+            <artifactId>patterntesting-tools</artifactId>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
