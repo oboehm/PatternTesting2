@@ -455,12 +455,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
-          <configuration>
-            <forkCount>1</forkCount>
-            <reuseForks>true</reuseForks>
-            <useSystemClassLoader>true</useSystemClassLoader>
-            <useManifestOnlyJar>false</useManifestOnlyJar>
-          </configuration>
         </plugin>
         <!-- JavaDoc -->
         <plugin>
@@ -777,7 +771,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.2</version>
+        <version>0.8.3</version>
         <configuration>
           <append>true</append>
         </configuration>
