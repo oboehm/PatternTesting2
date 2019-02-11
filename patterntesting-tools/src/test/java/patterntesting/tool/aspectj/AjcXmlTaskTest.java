@@ -20,13 +20,16 @@
 
 package patterntesting.tool.aspectj;
 
-import static org.junit.Assert.*;
-
-import java.io.*;
-
 import org.apache.logging.log4j.LogManager;
 import org.aspectj.tools.ant.taskdefs.AjcTask;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * This is the JUnit test for the AjcXml class.
@@ -66,7 +69,7 @@ public final class AjcXmlTaskTest {
 
     private static void checkXML(final String xmlString) {
         LOG.debug(xmlString);
-        assertTrue(xmlString, xmlString.trim().startsWith("<"));
+        assertTrue(xmlString.trim().startsWith("<"), xmlString);
     }
 
     /**
@@ -81,11 +84,9 @@ public final class AjcXmlTaskTest {
         LOG.info("classpath=" + classpath);
         try {
             System.setProperty("java.class.path", "/tmp/aspectjrt.jar");
-            assertTrue("aspectjrt.jar not recognized", AjcXmlTask
-                    .hasAspectjPath());
+            assertTrue(AjcXmlTask.hasAspectjPath(), "aspectjrt.jar not recognized");
             System.setProperty("java.class.path", "/tmp/aspectjrt-1.6.8.jar");
-            assertTrue("aspectjrt-1.6.8.jar not recognized", AjcXmlTask
-                    .hasAspectjPath());
+            assertTrue(AjcXmlTask.hasAspectjPath(), "aspectjrt-1.6.8.jar not recognized");
         } finally {
             System.setProperty("java.class.path", classpath);
         }
@@ -104,7 +105,7 @@ public final class AjcXmlTaskTest {
             System.setProperty("java.class.path", ".");
             File jarFile = AjcXmlTask.findAspectjPath();
             LOG.info("aspectjrt.jar found: " + jarFile);
-            assertTrue(jarFile + " not found", jarFile.exists());
+            assertTrue(jarFile.exists(), jarFile + " not found");
         } finally {
             System.setProperty("java.class.path", classpath);
         }
@@ -120,7 +121,7 @@ public final class AjcXmlTaskTest {
         File aspectjtoolsJar = AjcTask.findAspectjtoolsJar();
         LOG.info("aspectjtoolsJar=" + aspectjtoolsJar);
         assertNotNull(aspectjtoolsJar);
-        assertTrue(aspectjtoolsJar + " not found", aspectjtoolsJar.exists());
+        assertTrue(aspectjtoolsJar.exists(), aspectjtoolsJar + " not found");
     }
 
 }
