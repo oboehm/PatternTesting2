@@ -76,9 +76,8 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:cvs:pserver:anonymous@patterntesting.cvs.sourceforge.net:/cvsroot/patterntesting:PatternTesting10/patterntesting-tools</connection>
-    <url>http://patterntesting.cvs.sourceforge.net/viewvc/patterntesting/PatternTesting10/patterntesting-tools/</url>
-    <tag>patterntesting-1_3_0</tag>
+    <connection>scm:git:git://github.com/oboehm/PatternTesting2.git/patterntesting-tools</connection>
+    <url>https://github.com/oboehm/PatternTesting2/patterntesting-tools</url>
   </scm>
 
   <developers>
@@ -118,7 +117,7 @@
       <email />
       <organization>KPIT Cummins</organization>
       <roles>
-        <role>Java Devleoper</role>
+        <role>Java Developer</role>
       </roles>
     </contributor>
   </contributors>
