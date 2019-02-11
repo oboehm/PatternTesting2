@@ -1,16 +1,17 @@
 package patterntesting.tool.aspectj;
 
-import static org.junit.Assert.*;
-
-import java.io.*;
-import java.net.URL;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.io.ExtendedFile;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for {@link AjcXml}.
@@ -48,8 +49,7 @@ public final class TestAjcXml extends AjcTestCase {
     	AjcXml compiler = new AjcXml();
     	compiler.reset();
     	String classpath = System.getProperty("java.class.path");
-    	assertTrue("aspectjrt.jar not in " + classpath, classpath
-				.matches(".*aspectjrt[\\-\\.\\w]*.jar.*"));
+		assertTrue(classpath.matches(".*aspectjrt[\\-\\.\\w]*.jar.*"), "aspectjrt.jar not in " + classpath);
     }
 
     /**
@@ -175,7 +175,7 @@ public final class TestAjcXml extends AjcTestCase {
 		File resultFile = File.createTempFile("result", ".xml");
 		try {
     		startSample(srcDir, destDir, resultFile);
-    		assertTrue(resultFile + " missing", resultFile.exists());
+    		assertTrue(resultFile.exists(), resultFile + " missing");
 		} finally {
 		    log.info("deleting " + resultFile + "...");
 		    if (!resultFile.delete()) {
@@ -195,8 +195,8 @@ public final class TestAjcXml extends AjcTestCase {
 
 	/**
 	 * Remove garbage from other tests, e.g. the /tmp/patterntesting directory.
-	 * @throws IOException
-	 * @see AjcErrorHandler#write()
+	 * 
+	 * @throws IOException in case of I/O errpr
 	 */
 	private void cleanTmpDir() throws IOException {
 		File dir = ExtendedFile.getTmpdir("patterntesting");

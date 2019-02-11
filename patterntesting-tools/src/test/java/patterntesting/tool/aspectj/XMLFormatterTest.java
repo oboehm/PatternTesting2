@@ -20,15 +20,16 @@
 
 package patterntesting.tool.aspectj;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Vector;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
-import org.junit.*;
-
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.junit.FileTester;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Vector;
 
 /**
  * The Class XMLFormatterTest.
@@ -45,7 +46,7 @@ public final class XMLFormatterTest {
     /**
      * We put one result element in the list for testing.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() {
         AjcFileResult result = new AjcFileResult("test-report");
         ajcFileResults.add(result);

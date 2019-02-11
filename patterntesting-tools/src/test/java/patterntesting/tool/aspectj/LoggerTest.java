@@ -19,14 +19,14 @@
  */
 package patterntesting.tool.aspectj;
 
-import static org.junit.Assert.*;
+import org.aspectj.lang.reflect.SourceLocation;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import org.aspectj.lang.reflect.SourceLocation;
-import org.junit.Test;
-
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * The Class LoggerTest.
@@ -53,10 +53,10 @@ public final class LoggerTest {
 	@Test
 	public void testGetResultFile() {
 		File file = logger.getResultFile();
-		assertTrue(file + " can't be deleted", file.delete());
+		assertTrue(file.delete(), file + " can't be deleted");
 		logger.reset();
 		logger.logPTViolation(getSourceLocationMock(), "test-message");
-		assertTrue(file + " doesn't exist", file.exists());
+		assertTrue(file.exists(), file + " doesn't exist");
 	}
 
 	private SourceLocation getSourceLocationMock() {
