@@ -1,7 +1,5 @@
 /*
- * $Id: LogWatchTest.java,v 1.8 2016/12/18 20:19:37 oboehm Exp $
- *
- * Copyright (c) 2014 by Oliver Boehm
+ * Copyright (c) 2014-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +32,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Unit tests for {@link LogWatch} class.
  *
  * @author oliver
- * @version $Revision: 1.8 $
  * @since 1.4.1 (23.03.2014)
  */
 public class LogWatchTest {

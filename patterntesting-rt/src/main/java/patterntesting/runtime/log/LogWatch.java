@@ -1,7 +1,5 @@
 /*
- * $Id: LogWatch.java,v 1.12 2016/12/18 20:19:38 oboehm Exp $
- *
- * Copyright (c) 2014 by Oliver Boehm
+ * Copyright (c) 2014-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,20 +18,20 @@
 
 package patterntesting.runtime.log;
 
-import java.util.Locale;
-
 import org.apache.commons.lang3.time.StopWatch;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Logger;
 
-import patterntesting.runtime.util.Converter;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.Format;
+import java.util.Locale;
 
 /**
  * The Class LogWatch is a simple stop watch to be able to measure and log code
  * segments which need a little bit longer.
  *
  * @author oliver
- * @version $Revision: 1.12 $
  * @since 1.4.1 (17.03.2014)
  */
 public final class LogWatch extends StopWatch {
@@ -52,8 +50,6 @@ public final class LogWatch extends StopWatch {
 
 	/**
 	 * Start.
-	 *
-	 * @see org.apache.commons.lang3.time.StopWatch#start()
 	 */
 	@Override
 	public void start() {
@@ -64,8 +60,6 @@ public final class LogWatch extends StopWatch {
 
 	/**
 	 * Stop.
-	 *
-	 * @see org.apache.commons.lang3.time.StopWatch#stop()
 	 */
 	@Override
 	public void stop() {
@@ -75,8 +69,6 @@ public final class LogWatch extends StopWatch {
 
 	/**
 	 * Reset.
-	 *
-	 * @see org.apache.commons.lang3.time.StopWatch#reset()
 	 */
 	@Override
 	public void reset() {
@@ -94,18 +86,6 @@ public final class LogWatch extends StopWatch {
 	 */
 	public long getElapsedTime() {
 		return this.getTime();
-	}
-
-	/**
-	 * Gets the elapsed time from the start call in nano seconds.
-	 *
-	 * @return the nano time
-	 * @deprecated use {@link #getTimeInNanos()}
-	 */
-	@Override
-	@Deprecated
-	public long getNanoTime() {
-		return this.getTimeInNanos();
 	}
 
 	/**
@@ -152,7 +132,62 @@ public final class LogWatch extends StopWatch {
 		if (millis > 6000000.0) {
 			return super.toString();
 		}
-		return Converter.getTimeAsString(millis, Locale.ENGLISH);
+		return getTimeAsString(millis);
 	}
+	
+	/**
+	 * Gets the time as string with the corresponding unit. Unit can be "ms"
+	 * (for milliseconds) or "seconds".
+	 * <p>
+	 * Before 2.0 this method was part of the Converter class.
+	 * </p>
+	 *
+	 * @param timeInMillis the time in millis
+	 * @return the time as string
+	 * @since 2.0
+	 */
+	public static String getTimeAsString(final double timeInMillis) {
+		return getTimeAsString(timeInMillis, Locale.getDefault());
+	}
+
+	/**
+	 * Gets the time as string with the corresponding unit. Unit can be "ms"
+	 * (for milliseconds) or "seconds".
+	 * <p>
+	 * Before 2.0 this method was part of the Converter class.
+	 * </p>
+	 *
+	 * @param timeInMillis the time in millis
+	 * @param locale the locale
+	 * @return the time as string
+	 * @since 2.0
+	 */
+	public static String getTimeAsString(final double timeInMillis, final Locale locale) {
+		if (timeInMillis > 1.0) {
+			return getTimeAsString((long) timeInMillis);
+		}
+		Format nf = new DecimalFormat("#.###", new DecimalFormatSymbols(locale));
+		return nf.format(timeInMillis) + " ms";
+	}
+
+    /**
+     * Gets the time as string with the corresponding unit. Unit can be "ms"
+     * (for milliseconds) or "seconds".
+     * <p>
+     * Before 2.0 this method was part of the Converter class.
+     * </p>
+     *
+     * @param timeInMillis the time in millis
+     * @return the time as string
+     * @since 2.0
+     */
+    public static String getTimeAsString(final long timeInMillis) {
+        if (timeInMillis > 300000L) {
+            return ((timeInMillis + 30000L) / 60000L) + " minutes";
+        } else if (timeInMillis > 5000L) {
+            return ((timeInMillis + 500L) / 1000L) + " seconds";
+        }
+        return timeInMillis + " ms";
+    }
 
 }

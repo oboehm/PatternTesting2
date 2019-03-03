@@ -25,6 +25,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import patterntesting.runtime.log.LogWatch;
 
 import java.io.*;
 import java.lang.reflect.Array;
@@ -90,12 +91,7 @@ public final class Converter {
 	 * @since 1.2.20
 	 */
 	public static String getTimeAsString(final long timeInMillis) {
-		if (timeInMillis > 300000L) {
-			return ((timeInMillis + 30000L) / 60000L) + " minutes";
-		} else if (timeInMillis > 5000L) {
-			return ((timeInMillis + 500L) / 1000L) + " seconds";
-		}
-		return timeInMillis + " ms";
+		return LogWatch.getTimeAsString(timeInMillis);
 	}
 
 	/**
@@ -123,11 +119,7 @@ public final class Converter {
 	 * @since 1.4.2
 	 */
 	public static String getTimeAsString(final double timeInMillis, final Locale locale) {
-		if (timeInMillis > 1.0) {
-			return getTimeAsString((long) timeInMillis);
-		}
-		Format nf = new DecimalFormat("#.###", new DecimalFormatSymbols(locale));
-		return nf.format(timeInMillis) + " ms";
+		return Converter.getTimeAsString(timeInMillis, locale);
 	}
 
 	/**
