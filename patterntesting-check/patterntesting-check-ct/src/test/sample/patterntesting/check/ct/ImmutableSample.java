@@ -1,7 +1,5 @@
 /**
- * $Id: ImmutableSample.java,v 1.2 2010/09/06 09:10:06 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +19,7 @@ package patterntesting.check.ct;
 
 import org.junit.Test;
 
-import patterntesting.annotation.check.ct.Immutable;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * With this test class you can check if the ImmutableAspect is working
