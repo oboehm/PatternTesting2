@@ -39,8 +39,7 @@ public aspect OnlyForTestingAspect extends AbstractOnlyForTestingAspect {
      * but also the setup and teardown methods.
      */
     public pointcut testCode() :
-        testJUnit4Code() || testJUnit3Code()
-            || @withincode(OnlyForTesting)
+        testJUnit4Code() || @withincode(OnlyForTesting)
             || @within(OnlyForTesting);
             ;
     
@@ -50,15 +49,4 @@ public aspect OnlyForTestingAspect extends AbstractOnlyForTestingAspect {
             || @withincode(After)  || @withincode(AfterClass)
             ;
     
-    private pointcut testJUnit3Code():
-        withincode(public void TestCase+.test*())
-            || withincode(public void TestCase+.setUp())
-            || withincode(public void TestCase+.tearDown())
-            || withincode(TestCase+.new(..))
-            || initialization(TestCase+.new(..))
-            || preinitialization(TestCase+.new(..))
-            || staticinitialization(TestCase+)
-            || set(* TestCase+.*)
-            ;
-
 }
