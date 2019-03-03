@@ -119,7 +119,7 @@ public final class Converter {
 	 * @since 1.4.2
 	 */
 	public static String getTimeAsString(final double timeInMillis, final Locale locale) {
-		return Converter.getTimeAsString(timeInMillis, locale);
+		return LogWatch.getTimeAsString(timeInMillis, locale);
 	}
 
 	/**
