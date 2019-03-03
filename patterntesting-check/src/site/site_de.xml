@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	$Id: site_de.xml,v 1.9 2017/05/14 20:10:37 oboehm Exp $
+	
+	This is the copied "site.xml" from 1.0.0-SNAPSHOT
+	@see http://maven.apache.org/guides/mini/guide-site.html
+	@see http://maven.apache.org/maven-1.x/plugins/xdoc/
+	@see http://www.sonatype.com/book/reference/site-generation.html
+	
+	(c)reated: 23-Feb-2010 by ob@aosd.de
+	last up$Date: 2017/05/14 20:10:37 $ by $Author: oboehm $
+-->
+
+<project name="PatternTesting">
+
+  <bannerLeft>
+    <name> PatternTesting </name>
+    <src>../../img/banner-left.png</src>
+  </bannerLeft>
+ 
+  <bannerRight>
+    <name> PatternTesting </name>
+    <src>../../img/banner-right.png</src>
+  </bannerRight>
+ 
+  <version position="left"/>
+
+  <publishDate position="navigation-bottom" format="dd-MMM-yyyy" />
+
+  <body>
+  
+    <!-- see http://www.communardo.de/techblog/tag/maven2/ -->
+    <breadcrumbs>
+      <item name="Check" href="index.html" />
+    </breadcrumbs>
+
+    <!-- see http://www.communardo.de/techblog/tag/maven2/ -->
+    <menu ref="parent">
+      <item name="Check.CT"  href="ct/" />
+      <item name="Check.RT"  href="rt/" />
+    </menu>
+	   
+    <links>
+      <item name="AspectJ" href="http://www.eclipse.org/aspectj"/>
+    </links>
+
+    <menu name="Doc &amp; Downloads">
+	  <item name="Release Notes"            href="/changes-report.html" />
+      <item name="&#220;ber..."             href="/doc/whatis.html" />
+      <item name="Downloads"                href="../../downloads.html"/>
+    </menu>
+
+    <menu name="Support">
+      <item name="Mailing-Liste"            href="mail-lists.html"/>
+      <item name="Issue Tracking"           href="issue-tracking.html" collapse="true">
+        <item name="Support-Anfragen"         href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454318"/>
+        <item name="Feature Requests"         href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454320"/>
+        <item name="Bug-Reports"              href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454317"/>
+      </item>
+    </menu>
+
+    <menu ref="modules" />
+
+    <menu ref="reports" />
+	  
+	${reports}
+	  
+  </body>
+
+</project>

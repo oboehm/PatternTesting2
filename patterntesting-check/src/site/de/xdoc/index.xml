@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>Dokumentation</title>
+  </properties>
+
+  <body>
+  
+    <section name="&#220;ber patterntesting-check">
+      <p>
+        PatternTesting Check (patterntesting-check) ist ein Framework, dass die
+        automatische &#220;berpr&#252;fung von Architektur- und
+        Design-Empfehlungen erm&#246;glicht.
+        Es erkennt eine Reihe bekannter Anti-Patterns (wie z.B. die Verwendung
+        von System.out f&#252;r's Logging), unterst&#252;tzt aber auch das
+        Testen.
+      </p>
+    </section>
+  
+    <section name="Einf&#252;hrung">
+      <p>
+        2002 war PatternTesting Check der Ausgangspunkt der gesamten
+        PatternTesting-Komponenten. Es war (und ist) einer der ersten
+        AspectJ-Bibliotheken, das einige bekannte Anti-Patterns f&#252;r
+        Java erkennt. Einige der Pr&#252;fungen wie die System.out- oder
+        System.err-Erkennung finden w&#228;hrend der Compilierung statt,
+        andere &#220;berpr&#252;fungen wie die Aufdeckung von Null-&#220;bergabe
+        von Argumenten finden w&#228;hrend der Laufzeit (Runtime) statt.
+      </p>
+      <p>
+        Seit 2009 wurde PatternTesting Check aufgeteilt in:
+      </p>
+      <ul>
+        <li>
+          PatternTesting Check.CT
+          f&#252;r die Pr&#252;fungen zur "Compile Time",
+        </li>
+        <li>
+          PatternTesting Check.RT
+          f&#252;r die Pr&#252;fungen zur "Runtime".
+        </li>
+      </ul>
+      <p>
+        Gr&#252;nde f&#252;r die Aufteilungen waren vor allem Performance-Probleme
+        mit Eclipse 3.3. Die inkrementelle Compilierung dieser Version ist
+        &#252;ber 30 Mal langsamer als in Eclipse 3.4.
+        Daher wurde der statische Teil (Check.CT) als eigene Komponente
+        herausgezogen.
+        Der interessantere Teil ist allerdings der Runtime-Teil.
+        Nun kann man w&#228;hlen, ob man nur den Runtime-Teil verwenden will
+        oder beide.
+      </p>
+    </section>
+    
+    <section name="Empfehlungen">
+      <p>
+        Verwende mindestens Eclipse 3.4 - es ist um L&#228;ngen schneller als Eclipse 3.3
+        (siehe <a href="http://oli.blogger.de/stories/1365745/">Performance Boost with Eclise 3.4 / AJDT 1.6.3</a>).
+      </p>
+      <p>
+        Einige der statischen &#220;berpr&#252;fungen kann auch von anderen
+        Tools wie
+        <a href="http://findbugs.sourceforge.net/">FindBugs</a> oder
+        <a href="http://pmd.sourceforge.net/">PMD</a>
+        durchgef&#252;hrt werden.
+        Der Vorteil von PatternTesting Check.CT ist hier, dass es Teil des
+        Compilier-Vorganges ist - der Benutzer sieht also die Warnung unmittelbar.
+        <br/>
+        Nachteil: der Compile-Prozess wird dadurch etwas langsamer.
+      </p>
+    </section>
+
+    <section name="Hello World">
+      <p>
+        Ein einfaches Hello-World-Beispiel (noch mit PatternTesting 0.6)
+        findet sich in
+        <a href="http://oli.blogger.de/stories/1242343/">Oli's Blog</a>.
+      </p>
+      <p>
+        Ein aktuelles Hello-World-Beispiel f&#252;r PatternTesting ist im
+        <a href="http://patterntesting.sourceforge.net/wiki/index.php/Hello_World">PatternTesting Wiki</a>
+        dokumentiert.
+      </p>
+    </section>
+    
+    <section name="Weitere Beispiele">
+      <p>
+        Weitere Beispiele finden sich in
+        <a href="../../samples/de/index.html">PatternTesting-Samples</a>.
+      </p>
+    </section>
+
+  </body>
+  
+</document>

@@ -54,6 +54,7 @@
     <module>doc</module>
     <module>patterntesting-rt</module>
     <module>patterntesting-tools</module>
+    <module>patterntesting-check</module>
     <module>patterntesting-compat</module>
   </modules>
 

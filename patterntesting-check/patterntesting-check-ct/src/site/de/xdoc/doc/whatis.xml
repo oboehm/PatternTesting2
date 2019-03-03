@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>Was ist PatternTesting-Check.CT?</title>
+    <author email="ob@aosd.de">Vincent Massol</author>
+  </properties>
+
+  <body>
+
+    <section name="Einf&#252;hrung">
+      <p>
+        Jedes Projekt definiert ein Set an Regeln, mit den alle
+        (oder die meisten :-)) Entwickler &#252;bereinstimmen.
+        Diese Regeln k&#246;nnen Codier-Richtlinien, Namenskonventionen
+        oder, auf einem h&#246;heren Level, Archtiktur-Entscheidungen
+        oder Best Practices sein.
+      </p>
+      <p>
+        Normalerweise werden diese Richtlinien verbal ausgetauscht oder in
+        einem "Entwickler Handbuch" niedergeschrieben (z.B. in einem internen
+        Wiki). Doch das reicht meistens nicht aus. Wie kann ich sicherstellen,
+        dass ich diese Richtlinen auch eingehalten habe?
+      </p>
+      <p>
+        Im Wesentlichen gibt es hier nur eine L&#246;sung: Code Review.
+        Sei es, als st&#228;ndiger Prozess im Rahmen von Pair Programming oder
+        zu bestimmten Zeiten mit Kollegen oder Spezialisten, die dieses Review
+        durchf&#252;hren.
+        W&#228;re es nicht sch&#246;n, wenn man eine Test-Suite h&#228;tte, die
+        dies automatisch verifizieren k&#246;nnte? Genau so, wie man die
+        Richtigkeit des Codes verifiziert? Nur, dass mit der &#220;berpr&#252;fung
+        des Codes auch gleichzeitig die Einhaltung von Programmier-Emfpehoungen
+        einhergeht!
+      </p>
+      <p>
+        Es gibt verschiedene Tools, die Coding-Richtlinien und Namens-Konventionen
+        &#252;berpr&#252;fen, aber keine davon &#252;berpr&#252;fen
+        Architektur- und Design-Emfpehlungen.
+      </p>
+      <p>
+        ... bis jetzt ....
+      </p>
+      <p>
+        Eine der Ziele von Pattern Testing is die
+        <strong>automatische</strong> &#220;berpr&#252;fung von
+        Architektur-/Design-/Implementierungs-Entscheidungen.
+      </p>
+      <p>
+        PatternTesting-Check.CT ist der statische Teil f&#252;r
+        die &#252;berpr&#252;fen zur Compile-Zeit.
+      </p>
+            
+    </section>
+
+    <section name="Einige Beispiele">
+
+      <p>
+        Hier einige Beispiele von automatischen &#220;berpr&#252;fungen,
+        die das PatternTesting-Check-Framework erlaubt:
+      </p>
+      <ul>
+        <li>
+          kein Aufruf irgendeiner Methode in unserer Anwendung mit einem
+          <code>null</code>-Parameter,
+        </li>
+        <li>
+          keine R&#252;ckgaben von <code>null</code>-Werten in irgendeiner Methode,
+        </li>
+        <li>
+          keine Verwendung von <code>System.out.println()</code>
+          (stattdessen sollte das projekt-weite Logging-Framework benutzt werden),
+        </li>
+        <li>
+          keine Klassen verwendet JDBC direkt, sondern
+          alle Aufrufe an die Datenbank erfolgen &#252;ber eine
+          <code>JdbcDataAccess</code>-Klasse.
+        </li>
+      </ul>
+      <p>
+        Weitere &#220;berpr&#252;fungen, die k&#252;ftig denkbar sind:
+      </p>
+      <ul>
+      	<li>
+      	  zustandslose Klassen (Thread-Safa-Klassen in Avalon-Terminilogie, Singletons
+      	  oder "statische Klassen" in anderen Terminilogien) d&#252;rfen
+      	  Instanz-Variablen setzen, au&#223;er zum Initialisierungs-Zeitpunkt;
+      	</li>
+      	<li>
+      	  die "Control"-Schicht (zum Beispiel bei einer Web-Anwendung)
+      	  darf nur mit der "Service"-Schicht reden und nicht mit
+      	  der "Persistenz"-Schicht;
+      	</li>
+      	<li>
+      	  jede Anwendungs-Exception muss eine Unterklasse von
+      	  <code>BusinessException</code>, <code>TechnicalException</code> or 
+          <code>CriticalException</code> sein,
+      	</li>
+      	<li>
+      	  das MVC-Modell must konsistent eingehalten werden;
+      	  zum Beispiel jder Aufruf an die Service-Schickt muss durch die
+      	  Action-Klasse gehen (wenn man z.B. Struts einsetzt);
+      	</li>
+      	<li>
+      	  Exceptions werden nur auf oberster Ebenen protokolliert;
+      	</li>
+      	<li>
+      	  jeder Use Case darf nur eine maximale Anzahl von 5 SQL-Anfragen
+      	  an die Datenbank beinhalten;
+      	</li>
+      	<li>
+      	  etc...
+      	</li>
+      </ul>      
+
+      <p>
+        Die M&#246;glichkeiten sind schier endlos...
+      </p>
+      
+    </section>
+
+  </body>
+
+</document>

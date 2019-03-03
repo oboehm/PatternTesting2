@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
     $Id: pom.xml,v 1.99 2017/11/09 20:34:57 oboehm Exp $
 
@@ -23,104 +24,35 @@
     (c)reated 13-Mar-07 by ob@aosd.de
 	last up$Date: 2017/11/09 20:34:57 $ by $Author: oboehm $
 -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!-- 
+      The Basics
+      must be set if you want to upload it to the Central Repository
+      see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+   -->
+  <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.patterntesting</groupId>
     <artifactId>patterntesting-parent</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
-	
-  <!-- 
-      The Basics
-      must be set if you want to upload it to the Central Repository
-      see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
-   -->	
-  <modelVersion>4.0.0</modelVersion>
   <artifactId>patterntesting-tools</artifactId>
   <packaging>maven-plugin</packaging>
   <name>patterntesting-tools</name>
-  
-  <!-- see http://maven.apache.org/pom.html#Licenses -->
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-    </license>
-  </licenses>
-
-  <inceptionYear>2002</inceptionYear>
-  <description>
-    PatternTesting Tools (patterntesting-tools) is the container for
-    tools around PatternTesting like the Ant extensions and Maven plugin.
-  </description>
-  
-  <url>http://patterntesting.org/release/tools/</url>
+  <description>PatternTesting Tools (patterntesting-tools) is the container for
+    tools around PatternTesting like the Ant extensions and Maven plugin.</description>
 
   <!-- 
-      Deployment
-      see "Better Builds with Maven", p. 74
-      see http://maven.apache.org/plugins/maven-deploy-plugin/
-  -->
-  <distributionManagement>
-    <!--
-        Deployment of the Web-Site 
-        (try 'mvn site-deploy' to deploy it)
-    -->
-    <site>
-      <id>ftp-patterntesting.org</id>
-      <name>PatternTesting Website</name>
-      <url>${patterntesting.site.url}/${project.version}/tools/</url>
-    </site>
-  </distributionManagement>
-
-  <scm>
-    <connection>scm:git:git://github.com/oboehm/PatternTesting2.git/patterntesting-tools</connection>
-    <url>https://github.com/oboehm/PatternTesting2/patterntesting-tools</url>
-  </scm>
-
-  <developers>
-    <developer>
-      <name>Vincent Massol</name>
-      <id>vmassol</id>
-      <email>vmassol@pivolis.com</email>
-      <organization>Pivolis</organization>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Matt Smith</name>
-      <id>ojojo</id>
-      <email>matt@ojojo.com</email>
-      <organization>ojojo</organization>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Oliver Boehm</name>
-      <id>oboehm</id>
-      <email>ob@aosd.de</email>
-      <url>http://www.aosd.de/</url>
-      <organization>agentes AG</organization>
-      <organizationUrl>http://www.agentes.de</organizationUrl>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-  </developers>
-  <contributors>
-    <contributor>
-      <name>Shohara Shaikh</name>
-      <email />
-      <organization>KPIT Cummins</organization>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </contributor>
-  </contributors>
+      General Properties
+      (see parent POM)
+   -->
+  <properties>
+    <mavenVersion>3.0.5</mavenVersion>
+    <mojo.java.target>1.8</mojo.java.target>
+    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/tools/</patterntesting.site.artifact.dir>
+  </properties>
 
   <!-- 
 	  L I B R A R I E S
@@ -142,98 +74,98 @@
     <dependency>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>aspectj-maven-plugin</artifactId>
+      <version>1.11</version>
       <type>maven-plugin</type>
       <exclusions>
         <exclusion>
+          <groupId>org.apache.maven</groupId>
           <artifactId>maven-compat</artifactId>
-          <groupId>org.apache.maven</groupId>
         </exclusion>
         <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
           <artifactId>plexus-utils</artifactId>
-          <groupId>org.codehaus.plexus</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>commons-lang</artifactId>
           <groupId>commons-lang</groupId>
+          <artifactId>commons-lang</artifactId>
         </exclusion>
         <exclusion>
-          <artifactId>commons-validator</artifactId>
           <groupId>commons-validator</groupId>
+          <artifactId>commons-validator</artifactId>
         </exclusion>
         <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
           <artifactId>plexus-container-default</artifactId>
-          <groupId>org.codehaus.plexus</groupId>
         </exclusion>
         <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
           <artifactId>plexus-interpolation</artifactId>
-          <groupId>org.codehaus.plexus</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>doxia-sink-api</artifactId>
           <groupId>org.apache.maven.doxia</groupId>
+          <artifactId>doxia-sink-api</artifactId>
         </exclusion>
         <exclusion>
+          <groupId>org.apache.maven</groupId>
           <artifactId>maven-model</artifactId>
-          <groupId>org.apache.maven</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>commons-collections</artifactId>
           <groupId>commons-collections</groupId>
+          <artifactId>commons-collections</artifactId>
         </exclusion>
         <exclusion>
-          <artifactId>velocity</artifactId>
           <groupId>org.apache.velocity</groupId>
+          <artifactId>velocity</artifactId>
         </exclusion>
         <exclusion>
+          <groupId>org.apache.maven</groupId>
           <artifactId>maven-artifact</artifactId>
-          <groupId>org.apache.maven</groupId>
         </exclusion>
         <exclusion>
+          <groupId>org.apache.maven</groupId>
           <artifactId>maven-artifact-manager</artifactId>
-          <groupId>org.apache.maven</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>wagon-provider-api</artifactId>
           <groupId>org.apache.maven.wagon</groupId>
+          <artifactId>wagon-provider-api</artifactId>
         </exclusion>
         <exclusion>
+          <groupId>org.apache.maven</groupId>
           <artifactId>maven-plugin-api</artifactId>
-          <groupId>org.apache.maven</groupId>
         </exclusion>
         <exclusion>
+          <groupId>org.apache.maven</groupId>
           <artifactId>maven-settings</artifactId>
-          <groupId>org.apache.maven</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>commons-digester</artifactId>
           <groupId>commons-digester</groupId>
+          <artifactId>commons-digester</artifactId>
         </exclusion>
         <exclusion>
+          <groupId>org.apache.maven</groupId>
           <artifactId>maven-repository-metadata</artifactId>
-          <groupId>org.apache.maven</groupId>
         </exclusion>
         <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
           <artifactId>plexus-component-annotations</artifactId>
-          <groupId>org.codehaus.plexus</groupId>
         </exclusion>
         <exclusion>
+          <groupId>org.apache.maven</groupId>
           <artifactId>maven-core</artifactId>
-          <groupId>org.apache.maven</groupId>
         </exclusion>
         <exclusion>
+          <groupId>org.apache.maven</groupId>
           <artifactId>maven-model-builder</artifactId>
-          <groupId>org.apache.maven</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>plexus-classworlds</artifactId>
           <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-classworlds</artifactId>
         </exclusion>
         <exclusion>
-          <artifactId>maven-artifact-manager</artifactId>
           <groupId>org.apache.maven</groupId>
+          <artifactId>maven-artifact-manager</artifactId>
         </exclusion>
       </exclusions>
-      <version>1.11</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -241,35 +173,23 @@
       <version>${maven.version}</version>
       <exclusions>
         <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
           <artifactId>plexus-component-annotations</artifactId>
-          <groupId>org.codehaus.plexus</groupId>
         </exclusion>
         <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
           <artifactId>plexus-utils</artifactId>
-          <groupId>org.codehaus.plexus</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>guava</artifactId>
           <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
     <dependency>
-      <artifactId>guava</artifactId>
       <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
       <version>18.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-model</artifactId>
-      <version>${maven.version}</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>plexus-utils</artifactId>
-          <groupId>org.codehaus.plexus</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -277,12 +197,12 @@
       <version>${maven.version}</version>
       <exclusions>
         <exclusion>
-          <artifactId>plexus-utils</artifactId>
           <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-utils</artifactId>
         </exclusion>
         <exclusion>
-          <artifactId>plexus-component-annotations</artifactId>
           <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-component-annotations</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -297,21 +217,59 @@
       <version>1.6</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.maven.plugin-tools</groupId>
-      <artifactId>maven-plugin-annotations</artifactId>
-      <scope>provided</scope><!-- annotations are needed only to build the plugin -->
-      <exclusions>
-        <exclusion>
-          <artifactId>maven-artifact</artifactId>
-          <groupId>org.apache.maven</groupId>
-        </exclusion>
-      </exclusions>
-      <version>3.5.2</version>
-    </dependency>
-    <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-artifact</artifactId>
       <version>${maven.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.aether</groupId>
+      <artifactId>aether-api</artifactId>
+      <version>1.13.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.aether</groupId>
+      <artifactId>aether-impl</artifactId>
+      <version>1.13.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-aether-provider</artifactId>
+      <version>3.3.9</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-component-annotations</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-utils</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-model</artifactId>
+      <version>${maven.version}</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-utils</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugin-tools</groupId>
+      <artifactId>maven-plugin-annotations</artifactId>
+      <version>3.5.2</version>
+      <scope>provided</scope>
+      <!-- annotations are needed only to build the plugin -->
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.maven</groupId>
+          <artifactId>maven-artifact</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <!-- Testing, Mocking -->
     <dependency>
@@ -338,8 +296,8 @@
     <dependency>
       <groupId>org.apache.maven.plugin-testing</groupId>
       <artifactId>maven-plugin-testing-harness</artifactId>
-      <scope>test</scope>
       <version>3.3.0</version>
+      <scope>test</scope>
       <exclusions>
         <exclusion>
           <groupId>junit</groupId>
@@ -350,33 +308,8 @@
           <artifactId>plexus-utils</artifactId>
         </exclusion>
         <exclusion>
-          <artifactId>commons-io</artifactId>
           <groupId>commons-io</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.sonatype.aether</groupId>
-      <artifactId>aether-api</artifactId>
-      <version>1.13.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.sonatype.aether</groupId>
-      <artifactId>aether-impl</artifactId>
-      <version>1.13.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-aether-provider</artifactId>
-      <version>3.3.9</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>plexus-component-annotations</artifactId>
-          <groupId>org.codehaus.plexus</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>plexus-utils</artifactId>
-          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>commons-io</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -389,31 +322,14 @@
     </dependency>
   </dependencies>
 
-  <!-- 
-      General Properties
-      (see parent POM)
-   -->
-  <properties>
-    <mavenVersion>3.0.5</mavenVersion>
-    <mojo.java.target>1.8</mojo.java.target>
-    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/tools/</patterntesting.site.artifact.dir>
-  </properties>
-
   <!-- Build Settings -->
   <build>
     <resources>
       <resource>
-        <directory>src/main/resources</directory>
         <filtering>false</filtering>
+        <directory>src/main/resources</directory>
       </resource>
     </resources>
-    <extensions>
-      <!-- Enabling the use of FTP -->
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-         <artifactId>wagon-ftp</artifactId>
-      </extension>
-    </extensions>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -464,7 +380,7 @@
           <complianceLevel>${maven.compile.complianceLevel}</complianceLevel>
           <options>
             <option>-verbose</option>
-            <option>-showWeaveInfo</option>             
+            <option>-showWeaveInfo</option>
           </options>
           <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
           <aspectLibraries>
@@ -472,26 +388,26 @@
               <groupId>org.patterntesting</groupId>
               <artifactId>patterntesting-rt</artifactId>
             </aspectLibrary>
-            </aspectLibraries>
+          </aspectLibraries>
         </configuration>
         <executions>
           <execution>
             <id>compile</id>
-            <configuration>
-              <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
-            </configuration>
             <goals>
               <goal>compile</goal>
             </goals>
-          </execution>
-          <execution>
-            <id>test-compile</id>
             <configuration>
               <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
             </configuration>
+          </execution>
+          <execution>
+            <id>test-compile</id>
             <goals>
               <goal>test-compile</goal>
             </goals>
+            <configuration>
+              <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -513,9 +429,9 @@
           </execution>
         </executions>
       </plugin>
-	  <!-- see http://maven.apache.org/plugins/maven-surefire-plugin/examples/inclusion-exclusion.html -->
-	  <plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
+      <!-- see http://maven.apache.org/plugins/maven-surefire-plugin/examples/inclusion-exclusion.html -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <excludes>
@@ -528,7 +444,7 @@
           <forkCount>1</forkCount>
           <reuseForks>true</reuseForks>
         </configuration>
-	  </plugin>
+      </plugin>
       <!-- 
           We want to build a tar/zip file with all jars inside.
        -->
@@ -542,24 +458,105 @@
           <tarLongFileMode>gnu</tarLongFileMode>
         </configuration>
       </plugin>
-	  <!-- see http://maven.apache.org/plugins/maven-source-plugin/usage.html -->
+      <!-- see http://maven.apache.org/plugins/maven-source-plugin/usage.html -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <executions>
           <execution>
             <id>attach-sources</id>
-            <phase>verify</phase>
             <goals>
               <goal>jar</goal>
             </goals>
+            <phase>verify</phase>
           </execution>
         </executions>
       </plugin>
     </plugins>
+    <extensions>
+      <!-- Enabling the use of FTP -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ftp</artifactId>
+      </extension>
+    </extensions>
   </build>
-  
 
+  <url>http://patterntesting.org/release/tools/</url>
+
+  <inceptionYear>2002</inceptionYear>
+
+  <!-- see http://maven.apache.org/pom.html#Licenses -->
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>vmassol</id>
+      <name>Vincent Massol</name>
+      <email>vmassol@pivolis.com</email>
+      <organization>Pivolis</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>ojojo</id>
+      <name>Matt Smith</name>
+      <email>matt@ojojo.com</email>
+      <organization>ojojo</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>oboehm</id>
+      <name>Oliver Boehm</name>
+      <email>ob@aosd.de</email>
+      <url>http://www.aosd.de/</url>
+      <organization>agentes AG</organization>
+      <organizationUrl>http://www.agentes.de</organizationUrl>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+  </developers>
+  <contributors>
+    <contributor>
+      <name>Shohara Shaikh</name>
+      <email></email>
+      <organization>KPIT Cummins</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+  </contributors>
+
+  <scm>
+    <connection>scm:git:git://github.com/oboehm/PatternTesting2.git/patterntesting-tools</connection>
+    <url>https://github.com/oboehm/PatternTesting2/patterntesting-tools</url>
+  </scm>
+
+  <!-- 
+      Deployment
+      see "Better Builds with Maven", p. 74
+      see http://maven.apache.org/plugins/maven-deploy-plugin/
+  -->
+  <distributionManagement>
+    <!--
+        Deployment of the Web-Site 
+        (try 'mvn site-deploy' to deploy it)
+    -->
+    <site>
+      <id>ftp-patterntesting.org</id>
+      <name>PatternTesting Website</name>
+      <url>${patterntesting.site.url}/${project.version}/tools/</url>
+    </site>
+  </distributionManagement>
 
   <profiles>
 
@@ -606,8 +603,7 @@
         </plugins>
       </build>
     </profile>
-    
-  </profiles>
-  
-</project>
 
+  </profiles>
+
+</project>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<patterntesting>
+    <patterntesting-report>
+        <file
+            name="/somewhere/patterntesting-check-ct/src/test/sample/patterntesting/check/ct/junit4/OnlyForTesting4Test.java">
+            <error line="77">this call is only allowed from test code!</error>
+            <error line="78">this call is only allowed from test code!</error>
+        </file>
+    </patterntesting-report>
+</patterntesting>

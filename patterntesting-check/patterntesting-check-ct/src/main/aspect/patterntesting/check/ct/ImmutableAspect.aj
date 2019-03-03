@@ -1,7 +1,5 @@
 /**
- * $Id: SuppressStreamWarning.java,v 1.6 2016/12/10 20:55:19 oboehm Exp $
- *
- * Copyright (c) 2009 by Oliver Boehm
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * (c)reated 01.04.2009 by oliver (ob@aosd.de)
+ * (c)reated 29.09.2008 by oliver (ob@oasd.de)
  */
-package patterntesting.annotation.check.ct;
+package patterntesting.check.ct;
 
-import java.lang.annotation.*;
+import javax.annotation.concurrent.Immutable;
 
 /**
- * Use this annotation to suppress warnings about not to use stream classes.
+ * Classes annotated with "@Immutable" are considered as immutable.
+ *
+ * @see AbstractImmutableAspect
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.6 $
- * @see EnableStreamWarning
- * @since 01.04.2009
- * @deprecated no longer supported
+ * @since 29.09.2008
+ * @version $Revision: 1.1 $
  */
-@Deprecated
-@Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.TYPE })
-@Retention(RetentionPolicy.RUNTIME)
-public @interface SuppressStreamWarning {
+public aspect ImmutableAspect extends AbstractImmutableAspect {
+
+    /**
+     * Classes annotated with "@Immutable" are considered as immutable.
+     */
+    public pointcut applicationCode(): within(@Immutable *);
 
 }

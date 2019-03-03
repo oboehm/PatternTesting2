@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>Documentation</title>
+  </properties>
+
+  <body>
+
+    <section name="API Doc">
+      <p>
+        You have the choice:
+        you can use
+      </p>
+      <ul>
+        <li>
+          the <a href="../aspectj-report/overview-summary.html">AspectJ Docs</a>,
+        </li>
+        <li>
+          the normal <a href="../apidocs/index.html">JavaDocs</a> or
+        </li>
+        <li>
+          the <a href="../testapidocs/index.html">Test JavaDocs</a>.
+        </li>
+      </ul>
+      <p>
+        The AspectJ Docs are similar to javadoc but contains also
+        the AspectJ features like pointcuts, advices, ...
+      </p>
+    </section>
+    
+    <section name="Examples">
+      <p>
+        For some examples take a look at
+        <a href="../../samples/index.html">PatternTesting-Samples</a>.
+        The class
+        <a href="../../samples/xref/patterntesting/sample/World.html">patterntesting.sample.World</a>
+        is an example for the usage of System.out.
+        It is also an example how you can use the
+        <a href="../../runtime/aspectj-report/patterntesting/annotation/check/ct/SuppressSystemOutWarning.html">@SuppressSystemOutWarning</a>
+        to suppress the warning of the usage of System.out.
+      </p>
+    </section>
+
+  </body>
+  
+</document>

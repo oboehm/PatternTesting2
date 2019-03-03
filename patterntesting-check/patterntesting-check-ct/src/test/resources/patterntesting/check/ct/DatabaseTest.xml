@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<patterntesting>
+	<patterntesting-report>
+		<file
+			name="/somewhere/patterntesting-check-ct/src/test/sample/patterntesting/check/ct/DatabaseSample.java">
+			<error line="47">It is not allowed to create any JDBC objects</error>
+			<error line="48">It is not allowed to create any JDBC objects</error>
+			<error line="49">It is not allowed to use the JDBC API from here</error>
+		</file>
+	</patterntesting-report>
+</patterntesting>

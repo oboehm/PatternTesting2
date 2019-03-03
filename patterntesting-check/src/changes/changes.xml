@@ -1,0 +1,255 @@
+<?xml version="1.0"?>
+
+<!-- 
+    $Id: changes.xml,v 1.46 2016/12/31 16:38:07 oboehm Exp $
+    
+    A kind of release notes. This document describes the changes in the
+    different releases.
+    
+    see http://maven.apache.org/plugins/maven-changes-plugin/usage.html
+    see http://maven.apache.org/plugins/maven-changes-plugin/changes.html
+ -->
+
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+
+  <properties>
+    <title>Main changes</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <release version="1.7.0" date="06-Jan-2017"
+             description="Java 7 version">
+      <action dev="oboehm" date="2016-12-04" type="update">
+        Switched to Log4j 2.
+      </action>
+    </release>
+
+    <release version="1.6.0" date="06-Jan-2016"
+             description="Java 6 version">
+      <action dev="oboehm" date="2016-01-06" type="remove">
+        Some deprecated classes and aspects were removed.
+      </action>
+      <action dev="oboehm" date="2015-12-30" type="update">
+        Java 5 will be no longer supported.
+      </action>
+    </release>
+
+    <release version="1.5.2" date="04-Jul-2015"
+             description="bug fix">
+      <action dev="oboehm" date="2015-06-25" type="update">
+        Only version updated.
+      </action>
+    </release>
+
+    <release version="1.5.1" date="26-Apr-2015"
+             description="@Zombie support">
+      <action dev="oboehm" date="2015-01-13" type="add"
+              issue="feature-requests/23/" system="SourceForge2">
+        ZombieAspect logs use of @Zombie classes and methods
+        (PatternTesting Check-RT).
+      </action>
+    </release>
+
+    <release version="1.5.0" date="06-Jan-2015"
+             description="PatternTesting Benchmark project added for micro-benchmarking">
+      <action dev="oboehm" date="2014-06-16" type="update">
+        Begin with next snapshot.
+      </action>
+    </release>
+
+    <release version="1.4.1" date="07-Apr-2014"
+             description="logger initialization">
+      <action dev="oboehm" date="2014-02-12" type="add"
+              issue="feature-requests/10/" system="SourceForge2">>
+        Detection of wrong logger initialization
+        (PatternTesting Check-RT)).
+      </action>
+    </release>
+
+    <release version="1.4.0" date="06-Jan-2014"
+             description="JSR 305 support">
+      <action dev="oboehm" date="2013-04-28" type="add">
+        TransientTrapAspect added to find transient traps
+        (PatternTesting Check-CT).
+      </action>
+      <action dev="oboehm" issue="feature-requests/37/" system="SourceForge2"
+              date="2013-11-29" type="fix">
+        NotNull annotation of JSR 305 is supported.
+      </action>
+    </release>
+
+    <release version="1.3.0" date="06-Jan-2013"
+             description="exception and encoding aspect">
+      <action dev="oboehm" date="2012-08-12" type="add">
+        (Abstract)ExceptionAspect added to find methods which throw an
+        unspecific exception (PatternTesting Check-CT).
+      </action>
+      <action dev="oboehm" date="2012-08-09" type="add">
+        (Abstract)EncodingAspect added to find calls with undefined encoding
+        (PatternTesting Check-CT).
+      </action>
+      <action dev="oboehm" date="2012-08-08" type="add">
+        Annotation SuppressStreamWarning is now deprecated and replaced by
+        EnableStreamWarning (PatternTesting Check-CT).
+      </action>
+    </release>
+    
+    <release version="1.2.20" date="15-Jul-2012"
+             description="extended JUnit support">
+      <action dev="oboehm" date="2012-07-13" type="update">
+        Bug fixing release.
+      </action>
+    </release>
+
+    <release version="1.2.10-YEARS" date="23-Mar-2012"
+             description="10 years PatternTesting">
+      <action dev="oboehm" date="2012-01-31" type="add">
+        IllegalArgumentExceptionAspect added to damn the throwing of
+        IllegalArgumentExceptions for constructors and methods which have
+        no arguments (Check.CT).
+      </action>
+    </release>
+
+    <release version="1.2.0" date="06-Jan-2012"
+             description="OSGi bundle">
+      <action dev="oboehm" date="2011-07-29" type="update">
+        Switched from commons-logging to SLF4J.
+      </action>
+    </release>
+
+    <release version="1.1.0" date="22-Apr-2011"
+             description="version for Stuttgarter Test-Tage 2011">
+      <action dev="oboehm" date="2011-02-23" type="update">
+        Suppressing "adviceDidNotMatch" warning.
+      </action>
+    </release>
+
+    <release version="1.0.3" date="18-Oct-2010"
+             description="upload version">
+      <action dev="oboehm" date="2010-10-18" type="update">
+        Prepared for upload to https://oss.sonatype.org/
+      </action>
+    </release>
+
+    <release version="1.0.2" date="06-Sep-2010"
+             description="holiday version">
+      <action dev="oboehm" date="2010-09-06" type="update">
+        Code cleanup.
+      </action>
+    </release>
+
+    <release version="1.0.1" date="18-Jul-2010"
+             description="the version after JFS 2010">
+      <action dev="oboehm" date="2010-07-15" type="update">
+        Documentation updated.
+      </action>
+    </release>
+
+    <release version="1.0.0" date="20-Jun-2010"
+             description="first org.patterntesting version">
+      <action dev="oboehm" date="2010-01-05">
+        GroupId changed to "org.patterntesting".
+      </action>
+    </release>
+  
+    <release version="0.9.6" date="02-May-2009"
+             description="version for Stuttgarter TestTage 2009">
+      <action dev="oboehm" type="add">
+        project pages of Check.CT and Check.RT are moved to check/ct and
+        check/rt 
+      </action>
+    </release>
+
+    <release version="0.9.5" date="31-Mar-2009"
+             description="version for Giropay">
+      <action dev="oboehm" type="update">
+        patterntesting-check was splitted into patterntesting-check-ct
+        (compile time part with static checks) and
+        pattertesting-check-rt (runtime part with dynamic checks).
+      </action>
+    </release>
+
+    <release version="0.9.1" date="20-Mar-2009"
+             description="version for Q1/2009">
+      <action dev="oboehm" type="add">
+        DeprecatedAspect added which logs a warning if a
+        @Deprecated method is executed.
+      </action>
+      <action dev="oboehm" type="add">
+        You can mark now methods with "@OnlyForTesting". If you call these
+        methods outside from test methods you'll get an compile error.
+      </action>
+      <action dev="oboehm" type="add">
+        Methods and constructors annotated by "@PublicForTesting" are checked
+        during runtime if they were called from a test method or from the
+        class itself.
+      </action>
+      <action dev="oboehm" type="add">
+        With the ExceptionFactory and @TestException annotation you are now
+        able to control if a checked exception should be thrown or not.
+      </action>
+      <action dev="oboehm" type="add">
+        JUnitAspect added to detect some of the JUnit anti patterns described
+        in http://www.exubero.com/junit/antipatterns.html.
+        Only JUnit 4 is supported so you need it in the classpath
+        (for the used @Test annotation).
+      </action>
+      <action dev="oboehm" type="update">
+        The use of System.out or System.err in main methods is now tolerated.
+      </action>
+      <action dev="oboehm" type="update">
+        For performance reason the (Abstract)NullPointerTrap is limited to
+        public methods and constructors.
+      </action>
+    </release>
+
+    <release version="0.9.0" date="22-Jan-2009"
+             description="version for 2009">
+      <action dev="oboehm" type="update">
+        Damning System.out is now the default (annotation @DamnSystemOut is
+        no longer needed).
+      </action>
+      <action dev="oboehm" type="remove">
+        depencency to net.jcip removed
+      </action>
+    </release>
+
+    <release version="0.8.1" date="28-Dec-2008"
+             description="using asserts">
+      <action dev="oboehm" type="update">
+        (Abstract)NullPointerTrap and NotNullAspect uses now the assert keyword
+        for checking. So you can enable this checks via "java -ea ..."
+        (for the Sun VM).
+      </action>
+    </release>
+
+    <release version="0.8.0" date="12-Dec-2008"
+             description="project split">
+      <action dev="oboehm" type="add">
+        The project was splitted in several subparts:
+        patterntesting-parent,
+        patterntesting-rt (runtime),
+        patterntesting-check,
+        patterntesting-tools,
+        patterntesting-samples.
+      </action>
+      <action dev="oboehm" type="add">
+        You can mark attributes and parameters in constructors/methods
+        as @NotNull.
+      </action>
+    </release>
+
+    <release version="0.6.x" date="2008"
+             description="before the split (see patterntesting-parent)" >
+      <action dev="oboehm" type="update">
+        See patterntesting-parent for the history.
+      </action>
+    </release>
+
+  </body>
+
+</document>

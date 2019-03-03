@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>What is PatternTesting-Check.CT?</title>
+    <author email="vmassol@apache.org">Vincent Massol</author>
+  </properties>
+
+  <body>
+
+    <section name="Introduction">
+      <p>
+        Every project defines a set of rules that all (or most :-)) developers 
+        agree on. These rules can be coding conventions, naming conventions or
+        at a higher level architecture decisions or best practices.
+      </p>
+      <p>
+      	Usually these rules are either mentioned verbally or written in a 
+      	"Developer Guide" (I am personnally using an internal Wiki
+      	web site for sharing this best practices knowledge). However, it is
+      	not enough. How am I going to verify that I have properly coded 
+      	against these rules?
+      </p>
+      <p>
+      	So far, there was only one solution: code review. Be it continuously
+      	with Pair programming or at some point in time with tech leads or 
+      	peers performing the review. Wouldn't it be nice if I could have a
+      	suite of tests that could automatically check this? In the same 
+      	spirit a JUnit test suite verifies that code does what it is expected
+      	to do. But this time, we would check that not only the code does what
+      	it is supposed to do but also that it does it the way we have defined
+      	it!
+      </p>
+      <p>
+      	There are several tools available to check coding and naming
+        conventions (See the <a href="resources.html">Resource</a> section),
+        but there are none to perform architecture/design best practices.
+      </p>
+      <p>
+        ... until now ....
+      </p>
+      <p>
+      	Pattern Testing is about providing the means to
+      	<strong>automatically</strong> check for 
+      	Architecture/Design/Implementation decisions.
+      </p>
+      <p>
+      	PatternTesting Check.CT is the static part for the checks
+      	during compile time.
+      </p>
+            
+    </section>
+
+    <section name="Some examples">
+
+      <p>
+      	Here are some examples of automated checks that the
+      	PatternTesting-Check framework allows:
+      </p>
+      <ul>
+        <li>
+          Verify that no calls to any method in our application is allowed 
+          to use <code>null</code>,
+        </li>
+        <li>
+          Verify that no method returns <code>null</code> in our application,
+        </li>
+        <li>
+          Verify that no <code>System.out.println()</code> are used anywhere
+          (should use the project defined logging facility instead),
+        </li>
+      </ul>
+      <p>
+        In the future there may be more automated checks that the
+        PatternTesting-Check framework allows:
+      </p>
+      <ul>
+      	<li>
+          Verify that all calls to the database go through a
+          <code>JdbcDataAccess</code> class and that none uses JDBC directly,
+      	</li>
+      	<li>
+          Verify that stateless classes (Thread Safe classes in Avalon
+          terminology, Singleton or "static classes" in other terminologies)
+          are not allowed to set instance variables except at initialisation
+          time,          
+      	</li>
+      	<li>
+          Verify that the "control" layer (for exemple for a web application)
+          is only allowed to talk to the "service" layer (implementation of
+          the use cases) and not to the "persistence" layer (for example), 
+      	</li>
+      	<li>
+          Verify that any application exception must be a subclass of 
+          <code>BusinessException</code>, <code>TechnicalException</code> or 
+          <code>CriticalException</code>,
+      	</li>
+      	<li>
+          Verify that the MVC model is applied consistently. For example,
+          verify that any call to the service layer has been through an
+          Action class (if you're using Struts for example),
+      	</li>
+      	<li>
+          Verify that exceptions are only logged at the top level,
+      	</li>
+      	<li>
+          Verify that for any use case, a maximum number of 5 SQL queries 
+          to the database is allowed,
+      	</li>
+      	<li>
+      	  etc...
+      	</li>
+      </ul>      
+
+      <p>
+      	The power is almost endless...
+      </p>
+      
+    </section>
+
+  </body>
+
+</document>

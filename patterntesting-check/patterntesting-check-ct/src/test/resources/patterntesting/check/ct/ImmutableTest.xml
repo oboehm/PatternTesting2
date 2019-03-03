@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<patterntesting>
+    <patterntesting-report>
+        <file name="/somewhere/patterntesting-check-ct/src/test/sample/patterntesting/check/ct/ImmutableSample.java">
+            <warning line="37">declare attribute as final or transient in immutable object</warning>
+            <warning line="47">do not change attribute in immutable object (declare it final)</warning>
+            <warning line="49">don't use non final or non transient attributes in immutable object</warning>
+        </file>
+    </patterntesting-report>
+</patterntesting>
