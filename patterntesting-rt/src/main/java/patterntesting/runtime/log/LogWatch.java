@@ -26,6 +26,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.Format;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * The Class LogWatch is a simple stop watch to be able to measure and log code
@@ -164,7 +165,7 @@ public final class LogWatch extends StopWatch {
 	 */
 	public static String getTimeAsString(final double timeInMillis, final Locale locale) {
 		if (timeInMillis > 1.0) {
-			return getTimeAsString((long) timeInMillis);
+			return getTimeAsString((long) timeInMillis, locale);
 		}
 		Format nf = new DecimalFormat("#.###", new DecimalFormatSymbols(locale));
 		return nf.format(timeInMillis) + " ms";
@@ -182,12 +183,25 @@ public final class LogWatch extends StopWatch {
      * @since 2.0
      */
     public static String getTimeAsString(final long timeInMillis) {
-        if (timeInMillis > 300000L) {
-            return ((timeInMillis + 30000L) / 60000L) + " minutes";
-        } else if (timeInMillis > 5000L) {
-            return ((timeInMillis + 500L) / 1000L) + " seconds";
-        }
-        return timeInMillis + " ms";
+    	return getTimeAsString(timeInMillis, Locale.ENGLISH);
     }
+
+	/**
+	 * Gets the time as string with the corresponding unit. Unit can be "ms"
+	 * (for milliseconds) or "seconds".
+	 *
+	 * @param timeInMillis the time in millis
+	 * @param locale the locale
+	 * @return the time as string
+	 */
+	public static String getTimeAsString(final long timeInMillis, final Locale locale) {
+		ResourceBundle bundle = ResourceBundle.getBundle("patterntesting.runtime.log.messages", locale);
+		if (timeInMillis > 300000L) {
+			return ((timeInMillis + 30000L) / 60000L) + bundle.getString("minutes");
+		} else if (timeInMillis > 5000L) {
+			return ((timeInMillis + 500L) / 1000L) + bundle.getString("seconds");
+		}
+		return timeInMillis + " ms";
+	}
 
 }

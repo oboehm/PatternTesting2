@@ -24,6 +24,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.util.ThreadUtil;
 
+import java.util.Locale;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -92,6 +94,12 @@ public class LogWatchTest {
         long t1 = watch.getTimeInNanos();
         long t2 = watch.getTimeInNanos();
         assertEquals(t1, t2);
+    }
+
+    @Test
+    public void testGetTimeAsString() {
+        String s = LogWatch.getTimeAsString(15000.0, Locale.GERMAN);
+        assertThat(s, not(containsString("second")));
     }
 
 }
