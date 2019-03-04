@@ -195,11 +195,14 @@ public final class LogWatch extends StopWatch {
 	 * @return the time as string
 	 */
 	public static String getTimeAsString(final long timeInMillis, final Locale locale) {
-		ResourceBundle bundle = ResourceBundle.getBundle("patterntesting.runtime.log.messages", locale);
-		if (timeInMillis > 300000L) {
-			return ((timeInMillis + 30000L) / 60000L) + bundle.getString("minutes");
+		ResourceBundle bundle = ResourceBundle.getBundle("patterntesting.runtime.log.messages", locale,
+				ResourceBundle.Control.getNoFallbackControl(ResourceBundle.Control.FORMAT_DEFAULT));
+		if (timeInMillis > 18000000L) {
+			return ((timeInMillis + 1800000L) / 3600000L) + " " + bundle.getString("hours");
+		} else if (timeInMillis > 300000L) {
+			return ((timeInMillis + 30000L) / 60000L) + " " + bundle.getString("minutes");
 		} else if (timeInMillis > 5000L) {
-			return ((timeInMillis + 500L) / 1000L) + bundle.getString("seconds");
+			return ((timeInMillis + 500L) / 1000L) + " " + bundle.getString("seconds");
 		}
 		return timeInMillis + " ms";
 	}

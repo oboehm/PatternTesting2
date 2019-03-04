@@ -102,4 +102,10 @@ public class LogWatchTest {
         assertThat(s, not(containsString("second")));
     }
 
+    @Test
+    public void getGetHoursAsString() {
+        String s = LogWatch.getTimeAsString(6 * 3600 * 1000L, Locale.ENGLISH);
+        assertEquals("6 hours", s);
+    }
+
 }
