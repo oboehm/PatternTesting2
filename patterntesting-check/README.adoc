@@ -1,0 +1,14 @@
+https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-rt[image:https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-rt/badge.svg[Maven Metadata]]
+
+
+
+= What Is patterntesting-check?
+
+PatternTesting Check (patterntesting-check) is a quality framework that allows to automatically verify that Architecture/Design recommendations are implemented correctly in the code.
+It provides different checks of known anti patterns (like using System.out for logging) but provides also a test framework for better testing.
+
+
+
+== More Infos
+
+general link:../README.md[README]

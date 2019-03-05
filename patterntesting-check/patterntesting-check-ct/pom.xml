@@ -79,9 +79,8 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:cvs:pserver:anonymous@patterntesting.cvs.sourceforge.net:/cvsroot/patterntesting:PatternTesting10/patterntesting-check-ct</connection>
-    <url>http://patterntesting.cvs.sourceforge.net/viewvc/patterntesting/PatternTesting10/patterntesting-check-ct/</url>
-    <tag>patterntesting-1_3_0</tag>
+    <connection>scm:git:git://github.com/oboehm/PatternTesting2.git/patterntesting-check/patterntesting-check-ct</connection>
+    <url>https://github.com/oboehm/PatternTesting2/patterntesting-check/patterntesting-check-ct</url>
   </scm>
 
   <developers>
