@@ -20,9 +20,11 @@
 
 package patterntesting.check.ct.exception;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import patterntesting.annotation.check.ct.SuppressIllegalArgumentExceptionWarning;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit tests for the IllegalArgumentExceptionAspect.
@@ -51,9 +53,9 @@ public class IllegalArgumentExceptionTest {
     /**
      * Test throwing allowed.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testThrowingAllowed() {
-        throwIllegalArgumentException("bumm");
+        assertThrows(IllegalArgumentException.class, () -> throwIllegalArgumentException("bumm"));
     }
 
     private static void throwIllegalArgumentException(final String msg) {
@@ -66,9 +68,9 @@ public class IllegalArgumentExceptionTest {
      * should see the warning at the throw statement.
      */
     @SuppressIllegalArgumentExceptionWarning
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testWarning() {
-        throw new IllegalArgumentException();
+        assertThrows(IllegalArgumentException.class, () -> {throw new IllegalArgumentException();});
     }
 
 }

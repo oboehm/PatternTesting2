@@ -19,9 +19,10 @@
  */
 package patterntesting.check.ct.io;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 import org.junit.*;
 import org.apache.logging.log4j.*;
@@ -92,7 +93,7 @@ public final class StreamTest {
     //@EnableStreamWarning
     protected static void writeStream(final String phrase) throws IOException {
         OutputStream ostream = new FileOutputStream(tmpfile);
-        ostream.write(phrase.getBytes("ASCII"));
+        ostream.write(phrase.getBytes(StandardCharsets.US_ASCII));
         ostream.close();
     }
 
@@ -113,7 +114,7 @@ public final class StreamTest {
         if (n <= 0) {
             throw new IOException("nothing read from " + tmpfile);
         }
-        return new String(buffer, "ASCII");
+        return new String(buffer, StandardCharsets.US_ASCII);
     }
 
 }

@@ -19,7 +19,7 @@
  */
 package patterntesting.check.ct.io;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import patterntesting.annotation.check.ct.SuppressSystemOutWarning;
 

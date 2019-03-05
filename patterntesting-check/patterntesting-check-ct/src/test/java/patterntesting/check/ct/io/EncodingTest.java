@@ -19,9 +19,10 @@
  */
 package patterntesting.check.ct.io;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.*;
@@ -50,7 +51,7 @@ public final class EncodingTest {
      */
     @Before
     public void setUpStreams() throws UnsupportedEncodingException {
-        istream = new ByteArrayInputStream(INPUT.getBytes("ASCII"));
+        istream = new ByteArrayInputStream(INPUT.getBytes(StandardCharsets.US_ASCII));
         ostream = new ByteArrayOutputStream();
     }
     

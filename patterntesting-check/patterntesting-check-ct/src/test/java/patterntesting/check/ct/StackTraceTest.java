@@ -1,7 +1,5 @@
-/**
- * $Id: StackTraceTest.java,v 1.4 2016/01/06 20:47:42 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+/*
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +17,7 @@
  */
 package patterntesting.check.ct;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import patterntesting.annotation.check.ct.SuppressStackTraceWarning;
 
