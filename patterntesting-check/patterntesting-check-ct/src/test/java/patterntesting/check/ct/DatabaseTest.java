@@ -1,7 +1,5 @@
 /**
- * $Id: DatabaseTest.java,v 1.9 2016/01/06 20:47:42 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,16 +17,16 @@
  */
 package patterntesting.check.ct;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 import java.sql.Date;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import patterntesting.annotation.check.ct.*;
 import patterntesting.runtime.annotation.IntegrationTest;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * This is the JUnit testcase for (Abstract)DatabaseAspect.
@@ -51,7 +49,7 @@ public class DatabaseTest extends AbstractAcjXmlTest {
         long currentTimeMillis = System.currentTimeMillis();
         Date now = new Date(currentTimeMillis);
         Date later = new Date(currentTimeMillis + 100);
-        assertTrue(now + " is not before " + later, now.before(later));
+        assertTrue(now.before(later), now + " is not before " + later);
     }
 
     /**
