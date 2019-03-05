@@ -20,8 +20,6 @@
 
 package patterntesting.check.ct;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -31,9 +29,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.*;
 import org.custommonkey.xmlunit.*;
 import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.xml.sax.SAXException;
 
 import patterntesting.tool.aspectj.AjcXml;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * This abstract class sets up the AjcXml compiler for testing inside
@@ -49,7 +50,7 @@ public abstract class AbstractAcjXmlTest {
     /**
      * We want to tell XMLUnit to ignore white spaces.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpXMLUnit() {
         XMLUnit.setIgnoreWhitespace(true);
     }
@@ -60,7 +61,7 @@ public abstract class AbstractAcjXmlTest {
      *
      * @return the setup AcjXml compiler
      */
-    public static final AjcXml createAjcXml() {
+    public static AjcXml createAjcXml() {
         AjcXml compiler = new AjcXml();
         compiler.addSrcdir("src/test/sample");
         compiler.addSrcdir("src/main/aspect");
@@ -111,7 +112,7 @@ public abstract class AbstractAcjXmlTest {
 	        DetailedDiff details = new DetailedDiff(diff);
 	        List<Difference> allDiffs = details.getAllDifferences();
 	        int errors = countErrors(allDiffs);
-	        assertEquals(diff.toString(), 0, errors);
+	        assertEquals(0, errors, diff.toString());
         }
     }
 

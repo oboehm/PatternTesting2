@@ -1,7 +1,5 @@
-/**
- * $Id: ImmutableTest.java,v 1.11 2016/12/18 21:58:55 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+/*
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,18 +17,18 @@
  */
 package patterntesting.check.ct;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 
 import javax.annotation.concurrent.Immutable;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import patterntesting.runtime.annotation.IntegrationTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * With this test class you can check if the ImmutableAspect is working
