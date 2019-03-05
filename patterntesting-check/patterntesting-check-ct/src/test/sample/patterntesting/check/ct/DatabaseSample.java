@@ -21,11 +21,11 @@ package patterntesting.check.ct;
 
 import java.sql.Date;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import patterntesting.annotation.check.ct.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * This is the JUnit testcase for (Abstract)DatabaseAspect.
@@ -46,7 +46,7 @@ public class DatabaseSample {
         long currentTimeMillis = System.currentTimeMillis();
         Date now = new Date(currentTimeMillis);
         Date later = new Date(currentTimeMillis + 100);
-        assertTrue(now + " is not before " + later, now.before(later));
+        assertTrue(now.before(later), now + " is not before " + later);
     }
 
 }

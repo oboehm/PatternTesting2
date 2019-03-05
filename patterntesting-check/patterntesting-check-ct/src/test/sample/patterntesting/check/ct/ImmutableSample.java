@@ -17,7 +17,7 @@
  */
 package patterntesting.check.ct;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.concurrent.Immutable;
 
