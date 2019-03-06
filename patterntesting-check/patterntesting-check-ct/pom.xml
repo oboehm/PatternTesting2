@@ -140,10 +140,6 @@
   <dependencies>
     <dependency>
       <groupId>org.patterntesting</groupId>
-      <artifactId>patterntesting-rt</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.patterntesting</groupId>
       <artifactId>patterntesting-tools</artifactId>
       <exclusions>
         <exclusion>
@@ -161,6 +157,12 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+    </dependency>
+    <!-- not only for testing -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 

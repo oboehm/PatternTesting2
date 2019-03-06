@@ -46,8 +46,23 @@ public final class OnlyForTestingTest extends AbstractAcjXmlTest {
     @Test
     public void testJUnit4Errors() throws IOException, SAXException {
         checkErrors("patterntesting/check/ct/junit4/OnlyForTesting4Test.java,"
-                + "patterntesting/check/ct/*OnlyForTestingAspect.aj",
+                        + "patterntesting/check/ct/*OnlyForTestingAspect.aj",
                 "junit4/OnlyForTesting4Test.xml");
+    }
+
+    /**
+     * Here we use the AjcXml extension of patterntesting-tools which allows
+     * us to call the AspectJ compiler (ajc) and get the compiler output as
+     * XML result.
+     *
+     * @throws IOException if XML resource can't be read
+     * @throws SAXException if XML can't be parsed
+     */
+    @Test
+    public void testJUnit5Errors() throws IOException, SAXException {
+        checkErrors("patterntesting/check/ct/junit5/OnlyForTesting5Test.java,"
+                        + "patterntesting/check/ct/*OnlyForTestingAspect.aj",
+                "junit5/OnlyForTesting5Test.xml");
     }
 
 }

@@ -1,7 +1,5 @@
-/**
- * $Id: AbstractOnlyForTestingAspect.aj,v 1.2 2012/01/31 19:19:29 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+/*
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,6 +42,7 @@ public abstract aspect AbstractOnlyForTestingAspect {
      * JUnit3 test methods as test methods.
      * <br/>
      * Ex: <code>public pointcut applicationCode(): withincode(TestCase+.test*)</code>
+     *
      * @see OnlyForTestingAspect
      */
     public abstract pointcut testCode();

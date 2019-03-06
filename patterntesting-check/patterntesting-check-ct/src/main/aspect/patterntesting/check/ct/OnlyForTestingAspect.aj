@@ -1,7 +1,5 @@
-/**
- * $Id: OnlyForTestingAspect.aj,v 1.2 2011/12/29 16:46:18 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+/*
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,14 +37,20 @@ public aspect OnlyForTestingAspect extends AbstractOnlyForTestingAspect {
      * but also the setup and teardown methods.
      */
     public pointcut testCode() :
-        testJUnit4Code() || @withincode(OnlyForTesting)
+        testJUnit4Code() || testJUnit5Code() || @withincode(OnlyForTesting)
             || @within(OnlyForTesting);
             ;
-    
+
     private pointcut testJUnit4Code():
-        @withincode(Test)
-            || @withincode(Before) || @withincode(BeforeClass)
-            || @withincode(After)  || @withincode(AfterClass)
+            @withincode(Test)
+                    || @withincode(Before) || @withincode(BeforeClass)
+                    || @withincode(After)  || @withincode(AfterClass)
             ;
-    
+
+    private pointcut testJUnit5Code():
+            @withincode(org.junit.jupiter.api.Test)
+                    || @withincode(org.junit.jupiter.api.BeforeEach) || @withincode(org.junit.jupiter.api.BeforeAll)
+                    || @withincode(org.junit.jupiter.api.AfterEach)  || @withincode(org.junit.jupiter.api.AfterAll)
+            ;
+
 }
