@@ -1,7 +1,5 @@
 /*
- * $Id: EncodingTest.java,v 1.4 2016/12/18 21:58:55 oboehm Exp $
- *
- * Copyright (c) 2009 by Oliver Boehm
+ * Copyright (c) 2009-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +23,11 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.*;
 import org.apache.logging.log4j.*;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import patterntesting.annotation.check.ct.SuppressEncodingWarning;
 
 /**
@@ -45,12 +45,10 @@ public final class EncodingTest {
     private ByteArrayOutputStream ostream;
     
     /**
-     * Sets the up streams.
-     *
-     * @throws UnsupportedEncodingException the unsupported encoding exception
+     * Sets up the streams for testing.
      */
-    @Before
-    public void setUpStreams() throws UnsupportedEncodingException {
+    @BeforeEach
+    public void setUpStreams() {
         istream = new ByteArrayInputStream(INPUT.getBytes(StandardCharsets.US_ASCII));
         ostream = new ByteArrayOutputStream();
     }
@@ -60,7 +58,7 @@ public final class EncodingTest {
      *
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    @After
+    @AfterEach
     public void closeStreams() throws IOException {
         istream.close();
         ostream.close();
