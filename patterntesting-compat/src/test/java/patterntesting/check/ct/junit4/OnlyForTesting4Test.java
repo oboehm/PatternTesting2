@@ -1,6 +1,4 @@
 /*
- * $Id: OnlyForTesting4Test.java,v 1.3 2016/12/18 21:58:55 oboehm Exp $
- *
  * Copyright (c) 2008 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +15,7 @@
  *
  * (c)reated 19.02.2009 by oliver (ob@oasd.de)
  */
-package patterntesting.check.ct.junit;
+package patterntesting.check.ct.junit4;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.*;
