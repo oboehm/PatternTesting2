@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
     $Id: pom.xml,v 1.74 2017/08/12 20:25:30 oboehm Exp $
 
@@ -23,26 +24,122 @@
     (c)reated 17-Nov-08 by ob@aosd.de
 	last up$Date: 2017/08/12 20:25:30 $ by $Author: oboehm $
 -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!-- 
+      The Basics
+      must be set if you want to upload it to the Central Repository
+      see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+   -->
+  <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.patterntesting</groupId>
     <artifactId>patterntesting-parent</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
-	
-  <!-- 
-      The Basics
-      must be set if you want to upload it to the Central Repository
-      see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
-   -->	
-  <modelVersion>4.0.0</modelVersion>
   <groupId>org.patterntesting</groupId>
   <artifactId>patterntesting-check</artifactId>
   <packaging>pom</packaging>
   <name>patterntesting-check</name>
-  
+  <description>PatternTesting Check (patterntesting-check) is a quality framework that 
+    allows to automatically verify that Architecture/Design recommendations
+    are implemented correctly in the code.
+    It provides different checks of known anti patterns (like using System.out
+    for logging) but provides also a test framework for better testing.</description>
+
+  <modules>
+    <module>patterntesting-check-ct</module>
+  </modules>
+
+  <!-- 
+      General Properties
+      (see parent POM)
+   -->
+  <properties>
+    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/check/</patterntesting.site.artifact.dir>
+  </properties>
+
+  <!-- 
+      L I B R A R I E S
+      see http://www.ibiblio.org/maven2/ for available libraries
+   -->
+  <dependencies>
+    <dependency>
+      <groupId>org.patterntesting</groupId>
+      <artifactId>patterntesting-rt</artifactId>
+    </dependency>
+  </dependencies>
+
+  <!-- Build Settings -->
+  <build>
+    <plugins>
+      <!--
+          AspectJ compiler
+          @see http://www.mail-archive.com/user@mojo.codehaus.org/msg00157.html
+          @see http://mail-archives.apache.org/mod_mbox/maven-users/200601.mbox/%3CB39B8F0E-BB20-44DB-96B3-3C7FCB85B594@gmail.com%3E
+          @see http://mojo.codehaus.org/aspectj-maven-plugin/differentTestAndCompile.html
+       -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>aspectj-maven-plugin</artifactId>
+        <configuration>
+          <source>${maven.compile.source}</source>
+          <target>${maven.compile.target}</target>
+          <complianceLevel>${maven.compile.complianceLevel}</complianceLevel>
+          <options>
+            <option>-verbose</option>
+            <option>-showWeaveInfo</option>
+          </options>
+          <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
+          <aspectLibraries>
+            <aspectLibrary>
+              <groupId>org.patterntesting</groupId>
+              <artifactId>patterntesting-rt</artifactId>
+            </aspectLibrary>
+          </aspectLibraries>
+        </configuration>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
+            </configuration>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+            <configuration>
+              <ajdtBuildDefFile>src/test/build.ajproperties</ajdtBuildDefFile>
+            </configuration>
+          </execution>
+          <execution>
+            <id>reports</id>
+            <goals>
+              <goal>aspectj-report</goal>
+            </goals>
+            <phase>site</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <extensions>
+      <!-- Enabling the use of FTP -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ftp</artifactId>
+      </extension>
+    </extensions>
+  </build>
+  <url>http://patterntesting.org/release/check/</url>
+
+  <inceptionYear>2002</inceptionYear>
+
   <!-- see http://maven.apache.org/pom.html#Licenses -->
   <licenses>
     <license>
@@ -50,20 +147,53 @@
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
-  <url>http://patterntesting.org/release/check/</url>
 
-  <inceptionYear>2002</inceptionYear>
-  <description>
-    PatternTesting Check (patterntesting-check) is a quality framework that 
-    allows to automatically verify that Architecture/Design recommendations
-    are implemented correctly in the code.
-    It provides different checks of known anti patterns (like using System.out
-    for logging) but provides also a test framework for better testing.
-  </description>
-  
-  <modules>
-    <module>patterntesting-check-ct</module>
-  </modules>
+  <developers>
+    <developer>
+      <id>vmassol</id>
+      <name>Vincent Massol</name>
+      <email>vmassol@pivolis.com</email>
+      <organization>Pivolis</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>ojojo</id>
+      <name>Matt Smith</name>
+      <email>matt@ojojo.com</email>
+      <organization>ojojo</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>oboehm</id>
+      <name>Oliver Boehm</name>
+      <email>ob@aosd.de</email>
+      <url>http://www.aosd.de/</url>
+      <organization>agentes AG</organization>
+      <organizationUrl>http://www.agentes.de</organizationUrl>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+  </developers>
+  <contributors>
+    <contributor>
+      <name>Shohara Shaikh</name>
+      <email></email>
+      <organization>KPIT Cummins</organization>
+      <roles>
+        <role>Java Devleoper</role>
+      </roles>
+    </contributor>
+  </contributors>
+
+  <scm>
+    <connection>scm:git:git://github.com/oboehm/PatternTesting2.git/patterntesting-check</connection>
+    <url>https://github.com/oboehm/PatternTesting2/patterntesting-check/</url>
+  </scm>
 
   <!-- 
       Deployment
@@ -82,138 +212,6 @@
     </site>
   </distributionManagement>
 
-  <scm>
-    <connection>scm:git:git://github.com/oboehm/PatternTesting2.git/patterntesting-check</connection>
-    <url>https://github.com/oboehm/PatternTesting2/patterntesting-check/</url>
-  </scm>
-
-  <developers>
-    <developer>
-      <name>Vincent Massol</name>
-      <id>vmassol</id>
-      <email>vmassol@pivolis.com</email>
-      <organization>Pivolis</organization>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Matt Smith</name>
-      <id>ojojo</id>
-      <email>matt@ojojo.com</email>
-      <organization>ojojo</organization>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Oliver Boehm</name>
-      <id>oboehm</id>
-      <email>ob@aosd.de</email>
-      <url>http://www.aosd.de/</url>
-      <organization>agentes AG</organization>
-      <organizationUrl>http://www.agentes.de</organizationUrl>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-  </developers>
-  <contributors>
-    <contributor>
-      <name>Shohara Shaikh</name>
-      <email />
-      <organization>KPIT Cummins</organization>
-      <roles>
-        <role>Java Devleoper</role>
-      </roles>
-    </contributor>
-  </contributors>
-  
-  <!-- 
-      General Properties
-      (see parent POM)
-   -->
-  <properties>
-    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/check/</patterntesting.site.artifact.dir>
-  </properties> 
-
-  <!-- 
-      L I B R A R I E S
-      see http://www.ibiblio.org/maven2/ for available libraries
-   -->
-  <dependencies>
-    <dependency>
-      <groupId>org.patterntesting</groupId>
-      <artifactId>patterntesting-rt</artifactId>
-    </dependency>
-  </dependencies>
-
-  <!-- Build Settings -->
-  <build>
-    <extensions>
-      <!-- Enabling the use of FTP -->
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-         <artifactId>wagon-ftp</artifactId>
-      </extension>
-    </extensions>
-    <plugins>
-      <!--
-          AspectJ compiler
-          @see http://www.mail-archive.com/user@mojo.codehaus.org/msg00157.html
-          @see http://mail-archives.apache.org/mod_mbox/maven-users/200601.mbox/%3CB39B8F0E-BB20-44DB-96B3-3C7FCB85B594@gmail.com%3E
-          @see http://mojo.codehaus.org/aspectj-maven-plugin/differentTestAndCompile.html
-       -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>aspectj-maven-plugin</artifactId>
-        <configuration>
-          <source>${maven.compile.source}</source>
-          <target>${maven.compile.target}</target>
-          <complianceLevel>${maven.compile.complianceLevel}</complianceLevel>
-          <options>
-            <option>-verbose</option>
-            <option>-showWeaveInfo</option>             
-          </options>
-          <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
-          <aspectLibraries>
-            <aspectLibrary>
-              <groupId>org.patterntesting</groupId>
-              <artifactId>patterntesting-rt</artifactId>
-            </aspectLibrary>
-          </aspectLibraries>
-        </configuration>
-        <executions>
-          <execution>
-            <id>compile</id>
-            <configuration>
-              <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
-            </configuration>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>test-compile</id>
-            <configuration>
-              <ajdtBuildDefFile>src/test/build.ajproperties</ajdtBuildDefFile>
-            </configuration>
-            <goals>
-              <goal>test-compile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>reports</id>
-            <phase>site</phase>
-            <goals>
-              <goal>aspectj-report</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-  
   <profiles>
     <profile>
       <id>local-site</id>
@@ -235,9 +233,12 @@
             <artifactId>maven-antrun-plugin</artifactId>
             <executions>
               <execution>
+                <goals>
+                  <goal>run</goal>
+                </goals>
                 <phase>site</phase>
                 <configuration>
-                  <tasks name="install.reports" description="copy reports to local site">
+                  <tasks description="copy reports to local site" name="install.reports">
                     <!--
                       Place any ant task here. You can add anything
                       you can add between <target> and </target> in a
@@ -245,13 +246,10 @@
                     -->
                     <echo>copying reports...</echo>
                     <copy todir="${patterntesting.site.dir}/check/" verbose="false">
-                      <fileset dir="target/site" />
+                      <fileset dir="target/site"></fileset>
                     </copy>
                   </tasks>
                 </configuration>
-                <goals>
-                  <goal>run</goal>
-                </goals>
               </execution>
             </executions>
           </plugin>
