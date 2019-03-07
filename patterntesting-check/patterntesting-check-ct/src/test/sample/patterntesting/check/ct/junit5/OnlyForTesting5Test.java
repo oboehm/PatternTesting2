@@ -15,7 +15,7 @@
  *
  * (c)reated 06.03.2019 by oliver (ob@oasd.de)
  */
-package patterntesting.check.ct.junit;
+package patterntesting.check.ct.junit4;
 
 import org.apache.commons.logging.*;
 import org.junit.jupiter.api.Test;

@@ -28,7 +28,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.*;
 import org.custommonkey.xmlunit.*;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeAll;
 import org.xml.sax.SAXException;
 

@@ -154,10 +154,6 @@
 	  <artifactId>xmlunit</artifactId>
 	  <scope>test</scope>
 	</dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
     <!-- not only for testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>

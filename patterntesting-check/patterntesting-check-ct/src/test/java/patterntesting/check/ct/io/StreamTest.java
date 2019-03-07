@@ -26,6 +26,9 @@ import java.nio.charset.StandardCharsets;
 
 import org.junit.*;
 import org.apache.logging.log4j.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Since JDK 1.1 you should use the Writer and Reader classes and not the
@@ -55,7 +58,7 @@ public final class StreamTest {
      *
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() throws IOException {
         tmpfile = File.createTempFile("test", ".txt");
     }
@@ -63,7 +66,7 @@ public final class StreamTest {
     /**
      * Tear down after class.
      */
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() {
         if (!tmpfile.delete()) {
             log.warn(tmpfile + " can't be deleted");

@@ -17,9 +17,6 @@
  */
 package patterntesting.check.ct;
 
-import org.junit.*;
-import patterntesting.annotation.check.ct.OnlyForTesting;
-
 /**
  * This aspect (together with AbstractOnlyForTestingAspect) declares an error
  * if methods annotated by "@OnlyForTesting" are not called from a test method.
@@ -37,14 +34,8 @@ public aspect OnlyForTestingAspect extends AbstractOnlyForTestingAspect {
      * but also the setup and teardown methods.
      */
     public pointcut testCode() :
-        testJUnit4Code() || testJUnit5Code() || @withincode(OnlyForTesting)
-            || @within(OnlyForTesting);
-            ;
-
-    private pointcut testJUnit4Code():
-            @withincode(Test)
-                    || @withincode(Before) || @withincode(BeforeClass)
-                    || @withincode(After)  || @withincode(AfterClass)
+        testJUnit5Code() || @withincode(patterntesting.annotation.check.ct.OnlyForTesting)
+            || @within(patterntesting.annotation.check.ct.OnlyForTesting);
             ;
 
     private pointcut testJUnit5Code():
