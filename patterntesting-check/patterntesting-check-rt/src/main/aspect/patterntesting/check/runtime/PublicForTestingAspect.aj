@@ -21,7 +21,6 @@ import junit.framework.TestCase;
 
 import org.aspectj.lang.*;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
-import org.junit.*;
 
 import patterntesting.annotation.check.ct.*;
 import patterntesting.annotation.check.runtime.*;
@@ -39,17 +38,6 @@ import patterntesting.runtime.util.*;
 public aspect PublicForTestingAspect {
 
     /**
-     * JUnit4 test or setup/teardown methods.
-     */
-    private pointcut belowJUnit4Methods() :
-        cflowbelow(execution(@Test * *..*()))
-        || cflowbelow(execution(@Before * *..*()))
-        || cflowbelow(execution(@BeforeClass * *..*()))
-        || cflowbelow(execution(@After * *..*()))
-        || cflowbelow(execution(@AfterClass * *..*()))
-        ;
-
-    /**
      * JUnit5 test or setup/teardown methods.
      */
     private pointcut belowJUnit5Methods() :
@@ -65,7 +53,7 @@ public aspect PublicForTestingAspect {
      * <code>@OnlyForTesting</code>.
      */
     private pointcut belowTestMethods() :
-        belowJUnit5Methods() || belowJUnit4Methods()
+        belowJUnit5Methods()
         || cflowbelow(execution(@OnlyForTesting * *..*()))
         || cflowbelow(execution(@OnlyForTesting *..new()))
         || cflowbelow(@within(OnlyForTesting))

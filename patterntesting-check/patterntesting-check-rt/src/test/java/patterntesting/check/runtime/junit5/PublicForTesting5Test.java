@@ -17,35 +17,34 @@
  *
  * (c)reated 18.03.2009 by oliver (ob@aosd.de)
  */
-package patterntesting.check.runtime.junit4;
+package patterntesting.check.runtime.junit5;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.junit.jupiter.api.*;
+import patterntesting.annotation.check.runtime.PublicForTesting;
+import patterntesting.runtime.util.Assertions;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import static org.junit.Assert.assertTrue;
 
-import java.lang.reflect.*;
-
-import org.apache.commons.logging.*;
-import org.junit.*;
-
-import patterntesting.annotation.check.runtime.PublicForTesting;
-import patterntesting.check.runtime.junit5.Dummy;
-import patterntesting.runtime.util.Assertions;
-
 /**
- * The Class PublicForTestingTest.
+ * This is the unit test class for the PublicForTestingAspect.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.4 $
- * @since 18.03.2009
+ * @since 2.0 (08.03.2019)
  */
-public final class PublicForTesting4Test {
+public final class PublicForTesting5Test {
 
-    private static final Log log = LogFactory.getLog(PublicForTesting4Test.class);
+    private static final Log log = LogFactory.getLog(PublicForTesting5Test.class);
 
     /**
      * Tests if PublicForTesting methods can be called from setUp method.
      * And if assertions are enabled.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setUpBeforeClass() {
         assertTrue("assertions should be enabled", Assertions.ENABLED);
         Dummy.hello();
@@ -55,7 +54,7 @@ public final class PublicForTesting4Test {
      * Tests if PublicForTesting methods can be called from setUp method.
      * And if assertions are enabled.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         assertTrue("assertions should be enabled", Assertions.ENABLED);
         Dummy.hello();
@@ -64,7 +63,7 @@ public final class PublicForTesting4Test {
     /**
      * Tests if PublicForTesting methods can be called from tearDown method.
      */
-    @After
+    @AfterEach
     public void tearDown() {
         Dummy.hello();
     }
@@ -72,7 +71,7 @@ public final class PublicForTesting4Test {
     /**
      * Tests if PublicForTesting methods can be called from tearDown method.
      */
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() {
         Dummy.hello();
     }
@@ -126,7 +125,7 @@ public final class PublicForTesting4Test {
      */
     public static void main(final String[] args) {
         log.info("calling @PublicForTesting method...");
-        PublicForTesting4Test.helloWorld();
+        PublicForTesting5Test.helloWorld();
         Dummy.hello();
     }
 
