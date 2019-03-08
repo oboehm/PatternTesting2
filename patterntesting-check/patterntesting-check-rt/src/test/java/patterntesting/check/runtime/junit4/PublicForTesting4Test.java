@@ -27,6 +27,7 @@ import org.apache.commons.logging.*;
 import org.junit.*;
 
 import patterntesting.annotation.check.runtime.PublicForTesting;
+import patterntesting.check.runtime.junit5.Dummy;
 import patterntesting.runtime.util.Assertions;
 
 /**
@@ -36,10 +37,9 @@ import patterntesting.runtime.util.Assertions;
  * @version $Revision: 1.4 $
  * @since 18.03.2009
  */
-public final class PublicForTestingTest {
+public final class PublicForTesting4Test {
 
-    private static final Log log = LogFactory
-            .getLog(PublicForTestingTest.class);
+    private static final Log log = LogFactory.getLog(PublicForTesting4Test.class);
 
     /**
      * Tests if PublicForTesting methods can be called from setUp method.
@@ -126,7 +126,7 @@ public final class PublicForTestingTest {
      */
     public static void main(final String[] args) {
         log.info("calling @PublicForTesting method...");
-        PublicForTestingTest.helloWorld();
+        PublicForTesting4Test.helloWorld();
         Dummy.hello();
     }
 

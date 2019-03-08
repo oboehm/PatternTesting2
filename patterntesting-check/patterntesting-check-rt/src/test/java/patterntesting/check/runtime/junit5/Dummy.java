@@ -1,7 +1,5 @@
-/**
- * $Id: Dummy.java,v 1.6 2016/12/18 21:59:31 oboehm Exp $
- *
- * Copyright (c) 2009 by Oliver Boehm
+/*
+ * Copyright (c) 2009-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +15,7 @@
  *
  * (c)reated 18.03.2009 by oliver (ob@aosd.de)
  */
-package patterntesting.check.runtime.junit4;
+package patterntesting.check.runtime.junit5;
 
 import org.apache.logging.log4j.*;
 

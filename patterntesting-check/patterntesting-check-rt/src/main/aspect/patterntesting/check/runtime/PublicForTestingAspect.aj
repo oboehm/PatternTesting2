@@ -1,7 +1,5 @@
-/**
- * $Id: PublicForTestingAspect.aj,v 1.4 2016/08/13 20:40:57 oboehm Exp $
- *
- * Copyright (c) 2009 by Oliver Boehm
+/*
+ * Copyright (c) 2009-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,15 +37,6 @@ import patterntesting.runtime.util.*;
  * @since 18.03.2009
  */
 public aspect PublicForTestingAspect {
-    
-    /**
-     * JUnit3 test or setup/teardown methods.b
-     */
-    private pointcut belowJUnit3Methods() :
-        cflowbelow(execution(public void TestCase+.test*()))
-        || cflowbelow(execution(* TestCase+.setUp()))
-        || cflowbelow(execution(* TestCase+.tearDown()))
-        ;
 
     /**
      * JUnit4 test or setup/teardown methods.
@@ -61,11 +50,22 @@ public aspect PublicForTestingAspect {
         ;
 
     /**
+     * JUnit5 test or setup/teardown methods.
+     */
+    private pointcut belowJUnit5Methods() :
+            cflowbelow(execution(@org.junit.jupiter.api.Test * *..*()))
+                    || cflowbelow(execution(@org.junit.jupiter.api.BeforeEach * *..*()))
+                    || cflowbelow(execution(@org.junit.jupiter.api.BeforeAll * *..*()))
+                    || cflowbelow(execution(@org.junit.jupiter.api.AfterEach * *..*()))
+                    || cflowbelow(execution(@org.junit.jupiter.api.AfterAll * *..*()))
+            ;
+
+    /**
      * JUnit test or setup/teardown methods and methods marked with 
      * <code>@OnlyForTesting</code>.
      */
     private pointcut belowTestMethods() :
-        belowJUnit3Methods() || belowJUnit4Methods()
+        belowJUnit5Methods() || belowJUnit4Methods()
         || cflowbelow(execution(@OnlyForTesting * *..*()))
         || cflowbelow(execution(@OnlyForTesting *..new()))
         || cflowbelow(@within(OnlyForTesting))
