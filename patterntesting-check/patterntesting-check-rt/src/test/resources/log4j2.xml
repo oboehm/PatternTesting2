@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout
+        pattern="%3r %-5p[%4t]%-20.20c{3}: %m%n" />
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Logger name="patterntesting.check" level="debug"/>
+    <Logger name="patterntesting.annotation.check.runtime.SmokeTest" level="trace"/>
+    <Logger name="patterntesting.check.runtime.AbstractNullPointerTrap" level="trace"/>
+    <Logger name="patterntesting.check.runtime.AbstractTestThreadAspect" level="trace"/>
+    <Root level="info" additivity="false">
+      <AppenderRef ref="console" />
+    </Root>
+  </Loggers>
+</Configuration>

@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+
+<!-- 
+    $Id: changes.xml,v 1.46 2016/12/31 16:38:23 oboehm Exp $
+    
+    A kind of release notes. This document describes the changes in the
+    different releases.
+    
+    see http://maven.apache.org/plugins/maven-changes-plugin/usage.html
+    see http://maven.apache.org/plugins/maven-changes-plugin/changes.html
+ -->
+
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
+
+  <properties>
+    <title>Main changes</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+  
+    <release version="1.7.0" date="06-Jan-2017"
+             description="Java 7 version">
+      <action dev="oboehm" date="2016-12-04" type="update">
+        Switched to Log4j 2.
+      </action>
+    </release>
+
+    <release version="1.6.0" date="06-Jan-2016"
+             description="Java 6 version">
+      <action dev="oboehm" date="2016-01-06" type="remove">
+        Some deprecated classes and aspects were removed.
+      </action>
+      <action dev="oboehm" date="2015-12-30" type="update">
+        Java 5 will be no longer supported.
+      </action>
+    </release>
+
+    <release version="1.5.2" date="04-Jul-2015"
+             description="bug fix">
+      <action dev="oboehm" date="2015-06-25" type="update">
+        Only version updated.
+      </action>
+    </release>
+
+    <release version="1.5.1" date="26-Apr-2015"
+             description="@Zombie support">
+      <action dev="oboehm" date="2015-01-13" type="add"
+              issue="feature-requests/23/" system="SourceForge2">
+        ZombieAspect logs use of @Zombie classes and methods.
+      </action>
+    </release>
+    
+    <release version="1.5.0" date="06-Jan-2015"
+             description="PatternTesting Benchmark project added for micro-benchmarking">
+      <action dev="oboehm" date="2014-06-16" type="update">
+        Begin with next snapshot.
+      </action>
+    </release>
+
+    <release version="1.4.1" date="07-Apr-2014"
+             description="logger initialization">
+      <action dev="oboehm" date="2014-02-12" type="add"
+              issue="feature-requests/10/" system="SourceForge2">>
+        Detection of wrong logger initialization for different logging
+        frameworks (SLF4, Log4J, commons-logging, JDK).
+      </action>
+    </release>
+
+    <release version="1.4.0" date="06-Jan-2014"
+             description="JSR 305 support">
+      <action dev="oboehm" issue="feature-requests/37/" system="SourceForge2"
+              date="2013-11-29" type="fix">
+        NotNull annotation of JSR 305 is supported.
+      </action>
+    </release>
+
+    <release version="1.2.0" date="06-Jan-2012"
+             description="OSGi bundle">
+      <action dev="oboehm" date="2011-12-20" type="add">
+        Meta informatation for OSGi provided.
+      </action>
+      <action dev="oboehm" date="2011-07-29" type="update">
+        Switched from commons-logging to SLF4J.
+      </action>
+    </release>
+
+    <release version="1.1.0" date="22-Apr-2011"
+             description="version for Stuttgarter Test-Tage 2011">
+      <action dev="oboehm" date="2011-02-23" type="update">
+        Suppressing "adviceDidNotMatch" warning.
+      </action>
+    </release>
+
+    <release version="1.0.0" date="20-Jun-2010"
+             description="first org.patterntesting version">
+      <action dev="oboehm" issue="2941610" type="add" 
+              system="Sourceforge" date="2010-03-05">
+        JUnit classes and methods can now be marked as "@SmokeTest".
+      </action>
+      <action dev="oboehm" issue="2926501" type="fix" 
+              system="Sourceforge" date="2010-01-11">
+        @PublicForTesting works now also inside JUnit3 tests.
+      </action>
+      <action dev="oboehm" date="2010-01-05">
+        GroupId changed to "org.patterntesting".
+      </action>
+    </release>
+
+    <release version="0.9.8" date="20-Dec-2009"
+             description="Christmas version">
+      <action dev="oboehm" issue="2859497" type="fix" 
+              system="Sourceforge" date="2009-09-26">
+        Javadoc warnings and errors fixed (with the help of JAutodoc).
+      </action>
+    </release>
+  
+    <release version="0.9.7" date="14-Sep-2009"
+             description="JFS version">
+      <action dev="oboehm" type="update" date="2009-09-02">
+        NotNullAspect works now also for inner classes.
+      </action>
+      <action dev="oboehm" type="update" date="2009-06-14">
+        AbstractNullPointerAspect knows now @MayBeNull as parameter annotation.
+      </action>
+      <action dev="oboehm" type="update" date="2009-05-09">
+        Some XML files got now the schema references for better XML support
+        inside Eclipse.
+      </action>
+    </release>
+
+    <release version="0.9.6" date="02-May-2009"
+             description="version for Stuttgarter TestTage 2009">
+      <action dev="oboehm" type="update">
+        Some javadoc comments updated.
+      </action>
+    </release>
+
+    <release version="0.9.5" date="31-Mar-2009"
+             description="version for Giropay">
+      <action dev="oboehm" type="update">
+        patterntesting-check was splitted into patterntesting-check-ct
+        (compile time part with static checks) andF
+        pattertesting-check-rt (runtime part with dynamic checks).
+      </action>
+      <action dev="oboehm" issue="2719410" type="fix" 
+              system="Sourceforge" date="2009-03-29" >
+        ClasspathMonitor no longer hangs during access via jconsole
+        (was a build problem)
+      </action>
+    </release>
+
+    <release version="0.8.x" date="2008"
+             description="older versions">
+      <action dev="oboehm" type="update">
+        see PatternTesting Check
+      </action>
+    </release>
+
+  </body>
+
+</document>

@@ -1,0 +1,15 @@
+https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-check-rt[image:https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-check-rt/badge.svg[Maven Metadata]]
+
+
+
+= What Is patterntesting-check-rt?
+
+PatternTesting Check.RT (patterntesting-check-rt) provides different runtime
+checks of known anti patterns (like using null values as arguments or
+return values) but provides also a test framework for better testing.
+
+
+
+== More Infos
+
+general link:../README.md[README]

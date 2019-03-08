@@ -1,4 +1,4 @@
-https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-rt[image:https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-rt/badge.svg[Maven Metadata]]
+https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-check-rt[image:https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-check-rt/badge.svg[Maven Metadata]]
 
 
 

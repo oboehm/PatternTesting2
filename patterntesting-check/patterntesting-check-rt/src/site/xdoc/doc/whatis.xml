@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>What is PatternTesting Check.RT?</title>
+    <author email="vmassol@apache.org">Vincent Massol</author>
+  </properties>
+
+  <body>
+
+    <section name="Introduction">
+      <p>
+        Every project defines a set of rules that all (or most :-)) developers 
+        agree on. These rules can be coding conventions, naming conventions or
+        at a higher level architecture decisions or best practices.
+      </p>
+      <p>
+      	Usually these rules are either mentioned verbally or written in a 
+      	"Developer Guide" (I am personnally using an internal Wiki
+      	web site for sharing this best practices knowledge). However, it is
+      	not enough. How am I going to verify that I have properly coded 
+      	against these rules?
+      </p>
+      <p>
+      	So far, there was only one solution: code review. Be it continuously
+      	with Pair programming or at some point in time with tech leads or 
+      	peers performing the review. Wouldn't it be nice if I could have a
+      	suite of tests that could automatically check this? In the same 
+      	spirit a JUnit test suite verifies that code does what it is expected
+      	to do. But this time, we would check that not only the code does what
+      	it is supposed to do but also that it does it the way we have defined
+      	it!
+      </p>
+      <p>
+      	There are several tools available to check coding and naming
+        conventions (See the <a href="resources.html">Resource</a> section),
+        but there are none to perform architecture/design best practices.
+      </p>
+      <p>
+        ... until now ....
+      </p>
+      <p>
+      	PatternTesting Check is about providing the means to
+      	<strong>automatically</strong> check for 
+      	Architecture/Design/Implementation decisions.
+      	PatternTesting Check.RT is the runtime part of it.
+      </p>
+            
+    </section>
+
+    <section name="Some examples">
+
+      <p>
+      	Here are some examples of automated checks that the
+      	PatternTesting-Check.RT framework allows:
+      </p>
+      <ul>
+        <li>
+          Verify that no calls to any method in our application is allowed 
+          to use <code>null</code>,
+        </li>
+        <li>
+          Verify that no method returns <code>null</code> in our application,
+        </li>
+      </ul>
+
+      <p>
+      	The power is almost endless...
+      </p>
+      
+    </section>
+
+  </body>
+
+</document>

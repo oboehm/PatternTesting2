@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>Dokumentation</title>
+  </properties>
+
+  <body>
+
+    <section name="API-Doc">
+      <p>
+        Du hast die Wahl:
+        du kannst
+      </p>
+      <ul>
+        <li>
+          die <a href="../aspectj-report/overview-summary.html">AspectJ-Docs</a>,
+        </li>
+        <li>
+          die normalen <a href="../apidocs/index.html">JavaDocs</a> oder
+        </li>
+        <li>
+          die <a href="../testapidocs/index.html">Test-JavaDocs</a>
+        </li>
+      </ul>
+      <p>ausw&#228;hlen.</p>
+      <p>
+        Die AspectJ-Docs sind &#228;hnlich den Javadocs, enthalten aber auch
+        die AspectJ-Features wie Pointcuts, Advices, ...
+      </p>
+    </section>
+    
+    <section name="Beispiele">
+      <p>
+        Weitere Beispiele gibt es unter 
+        <a href="../../../samples/de/index.html">PatternTesting-Samples</a>.
+        Die Klasse
+        <a href="../../../samples/de/xref/patterntesting/sample/Config.html">patterntesting.sample.Config</a>
+        ist ein Beispiel, wie eine NullPointerException passieren kann.
+        Es ist aber auch ein Beispiel, wie
+        <a href="../../../runtime/de/aspectj-report/patterntesting/annotation/check/runtime/MayReturnNull.html">@MayReturnNull</a>
+        und
+        <a href="../../../runtime/de/aspectj-report/patterntesting/annotation/check/runtime/NullArgsAllowed.html">@NullArgsAllowed</a>
+        zusammen mit
+        <a href="../../../runtime/de/aspectj-report/patterntesting/annotation/check/runtime/NotNull.html">@NotNull</a>
+        eingesetzt werden kann.
+      </p>
+    </section>
+
+  </body>
+  
+</document>
