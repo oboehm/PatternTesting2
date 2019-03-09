@@ -17,8 +17,13 @@ script:
 
 after_success:
   - mvn integration-test jacoco:report coveralls:report
+  - bash <(curl -s https://codecov.io/bash)
 
 cache:
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/.sonar/cache'
+
+env:
+  global:
+    - CODECOV_TOKEN="7255b1c3-7273-43a9-b6ba-66637d44c23c"
