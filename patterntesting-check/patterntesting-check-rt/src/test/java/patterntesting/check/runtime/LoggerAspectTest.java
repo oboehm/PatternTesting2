@@ -20,9 +20,9 @@
 
 package patterntesting.check.runtime;
 
-import org.junit.Test;
 import org.apache.logging.log4j.*;
 
+import org.junit.jupiter.api.Test;
 import patterntesting.annotation.check.runtime.SuppressLoggerWarning;
 
 /**

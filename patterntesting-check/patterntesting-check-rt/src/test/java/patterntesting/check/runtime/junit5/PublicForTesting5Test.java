@@ -28,7 +28,7 @@ import patterntesting.runtime.util.Assertions;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * This is the unit test class for the PublicForTestingAspect.
@@ -46,7 +46,7 @@ public final class PublicForTesting5Test {
      */
     @BeforeAll
     public static void setUpBeforeClass() {
-        assertTrue("assertions should be enabled", Assertions.ENABLED);
+        assertTrue(Assertions.ENABLED, "assertions should be enabled");
         Dummy.hello();
     }
 
@@ -56,7 +56,7 @@ public final class PublicForTesting5Test {
      */
     @BeforeEach
     public void setUp() {
-        assertTrue("assertions should be enabled", Assertions.ENABLED);
+        assertTrue(Assertions.ENABLED, "assertions should be enabled");
         Dummy.hello();
     }
 

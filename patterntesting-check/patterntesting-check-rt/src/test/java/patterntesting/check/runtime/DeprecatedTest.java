@@ -1,7 +1,5 @@
-/**
- * $Id: DeprecatedTest.java,v 1.8 2016/12/18 21:59:31 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+/*
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +17,11 @@
  */
 package patterntesting.check.runtime;
 
-import org.junit.Test;
 import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.LogManager;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * The Class DeprecatedTest.
@@ -39,9 +39,9 @@ public final class DeprecatedTest extends AbstractRuntimeTest {
     /**
      * Test deprecated call.
      */
-    @Test(expected = RuntimeException.class)
+    @Test//(expected = RuntimeException.class)
     public void testDeprecatedCall() {
-        deprecatedMethod();
+        assertThrows(RuntimeException.class, DeprecatedTest::deprecatedMethod);
     }
 
     @Deprecated
@@ -52,26 +52,28 @@ public final class DeprecatedTest extends AbstractRuntimeTest {
     /**
      * Test get deprecated attribute.
      */
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testGetDeprecatedAttribute() {
-        log.info("deprecatedAttribute = " + deprecatedAttribute);
+        assertThrows(RuntimeException.class, () -> log.info("deprecatedAttribute = " + deprecatedAttribute));
     }
 
     /**
      * Test set deprecated attribute.
      */
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testSetDeprecatedAttribute() {
-        deprecatedAttribute = 2;
+        assertThrows(RuntimeException.class, () -> deprecatedAttribute = 2);
     }
 
     /**
      * Test create deprecated class.
      */
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testCreateDeprecatedClass() {
-        DeprecatedClass dc = new DeprecatedClass();
-        log.info(dc + " created.");
+        assertThrows(RuntimeException.class, () -> {
+            DeprecatedClass dc = new DeprecatedClass();
+            log.info(dc + " created.");
+        });
     }
 
 }

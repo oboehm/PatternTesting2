@@ -22,11 +22,13 @@ package patterntesting.check.runtime;
 
 import java.net.URI;
 
-import org.junit.Test;
 import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.LogManager;
 
+import org.junit.jupiter.api.Test;
 import patterntesting.check.runtime.test.ZombieClass;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Unit tests for the ZombieAspect.
@@ -49,10 +51,12 @@ public final class ZombieAspectTest extends AbstractRuntimeTest {
      * initialization of the {@link ZombieClass}.
      * </p>
      */
-    @Test(expected = ExceptionInInitializerError.class)
+    @Test
     public void testZombieClass() {
-        URI uri = ZombieClass.getRecipe();
-        LOG.info("uri = {}", uri);
+        assertThrows(ExceptionInInitializerError.class, () -> {
+            URI uri = ZombieClass.getRecipe();
+            LOG.info("uri = {}", uri);
+        });
     }
 
 }

@@ -19,12 +19,12 @@
  */
 package patterntesting.check.runtime;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.apache.commons.logging.impl.SimpleLog;
-import org.junit.Test;
 import org.apache.logging.log4j.*;
 
+import org.junit.jupiter.api.Test;
 import patterntesting.annotation.check.runtime.*;
 import patterntesting.runtime.annotation.LogThrowable;
 
@@ -44,17 +44,17 @@ public final class NullPointerTrapTest extends AbstractRuntimeTest {
 	/**
 	 * Test null arg.
 	 */
-    @Test(expected = AssertionError.class)
+    @Test
 	public void testNullArg() {
-	    echo(null);
+		assertThrows(AssertionError.class, () -> echo(null));
 	}
 
 	/**
 	 * Test null arg2.
 	 */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testNullArg2() {
-        echo("one", null);
+		assertThrows(AssertionError.class, () -> echo("one", null));
     }
 
 	/**
@@ -145,18 +145,18 @@ public final class NullPointerTrapTest extends AbstractRuntimeTest {
 	 * This test should fail because null as arguments and as return value is
 	 * not allowed for the echo method.
 	 */
-    @Test(expected = AssertionError.class)
+    @Test
 	public void testNullEcho() {
-    	echo(null);
+		assertThrows(AssertionError.class, () -> echo(null));
 	}
 
     /**
      * This test should fail because null as arguments and as return value is
      * not allowed for the staticEcho method.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testNullStaticEcho() {
-        echo(null);
+		assertThrows(AssertionError.class, () -> staticEcho(null));
     }
 
 	/**
@@ -164,7 +164,6 @@ public final class NullPointerTrapTest extends AbstractRuntimeTest {
 	 * in (Abstract)NullPointerTrap.
 	 *
 	 * @param s the s
-	 *
 	 * @return the string
 	 */
     @LogThrowable(SimpleLog.LOG_LEVEL_INFO)

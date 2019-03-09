@@ -1,7 +1,5 @@
 /*
- * $Id: NullDummy.java,v 1.6 2016/12/18 21:59:31 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +26,6 @@ import patterntesting.annotation.check.runtime.*;
  * the NullPointerTrap and NullPointerTrapTest.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.6 $
  * @see NullPointerTrapTest
  * @since 12.09.2008
  */

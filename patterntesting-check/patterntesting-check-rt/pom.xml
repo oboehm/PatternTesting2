@@ -129,10 +129,6 @@
       <artifactId>commons-logging</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
   </dependencies>
 
   <!-- Build Settings -->

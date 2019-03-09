@@ -17,8 +17,6 @@
  */
 package patterntesting.check.runtime;
 
-import junit.framework.TestCase;
-
 import org.aspectj.lang.*;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 

@@ -20,11 +20,10 @@
 
 package patterntesting.check.runtime;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.BeforeClass;
-
+import org.junit.jupiter.api.BeforeAll;
 import patterntesting.runtime.util.Assertions;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The Class AbstractRuntimeTest.
@@ -43,10 +42,9 @@ public class AbstractRuntimeTest {
      * (java -ea ...).
      * </p>
      */
-    @BeforeClass
+    @BeforeAll
     public static void testAssertionsEnabled() {
-        assertTrue("assertion is disabled - enable it with 'java -ea ...'",
-                Assertions.ENABLED);
+        assertTrue(Assertions.ENABLED, "assertion is disabled - enable it with 'java -ea ...'");
     }
 
 }

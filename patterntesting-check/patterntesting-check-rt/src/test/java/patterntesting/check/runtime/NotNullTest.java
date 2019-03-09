@@ -21,11 +21,13 @@ package patterntesting.check.runtime;
 
 import javax.validation.constraints.NotNull;
 
-import org.junit.Test;
 import org.apache.logging.log4j.*;
 
+import org.junit.jupiter.api.Test;
 import patterntesting.annotation.check.runtime.MayReturnNull;
 import patterntesting.annotation.check.runtime.NullArgsAllowed;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * The Class NotNullTest.
@@ -84,28 +86,34 @@ public class NotNullTest {
     /**
      * Test static null string.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public final void testStaticNullString() {
-        log.info("s0 = " + s0);
-        s0 = null;
+        assertThrows(AssertionError.class, () -> {
+            log.info("s0 = " + s0);
+            s0 = null;
+        });
     }
 
     /**
      * Test null string.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public final void testNullString() {
-        log.info("s1 = " + s1);
-        s1 = null;
+        assertThrows(AssertionError.class, () -> {
+            log.info("s1 = " + s1);
+            s1 = null;
+        });
     }
 
     /**
      * Test ctor not null arg.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public final void testCtorNotNullArg() {
-        new NotNullConstructor("something");
-        new NotNullConstructor(nullString);
+        assertThrows(AssertionError.class, () -> {
+            new NotNullConstructor("something");
+            new NotNullConstructor(nullString);
+        });
     }
 
     /**
@@ -119,34 +127,36 @@ public class NotNullTest {
     /**
      * Test ctor null args.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public final void testCtorNullArgs() {
-        new NotNullConstructor(nullString, "test");
+        assertThrows(AssertionError.class, () -> new NotNullConstructor(nullString, "test"));
     }
 
     /**
      * Test null arg.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public final void testNullArg() {
-        method(nullString);
+        assertThrows(AssertionError.class, () -> method(nullString));
     }
 
     /**
      * Test null args.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public final void testNullArgs() {
-        method("test", nullString);
+        assertThrows(AssertionError.class, () -> method("test", nullString));
     }
 
     /**
      * Test null return.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public final void testNullReturn() {
-        String s = returnNull();
-        log.info("s = " + s);
+        assertThrows(AssertionError.class, () -> {
+            String s = returnNull();
+            log.info("s = " + s);
+        });
     }
 
     private void method(@NotNull final String s) {
