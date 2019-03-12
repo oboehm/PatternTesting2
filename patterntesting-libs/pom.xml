@@ -44,8 +44,8 @@
   
   <modules>
     <module>patterntesting-check</module>
-    <!--<module>../patterntesting-concurrent</module>-->
-    <!--<module>../patterntesting-exception</module>-->
+    <!--<module>patterntesting-concurrent</module>-->
+    <!--<module>patterntesting-exception</module>-->
   </modules>
   
   <!-- see http://maven.apache.org/pom.html#Licenses -->
@@ -82,9 +82,8 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:cvs:pserver:anonymous@patterntesting.cvs.sourceforge.net:/cvsroot/patterntesting:PatternTesting10/patterntesting-libs</connection>
-    <url>http://patterntesting.cvs.sourceforge.net/viewvc/patterntesting/PatternTesting10/patterntesting-libs/</url>
-    <tag>patterntesting-1_3_0</tag>
+    <connection>scm:git:git://github.com/oboehm/PatternTesting2.git/patterntesting-libs/</connection>
+    <url>https://github.com/oboehm/PatternTesting2/patterntesting-libs/</url>
   </scm>
   
   <build>

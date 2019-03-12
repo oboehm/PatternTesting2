@@ -117,6 +117,13 @@
           </execution>
         </executions>
       </plugin>
+      <!-- enabled in parent so we must disable it here -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <skipAssembly>true</skipAssembly>
+        </configuration>
+      </plugin>
     </plugins>
     <extensions>
       <!-- Enabling the use of FTP -->
@@ -181,8 +188,8 @@
   </contributors>
 
   <scm>
-    <connection>scm:git:git://github.com/oboehm/PatternTesting2.git/patterntesting-check</connection>
-    <url>https://github.com/oboehm/PatternTesting2/patterntesting-check/</url>
+    <connection>scm:git:git://github.com/oboehm/PatternTesting2.git/patterntesting-libs/patterntesting-check</connection>
+    <url>https://github.com/oboehm/PatternTesting2/patterntesting-libs/patterntesting-check/</url>
   </scm>
 
   <!-- 

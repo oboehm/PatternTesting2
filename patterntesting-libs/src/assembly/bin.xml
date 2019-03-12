@@ -52,13 +52,6 @@
     </fileSet>
     <!-- put the sources into the archive -->
     <fileSet>
-      <directory>../patterntesting-agent/target</directory>
-      <outputDirectory>src</outputDirectory>
-      <includes>
-        <include>*-sources.jar</include>
-      </includes>
-    </fileSet>
-    <fileSet>
       <directory>../patterntesting-rt/target</directory>
       <outputDirectory>src</outputDirectory>
       <includes>
@@ -66,32 +59,32 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../patterntesting-check-ct/target</directory>
+      <directory>patterntesting-check/patterntesting-check-ct/target</directory>
       <outputDirectory>src</outputDirectory>
       <includes>
         <include>*-sources.jar</include>
       </includes>
     </fileSet>
     <fileSet>
-      <directory>../patterntesting-check-rt/target</directory>
+      <directory>patterntesting-check/patterntesting-check-rt/target</directory>
       <outputDirectory>src</outputDirectory>
       <includes>
         <include>*-sources.jar</include>
       </includes>
     </fileSet>
-    <fileSet>
-      <directory>../patterntesting-concurrent/target</directory>
-      <outputDirectory>src</outputDirectory>
-      <includes>
-        <include>*-sources.jar</include>
-      </includes>
-    </fileSet>
-    <fileSet>
-      <directory>../patterntesting-exception/target</directory>
-      <outputDirectory>src</outputDirectory>
-      <includes>
-        <include>*-sources.jar</include>
-      </includes>
-    </fileSet>
+    <!--<fileSet>-->
+      <!--<directory>patterntesting-concurrent/target</directory>-->
+      <!--<outputDirectory>src</outputDirectory>-->
+      <!--<includes>-->
+        <!--<include>*-sources.jar</include>-->
+      <!--</includes>-->
+    <!--</fileSet>-->
+    <!--<fileSet>-->
+      <!--<directory>patterntesting-exception/target</directory>-->
+      <!--<outputDirectory>src</outputDirectory>-->
+      <!--<includes>-->
+        <!--<include>*-sources.jar</include>-->
+      <!--</includes>-->
+    <!--</fileSet>-->
   </fileSets>
 </assembly>
