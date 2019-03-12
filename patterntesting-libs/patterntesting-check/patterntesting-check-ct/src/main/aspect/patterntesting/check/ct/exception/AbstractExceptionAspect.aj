@@ -50,32 +50,32 @@ public abstract aspect AbstractExceptionAspect {
      * This is the pointcut for it.
      */
     pointcut throwsRuntimeException() :
-        execution(* *..*.*(..) throws RuntimeException)
-        || execution(*..*.new(..) throws RuntimeException);
+        execution(* *..*.*(..) throws java.lang.RuntimeException)
+        || execution(*..*.new(..) throws java.lang.RuntimeException);
 
     /**
      * Methods or constructors should not throw an {@link Exception}.
      * This is the pointcut for it.
      */
     pointcut throwsException() :
-        execution(* *..*.*(..) throws Exception)
-        || execution(*..*.new(..) throws Exception);
+        execution(* *..*.*(..) throws java.lang.Exception)
+        || execution(*..*.new(..) throws java.lang.Exception);
 
     /**
      * Methods or constructors should not throw a {@link Throwable}.
      * This is the pointcut for it.
      */
     pointcut throwsThrowable() :
-        execution(* *..*.*(..) throws Throwable)
-        || execution(*..*.new(..) throws Throwable);
+        execution(* *..*.*(..) throws java.lang.Throwable)
+        || execution(*..*.new(..) throws java.lang.Throwable);
     
     /**
      * Methods or constructors should not throw an {@link Error} or subclass of
      * an {@link Error}. This is the pointcut for it.
      */
     pointcut throwsError() :
-        execution(* *..*.*(..) throws Error+)
-            || execution(*..*.new(..) throws Error+);
+        execution(* *..*.*(..) throws java.lang.Error+)
+            || execution(*..*.new(..) throws java.lang.Error+);
     
     declare warning : throwsRuntimeException() && applicationCode() :
         "don't throw an RuntimeException - use a more specific one!";
@@ -94,28 +94,28 @@ public abstract aspect AbstractExceptionAspect {
      * by setting a pointcut to the constructor of a {@link RuntimeException}.
      */
     pointcut throwingRuntimeException() :
-        call(RuntimeException.new(..)) && applicationCode();
+        call(java.lang.RuntimeException.new(..)) && applicationCode();
     
     /**
      * We can't set a pointcut to a throw statement. But we can do it indirect
      * by setting a pointcut to the constructor of a {@link Exception}.
      */
     pointcut throwingException() :
-        call(Exception.new(..)) && applicationCode();
+        call(java.lang.Exception.new(..)) && applicationCode();
     
     /**
      * We can't set a pointcut to a throw statement. But we can do it indirect
      * by setting a pointcut to the constructor of a {@link Throwable}.
      */
     pointcut throwingThrowable() :
-        call(Throwable.new(..)) && applicationCode();
+        call(java.lang.Throwable.new(..)) && applicationCode();
     
     /**
      * We can't set a pointcut to a throw statement. But we can do it indirect
      * by setting a pointcut to the constructor of a {@link Error}.
      */
     pointcut throwingError() :
-        call(Error.new(..)) && applicationCode();
+        call(java.lang.Error.new(..)) && applicationCode();
     
     declare warning : throwingRuntimeException() && withincode(* *..*.*()):
         "don't throw a unspecific RuntimeException - use a more specific one";

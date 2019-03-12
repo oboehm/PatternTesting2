@@ -43,7 +43,7 @@
   <name>patterntesting-libs</name>
   
   <modules>
-    <!--<module>../patterntesting-check</module>-->
+    <module>patterntesting-check</module>
     <!--<module>../patterntesting-concurrent</module>-->
     <!--<module>../patterntesting-exception</module>-->
   </modules>
@@ -135,22 +135,6 @@
       <groupId>org.patterntesting</groupId>
       <artifactId>patterntesting-rt</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.patterntesting</groupId>
-      <artifactId>patterntesting-check-ct</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.patterntesting</groupId>
-      <artifactId>patterntesting-check-rt</artifactId>
-    </dependency>
-    <!--<dependency>-->
-      <!--<groupId>org.patterntesting</groupId>-->
-      <!--<artifactId>patterntesting-concurrent</artifactId>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>org.patterntesting</groupId>-->
-      <!--<artifactId>patterntesting-exception</artifactId>-->
-    <!--</dependency>-->
   </dependencies>
   
 </project>

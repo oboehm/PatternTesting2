@@ -66,7 +66,7 @@ public abstract aspect AbstractSopAspect
      * Invalid system logging.
      */
     pointcut invalidSystemLogging() :
-        (get(PrintStream System.out) || get(PrintStream System.err))
+        (get(PrintStream java.lang.System.out) || get(PrintStream java.lang.System.err))
         && applicationCode()
         && !allowedCode();
 

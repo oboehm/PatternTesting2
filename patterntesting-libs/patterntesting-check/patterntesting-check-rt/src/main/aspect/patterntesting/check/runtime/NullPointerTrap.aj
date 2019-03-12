@@ -77,7 +77,7 @@ public aspect NullPointerTrap  extends AbstractNullPointerTrap {
         execution(@NullArgsAllowed * *..*(*, ..))
         || execution(@NullArgsAllowed *..new(*, ..))
         || execution(*..*$*.new(..))
-        || execution(boolean *..equals(Object))
+        || execution(boolean *..equals(java.lang.Object))
         || within(@NullArgsAllowed *);
 
     /**
@@ -86,7 +86,7 @@ public aspect NullPointerTrap  extends AbstractNullPointerTrap {
      * method name or before the whole class.
      */
     public pointcut mayReturnNull() :
-        execution(@MayReturnNull Object+ *..*(..))
+        execution(@MayReturnNull java.lang.Object+ *..*(..))
         || within(@MayReturnNull *);
 
 }

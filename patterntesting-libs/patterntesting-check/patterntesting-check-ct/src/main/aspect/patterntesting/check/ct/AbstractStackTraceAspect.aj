@@ -48,7 +48,7 @@ public abstract aspect AbstractStackTraceAspect
      * Invalid system logging.
      */
     pointcut invalidStackTraceLogging() :
-         call (public void Throwable+.printStackTrace())
+         call (public void java.lang.Throwable+.printStackTrace())
         && applicationCode()
         && !allowedCode();
 

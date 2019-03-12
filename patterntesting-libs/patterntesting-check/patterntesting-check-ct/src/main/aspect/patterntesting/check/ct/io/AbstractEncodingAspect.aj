@@ -47,11 +47,11 @@ public abstract aspect AbstractEncodingAspect {
     pointcut undefinedEncodingConstructor() :
         call(public InputStreamReader.new(InputStream))
             || call(public OutputStreamWriter.new(OutputStream))
-            || call(public String.new(byte[]))
+            || call(public java.lang.String.new(byte[]))
             ;
 
     pointcut undefinedEncodingCall() :
-        call(public byte[] String.getBytes())
+        call(public byte[] java.lang.String.getBytes())
             ;
 
     declare warning : undefinedEncodingConstructor() && applicationCode() :

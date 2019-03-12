@@ -132,7 +132,7 @@ public abstract aspect AbstractNullPointerTrap {
 	 * For performance reason this is limited to public methods.
 	 */
 	private pointcut nonVoidMethods() :
-		execution(public Object+ *..*(..))
+		execution(public java.lang.Object+ *..*(..))
 		&& applicationCode()
 		&& !mayReturnNull()
 		&& !within(*NullPointerTrap);

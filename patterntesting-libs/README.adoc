@@ -1,0 +1,14 @@
+https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-check[image:https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-check/badge.svg[Maven Metadata]]
+
+
+
+= What Is patterntesting-libs?
+
+PatternTesting Libs (patterntesting-libs) simplifies the use of the PatternTesting libs
+by collecting them into one big jar file.
+
+
+
+== More Infos
+
+general link:../README.md[README]

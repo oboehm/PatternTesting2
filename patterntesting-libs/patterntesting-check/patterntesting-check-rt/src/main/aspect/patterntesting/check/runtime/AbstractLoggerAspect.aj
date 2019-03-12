@@ -61,9 +61,9 @@ public abstract aspect AbstractLoggerAspect {
      * of {@link LogManager#getLogger(Class)}.
      */
     pointcut getClassLogger() :
-        (call(public org.apache.logging.log4j.Logger org.slf4j.LogManager.getClassLogger(Class))
-        || call(public org.apache.commons.logging.Log org.apache.commons.logging.LogFactory.getLog(Class))
-        || call(public org.apache.log4j..Logger org.apache.log4j..Logger.getLogger(Class)))
+        (call(public org.apache.logging.log4j.Logger org.slf4j.LogManager.getClassLogger(java.lang.Class))
+        || call(public org.apache.commons.logging.Log org.apache.commons.logging.LogFactory.getLog(java.lang.Class))
+        || call(public org.apache.log4j..Logger org.apache.log4j..Logger.getLogger(java.lang.Class)))
         && applicationCode();
 
     /**
@@ -71,10 +71,10 @@ public abstract aspect AbstractLoggerAspect {
      * as argument.
      */
     pointcut getStringLogger() :
-        (call(public org.apache.logging.log4j.Logger org.slf4j.LogManager.getClassLogger(String))
-        || call(public org.apache.log4j..Logger org.apache.log4j..Logger.getLogger(String))
-        || call(public org.apache.commons.logging.Log org.apache.commons.logging.LogFactory.getLog(String))
-        || call(public java.util.logging.Logger java.util.logging.Logger.getLogger(String)))
+        (call(public org.apache.logging.log4j.Logger org.slf4j.LogManager.getClassLogger(java.lang.String))
+        || call(public org.apache.log4j..Logger org.apache.log4j..Logger.getLogger(java.lang.String))
+        || call(public org.apache.commons.logging.Log org.apache.commons.logging.LogFactory.getLog(java.lang.String))
+        || call(public java.util.logging.Logger java.util.logging.Logger.getLogger(java.lang.String)))
         && applicationCode();
 
     /**

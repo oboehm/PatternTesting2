@@ -50,7 +50,7 @@ public abstract aspect AbstractIllegalArgumentExceptionAspect {
      * by setting a pointcut to the constructor of an IllegalArgumentException.
      */
     pointcut throwingIllegalArgumentException() :
-        call(IllegalArgumentException.new(..)) && applicationCode();
+        call(java.lang.IllegalArgumentException.new(..)) && applicationCode();
     
     declare warning : throwingIllegalArgumentException() && withincode(* *..*.*()):
         "don't throw an IllegalArgumentException for a method with no arguments";

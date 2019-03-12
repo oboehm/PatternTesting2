@@ -1,98 +1,91 @@
 /*
- * $Id: ZombieAspect.aj,v 1.4 2016/12/18 21:59:31 oboehm Exp $
+ * $Id: DeprecatedAspect.aj,v 1.5 2016/12/18 21:59:31 oboehm Exp $
  *
- * Copyright (c) 2015 by Oliver Boehm
+ * Copyright (c) 2008 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express orimplied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
- * (c)reated 11.01.2015 by oliver (ob@oasd.de)
+ *
+ * (c)reated 17.02.2009 by oliver (ob@oasd.de)
  */
-
 package patterntesting.check.runtime;
 
 import org.aspectj.lang.JoinPoint;
 import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.LogManager;
 
-import patterntesting.annotation.check.runtime.Zombie;
-
 /**
- * This is the aspect for the {@link Zombie} annotation. If you have a class
- * (or method) you want to delete but you are not sure if it is used you can
- * mark it as {@link Zombie} class. If this class will be used you will get a
- * warning in the log or an {@link AssertionError} will be thrown if assertions
- * are enabled.
- * <p>
- * Because this aspect is very similar to the {@link DeprecatedAspect} it uses
- * the same super aspect.
- * </p>
- * 
- * @author oliver
- * @version $Revision: 1.4 $
- * @since 1.6 (11.01.2015)
+ * Do you have developers who are resistent against deprecated methods?
+ * Now you can see it in the log as warning which "@Deprecated" methods
+ * were executed.
+ * <br/>
+ * And if assertions are enabled ('java -ea ...') a DeprecatedCodeException
+ * will be thrown to force the use of *not* deprecated methods.
+ *
+ * @author <a href="boehm@javatux.de">oliver</a>
+ * @version $Revision: 1.5 $
+ * @since 17.02.2009
  */
-public aspect ZombieAspect extends AbstractDeprecatedAspect {
-
-    private static final Logger LOG = LogManager.getLogger(ZombieAspect.class);
+public aspect DeprecatedAspect extends AbstractDeprecatedAspect {
+    
+    private static final Logger LOG = LogManager.getLogger(DeprecatedAspect.class);
     
     /**
      * To return the aspect specific logger to the super aspect.
-     * 
      * @return the aspect specific logger
      */
     @Override
     public final Logger getLog() {
         return LOG;
     }
-    
+
     /**
      * Gets the marker for logging.
      *
-     * @return "@Zombie"
+     * @return "@Deprecated"
      */
     @Override
     public final String getMarker() {
-        return "@Zombie";
+        return "@Deprecated";
     }
-
+    
     /**
-     * Here we will throw an {@link ZombieException}.
+     * Here we will throw an {@link DeprecatedCodeException}.
      *
      * @param jp the joinpoint
      */
     @Override
     protected void throwCauseFor(final JoinPoint jp) {
-        throw new ZombieException(jp);
+        throw new DeprecatedCodeException(jp);
     }
 
     /**
-     * These are the methods which are marked as "@Zombie"
+     * These are the methods which are marked as "@Deprecated"
      * (unfortunately the methods marked as "deprecated" in a Javadoc
      * comment cannot be recognized).
      */
     pointcut deprecatedMethods() :
-        execution((@Zombie *..*).new(..))
-        || execution(* @Zombie *..*.*(..))
-        || @withincode(Deprecated)
+        execution((@java.lang.Deprecated *..*).new(..))
+        || execution(* @java.lang.Deprecated *..*.*(..))
+        || @withincode(java.lang.Deprecated)
         ;
 
     /**
-     * "@Zombie" attributes should eiter be set nor read.a
+     * "@Deprecated" attributes should eiter be set nor read.a
      */
     pointcut deprecatedAttributes() :
-        (set(@Zombie * *..*.*)
+        (set(@java.lang.Deprecated * *..*.*)
                 && withincode(* *..*.*(..)))
-        || get(@Zombie * *..*.*)
+        || get(@java.lang.Deprecated * *..*.*)
         ;
 
     /**
@@ -101,8 +94,6 @@ public aspect ZombieAspect extends AbstractDeprecatedAspect {
     public pointcut deprecatedCode() :
         deprecatedMethods()
         || deprecatedAttributes()
-        || within(@Zombie *)
         ;
 
 }
-
