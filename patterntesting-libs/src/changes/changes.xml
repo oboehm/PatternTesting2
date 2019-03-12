@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+
+<!-- 
+    $Id: changes.xml,v 1.35 2017/11/09 20:35:17 oboehm Exp $
+    
+    A kind of release notes. This document describes the changes in the
+    different releases.
+    
+    see http://maven.apache.org/plugins/maven-changes-plugin/usage.html
+    see http://maven.apache.org/plugins/maven-changes-plugin/changes.html
+ -->
+
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+
+  <properties>
+    <title>Main changes</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <release version="1.8.0" date="11-Nov-2017"
+             description="last version with CVS">
+      <action dev="oboehm" date="2017-11-08" type="update">
+        Deprecated classes removed.
+      </action>
+      <action dev="oboehm" date="2017-08-19" type="fix"
+                    issue="bugs/39/" system="SourceForge2">
+        Old faulty code in ResourcepathMonitor removed
+        (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2017-08-17" type="fix"
+                    issue="bugs/38/" system="SourceForge2">
+        Bug in DescritptionUtils fixed
+        (PatternTesting Runtime).
+      </action>
+    </release>
+
+    <release version="1.7.2" date="13-Aug-2017"
+             description="ResourcepathMonitor">
+      <action dev="oboehm" date="2017-07-26" type="add">
+        NetworkTester added
+        (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" issue="feature-requests/50/" system="SourceForge2"
+              date="2017-07-17" type="fix">
+        Methods deserialize(..) and assertNoFinalTransientAttribute(..) added
+        in SerializableTester
+        (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2017-07-16" type="fix"
+                    issue="bugs/37/" system="SourceForge2">
+        Monitor class no longer can be registered as shutdown hook
+        (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2017-06-10" type="update">
+        Resource specific methods of ClasspathMonitor are now more and more
+        moved to ResourcepathMonitor
+        (PatternTesting Runtime).
+      </action>
+    </release>
+
+     <release version="1.7.1" date="11-May-2017"
+             description="Spring Boot Support">
+      <action dev="oboehm" date="2017-05-10" type="fix"
+              issue="bugs/36/" system="SourceForge2">
+        ClasspathDigger refactored and tested in Spring environment
+        (PatternTesting Runtime).
+      </action>
+    </release>
+
+    <release version="1.7.0" date="06-Jan-2017"
+             description="Java 7 version">
+      <action dev="oboehm" date="2016-12-04" type="update">
+        Switched to Log4j 2.
+      </action>
+    </release>
+
+    <release version="1.6.0" date="06-Jan-2016"
+             description="Java 6 version">
+      <action dev="oboehm" date="2015-12-30" type="update">
+        Java 5 will be no longer supported.
+      </action>
+      <action dev="oboehm" date="2015-12-12" type="fix"
+              issue="bugs/34/" system="SourceForge2">
+        Classloader of Tomcat 8 is supported now for ClasspathMonitor
+        (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2015-12-08" type="add"
+              issue="feature-requests/47/" system="SourceForge2">
+        FileTester prints now filename if files differ
+        (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2015-11-10" type="add"
+              issue="feature-requests/46/" system="SourceForge2">
+        ClassTester added to check static initializer of classes
+        (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2015-06-15" type="add">
+        You are now able to ignore e.g. white spaces in FileTester / IOTester
+        by using a StringConverter as additional argument
+        (PatternTesting Runtime).
+      </action>
+    </release>
+
+    <release version="1.5.2" date="04-Jul-2015"
+             description="bug fix">
+      <action dev="oboehm" date="2015-06-15" type="add"
+              issue="feature-requests/44/" system="SourceForge2">
+        Sequence diagrams can be now generated as simple text files which can
+        be used as input for https://www.websequencediagrams.com/
+        (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2015-01-16" type="update">
+        Finetuning of generated sequence diagrams
+        (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2015-05-29" type="fix"
+              issue="bugs/33/" system="SourceForge2">
+        Generated sequence diagrams no longer have double messages
+        (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2015-05-28" type="update">
+        Samples for JFS 2015 extended and updated.
+      </action>
+      <action dev="oboehm" date="2015-05-27" type="fix"
+              issue="bugs/32/" system="SourceForge2">
+        NPE fixed for empty @DrawSequenceDiagram annotation
+        (PatternTesting Runtime).
+      </action>
+    </release>
+
+    <release version="1.5.1" date="26-Apr-2015"
+             description="Pattern support">
+      <action dev="oboehm" date="2015-04-21" type="remove">
+        Packaged 'patterntesting.concurrent.experimental' removed
+        (PatternTesting Concurrent).
+      </action>
+      <action dev="oboehm" date="2015-01-13" type="add"
+              issue="feature-requests/23/" system="SourceForge2">
+        ZombieAspect logs use of @Zombie classes and methods
+        (PatternTesting Check-RT).
+      </action>
+    </release>
+
+    <release version="1.5.0" date="06-Jan-2015"
+             description="PatternTesting Benchmark project added for micro-benchmarking">
+      <action dev="oboehm" date="2014-06-16" type="update">
+        Begin with next snapshot.
+      </action>
+    </release>
+
+    <release version="1.4.3" date="14-Jun-2014"
+             description="SQL logging">
+      <action dev="oboehm" date="2014-05-06" type="update">
+        Begin with next snapshot.
+      </action>
+    </release>
+ 
+    <release version="1.4.2" date="05-May-2014"
+             description="SQL profiling">
+      <action dev="oboehm" date="2014-04-14" type="update">
+        Begin with next snapshot.
+      </action>
+    </release>
+
+    <release version="1.4.1" date="07-Apr-2014"
+             description="improved monitoring of JDBC connections">
+      <action dev="oboehm" date="2014-01-07" type="update">
+        Begin with next snapshot.
+      </action>
+    </release>
+  
+    <release version="1.4.0" date="06-Jan-2014"
+             description="logging as sequence diagram">
+      <action dev="oboehm" date="2013-04-28" type="add">
+        TransientTrapAspect added to find transient traps
+        (PatternTesting Check-CT).
+      </action>
+    </release>
+
+    <release version="1.3.0" date="06-Jan-2013"
+             description="DB monitoring">
+      <action dev="oboehm" date="2013-01-02" type="update">
+        DB connections can be now monitored by ConnectionMonitor together with
+        ProxyConnection (PatternTesting Runtime).
+      </action>
+      <action date="2012-11-03" issue="3585230" system="Sourceforge" type="fix">
+        Patch from Patrick Linskey integrated (PatternTesting Concurrent).
+      </action>
+      <action dev="oboehm" date="2012-09-27" type="update">
+        ObjectTester.assertEquals(..) checks now if equals method is
+        symmetrical implemented (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2012-08-12" type="add">
+        (Abstract)ExceptionAspect added to find methods which throw an
+        unspecific exception (PatternTesting Check-CT).
+        @SuppressExceptionWarning added (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2012-08-09" type="add">
+        (Abstract)EncodingAspect added to find calls with undefined encoding
+        (PatternTesting Check-CT).
+        @SupressEncodingWarning added (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2012-08-08" type="add">
+        Annotation SuppressStreamWarning is now deprecated and replaced by
+        EnableStreamWarning
+        (PatternTesting Runtime / Check-CT)
+      </action>
+      <action dev="oboehm" date="2012-08-08" type="add">
+        ObjectTester.assertEquals(..) checks now, if null as argument is
+        handled correct in the equals method
+        (PatternTesting Runtime).
+      </action>
+    </release>
+
+    <release version="1.2.20" date="15-Jul-2012"
+             description="extended JUnit support">
+      <action dev="oboehm" date="2012-07-13" type="update">
+        Bug fixing release.
+      </action>
+    </release>
+
+    <release version="1.2.10-YEARS" date="23-Mar-2012"
+             description="10 years PatternTesting">
+      <action dev="oboehm" date="2012-01-10" type="update">
+        Begin with next snapshot.
+      </action>
+    </release>
+
+    <release version="1.2.0" date="06-Jan-2012"
+             description="OSGi bundle">
+      <action dev="oboehm" date="2011-07-29" type="update">
+        Switched from commons-logging to SLF4J.
+      </action>
+    </release>
+
+    <release version="1.1.0" date="22-Apr-2011"
+             description="version for Stuttgarter Test-Tage 2011">
+      <action dev="oboehm" date="2011-04-06" type="add">
+        IOTester and FileTester added (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2011-03-24" type="update">
+        Improved startup time for ClasspathMonitor (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2011-03-20" type="update">
+        The checkXxx methods in the different tester (ObjectTester,
+        SerializableTester, CloneableTester) are renamed to assertXxx
+        (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2011-02-23" type="update">
+        Suppressing "adviceDidNotMatch" warning.
+      </action>
+      <action dev="oboehm" date="2011-03-18" type="update">
+        The "till" argument in @Broken can handle now simple times
+        like "18-Mar-2011 17:55" (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2011-02-23" type="remove">
+        Deprecated aspects (BrokenAspect, IntegrationTestAspect,
+        RunTestOnAspect, SkipTestOnAspect) for JUnit tests removed.
+        Use "@RunWith(SmokeRunner.class)" in your JUnit tests for that
+        functionality (PatternTesting Runtime).
+      </action>
+      <action dev="oboehm" date="2011-02-23" type="remove">
+        Deprecated @RunTestsParallel and ParallelRunnerAspect removed.
+        Use "@RunWith(ParallelRunner.class)" to run JUnit methods parallel
+        (PatternTesting Concurrent)
+      </action>
+      <action dev="oboehm" date="2011-02-22" type="add">
+        Begin with Maven plugin for compiling with PatternTesting libs
+        (PatternTesting Tools).
+      </action>
+      <action dev="oboehm" date="2010-12-31" type="update" issue="2859499">
+        Checkstyle warnings reduced.
+      </action>
+      <action dev="oboehm" date="2010-12-30" type="fix" issue="2859514">
+        Class cycles between packages are now eliminated.
+      </action>
+      <action dev="oboehm" date="2010-12-29" type="fix" issue="2859540">
+        PMD errors fixed.
+      </action>
+      <action dev="oboehm" date="2010-12-29" type="fix" issue="2926499">
+        OnlyForTestingAspect works now also for JUnit3 test code
+        (PatternTesting Check.CT).
+      </action>
+      <action dev="oboehm" date="2010-11-11" type="add">
+        ZipExceptions are enriched by the name of the zip file
+        (PatternTesting Exception).
+      </action>
+      <action dev="oboehm" date="2010-11-01" type="fix">
+        @LogRuntimeException and @LogThrowable works now for static methods
+        inside the annotated class (PatternTesting Runtime).
+      </action>
+    </release>
+
+    <release version="1.0.3" date="18-Oct-2010"
+             description="upload version">
+      <action dev="oboehm" date="2010-10-18" type="update">
+        Prepared for upload to https://oss.sonatype.org/
+      </action>
+    </release>
+
+    <release version="1.0.2" date="06-Sep-2010"
+             description="holiday version">
+      <action dev="oboehm" date="2010-09-06" type="update">
+        Code cleanup.
+      </action>
+    </release>
+
+    <release version="1.0.1" date="18-Jul-2010"
+             description="first org.patterntesting version">
+      <action dev="oboehm" date="2010-07-15" type="update" >
+        No changes.
+      </action>
+    </release>
+
+    <release version="1.0.0" date="20-Jun-2010"
+             description="first org.patterntesting version">
+      <action dev="oboehm" date="2010-05-12" type="add">
+        Created as bracket around the PatternTesting libraries.
+      </action>
+    </release>
+
+  </body>
+
+</document>

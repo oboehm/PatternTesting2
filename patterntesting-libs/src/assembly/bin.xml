@@ -1,0 +1,97 @@
+<!--
+    $Id: bin.xml,v 1.3 2012/03/22 18:11:49 oboehm Exp $
+    
+    We want to include all jar files into a lonely zip or tar archive.
+    @see http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html
+    
+    last up$Date: 2012/03/22 18:11:49 $ by $Author: oboehm $
+-->
+
+<assembly>
+  <id>bin</id>
+  <formats>
+    <format>tar.gz</format>
+    <format>zip</format>
+  </formats>
+  <!-- see http://svn.apache.org/repos/asf/jakarta/cactus/trunk/cactus-bin-assembly.xml -->
+  <includeBaseDirectory>true</includeBaseDirectory>
+  <baseDirectory>${project.artifactId}-${project.version}</baseDirectory>
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory>/lib</outputDirectory>
+      <includes>
+        <include>patterntesting-*:jar:*</include>
+      </includes>
+      <unpack>false</unpack>
+      <scope>runtime</scope>
+    </dependencySet>
+    <dependencySet>
+      <outputDirectory>/lib/ext</outputDirectory>
+      <includes>
+        <include>*:jar:*</include>
+      </includes>
+      <excludes>
+        <exclude>patterntesting-*:jar:*</exclude>
+      </excludes>
+      <unpack>false</unpack>
+      <scope>runtime</scope>
+    </dependencySet>
+  </dependencySets>
+  <fileSets>
+    <fileSet>
+      <includes>
+        <include>LICENSE.txt</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>src/assembly</directory>
+      <outputDirectory>/</outputDirectory>
+      <includes>
+        <include>README.txt</include>
+      </includes>
+    </fileSet>
+    <!-- put the sources into the archive -->
+    <fileSet>
+      <directory>../patterntesting-agent/target</directory>
+      <outputDirectory>src</outputDirectory>
+      <includes>
+        <include>*-sources.jar</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../patterntesting-rt/target</directory>
+      <outputDirectory>src</outputDirectory>
+      <includes>
+        <include>*-sources.jar</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../patterntesting-check-ct/target</directory>
+      <outputDirectory>src</outputDirectory>
+      <includes>
+        <include>*-sources.jar</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../patterntesting-check-rt/target</directory>
+      <outputDirectory>src</outputDirectory>
+      <includes>
+        <include>*-sources.jar</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../patterntesting-concurrent/target</directory>
+      <outputDirectory>src</outputDirectory>
+      <includes>
+        <include>*-sources.jar</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>../patterntesting-exception/target</directory>
+      <outputDirectory>src</outputDirectory>
+      <includes>
+        <include>*-sources.jar</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</assembly>
