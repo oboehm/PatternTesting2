@@ -259,6 +259,13 @@
           </archive> 
         </configuration>
       </plugin>
+      <!-- enabled in parent so we must disable it here -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <skipAssembly>true</skipAssembly>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 

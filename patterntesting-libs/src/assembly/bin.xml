@@ -79,12 +79,12 @@
         <!--<include>*-sources.jar</include>-->
       <!--</includes>-->
     <!--</fileSet>-->
-    <!--<fileSet>-->
-      <!--<directory>patterntesting-exception/target</directory>-->
-      <!--<outputDirectory>src</outputDirectory>-->
-      <!--<includes>-->
-        <!--<include>*-sources.jar</include>-->
-      <!--</includes>-->
-    <!--</fileSet>-->
+    <fileSet>
+      <directory>patterntesting-exception/target</directory>
+      <outputDirectory>src</outputDirectory>
+      <includes>
+        <include>*-sources.jar</include>
+      </includes>
+    </fileSet>
   </fileSets>
 </assembly>
