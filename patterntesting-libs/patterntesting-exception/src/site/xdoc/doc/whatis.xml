@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>About PatternTesting-Exception</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <section name="About patterntesting-exception">
+      <p>
+        If you want to do exception handling correct this is a hard job.
+        PatternTesting-Exception wants to help you to do this job.
+        For this reason this AspectJ library provides:
+      </p>
+      <ul>
+        <li>
+          better exception handling (it wraps some common exception like
+          IOException and replaces the error message by a more helpful one,
+          e.g. which file is missing with a FileNotFoundException).)
+        </li>
+        <li>
+          Test support for exception handling (via ExceptionFactory and
+          @TestException annotation)
+        </li>
+      </ul>
+    </section>
+
+    <section name="History">
+      <p>
+      	In a previous version the exception support was distributed over
+      	several sub projects (patterntesting-rt and patterntesting-check).
+      </p>
+    </section>
+
+  </body>
+
+</document>

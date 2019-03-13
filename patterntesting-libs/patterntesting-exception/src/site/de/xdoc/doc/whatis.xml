@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>Was ist PatternTesting-Exception?</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <section name="&#220;ber patterntesting-exception">
+      <p>
+        Exception-Handling ist ein harter Job.
+        PatternTesting-Exception bietet dir Hilfe f&#252;r diesen
+        harten Job an. Daher bietet diese AspectJ-Bibliothek folgende
+        Unterst&#252;tzung:
+      </p>
+      <ul>
+        <li>
+          verbessertes Exception-Handling (es kapselt einige gebr&#228;chliche
+          Exceptions wie die IOException und ersetzt die Fehlermeldung durch
+          eine etwas aussagekr&#228;ftigere Fehlermeldung, die z.B. den
+          betroffenen Dateinamen bei einer FileNotFoundException enth&#228;lt)
+        </li>
+        <li>
+          Test-Unterst&#252;tzung f&#252;r Exception-Handling
+          (durch die ExcptionFactory und @TestException-Annotation).
+        </li>
+      </ul>
+    </section>
+
+    <section name="Historie">
+      <p>
+        In fr&#252;heren Versionen war die Exception-Unterst&#252;tzung
+        &#252;ber mehrere andere Komponenten
+        (patterntesting-rt und patterntesting-check) verteilt.
+      </p>
+    </section>
+
+  </body>
+
+</document>

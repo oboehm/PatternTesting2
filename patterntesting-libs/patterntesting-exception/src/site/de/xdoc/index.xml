@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>Was ist PatternTesting-Exception?</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <section name="Einleitung">
+      <p>
+        Exception-Handling ist ein harter Job.
+        PatternTesting-Exception bietet dir Hilfe f&#252;r diesen
+        harten Job an. Daher bietet diese AspectJ-Bibliothek folgende
+        Unterst&#252;tzung:
+      </p>
+      <dl>
+        <dt>
+          Besseres Exception-Handling:
+        </dt>
+        <dd>
+          PatternTesting-Exception kapselt einige gebr&#228;chliche
+          Exceptions wie die IOException und ersetzt die Fehlermeldung durch
+          eine etwas aussagekr&#228;ftigere Fehlermeldung
+          (z.B. bei einer FileNotFoundException bekommt man als zus&#228;tzliche
+          Information den Namen der fehlenden Datei mit voller Pfadangabe).
+        </dd>
+        <dd>
+          Daf&#252;r muss im Code nichts gemacht werden - keine Konfiguration,
+          keine Annotation. Lediglich die patterntesting-exception-Bibliothek
+          muss als AspectJ-Bibliothek eingebunden werden.
+        </dd>
+        <dt>
+          Test-Unterst&#252;tzung f&#252;r Exception-Handling:
+        </dt>
+        <dd>
+          Hast du das Problem, dass du nicht wei&#223;t, wie du dein
+          Exception-Handling testen sollst? Nimm einen Mock, der dir die
+          gew&#252;nschte Exception provoziert. Zu kompliziert?
+          Willkommen im Club!
+          <br/>
+          Verwende die ExceptionFactory zusammen mit der @TestException-Annotation
+          und die kannst bestimmen, wann die Exception angeflogen kommen
+          soll. Du kannst das Ganze programmatisch oder sogar &#252;ber JMX
+          kontrollieren. Damit kannst du jetzt dein Programm oder deine
+          Web-Anwendung beobachten, wie sie auf die eine oder andere
+          unerwartete Exception reagiert.
+        </dd>
+      </dl>
+    </section>
+    
+    <section name="Bessere Exceptions">
+      <p>
+        Aufrufe der folgenden JDK-Klassen werden bzgl. aussagekr&#228;ftigere
+        Exceptions &#252;berwacht:
+      </p>
+      <ul>
+        <li>java.io.File (f&#252;r IOExceptions)</li>
+        <li>java.io.FileInputStream (f&#252;r FileNotFoundExceptions)</li>
+        <li>java.io.FileOutputStream (f&#252;r FileNotFoundExceptions)</li>
+        <li>java.io.RandomAccessFile (f&#252;r FileNotFoundExceptions)</li>
+        <li>java.net.Socket (f&#252;r ConnectExceptions)</li>
+      </ul>
+      <p>
+        Fehlen einige Klassen (nat&#252;rlich, oder)?
+        Erz&#228;hl es auf der
+      
+        Are some classes missing (yes, of course)?
+        Tell it to the
+        <a href="https://lists.sourceforge.net/lists/listinfo/patterntesting-user">patterntesting-user</a>-Mailing-Liste
+        oder trage einen
+        <a href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454320">Feature-Request</a>
+        ein.
+      </p>
+    </section>
+
+    <section name="Einige Beispiele">
+      <p>
+        F&#252;r Beispiele wirf einen Blick in die PatternTesting-Samples:
+      </p>
+      <dl>
+        <dt>
+          <a href="../../..samples/xref/patterntesting/sample/Bomb.html">patterntesting.sample.Bomb</a>
+        </dt>
+        <dd>
+          Dies ist eine sehr primitive Bombe, die einen Countdown simuliert.
+          Das Beispiel zeigt, wie man die @TestException-Annotation verwenden kann.
+          Wenn du das Programm startest, kannst du &#252;ber die
+          <code>jconsole</code> eine InterruptedException via JMX
+          ausl&#246;sen.
+        </dd>
+      </dl>
+    </section>
+
+  </body>
+
+</document>

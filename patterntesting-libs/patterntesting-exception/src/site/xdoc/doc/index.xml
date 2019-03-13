@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>Documentation</title>
+  </properties>
+
+  <body>
+
+    <section name="API Doc">
+      <p>
+        You have the choice:
+        you can use
+      </p>
+      <ul>
+        <li>
+          the normal <a href="../apidocs/index.html">JavaDocs</a> or
+        </li>
+        <li>
+          the <a href="../aspectj-report/overview-summary.html">AspectJ Docs</a>.
+        </li>
+      </ul>
+      <p>
+        The AspectJ Docs are similar to javadoc but contains also
+        the AspetcJ features like pointcuts, advices, ...
+      </p>
+    </section>
+    
+    <section name="Examples">
+      <p>
+        For some examples take a at
+        <a href="../../samples/index.html">PatternTesting-Samples</a>.
+        Look at
+        <a href="../samples/xref/patterntesting/sample/Bomb.html">patterntesting.sample.Bomb</a>
+        which is an example for the @TestException annotation.
+      </p>
+    </section>
+
+  </body>
+  
+</document>

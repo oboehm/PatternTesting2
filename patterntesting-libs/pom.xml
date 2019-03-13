@@ -45,7 +45,7 @@
   <modules>
     <module>patterntesting-check</module>
     <!--<module>patterntesting-concurrent</module>-->
-    <!--<module>patterntesting-exception</module>-->
+    <module>patterntesting-exception</module>
   </modules>
   
   <!-- see http://maven.apache.org/pom.html#Licenses -->

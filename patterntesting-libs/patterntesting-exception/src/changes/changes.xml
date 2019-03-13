@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+
+<!-- 
+    $Id: changes.xml,v 1.50 2017/11/09 20:40:24 oboehm Exp $
+    
+    A kind of release notes. This document describes the changes in the
+    different releases.
+    
+    see http://maven.apache.org/plugins/maven-changes-plugin/usage.html
+    see http://maven.apache.org/plugins/maven-changes-plugin/changes.html
+ -->
+
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
+
+  <properties>
+    <title>Main changes</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <release version="1.8.0" date="11-Nov-2017"
+             description="last version with CVS">
+    </release>
+
+    <release version="1.7.0" date="06-Jan-2017"
+             description="Java 7 version">
+      <action dev="oboehm" date="2016-12-04" type="update">
+        Switched to Log4j 2.
+      </action>
+    </release>
+
+    <release version="1.6.0" date="06-Jan-2016"
+             description="Java 6 version">
+      <action dev="oboehm" date="2015-12-30" type="update">
+        Java 5 will be no longer supported.
+      </action>
+    </release>
+
+    <release version="1.5.2" date="04-Jul-2015"
+             description="bug fix">
+      <action dev="oboehm" date="2015-06-25" type="update">
+        Only version updated.
+      </action>
+    </release>
+
+    <release version="1.5.0" date="06-Jan-2015"
+             description="PatternTesting Benchmark project added for micro-benchmarking">
+      <action dev="oboehm" date="2014-06-16" type="update">
+        Begin with next snapshot.
+      </action>
+    </release>
+
+    <release version="1.2.10-YEARS" date="23-Mar-2012"
+             description="10 years PatternTesting">
+      <action dev="ninthbit" issue="2908003" type="fix"
+              system="Sourceforge" date="2012-03-23">
+        Wrapping SQLExceptions for more readability.
+      </action>
+      <action dev="oboehm" date="2012-03-09" type="update">
+        Better NoRouteToHostException with hostname as additional info.
+      </action>
+    </release>
+
+    <release version="1.2.0" date="06-Jan-2012"
+             description="OSGi bundle">
+      <action dev="oboehm" date="2011-12-20" type="add">
+        Meta informatation for OSGi provided.
+      </action>
+      <action dev="oboehm" date="2011-07-29" type="update">
+        Switched from commons-logging to SLF4J.
+      </action>
+    </release>
+
+    <release version="1.1.0" date="22-Apr-2011"
+             description="version for Stuttgarter Test-Tage 2011">
+      <action dev="oboehm" date="2011-02-23" type="update">
+        Suppressing "adviceDidNotMatch" warning.
+      </action>
+      <action dev="oboehm" date="2010-11-11" type="add">
+        ZipExceptions are enriched by the name of the zip file.
+      </action>
+    </release>
+
+    <release version="1.0.1" date="18-Jul-2010"
+             description="first org.patterntesting version">
+      <action dev="oboehm" issue="3027318" type="fix" 
+              system="Sourceforge" date="2010-07-16">
+        ExceptionFactory has now a "fire"-Attribute with an exception
+        which can be triggered now also by a subclass of the stored
+        exception.
+      </action>
+      <action dev="oboehm" date="2010-07-08" type="add" >
+        Scope can now be limited to a single class for the
+        ExceptionFactory.
+      </action>
+    </release>
+
+    <release version="1.0.0" date="20-Jun-2010"
+             description="first org.patterntesting version">
+      <action dev="oboehm" date="2010-01-05" type="update" >
+        GroupId changed to "org.patterntesting".
+      </action>
+      <action dev="oboehm" date="2010-05-12" type="add" >
+        Providing better NoRouteToHostException.
+      </action>
+    </release>
+
+    <release version="0.9.8" date="12-Dec-2009"
+             description="Christmas version">
+      <action dev="oboehm" issue="2859497" type="fix" 
+              system="Sourceforge" date="2009-09-28">
+        Javadoc warnings and errors fixed (with the help of JAutodoc).
+      </action>
+    </release>
+
+    <release version="0.9.7" date="14-Sep-2009"
+             description="JFS version">
+      <action dev="oboehm" type="add" date="2009-06-10">
+        Instead of FileNotFoundException a DirNotFoundException will be
+        thrown if the cause for the exception is a missing directory.
+      </action>
+      <action dev="oboehm" type="update" date="2009-05-12">
+        FileHelper moved back to PatternTesting-Runtime
+      </action>
+      <action dev="oboehm" type="update" date="2009-05-04">
+        Better FileNotFoundException for FileInputStream, FileOutputStream
+        and RandomAccessFile with String as parameter (instead of File).
+      </action>
+    </release>
+  
+    <release version="0.9.6" date="02-May-2009"
+             description="version for Stuttgarter TestTage 2009">
+      <action dev="oboehm" type="add" date="2009-04-30">
+        Better FileNotFoundException for FileInputStream, FileOutputStream
+        and RandomAccessFile.
+      </action>
+    </release>
+
+    <release version="0.9.5" date="31-Mar-2009"
+             description="version for giropay">
+      <action dev="oboehm" type="update">
+        ExceptionFactory and other classes for exception support
+        moved from PatternTesting-Check and PatternTesting-Runtime
+        to a new project "PatternTesting Exception".
+      </action>
+    </release>
+
+  </body>
+
+</document>

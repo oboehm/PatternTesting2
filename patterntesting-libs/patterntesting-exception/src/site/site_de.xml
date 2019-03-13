@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	$Id: site_de.xml,v 1.8 2017/05/14 20:10:49 oboehm Exp $
+    
+    This is the German translation of site.xml.
+    
+    (c)reated: 26-Feb-2010 by ob@aosd.de
+	last up$Date: 2017/05/14 20:10:49 $ by $Author: oboehm $
+-->
+
+<project name="PatternTesting">
+
+  <bannerLeft>
+    <name> PatternTesting </name>
+    <src>../../img/banner-left.png</src>
+  </bannerLeft>
+ 
+  <bannerRight>
+    <name> PatternTesting </name>
+    <src>../../img/banner-right.png</src>
+  </bannerRight>
+ 
+  <version position="left"/>
+
+  <publishDate position="navigation-bottom" format="dd-MMM-yyyy" />
+
+  <body>
+  
+    <!-- see http://www.communardo.de/techblog/tag/maven2/ -->
+    <breadcrumbs>
+      <item name="PatternTesting-Exception" href="index.html" />
+    </breadcrumbs>
+
+    <!-- see http://www.communardo.de/techblog/tag/maven2/ -->
+    <menu ref="parent"/>
+	   
+    <links>
+      <item name="AspectJ" href="http://www.eclipse.org/aspectj"/>
+    </links>
+
+    <menu name="Doc &amp; Downloads">
+      <item name="Dokumentation"            href="/doc/index.html" collapse="true" >
+        <item name="Release Notes"            href="/changes-report.html" />
+        <item name="&#220;ber..."             href="/doc/whatis.html" />
+        <item name="Java API"                 href="../apidocs/index.html" />
+        <item name="AspectJ API"              href="../aspectj-report/overview-summary.html" />
+      </item>
+      <item name="Downloads"                href="../../downloads.html"/>
+    </menu>
+
+    <menu name="Support">
+      <item name="Mailing-Listen"           href="mail-lists.html"/>
+      <item name="Issue Tracking"           href="issue-tracking.html" collapse="true">
+        <item name="Support-Anfragen"         href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454318"/>
+        <item name="Feature-Anfragen"         href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454320"/>
+        <item name="Bug-Reports"              href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454317"/>
+      </item>
+    </menu>
+
+    <menu ref="modules" />
+
+    <menu ref="reports" />
+	  
+	${reports}
+	  
+  </body>
+
+</project>

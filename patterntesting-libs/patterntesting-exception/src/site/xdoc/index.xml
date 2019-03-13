@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>What is PatternTesting-Exception?</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <section name="Introduction">
+      <p>
+        If you want to do exception handling correct this is a hard job.
+        PatternTesting-Exception wants to help you to do this job.
+        For this reason this AspectJ library provides:
+      </p>
+      <dl>
+        <dt>
+          Better exception handling:
+        </dt>
+        <dd>
+          PatternTesting-Exception wraps some exception (e.g. IOException)
+          and replaces the message by some more helpful message
+          (e.g. for a FileNotFoundException you get the missing file with
+          the full pathname).
+        </dd>
+        <dd>
+          For this feature you have to do nothing in your code - no
+          configuration, no annotation is needed.
+        </dd>
+        <dt>
+          Test support for exception handling:
+        </dt>
+        <dd>
+          You have problem to test your exception handling? Use a mock which
+          provokes the desired exception. A mock would be too complicated for
+          the test? You're welcome.
+          <br/>
+          Use the ExceptionFactory together with the
+          @TestException annotation and you can control if and when an
+          exception should be thrown. You can control it even via JMX.
+          So you can watch how your program or web application would react on an
+          unexpected exception.
+        </dd>
+      </dl>
+    </section>
+    
+    <section name="Better Exceptions">
+      <p>
+        At the moment only the call of the following JDK classes are wrapped
+        to provide better exceptions:
+      </p>
+      <ul>
+        <li>java.io.File (for IOExceptions)</li>
+        <li>java.io.FileInputStream (for FileNotFoundExceptions)</li>
+        <li>java.io.FileOutputStream (for FileNotFoundExceptions)</li>
+        <li>java.io.RandomAccessFile (for FileNotFoundExceptions)</li>
+        <li>java.net.Socket (for ConnectExceptions)</li>
+      </ul>
+      <p>
+        Are some classes missing (yes, of course)?
+        Tell it to the
+        <a href="https://lists.sourceforge.net/lists/listinfo/patterntesting-user">patterntesting-user</a>
+        mailing list or enter a
+        <a href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454320">feature request</a>.
+      </p>
+    </section>
+
+    <section name="Some examples">
+      <p>
+      	For an example take a look into PatternTesting-Samples:
+      </p>
+      <dl>
+        <dt>
+          <a href="../samples/xref/patterntesting/sample/Bomb.html">patterntesting.sample.Bomb</a>
+        </dt>
+        <dd>
+          This is a very primitive bomb which simulates a countdown.
+          It shows you how you can use the @TestException annotation.
+          If you'll start this program
+          you can provoke an InterruptedException via JMX.
+        </dd>
+      </dl>
+    </section>
+
+  </body>
+
+</document>
