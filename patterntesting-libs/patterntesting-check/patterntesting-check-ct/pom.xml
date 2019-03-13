@@ -206,7 +206,6 @@
   <contributors>
     <contributor>
       <name>Shohara Shaikh</name>
-      <email></email>
       <organization>KPIT Cummins</organization>
       <roles>
         <role>Java Devleoper</role>
@@ -215,8 +214,8 @@
   </contributors>
 
   <scm>
-    <connection>scm:git:git://github.com/oboehm/PatternTesting2.git/patterntesting-check/patterntesting-check-ct</connection>
-    <url>https://github.com/oboehm/PatternTesting2/patterntesting-check/patterntesting-check-ct</url>
+    <connection>scm:git:git://github.com/oboehm/PatternTesting2.git/patterntesting-libs/patterntesting-check/patterntesting-check-ct</connection>
+    <url>https://github.com/oboehm/PatternTesting2/patterntesting-libs/patterntesting-check/patterntesting-check-ct</url>
   </scm>
 
   <!-- 
@@ -270,7 +269,7 @@
                     -->
                     <echo>copying reports...</echo>
                     <copy todir="${patterntesting.site.dir}/check/ct/" verbose="false">
-                      <fileset dir="target/site"></fileset>
+                      <fileset dir="target/site"/>
                     </copy>
                   </tasks>
                 </configuration>
