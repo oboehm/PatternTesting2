@@ -8,7 +8,7 @@
   </Appenders>
   <Loggers>
     <Logger name="patterntesting" level="info"/>
-    <Logger name="patterntesting.runtime.exception" level="trace"/>
+    <Logger name="patterntesting.exception.net.ConnectExceptionTest" level="debug"/>
     <Root level="info" additivity="false">
       <AppenderRef ref="console" />
     </Root>

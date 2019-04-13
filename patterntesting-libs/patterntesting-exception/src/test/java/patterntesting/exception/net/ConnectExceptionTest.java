@@ -20,7 +20,6 @@ package patterntesting.exception.net;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
-import patterntesting.runtime.annotation.IntegrationTest;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -72,13 +71,13 @@ public class ConnectExceptionTest {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     @Test
-    @IntegrationTest("can take longer till timeout appears")
     public final void testNoRouteToHostException() throws IOException {
         try {
             Socket socket = new Socket("10.11.12.13", 80);
             socket.close();
             fail("ConnectException expected for 10.11.12.13:80");
         } catch (SocketException expected) {
+            log.debug("Connection failed:", expected);
             checkMessage(expected, "10.11.12.13", 80);
         }
     }

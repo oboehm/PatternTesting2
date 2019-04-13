@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 	Project Object Model (POM) for Maven
 	If you are behind a proxy try the following command:
@@ -20,78 +21,35 @@
 	
     (c)reated 22-Mar-09 by ob@aosd.de
 -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!-- 
+      The Basics
+      must be set if you want to upload it to the Central Repository
+      see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+   -->
+  <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.patterntesting</groupId>
     <artifactId>patterntesting-libs</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
-	
-  <!-- 
-      The Basics
-      must be set if you want to upload it to the Central Repository
-      see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
-   -->	
-  <modelVersion>4.0.0</modelVersion>
   <artifactId>patterntesting-exception</artifactId>
   <packaging>jar</packaging>
-  <!-- see http://maven.apache.org/pom.html#Licenses -->
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-    </license>
-  </licenses>
-
-  <inceptionYear>2009</inceptionYear>
-  <description>
-    PatternTesting Exception (patterntesting-exception) is a framework round
+  <description>PatternTesting Exception (patterntesting-exception) is a framework round
     about exceptions. It wraps some common exception (like IOException) to
     provide some more information as the original exception (e.g. the
     filename with the absolute pathname).
-    On the other it allows you to provoke exceptions for better testing.
-  </description>
-  
-  <url>http://patterntesting.org/release/exception/</url>
+    On the other it allows you to provoke exceptions for better testing.</description>
 
   <!-- 
-      Deployment
-      see "Better Builds with Maven", p. 74
-      see http://maven.apache.org/plugins/maven-deploy-plugin/
-  -->
-  <distributionManagement>
-    <!--
-        Deployment of the Web-Site 
-        (try 'mvn site-deploy' to deploy it)
-    -->
-    <site>
-      <id>ftp-patterntesting.org</id>
-      <name>PatternTesting Website</name>
-      <url>${patterntesting.site.url}/${project.version}/exception/</url>
-    </site>
-  </distributionManagement>
-
-  <scm>
-    <connection>scm:cvs:pserver:anonymous@patterntesting.cvs.sourceforge.net:/cvsroot/patterntesting:PatternTesting10/patterntesting-exception</connection>
-    <url>http://patterntesting.cvs.sourceforge.net/viewvc/patterntesting/PatternTesting10/patterntesting-exception/</url>
-    <tag>patterntesting-1_3_0</tag>
-  </scm>
-
-  <developers>
-    <developer>
-      <name>Oliver Boehm</name>
-      <id>oboehm</id>
-      <email>ob@aosd.de</email>
-      <url>http://www.aosd.de/</url>
-      <organization>agentes AG</organization>
-      <organizationUrl>http://www.agentes.de</organizationUrl>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-  </developers>
+      General Properties
+      (see parent POM)
+   -->
+  <properties>
+    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/exception/</patterntesting.site.artifact.dir>
+  </properties>
 
   <!-- 
 	  L I B R A R I E S
@@ -102,32 +60,11 @@
       <groupId>org.patterntesting</groupId>
       <artifactId>patterntesting-rt</artifactId>
     </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
-
-  <!-- 
-      General Properties
-      (see parent POM)
-   -->
-  <properties>
-    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/exception/</patterntesting.site.artifact.dir>
-  </properties> 
 
   <!-- Build Settings -->
   <build>
-  
-    <extensions>
-      <!-- Enabling the use of FTP -->
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-         <artifactId>wagon-ftp</artifactId>
-      </extension>
-    </extensions>
-    
+
     <pluginManagement>
       <plugins>
         <!-- 
@@ -145,7 +82,7 @@
         </plugin>
       </plugins>
     </pluginManagement>
-    
+
     <plugins>
       <!--
           AspectJ compiler
@@ -160,10 +97,6 @@
           <source>${maven.compile.source}</source>
           <target>${maven.compile.target}</target>
           <complianceLevel>${maven.compile.complianceLevel}</complianceLevel>
-          <options>
-            <option>-verbose</option>
-            <option>-showWeaveInfo</option>             
-          </options>
           <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
           <aspectLibraries>
             <aspectLibrary>
@@ -175,27 +108,27 @@
         <executions>
           <execution>
             <id>compile</id>
-            <configuration>
-              <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
-            </configuration>
             <goals>
               <goal>compile</goal>
             </goals>
+            <configuration>
+              <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
+            </configuration>
           </execution>
           <execution>
             <id>test-compile</id>
-            <configuration>
-              <ajdtBuildDefFile>src/test/build.ajproperties</ajdtBuildDefFile>
-            </configuration>
             <goals>
               <goal>test-compile</goal>
             </goals>
+            <configuration>
+              <ajdtBuildDefFile>src/test/build.ajproperties</ajdtBuildDefFile>
+            </configuration>
           </execution>
         </executions>
       </plugin>
-	  <!-- see http://maven.apache.org/plugins/maven-surefire-plugin/examples/inclusion-exclusion.html -->
-	  <plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
+      <!-- see http://maven.apache.org/plugins/maven-surefire-plugin/examples/inclusion-exclusion.html -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <!-- Aspects must be addressed with the suffix .java (don't ask why) -->
@@ -203,18 +136,18 @@
             <exclude>**/patterntesting/exception/TestExceptionAspect.java</exclude>
           </excludes>
         </configuration>
-	  </plugin>
-	  <!-- see http://maven.apache.org/plugins/maven-source-plugin/usage.html -->
+      </plugin>
+      <!-- see http://maven.apache.org/plugins/maven-source-plugin/usage.html -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <executions>
           <execution>
             <id>attach-sources</id>
-            <phase>verify</phase>
             <goals>
               <goal>jar</goal>
             </goals>
+            <phase>verify</phase>
           </execution>
         </executions>
       </plugin>
@@ -228,22 +161,18 @@
         <extensions>true</extensions>
         <configuration>
           <instructions>
-            <Import-Package>
-              *
-            </Import-Package>
-            <Export-Package>
-              patterntesting.exception,
-              patterntesting.exception.*
-            </Export-Package>
+            <Import-Package>*</Import-Package>
+            <Export-Package>patterntesting.exception,
+              patterntesting.exception.*</Export-Package>
           </instructions>
         </configuration>
         <executions>
           <execution>
             <id>bundle-manifest</id>
-            <phase>process-classes</phase>
-            <goals>    
+            <goals>
               <goal>manifest</goal>
-            </goals>   
+            </goals>
+            <phase>process-classes</phase>
           </execution>
         </executions>
       </plugin>
@@ -254,9 +183,9 @@
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
-          <archive>  
+          <archive>
             <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-          </archive> 
+          </archive>
         </configuration>
       </plugin>
       <!-- enabled in parent so we must disable it here -->
@@ -267,7 +196,63 @@
         </configuration>
       </plugin>
     </plugins>
+
+    <extensions>
+      <!-- Enabling the use of FTP -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ftp</artifactId>
+      </extension>
+    </extensions>
   </build>
+
+  <url>http://patterntesting.org/release/exception/</url>
+
+  <inceptionYear>2009</inceptionYear>
+  <!-- see http://maven.apache.org/pom.html#Licenses -->
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>oboehm</id>
+      <name>Oliver Boehm</name>
+      <email>ob@aosd.de</email>
+      <url>http://www.aosd.de/</url>
+      <organization>agentes AG</organization>
+      <organizationUrl>http://www.agentes.de</organizationUrl>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:cvs:pserver:anonymous@patterntesting.cvs.sourceforge.net:/cvsroot/patterntesting:PatternTesting10/patterntesting-exception</connection>
+    <url>http://patterntesting.cvs.sourceforge.net/viewvc/patterntesting/PatternTesting10/patterntesting-exception/</url>
+    <tag>patterntesting-1_3_0</tag>
+  </scm>
+
+  <!-- 
+      Deployment
+      see "Better Builds with Maven", p. 74
+      see http://maven.apache.org/plugins/maven-deploy-plugin/
+  -->
+  <distributionManagement>
+    <!--
+        Deployment of the Web-Site 
+        (try 'mvn site-deploy' to deploy it)
+    -->
+    <site>
+      <id>ftp-patterntesting.org</id>
+      <name>PatternTesting Website</name>
+      <url>${patterntesting.site.url}/${project.version}/exception/</url>
+    </site>
+  </distributionManagement>
 
   <profiles>
     <profile>
@@ -290,9 +275,12 @@
             <artifactId>maven-antrun-plugin</artifactId>
             <executions>
               <execution>
+                <goals>
+                  <goal>run</goal>
+                </goals>
                 <phase>site</phase>
                 <configuration>
-                  <tasks name="install.reports" description="copy reports to local site">
+                  <tasks description="copy reports to local site" name="install.reports">
                     <!--
                       Place any ant task here. You can add anything
                       you can add between <target> and </target> in a
@@ -300,13 +288,10 @@
                     -->
                     <echo>copying reports...</echo>
                     <copy todir="${patterntesting.site.dir}/exception/" verbose="false">
-                      <fileset dir="target/site" />
+                      <fileset dir="target/site"></fileset>
                     </copy>
                   </tasks>
                 </configuration>
-                <goals>
-                  <goal>run</goal>
-                </goals>
               </execution>
             </executions>
           </plugin>
