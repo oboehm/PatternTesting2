@@ -70,24 +70,6 @@
   <!-- Build Settings -->
   <build>
 
-    <pluginManagement>
-      <plugins>
-        <!-- 
-            Single-Threading for JUnit Tests
-            Because we manipulate System properties for testing we can't use
-            multi-threading for testing. So we the parallel methods to 1.
-         -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <configuration>
-            <parallel>classes</parallel>
-            <threadCount>1</threadCount>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-
     <plugins>
       <!--
           AspectJ compiler
