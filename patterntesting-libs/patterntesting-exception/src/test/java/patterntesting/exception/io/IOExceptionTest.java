@@ -24,11 +24,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * This is the JUnit test for the IOExceptionAspect.
@@ -44,12 +45,10 @@ public class IOExceptionTest {
 
 	/**
 	 * Test create temp file.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-    @Test(expected = DirNotFoundException.class)
-	public final void testCreateTempFile() throws IOException {
-	    File.createTempFile("exception", "expected", missingDir);
+    @Test
+	public final void testCreateTempFile() {
+        assertThrows(DirNotFoundException.class, () -> File.createTempFile("exception", "expected", missingDir));
 	}
 
 	/**
@@ -70,11 +69,9 @@ public class IOExceptionTest {
 
 	/**
 	 * Test create temp file with dir suffix.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@Test
-	public final void testCreateTempFileWithDirSuffix() throws IOException {
+	public final void testCreateTempFileWithDirSuffix() {
 		try {
 			File.createTempFile("test", missingDir.toString());
 			fail("IOException expected for suffix " + missingDir);
@@ -85,13 +82,13 @@ public class IOExceptionTest {
 
 	/**
 	 * Test create new file.
-	 *
-	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-    @Test(expected = DirNotFoundException.class)
-	public final void testCreateNewFile() throws IOException {
-		File file = new File(SystemUtils.getJavaIoTmpDir(), missingDir.toString());
-		file.createNewFile();
+    @Test
+	public final void testCreateNewFile() {
+        assertThrows(DirNotFoundException.class, () -> {
+            File file = new File(SystemUtils.getJavaIoTmpDir(), missingDir.toString());
+            file.createNewFile();
+        });
 	}
 
     /**
@@ -154,14 +151,14 @@ public class IOExceptionTest {
     /**
      * What happens, if a file cound be not created because part of the
      * directory path is missing?.
-     *
-     * @throws IOException Signals that an I/O exception has occurred.
      */
-    @Test(expected = DirNotFoundException.class)
-    public final void testFileNotFoundExceptionOutputStreamMissingDir() throws IOException {
-        File file = new File(missingDir, "test.txt");
-        OutputStream ostream = new FileOutputStream(file);
-        ostream.close();
+    @Test
+    public final void testFileNotFoundExceptionOutputStreamMissingDir() {
+        assertThrows(DirNotFoundException.class, () -> {
+            File file = new File(missingDir, "test.txt");
+            OutputStream ostream = new FileOutputStream(file);
+            ostream.close();
+        });
     }
 
     /**

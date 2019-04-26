@@ -20,14 +20,20 @@
 
 package patterntesting.exception.io;
 
-import static org.junit.Assert.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.jar.JarFile;
-import java.util.zip.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
-import org.junit.*;
-import org.apache.logging.log4j.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**
@@ -48,15 +54,15 @@ public final class ZipExceptionTest {
      *
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    @BeforeClass
+    @BeforeAll
     public static void setupZipFiles() throws IOException {
         emptyFile = File.createTempFile("empty", ".zip");
-        assertTrue(emptyFile + " can't be created", emptyFile.exists());
+        assertTrue(emptyFile.exists(), emptyFile + " can't be created");
         log.info(emptyFile + " created for testing");
         corruptFile = new File("src/test/resources/patterntesting/exception/io/corrupt.zip");
-        assertTrue(corruptFile + " does not exist", corruptFile.exists());
+        assertTrue(corruptFile.exists(), corruptFile + " does not exist");
         validFile = new File("src/test/resources/patterntesting/exception/io/valid.zip");
-        assertTrue(validFile + " does not exist", validFile.exists());
+        assertTrue(validFile.exists(), validFile + " does not exist");
     }
 
     /**
@@ -84,15 +90,13 @@ public final class ZipExceptionTest {
     /**
      * Also for a non existing zip file we want to have the name in the thrown
      * exception.
-     *
-     * @throws IOException Signals that an I/O exception has occurred.
      */
     @Test
-    public void testNotExistingZipFile() throws IOException {
+    public void testNotExistingZipFile() {
         checkFailingConstructor(new File("does.not.exist"));
     }
 
-    private static void checkFailingConstructor(final File file) throws IOException {
+    private static void checkFailingConstructor(final File file) {
         checkFailingZipFileCtor(file);
         checkFailingJarFileCtor(file);
     }
@@ -107,7 +111,7 @@ public final class ZipExceptionTest {
         }
     }
 
-    private static void checkFailingJarFileCtor(final File file) throws IOException {
+    private static void checkFailingJarFileCtor(final File file) {
         try {
             JarFile jar = new JarFile(file);
             jar.close();
@@ -176,13 +180,13 @@ public final class ZipExceptionTest {
     private static void checkException(final Exception expected, final File file) {
         String msg = expected.getMessage();
         log.info("msg=\"" + msg + '"');
-        assertTrue(file + " not part of: " + msg, msg.contains(file.getPath()));
+        assertTrue(msg.contains(file.getPath()), file + " not part of: " + msg);
     }
 
     /**
      * Deletes the corrupted zip file.
      */
-    @AfterClass
+    @AfterAll
     public static void teardownZipFiles() {
         emptyFile.delete();
         log.info(emptyFile + " deleted");
