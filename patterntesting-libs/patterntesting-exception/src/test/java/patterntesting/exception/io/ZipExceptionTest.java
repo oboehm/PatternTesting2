@@ -60,7 +60,7 @@ public final class ZipExceptionTest {
         assertTrue(emptyFile.exists(), emptyFile + " can't be created");
         log.info(emptyFile + " created for testing");
         corruptFile = new File("src/test/resources/patterntesting/exception/io/corrupt.zip");
-        assertTrue(corruptFile.exists(), corruptFile + " does not exist");
+        assertTrue(corruptFile.exists(), corruptFile.getAbsolutePath() + " does not exist");
         validFile = new File("src/test/resources/patterntesting/exception/io/valid.zip");
         assertTrue(validFile.exists(), validFile + " does not exist");
     }
