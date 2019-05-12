@@ -19,7 +19,7 @@ package patterntesting.exception.net;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -27,8 +27,7 @@ import java.net.NoRouteToHostException;
 import java.net.Socket;
 import java.net.SocketException;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * This is the JUnit Test for the ConnectExceptionAspect.

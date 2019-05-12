@@ -30,8 +30,7 @@ import java.net.HttpURLConnection;
 import java.net.SocketException;
 import java.net.URL;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 
 /**
