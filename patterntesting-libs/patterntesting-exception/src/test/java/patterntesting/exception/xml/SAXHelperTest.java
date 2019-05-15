@@ -19,23 +19,23 @@
  */
 package patterntesting.exception.xml;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 /**
  * The Class SAXHelperTest.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.7 $
  * @see org.xml.sax.helpers.XMLReaderFactory
  * @since 17.12.2008
  */
@@ -48,39 +48,27 @@ public final class SAXHelperTest {
      * Test method for
      * {@link patterntesting.exception.xml.SAXHelper#betterSAXException(org.xml.sax.SAXException)}
      * .
-     *
-     * @throws InstantiationException             the instantiation exception
-     * @throws IllegalAccessException             the illegal access exception
      */
     @Test
-    public void testBetterSAXException() throws InstantiationException,
-            IllegalAccessException {
+    public void testBetterSAXException()  {
         SAXException saxe = createSAXException();
         checkSAXException(saxe, saxe.getMessage());
     }
 
     /**
      * Test better sax exception with system property.
-     *
-     * @throws InstantiationException the instantiation exception
-     * @throws IllegalAccessException the illegal access exception
      */
     @Test
-    public void testBetterSAXExceptionWithSystemProperty()
-            throws InstantiationException, IllegalAccessException {
+    public void testBetterSAXExceptionWithSystemProperty() {
         checkSAXException("something.else", "");
     }
 
     /**
      * If the classname of the SAX driver is identical to the system property
      * given by propertyName we expect a more detail error message.
-     *
-     * @throws InstantiationException the instantiation exception
-     * @throws IllegalAccessException the illegal access exception
      */
     @Test
-    public void testBetterSAXExceptionWithWrongSystemProperty()
-            throws InstantiationException, IllegalAccessException {
+    public void testBetterSAXExceptionWithWrongSystemProperty() {
         checkSAXException(driverClassName, " - check property \""
                 + SAXHelper.DRIVER_PROPERTY + "\"");
     }
@@ -107,10 +95,10 @@ public final class SAXHelperTest {
     public void testDriverResource() throws IOException {
         String service = SAXHelper.DRIVER_RESOURCE;
         InputStream in = ClassLoader.getSystemResourceAsStream(service);
-        assertNotNull("can't load " + service, in);
+        assertNotNull(in, "can't load " + service);
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    in, "UTF8"));
+                    in, StandardCharsets.UTF_8));
             String className = reader.readLine();
             reader.close();
             assertEquals("nirwana.test.driver", className);

@@ -22,19 +22,21 @@ package patterntesting.exception.xml;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.endsWith;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
  * The Class XMLReaderFactoryTest.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.11 $
  * @since 17.12.2008
  */
 public final class XMLReaderFactoryTest {
@@ -57,19 +59,16 @@ public final class XMLReaderFactoryTest {
                 assertNotNull(xmlReader);
             } catch (SAXException saxe) {
                 log.info(saxe.getMessage());
-                assertTrue(StringUtils
-                        .contains(saxe.getMessage(), "check system resource"));
+                assertThat(saxe.getMessage(), containsString("check system resource"));
             }
         }
     }
 
     /**
      * Test set property.
-     *
-     * @throws SAXException the SAX exception
      */
     @Test
-    public void testSetProperty() throws SAXException {
+    public void testSetProperty() {
         synchronized (System.class) {
             String propertyName = SAXHelper.DRIVER_PROPERTY;
             try {
@@ -85,16 +84,9 @@ public final class XMLReaderFactoryTest {
 
     private void checkCreateXMLReader(final Class<? extends Throwable> clazz,
             final String expected) {
-        try {
-            XMLReaderFactory.createXMLReader();
-            fail(clazz.getSimpleName() + "(" + expected + ") expected");
-        } catch (Throwable t) {
-            log.debug(t.getMessage(), t);
-            assertEquals(clazz, t.getClass());
-            String msg = t.getMessage();
-            assertTrue('"' + msg + "\" does not end with \"" + expected + '"',
-                    msg.endsWith(expected));
-        }
+        Throwable t = assertThrows(clazz, XMLReaderFactory::createXMLReader);
+        log.debug(t.getMessage(), t);
+        assertThat(t.getMessage(), endsWith(expected));
     }
 
 }
