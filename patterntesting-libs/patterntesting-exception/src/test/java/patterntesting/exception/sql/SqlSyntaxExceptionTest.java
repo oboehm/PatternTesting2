@@ -1,10 +1,11 @@
 package patterntesting.exception.sql;
 
-import static org.junit.Assert.*;
-
+import org.junit.jupiter.api.Test;
 import java.sql.*;
 
-import org.junit.Test;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -17,20 +18,16 @@ public class SqlSyntaxExceptionTest{
 
     /**
 	 * The simplest case: Append sql command to message.
-	 *
-	 * @throws ClassNotFoundException thrown when hsqldb is not in classpath
 	 */
 	@Test
-	public void testSingleParameterCall() throws ClassNotFoundException {
+	public void testSingleParameterCall() {
 		String query = "SELECT * FROM test";
-		try {
-			Statement statement = new DummyStatement();
+		Statement statement = new DummyStatement();
+		SQLException ex = assertThrows(SQLException.class, () -> {
 			statement.execute(query);
 			statement.close();
-			fail("should fail: " + query);
-		} catch (SQLException e) {
-            assertTrue("'" + query + "' missing in " + e, e.getMessage().contains(query));
-		}
+		});
+		assertThat(ex.getMessage(), containsString(query));
 	}
 
 }
