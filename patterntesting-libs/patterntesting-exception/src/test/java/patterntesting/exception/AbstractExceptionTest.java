@@ -20,11 +20,10 @@
 
 package patterntesting.exception;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.util.Assertions;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * This is the abstract super class needed for TestExceptionClass but also
@@ -45,8 +44,7 @@ public abstract class AbstractExceptionTest {
      */
     @Test
     public final void testAssertionsEnabled() {
-        assertTrue("assertion is disabled - enable it with 'java -ea ...'",
-                Assertions.ENABLED);
+        assertTrue(Assertions.ENABLED, "assertion is disabled - enable it with 'java -ea ...'");
     }
 
 }

@@ -83,10 +83,15 @@ public final class XMLReaderFactoryTest {
     }
 
     private void checkCreateXMLReader(final Class<? extends Throwable> clazz,
-            final String expected) {
-        Throwable t = assertThrows(clazz, XMLReaderFactory::createXMLReader);
-        log.debug(t.getMessage(), t);
-        assertThat(t.getMessage(), endsWith(expected));
+                                      final String expected) {
+        try {
+            XMLReaderFactory.createXMLReader();
+            fail(clazz.getSimpleName() + "(" + expected + ") expected");
+        } catch (Throwable t) {
+            log.debug(t.getMessage(), t);
+            assertEquals(clazz, t.getClass());
+            assertThat(t.getMessage(), endsWith(expected));
+        }
     }
 
 }
