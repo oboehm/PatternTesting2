@@ -1,7 +1,5 @@
 /*
- * $Id: XMLReaderFactoryTest.java,v 1.11 2016/12/18 21:57:35 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +17,6 @@
  */
 package patterntesting.exception.xml;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
@@ -30,6 +27,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -41,8 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public final class XMLReaderFactoryTest {
 
-    private static final Logger log = LogManager
-            .getLogger(XMLReaderFactoryTest.class);
+    private static final Logger log = LogManager.getLogger(XMLReaderFactoryTest.class);
 
     /**
      * We have the wrong system resource in the classpath so this method

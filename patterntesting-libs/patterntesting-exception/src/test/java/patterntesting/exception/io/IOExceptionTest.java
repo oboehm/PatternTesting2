@@ -28,8 +28,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This is the JUnit test for the IOExceptionAspect.
@@ -93,22 +92,20 @@ public class IOExceptionTest {
 
     /**
      * Test file not found exception input stream.
+     *
+     * @throws IOException the io exception
      */
     @Test
-    public final void testFileNotFoundExceptionInputStream() {
+    public final void testFileNotFoundExceptionInputStream() throws IOException {
         String filename = "hugo";
         File file = new File(filename);
-        assertFalse(file + " should not exist", file.exists());
-        try {
-            InputStream istream = new FileInputStream(file);
-            IOUtils.closeQuietly(istream);
+        assertFalse(file.exists(), file + " should not exist");
+        try (InputStream istream = new FileInputStream(file)) {
             fail("FileNotFoundException expected for " + file);
         } catch (FileNotFoundException expected) {
             checkMessage(expected);
         }
-        try {
-            InputStream istream = new FileInputStream(filename);
-            IOUtils.closeQuietly(istream);
+        try (InputStream istream = new FileInputStream(filename)) {
             fail("FileNotFoundException expected for " + filename);
         } catch (FileNotFoundException expected) {
             checkMessage(expected);
@@ -125,9 +122,9 @@ public class IOExceptionTest {
             throws IOException {
         String filename = "readonly.test";
         File file = new File(filename);
-        assertFalse(file + " should not exist", file.exists());
-        assertTrue("can't create " + file, file.createNewFile());
-        assertTrue("can't set " + file + " readonly", file.setReadOnly());
+        assertFalse(file.exists(), file + " should not exist");
+        assertTrue(file.createNewFile(), "can't create " + file);
+        assertTrue(file.setReadOnly(), "can't set " + file + " readonly");
         try {
             OutputStream ostream = new FileOutputStream(file);
             ostream.close();
@@ -163,22 +160,20 @@ public class IOExceptionTest {
 
     /**
      * Do you get a FileNotFoundException for RandomAccessFile? Let's check it!.
+     *
+     * @throws IOException the io exception
      */
     @Test
-    public final void testFileNotFoundExceptionRandomAccess() {
+    public final void testFileNotFoundExceptionRandomAccess() throws IOException {
         String filename = "hugo";
         File file = new File(filename);
-        assertFalse(file + " should not exist", file.exists());
-        try {
-            RandomAccessFile raf = new RandomAccessFile(file, "r");
-            IOUtils.closeQuietly(raf);
+        assertFalse(file.exists(), file + " should not exist");
+        try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
             fail("FileNotFoundException expected for " + file);
         } catch (FileNotFoundException expected) {
             checkMessage(expected);
         }
-        try {
-            RandomAccessFile raf = new RandomAccessFile(filename, "r");
-            IOUtils.closeQuietly(raf);
+        try (RandomAccessFile raf = new RandomAccessFile(filename, "r")) {
             fail("FileNotFoundException expected for " + filename);
         } catch (FileNotFoundException expected) {
             checkMessage(expected);
@@ -188,8 +183,7 @@ public class IOExceptionTest {
 	private void checkMessage(final IOException expected) {
 		log.info(expected.getLocalizedMessage());
 		String msg = expected.getMessage();
-		assertFalse("filename missing in '" + msg + "'", msg
-				.equals("No such file or directory"));
+        assertNotEquals("No such file or directory", msg, "filename missing in '" + msg + "'");
 	}
 
 	private void checkMessage(final FileNotFoundException expected) {
@@ -198,7 +192,7 @@ public class IOExceptionTest {
 	    String filename = StringUtils.substringBefore(msg,
                 " (No such file or directory)");
 	    File file = new File(filename);
-	    assertTrue(file + " should be absolute", file.isAbsolute());
+	    assertTrue(file.isAbsolute(), file + " should be absolute");
 	}
 
 }

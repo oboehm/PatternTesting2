@@ -1,7 +1,5 @@
 /*
- * $Id: TestExceptionTest.java,v 1.11 2016/01/06 20:46:12 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +21,10 @@ package patterntesting.exception;
 import java.io.*;
 import java.net.SocketException;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import patterntesting.annotation.exception.TestException;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * The Class TestExceptionTest.
@@ -50,27 +49,23 @@ public final class TestExceptionTest extends AbstractExceptionTest implements Se
 
     /**
 	 * Test expected exception.
-	 *
-	 * @throws InterruptedException the interrupted exception
 	 */
-    @Test(expected = InterruptedException.class)
-    public void testExpectedException() throws InterruptedException {
+    @Test
+    public void testExpectedException() {
 	    synchronized (exceptionFactory) {
 	        activateOnce(InterruptedException.class);
-	        mayThrowException();
+	        assertThrows(InterruptedException.class, () -> mayThrowException());
         }
     }
 
     /**
      * Test expected exception.
-     *
-     * @throws IOException the expected exception
      */
-    @Test(expected = SocketException.class)
-    public void testExpectedSubexception() throws IOException {
+    @Test
+    public void testExpectedSubexception() {
         synchronized (exceptionFactory) {
             activateOnce(SocketException.class);
-            mayThrowIOException(false);
+            assertThrows(SocketException.class, () -> mayThrowIOException(false));
         }
     }
 
@@ -90,14 +85,12 @@ public final class TestExceptionTest extends AbstractExceptionTest implements Se
      * Test method for {@link ExceptionFactory#setScope(Class)}.
      * Because we set the scope to this test class here we expected
      * an InterruptedException.
-     *
-     * @throws InterruptedException the expected exception
      */
-    @Test(expected = InterruptedException.class)
-    public void testScope() throws InterruptedException {
+    @Test
+    public void testScope() {
         synchronized (exceptionFactory) {
             activateOnce(InterruptedException.class, this.getClass());
-            mayThrowException();
+            assertThrows(InterruptedException.class, () -> mayThrowException());
         }
     }
 
@@ -120,15 +113,13 @@ public final class TestExceptionTest extends AbstractExceptionTest implements Se
      * Test method for {@link ExceptionFactory#resetScope()}.
      * Because we reset the scope to "all classes" we expected
      * an InterruptedException.
-     *
-     * @throws InterruptedException the expected exception
      */
-    @Test(expected = InterruptedException.class)
-    public void testResetScope() throws InterruptedException {
+    @Test
+    public void testResetScope() {
         synchronized (exceptionFactory) {
             activateOnce(InterruptedException.class, String.class);
             exceptionFactory.resetScope();
-            mayThrowException();
+            assertThrows(InterruptedException.class, () -> mayThrowException());
         }
     }
 
@@ -136,14 +127,12 @@ public final class TestExceptionTest extends AbstractExceptionTest implements Se
      * Test method for {@link ExceptionFactory#setScope(Class)}.
      * Because we set the scope to a super class of this test class here
      * we expected an InterruptedException.
-     *
-     * @throws InterruptedException the expected exception
      */
-    @Test(expected = InterruptedException.class)
-    public void testSuperclassScope() throws InterruptedException {
+    @Test
+    public void testSuperclassScope() {
         synchronized (exceptionFactory) {
             activateOnce(InterruptedException.class, AbstractExceptionTest.class);
-            mayThrowException();
+            assertThrows(InterruptedException.class, () -> mayThrowException());
         }
     }
 
@@ -151,14 +140,12 @@ public final class TestExceptionTest extends AbstractExceptionTest implements Se
      * Test method for {@link ExceptionFactory#setScope(Class)}.
      * Because we set the scope to an interface of this test class here
      * we expected an InterruptedException.
-     *
-     * @throws InterruptedException the expected exception
      */
-    @Test(expected = InterruptedException.class)
-    public void testInterfaceScope() throws InterruptedException {
+    @Test
+    public void testInterfaceScope() {
         synchronized (exceptionFactory) {
             activateOnce(InterruptedException.class, Serializable.class);
-            mayThrowException();
+            assertThrows(InterruptedException.class, () -> mayThrowException());
         }
     }
 

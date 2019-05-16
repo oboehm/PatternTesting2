@@ -1,7 +1,5 @@
 /*
- * $Id: ExceptionFactoryTest.java,v 1.13 2016/12/18 21:57:35 oboehm Exp $
- *
- * Copyright (c) 2009 by Oliver Boehm
+ * Copyright (c) 2009-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +15,17 @@
  */
 package patterntesting.exception;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.SocketException;
 
-import org.junit.*;
 import org.apache.logging.log4j.*;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import patterntesting.runtime.jmx.MBeanHelper;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Class ExceptionFactoryTest.
@@ -39,7 +38,7 @@ public final class ExceptionFactoryTest extends AbstractExceptionTest {
     /**
      * Setup.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         factory.reset();
     }
@@ -47,12 +46,12 @@ public final class ExceptionFactoryTest extends AbstractExceptionTest {
     /**
      * Test provoke.
      */
-    @Test(expected = InterruptedException.class)
+    @Test
     public void testProvoke() {
         synchronized (factory) {
             factory.activate();
             assertTrue(factory.isActive());
-            factory.provoke(InterruptedException.class);            
+            assertThrows(InterruptedException.class, () -> factory.provoke(InterruptedException.class));
         }
     }
 
@@ -112,26 +111,26 @@ public final class ExceptionFactoryTest extends AbstractExceptionTest {
     /**
      * Tests provokeOneOf with exact match.
      */
-	@Test(expected = ClassCastException.class)
+	@Test
     public void testProvokeOneOfExactMatch() {
         Class<? extends Throwable>[] throwables = getThrowableArrayWith(ClassCastException.class);
 		synchronized (factory) {
 		    factory.activate();
 	        factory.setFire(ClassCastException.class);
-	        factory.provokeOneOf(throwables);
+	        assertThrows(ClassCastException.class, () -> factory.provokeOneOf(throwables));
         }
 	}
 
     /**
      * Tests provokeOneOf with a subclass of the fired exception.
      */
-    @Test(expected = SocketException.class)
+    @Test
     public void testProvokeOneOf() {
         Class<? extends Throwable>[] throwables = getThrowableArrayWith(IOException.class);
         synchronized (factory) {
             factory.activate();
             factory.setFire(SocketException.class);
-            factory.provokeOneOf(throwables);
+            assertThrows(SocketException.class, () -> factory.provokeOneOf(throwables));
         }
     }
 
@@ -169,7 +168,7 @@ public final class ExceptionFactoryTest extends AbstractExceptionTest {
      */
     @Test
     public void testMBeanRegistration() {
-    	assertTrue("factory is not registered", MBeanHelper.isRegistered(factory));
+    	assertTrue(MBeanHelper.isRegistered(factory), "factory is not registered");
     }
     
 }

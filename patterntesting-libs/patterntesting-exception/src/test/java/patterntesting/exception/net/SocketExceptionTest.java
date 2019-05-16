@@ -30,7 +30,8 @@ import java.net.HttpURLConnection;
 import java.net.SocketException;
 import java.net.URL;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**
@@ -63,8 +64,7 @@ public final class SocketExceptionTest {
     private static void checkMessage(final SocketException e, final URL url) {
         String host = url.getHost();
         String msg = e.getMessage();
-        assertTrue(host + " not inside '" + msg + "'", StringUtils.contains(
-                msg, host));
+        assertTrue(StringUtils.contains(msg, host), host + " not inside '" + msg + "'");
         log.info("expected message: " + msg);
     }
 

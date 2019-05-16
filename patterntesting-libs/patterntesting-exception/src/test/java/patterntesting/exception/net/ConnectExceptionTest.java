@@ -1,7 +1,5 @@
 /*
- * $Id: ConnectExceptionTest.java,v 1.10 2016/12/18 21:57:35 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,13 +25,13 @@ import java.net.NoRouteToHostException;
 import java.net.Socket;
 import java.net.SocketException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * This is the JUnit Test for the ConnectExceptionAspect.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.10 $
  * @since 23.03.2009
  */
 public class ConnectExceptionTest {
@@ -85,7 +83,7 @@ public class ConnectExceptionTest {
             final int port) {
         log.info(expected.getLocalizedMessage());
         String msg = expected.getMessage();
-        assertTrue("hostname and port missing in '" + msg + "'", msg.contains(host + ":" + port));
+        assertTrue(msg.contains(host + ":" + port), "hostname and port missing in '" + msg + "'");
     }
 
 }
