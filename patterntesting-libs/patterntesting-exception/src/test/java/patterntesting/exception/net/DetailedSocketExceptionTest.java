@@ -21,6 +21,8 @@ import org.junit.jupiter.api.Test;
 
 import java.net.SocketException;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -33,6 +35,14 @@ class DetailedSocketExceptionTest {
         Throwable cause = new IllegalStateException("bumm");
         SocketException ex = new DetailedSocketException("broken", cause);
         assertEquals(cause, ex.getCause());
+    }
+
+    @Test
+    void of() {
+        SocketException orig = new SocketException("not connected");
+        String host = "testhost";
+        SocketException better = DetailedSocketException.of(orig, host, 4711);
+        assertThat(better.getMessage(), containsString(host));
     }
 
 }

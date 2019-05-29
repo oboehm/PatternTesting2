@@ -17,6 +17,8 @@
  */
 package patterntesting.exception.net;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.net.SocketException;
 
 /**
@@ -39,6 +41,25 @@ public class DetailedSocketException extends SocketException {
     public DetailedSocketException(String msg, Throwable cause) {
         super(msg);
         initCause(cause);
+    }
+
+    /**
+     * The given SocketException is checked if it contains the host in the
+     * error message. If not it is appended.
+     *
+     * @param e    the original SocketException
+     * @param host the host
+     * @param port the port
+     * @return a socket exception with more details
+     * @since 2.0
+     */
+    public static SocketException of(SocketException e, String host, int port) {
+        String msg = e.getMessage();
+        if (StringUtils.contains(msg, host)) {
+            return e;
+        }
+        String betterMsg = msg + " (can't connect " + host + ":" + port + ")";
+        return new DetailedSocketException(betterMsg, e);
     }
 
 }

@@ -72,7 +72,7 @@ public aspect SocketExceptionAspect {
         } catch (NoRouteToHostException ex) {
             throw SocketExceptionHelper.getBetterNoRouteToHostException(ex, host, port);
         } catch (SocketException ex) {
-            throw SocketExceptionHelper.getBetterSocketException(ex, host, port);
+            throw DetailedSocketException.of(ex, host, port);
         }
     }
 
