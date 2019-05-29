@@ -71,6 +71,8 @@ public aspect SocketExceptionAspect {
             throw SocketExceptionHelper.getBetterConnectException(ce, host, port);
         } catch (NoRouteToHostException ex) {
             throw SocketExceptionHelper.getBetterNoRouteToHostException(ex, host, port);
+        } catch (SocketException ex) {
+            throw SocketExceptionHelper.getBetterSocketException(ex, host, port);
         }
     }
 

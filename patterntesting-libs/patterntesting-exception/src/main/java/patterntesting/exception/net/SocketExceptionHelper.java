@@ -117,13 +117,28 @@ public final class SocketExceptionHelper {
      */
     public static SocketException getBetterSocketException(final SocketException e,
             final URLConnection connection) {
-        String msg = e.getMessage();
         URL url = connection.getURL();
         String host = url.getHost();
+        int port = url.getPort();
+        return getBetterSocketException(e, host, port);
+    }
+
+    /**
+     * The given SocketException is checked if it contains the host in the
+     * error message. If not it is appended.
+     *
+     * @param e    the original SocketException
+     * @param host the host
+     * @param port the port
+     * @return the better socket exception
+     * @since 2.0
+     */
+    public static SocketException getBetterSocketException(SocketException e, String host, int port) {
+        String msg = e.getMessage();
         if (StringUtils.contains(msg, host)) {
             return e;
         }
-        String betterMsg = msg + " (can't connect " + host + ")";
+        String betterMsg = msg + " (can't connect " + host + ":" + port + ")";
         return new SocketException(betterMsg);
     }
 
