@@ -55,6 +55,7 @@
     <module>patterntesting-rt</module>
     <module>patterntesting-tools</module>
     <module>patterntesting-libs</module>
+    <module>patterntesting-samples</module>
     <module>patterntesting-compat</module>
   </modules>
 
@@ -80,7 +81,7 @@
     <maven.compile.target>1.8</maven.compile.target>
 
     <maven.version>3.3.9</maven.version>
-    <!-- 
+    <!--
       Overwrite this in sub module, e.g. to ${patterntesting.site.dir}/rt for runtime
      -->
     <patterntesting.site.artifact.dir>${patterntesting.site.dir}/</patterntesting.site.artifact.dir>
@@ -164,7 +165,7 @@
     <!-- Throwable and Error classes should not be caught  -->
     <sonar.issue.ignore.multicriteria.6.ruleKey>squid:S1181</sonar.issue.ignore.multicriteria.6.ruleKey>
     <sonar.issue.ignore.multicriteria.7.resourceKey>**/concurrent/**</sonar.issue.ignore.multicriteria.7.resourceKey>
-    <!-- 
+    <!--
         Dodgy - Redundant nullcheck of value known to be non-null:
         This rule is disabled because FindBugs works on the byte code. Some (or most?)
         of the warnings seems to be result of the weaved byte code
@@ -184,7 +185,7 @@
 
   </properties>
 
-  <!-- 
+  <!--
       L I B R A R I E S
       the libraries are (normally) alphabetically sorted.
       see http://www.ibiblio.org/maven2/ for available libraries
@@ -427,7 +428,7 @@
 
   </dependencyManagement>
 
-  <!-- 
+  <!--
       libraries which are needed by all sub modules
    -->
   <dependencies>
@@ -771,7 +772,7 @@
           </execution>
         </executions>
       </plugin>
-      <!-- 
+      <!--
         see http://maven.apache.org/plugins/maven-changes-plugin/examples/changes-file-validation.html
        -->
       <plugin>
@@ -914,7 +915,7 @@
             </additionalDependency>
           </additionalDependencies>
           <linksource>true</linksource>
-          <!-- 
+          <!--
               The following apidocs were not included because of missing package-list:
               http://jamonapi.sourceforge.net/javadoc/
            -->
@@ -924,7 +925,7 @@
           </links>
         </configuration>
       </plugin>
-      <!-- 
+      <!--
           Changes
           see http://maven.apache.org/plugins/maven-changes-plugin/usage.html
        -->
@@ -1047,14 +1048,14 @@
     <url>https://travis-ci.org/oboehm/PatternTesting2</url>
   </ciManagement>
 
-  <!-- 
+  <!--
       Deployment
       see "Better Builds with Maven", p. 74
       see http://maven.apache.org/plugins/maven-deploy-plugin/
   -->
   <distributionManagement>
     <!--
-        Deployment of the Web-Site 
+        Deployment of the Web-Site
         (try 'mvn site-deploy' to deploy it)
     -->
     <site>
@@ -1064,10 +1065,10 @@
     </site>
   </distributionManagement>
 
-  <!-- 
+  <!--
       To install a jar of sources along with your artifact
       during the release process use the release profile below.
-      
+
       see http://maven.apache.org/plugins/maven-source-plugin/usage.html
    -->
   <profiles>
@@ -1102,7 +1103,7 @@
         For OSGi versions of some OSS libs Springsource provides a repository.
         These are needed for testing the bundles inside an OSGi container like
         Felix.
-        
+
         see http://ebr.springsource.com/repository/app/faq#q8
     -->
     <profile>
@@ -1162,7 +1163,7 @@
       </repositories>
     </profile>
 
-    <!-- 
+    <!--
         Disable SNAPSHOT signing
         (start 'mvn -Prelease' to activate release profile with signing)
         see https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven#HowToGeneratePGPSignaturesWithMaven-MavenGPGPlugin
@@ -1246,7 +1247,7 @@
         <plugins>
           <!--
               copy reports
-              
+
               ask Ant to do some jobs for us
               @see http://maven.apache.org/plugins/maven-antrun-plugin/usage.html
               @see http://maven.apache.org/settings.html / Properties
@@ -1279,7 +1280,7 @@
       </build>
     </profile>
 
-    <!-- 
+    <!--
       Use this profile if you want UML diagrams inside the generated javadoc.
      -->
     <profile>
@@ -1335,16 +1336,14 @@
               <source>${maven.compile.source}</source>
               <encoding>${commons.encoding}</encoding>
               <linksource>true</linksource>
-              <!-- 
+              <!--
                   The following apidocs were not included because of missing package-list:
                   http://jamonapi.sourceforge.net/javadoc/
                -->
               <links>
-                <link>http://docs.oracle.com/javase/7/docs/api/</link>
                 <link>http://www.eclipse.org/aspectj/doc/released/runtime-api</link>
                 <link>http://commons.apache.org/proper/commons-lang3/apidocs/</link>
                 <link>http://commons.apache.org/proper/commons-io/javadocs/api-release/</link>
-                <link>http://junit.org/javadoc/latest/</link>
               </links>
               <quiet>true</quiet>
             </configuration>
