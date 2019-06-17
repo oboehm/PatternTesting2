@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>What is PatternTesting-Concurrent?</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <section name="Introduction">
+      <p>
+        Computer will not get faster. They will have more processors
+        but the processor speed of one processor will nearly the same
+        as today.
+        So concurrency will become more and more important in the future.
+        PatternTesting has some support for concurrency but has also
+        have support for testing threads.
+      </p>
+      <p>
+        If you want to know more about concurrency read
+        Brian Goetz's excellent book 
+        "<a href="http://jcip.net/">Java Concurrency in Practice</a>".
+      </p>
+    </section>
+    
+  </body>
+
+</document>

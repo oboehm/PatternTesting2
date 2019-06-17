@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>About PatternTesting-Concurrent</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <section name="About patterntesting-concurrent">
+      <p>
+        Concurrency will become more and more important in the future.
+        PatternTesting has some support for concurrency but has also
+        have support for testing threads.
+      </p>
+      <ul>
+        <li>
+          Thread support: you can mark your methods as <code>@Sychronized</code>
+          which has the advantage that the lock classes from
+          <code>java.util.concurrent</code> will be used. This allows
+          you more flexibility than the <code>synchronized</code> keyword.
+        </li>
+      </ul>
+    </section>
+
+    <section name="History">
+      <p>
+      	In a previous version support for concurrency was distributed over
+      	several sub projects (patterntesting-rt and patterntesting-check).
+      </p>
+    </section>
+
+  </body>
+
+</document>

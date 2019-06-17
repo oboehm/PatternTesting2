@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>Was ist PatternTesting-Concurrent?</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <section name="Einleitung">
+      <p>
+        Computer werden immer schneller. Und sie werden immer mehr
+        Prozessoren besitzten. Allerdings wird die
+        Geschwindigkeit eines einzelnen Prozessors nahezu die gleiche
+        sein wie heute.
+        D.h. Parallelit&#228;t wird in Zukunft immer wichtiger werden.
+        Daf&#252;r bietet PatternTesting Concurrent jetzt schon
+        Unterst&#252;tzung an.
+      </p>
+      <p>
+        Wenn du mehr &#252;ber "Concurrency" wissen willst,
+        lies am besten Biran Goetzs ausgezeichnetes Buch
+        "<a href="http://jcip.net/">Java Concurrency in Practice</a>".
+      </p>
+    </section>
+
+  </body>
+
+</document>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>Documentation</title>
+  </properties>
+
+  <body>
+
+    <section name="API Doc">
+      <p>
+        You have the choice:
+        you can use
+      </p>
+      <ul>
+        <li>
+          the <a href="../aspectj-report/overview-summary.html">AspectJ Docs</a>,
+        </li>
+        <li>
+          the normal <a href="../apidocs/index.html">JavaDocs</a> or
+        </li>
+        <li>
+          the <a href="../testapidocs/index.html">Test JavaDocs</a>.
+        </li>
+      </ul>
+       <p>
+        The AspectJ Docs are similar to javadoc but contains also
+        the AspectJ features like pointcuts, advices, ...
+      </p>
+    </section>
+    
+    <section name="Examples">
+      <p>
+        For some examples take a look at
+        <a href="../../samples/index.html">PatternTesting-Samples</a>.
+        Look at
+        <a href="../samples/xref/patterntesting/sample/IdGenerator.html">patterntesting.sample.IdGenerator</a>
+        which is an example when to use the synchronized keyword.
+        It is tested by
+        <a href="../samples/xref-test/patterntesting/sample/IdGeneratorTest.html">patterntesting.sample.IdGeneratorTest</a>
+        which uses the 
+        <a href="runtime/aspectj-report/patterntesting/annotation/concurrent/TestThread.html">@TestThread</a>
+        annotation.
+      </p>
+      <p>
+        <a href="../samples/xref-test/patterntesting/sample/IdGeneratorTest.html">IdGeneratorTest</a>
+        is also an example for the 
+        <a href="runtime/aspectj-report/patterntesting/annotation/concurrent/TestThread.html">@RunParallel</a>
+        annotation which allows you to run a method parallel in different
+        threads.
+      </p>
+    </section>
+
+  </body>
+  
+</document>

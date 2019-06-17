@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>Was ist PatternTesting-Concurrent?</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <section name="&#220;ber patterntesting-concurrent">
+      <p>
+        Parallelit&#228;t wird in Zukunft immer an Bedeutung gewinnen.
+        PatternTesting bietet sowohl Unterst&#252;tzung f&#252;r Nebenl&#228;ufigkeit
+        als auch Test-Support f&#252;r Threads.
+      </p>
+      <ul>
+        <li>
+          Thread-Support: du kannst Methoden als <code>@Sychronized</code> markieren.
+          Dabei werden die Lock-Klassen von <code>java.util.concurrent</code>
+          verwendet, die mehr Flexibilit&#228;t als das
+          <code>synchronized</code>-Schl&#252;sselwort erlaubt.
+        </li>
+      </ul>
+    </section>
+
+    <section name="Historie">
+      <p>
+        In fr&#252;heren Versionen war die Unterst&#252;tzung f&#252;r
+        "Concurrency" &#252;ber mehrere andere Komponenten
+        (patterntesting-rt und patterntesting-check) verteilt.
+      </p>
+    </section>
+
+  </body>
+
+</document>

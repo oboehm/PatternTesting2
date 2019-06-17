@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>Dokumentation</title>
+  </properties>
+
+  <body>
+
+    <section name="API Doc">
+      <p>
+        Du hast die Wahl:
+        du kannst
+      </p>
+      <ul>
+        <li>
+          die <a href="../aspectj-report/overview-summary.html">AspectJ-Docs</a>,
+        </li>
+        <li>
+          die normalen <a href="../apidocs/index.html">JavaDocs</a> oder
+        </li>
+        <li>
+          die <a href="../testapidocs/index.html">Test-JavaDocs</a>
+        </li>
+      </ul>
+      <p>ausw&#228;hlen.</p>
+      <p>
+        Die AspectJ-Docs sind &#228;hnlich den Javadocs, enthalten aber auch
+        die AspectJ-Features wie Pointcuts, Advices, ...
+      </p>
+    </section>
+    
+    <section name="Weitere Beispiele">
+      <p>
+        Weitere Beispiele gibt es unter 
+        <a href="../../../samples/de/index.html">PatternTesting-Samples</a>.
+        Unter
+        <a href="../../../samples/xref/patterntesting/sample/IdGenerator.html">patterntesting.sample.IdGenerator</a>
+        gibt es Beispiel, das die Verwendung des synchronized-Schl&#252;sselworts zeigt.
+        Es wird von
+        <a href="../../../samples/xref-test/patterntesting/sample/IdGeneratorTest.html">patterntesting.sample.IdGeneratorTest</a>
+        getestet, welches die
+        <a href="../../../runtime/aspectj-report/patterntesting/annotation/concurrent/TestThread.html">@TestThread</a>-Annotation
+        benutzt.
+      </p>
+      <p>
+        <a href="../../..samples/xref-test/patterntesting/sample/IdGeneratorTest.html">IdGeneratorTest</a>
+        ist ebenso ein Beispiel f&#252;r die
+        <a href="runtime/aspectj-report/patterntesting/annotation/concurrent/TestThread.html">@RunParallel</a>-Annotation,
+        die den parallelen Ablauf von Methoden in verschiedenen Threads
+        erlaubt.
+      </p>
+    </section>
+
+  </body>
+  
+</document>

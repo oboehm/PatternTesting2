@@ -44,7 +44,7 @@
 
   <modules>
     <module>patterntesting-check</module>
-    <!--<module>patterntesting-concurrent</module>-->
+    <module>patterntesting-concurrent</module>
     <module>patterntesting-exception</module>
   </modules>
 
