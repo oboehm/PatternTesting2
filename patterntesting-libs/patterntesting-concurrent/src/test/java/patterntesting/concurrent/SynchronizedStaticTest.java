@@ -1,7 +1,5 @@
 /*
- * $Id: SynchronizedStaticTest.java,v 1.6 2016/12/18 21:56:49 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,19 +17,20 @@
  */
 package patterntesting.concurrent;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-import org.apache.logging.log4j.*;
-
-import patterntesting.annotation.concurrent.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
+import patterntesting.annotation.concurrent.GuardedBy;
+import patterntesting.annotation.concurrent.Synchronized;
+import patterntesting.annotation.concurrent.ThreadSafe;
 import patterntesting.runtime.util.ThreadUtil;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * This is the test class for the SynchronizedAspect.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.6 $
  * @since 13.11.2008
  */
 @ThreadSafe
@@ -57,7 +56,7 @@ public final class SynchronizedStaticTest implements Runnable {
         t1.join();
         t2.join();
         log.info("thread t1 and t2 has finished");
-        assertEquals("lost update", n + 2, counter);
+        assertEquals(n + 2, counter, "lost update");
 	}
 
 	/////   do some stuff to test multi-threading   ///////////////////////////

@@ -1,7 +1,5 @@
 /*
- * $Id: ThreadDeadLockMonitorTest.java,v 1.6 2016/12/18 21:56:49 oboehm Exp $
- *
- * Copyright (c) 2009 by Oliver Boehm
+ * Copyright (c) 2009-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +18,19 @@
 
 package patterntesting.concurrent;
 
-import java.util.concurrent.*;
-
-import org.junit.Test;
-import org.apache.logging.log4j.*;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 import patterntesting.concurrent.test.DeadLocker;
 import patterntesting.runtime.util.ThreadUtil;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * This test class will provocate a thread deadlock.
  *
  * @author oliver
- * @version $Revision: 1.6 $
  * @since 14.07.2009
  */
 public final class ThreadDeadLockMonitorTest implements DeadLockListener {
@@ -68,16 +66,8 @@ public final class ThreadDeadLockMonitorTest implements DeadLockListener {
 	 */
 	private void provocateDeadLocks() {
 		ExecutorService pool = Executors.newFixedThreadPool(2);
-		pool.submit(new Runnable() {
-			public void run() {
-				test.acquireTwoLocks();
-			}
-		});
-		pool.submit(new Runnable() {
-			public void run() {
-				test.acquireLocks();
-			}
-		});
+		pool.submit(() -> test.acquireTwoLocks());
+		pool.submit(() -> test.acquireLocks());
 	}
 
 	/**

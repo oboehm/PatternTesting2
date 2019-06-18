@@ -1,7 +1,5 @@
-/**
- * $Id: ThreadSafeCollectionTest.java,v 1.6 2016/12/18 21:56:49 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+/*
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,21 +17,22 @@
  */
 package patterntesting.concurrent;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
+import patterntesting.annotation.concurrent.ForceThreadSafeCollection;
+
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.concurrent.*;
-
-import org.junit.Test;
-import org.apache.logging.log4j.*;
-
-import patterntesting.annotation.concurrent.ForceThreadSafeCollection;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.PriorityBlockingQueue;
 
 /**
  * This is only a test class to check if the warnings from the
  * ForceThreadSafeCollection aspect are working.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.6 $
  * @see patterntesting.annotation.concurrent.ForceThreadSafeCollection
  * @since 06.10.2008
  */
@@ -49,11 +48,11 @@ public class ThreadSafeCollectionTest {
 	//@ForceThreadSafeCollection
 	@Test
 	public final void unsafeMethod() {
-		Map<Long, BigDecimal> primeNumbers = new LinkedHashMap<Long, BigDecimal>();
-		Map<Long, BigDecimal> map = new TreeMap<Long, BigDecimal>(primeNumbers);
-		Set<Long> set = new TreeSet<Long>(map.keySet());
-		List<Long> list = new ArrayList<Long>(set);
-		Queue<Long> queue = new PriorityQueue<Long>(list);
+		Map<Long, BigDecimal> primeNumbers = new LinkedHashMap<>();
+		Map<Long, BigDecimal> map = new TreeMap<>(primeNumbers);
+		Set<Long> set = new TreeSet<>(map.keySet());
+		List<Long> list = new ArrayList<>(set);
+		Queue<Long> queue = new PriorityQueue<>(list);
         log.info(queue + " created");
 	}
 
@@ -66,11 +65,11 @@ public class ThreadSafeCollectionTest {
 	@ForceThreadSafeCollection
 	@Test
 	public final void safeMethod() {
-		Map<Long, BigDecimal> primeNumbers = new Hashtable<Long, BigDecimal>();
-        Map<Long, BigDecimal> map = new ConcurrentHashMap<Long, BigDecimal>(primeNumbers);
-		Set<Long> set = new CopyOnWriteArraySet<Long>(map.keySet());
-		List<Long> list = new Vector<Long>(set);
-		Queue<Long> queue = new PriorityBlockingQueue<Long>(list);
+		Map<Long, BigDecimal> primeNumbers = new Hashtable<>();
+        Map<Long, BigDecimal> map = new ConcurrentHashMap<>(primeNumbers);
+		Set<Long> set = new CopyOnWriteArraySet<>(map.keySet());
+		List<Long> list = new Vector<>(set);
+		Queue<Long> queue = new PriorityBlockingQueue<>(list);
 		log.info(queue + " created");
 	}
 

@@ -1,7 +1,5 @@
 /*
- * $Id: RunParallelTest.java,v 1.7 2016/01/06 20:47:14 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,18 +17,17 @@
  */
 package patterntesting.concurrent;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import patterntesting.annotation.concurrent.RunParallel;
 import patterntesting.concurrent.test.Counter;
 import patterntesting.runtime.util.ThreadUtil;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The Class RunParallelTest.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.7 $
  * @since 13.01.2009
  */
 public final class RunParallelTest {

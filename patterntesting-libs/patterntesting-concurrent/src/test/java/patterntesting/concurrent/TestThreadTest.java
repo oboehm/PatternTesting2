@@ -1,7 +1,5 @@
 /*
- * $Id: TestThreadTest.java,v 1.6 2016/12/18 21:56:49 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,18 +17,17 @@
  */
 package patterntesting.concurrent;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-import org.apache.logging.log4j.*;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 import patterntesting.annotation.concurrent.TestThread;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * This is the test class for the (Abstract)TestThreadAspect.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.6 $
  * @since 01.12.2008
  */
 @TestThread
@@ -54,7 +51,7 @@ public final class TestThreadTest implements Runnable {
         t1.join();
         t2.join();
         // each thread increases the counter 5 times
-        assertEquals("lost update", 20, counter);
+        assertEquals(20, counter, "lost update");
     }
 
     /////   do some stuff to test multi-threading   ///////////////////////////

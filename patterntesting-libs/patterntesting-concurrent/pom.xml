@@ -100,17 +100,8 @@
   <dependencies>
     <dependency>
       <groupId>org.patterntesting</groupId>
-      <artifactId>patterntesting-rt</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.patterntesting</groupId>
       <artifactId>patterntesting-tools</artifactId>
       <scope>test</scope>
-    </dependency>
-    <!-- needed for testing -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
     </dependency>
   </dependencies>
 
@@ -145,10 +136,6 @@
           <source>${maven.compile.source}</source>
           <target>${maven.compile.target}</target>
           <complianceLevel>${maven.compile.complianceLevel}</complianceLevel>
-          <options>
-            <option>-verbose</option>
-            <option>-showWeaveInfo</option>             
-          </options>
           <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
           <aspectLibraries>
             <aspectLibrary>
