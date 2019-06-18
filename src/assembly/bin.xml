@@ -1,0 +1,31 @@
+<!--
+    We want to include all jar files into a lonely zip or tar archive.
+    @see http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html
+-->
+
+<assembly>
+  <id>bin</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <!-- see http://svn.apache.org/repos/asf/jakarta/cactus/trunk/cactus-bin-assembly.xml -->
+  <includeBaseDirectory>true</includeBaseDirectory>
+  <baseDirectory>patterntesting-${project.version}</baseDirectory>
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory>/lib</outputDirectory>
+      <includes>
+        <include>patterntesting-*:jar:*</include>
+      </includes>
+      <!-- see http://maven.apache.org/plugins/maven-assembly-plugin/advanced-descriptor-topics.html -->
+      <unpack>false</unpack>
+    </dependencySet>
+  </dependencySets>
+  <fileSets>
+    <fileSet>
+      <includes>
+        <include>LICENSE.txt</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</assembly>
