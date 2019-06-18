@@ -1,7 +1,5 @@
 /*
- * $Id: DeadLockLoggerTest.java,v 1.1 2016/03/25 14:34:31 oboehm Exp $
- *
- * Copyright (c) 2016 by Oliver Boehm
+ * Copyright (c) 2016-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +18,14 @@
 
 package patterntesting.concurrent;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tesss for {@link DeadLockLogger} class.
  *
  * @author oliver
  */
-public final class DeadLockLoggerTest {
+class DeadLockLoggerTest {
 
     private final DeadLockLogger logger = new DeadLockLogger();
 
@@ -35,7 +33,7 @@ public final class DeadLockLoggerTest {
      * Test method for {@link DeadLockLogger#deadLockDetected(Thread[])}.
      */
     @Test
-    public void testDeadLockDetected() {
+    void testDeadLockDetected() {
         Thread[] threads = { Thread.currentThread() };
         logger.deadLockDetected(threads);
     }
