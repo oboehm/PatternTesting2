@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout
+        pattern="%d{HH:mm:ss,SSS} %-5p %-25.25c{3} %m%n" />
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Logger name="patterntesting" level="info"/>
+    <Root level="warn" additivity="false">
+      <AppenderRef ref="console" />
+    </Root>
+  </Loggers>
+</Configuration>
