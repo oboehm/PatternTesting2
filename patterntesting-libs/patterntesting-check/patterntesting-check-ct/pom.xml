@@ -61,6 +61,10 @@
       see http://www.ibiblio.org/maven2/ for available libraries
    -->
   <dependencies>
+    <dependency>
+      <groupId>org.patterntesting</groupId>
+      <artifactId>patterntesting-rt</artifactId>
+    </dependency>
     <!-- not only for testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
