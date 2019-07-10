@@ -20,11 +20,11 @@
 
 package patterntesting.runtime.junit;
 
+import clazzfish.monitor.ClasspathMonitor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import patterntesting.runtime.exception.DetailedAssertionError;
-import patterntesting.runtime.monitor.ClasspathMonitor;
 import patterntesting.runtime.util.Converter;
 import patterntesting.runtime.util.ReflectionHelper;
 
@@ -32,6 +32,7 @@ import java.io.NotSerializableException;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -362,6 +363,10 @@ public final class ObjectTester extends AbstractTester {
 		Collection<Class<? extends Object>> concreteClasses = classpathMonitor.getConcreteClassList(packageName);
 		Collection<Class<? extends Object>> classes = new ArrayList<>(concreteClasses.size());
 		for (Class<? extends Object> clazz : concreteClasses) {
+			if (!Modifier.isPublic(clazz.getModifiers())) {
+				LOG.debug(clazz + " will be ignored (class is not public)");
+				continue;
+			}
 			if (!hasEqualsDeclared(clazz)) {
 				LOG.debug(clazz + " will be ignored (equals(..) not overwritten)");
 				continue;

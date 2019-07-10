@@ -1,7 +1,5 @@
 /*
- * $Id: ObjectTesterTest.java,v 1.34 2016/12/18 20:19:38 oboehm Exp $
- *
- * Copyright (c) 2010 by Oliver Boehm
+ * Copyright (c) 2010-2019 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -259,6 +257,16 @@ public final class ObjectTesterTest {
                 Pattern.compile(Crash.class.getName()),
                 Pattern.compile(RunOnInitializerBug.class.getName()),
                 Pattern.compile(Dummy.class.getName()));
+    }
+
+    /**
+     * During testing with JDK 1.8 an IllegalArgumentException happened with
+     * "can't access ctor of class java.awt.datatransfer.MimeType". This is
+     * the test to reproduce and fix this error.
+     */
+    @Test
+    public void testEqualsMimeType() {
+        ObjectTester.assertEqualsOfPackage("java.awt.datatransfer");
     }
 
 
