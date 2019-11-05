@@ -1,7 +1,5 @@
 /**
- * $Id: ProfileMe.java,v 1.5 2016/12/10 20:55:18 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2020 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,13 +41,9 @@ import java.lang.annotation.*;
  * </p>
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.5 $
  * @see DontProfileMe
  * @see patterntesting.runtime.monitor.ProfileStatistic
- * @see patterntesting.runtime.monitor.ProfileStatistic
  * @see patterntesting.runtime.monitor.ProfileMonitor
- * @see patterntesting.runtime.monitor.ClasspathMonitor
- * @see patterntesting.runtime.monitor.ClasspathMonitorMBean
  * @since 19.12.2008
  */
 @Retention(RetentionPolicy.RUNTIME)
