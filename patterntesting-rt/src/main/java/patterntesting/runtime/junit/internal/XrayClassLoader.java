@@ -1,7 +1,5 @@
 /*
- * $Id: XrayClassLoader.java,v 1.6 2016/12/18 20:19:41 oboehm Exp $
- *
- * Copyright (c) 2010 by Oliver Boehm
+ * Copyright (c) 2010-2020 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +18,12 @@
 
 package patterntesting.runtime.junit.internal;
 
+import clazzfish.monitor.ClasspathMonitor;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import patterntesting.runtime.monitor.ClasspathMonitor;
 import patterntesting.runtime.util.Converter;
 
 import java.io.File;
@@ -162,11 +160,8 @@ public final class XrayClassLoader extends ClassLoader {
 		String classpath = StringUtils.substringAfterLast(uri.toString(), "!");
 		JarFile jarFile = new JarFile(file);
 		JarEntry entry = getEntry(classpath, jarFile);
-		InputStream istream = jarFile.getInputStream(entry);
-		try {
+		try (InputStream istream = jarFile.getInputStream(entry)) {
 			return IOUtils.toByteArray(istream);
-		} finally {
-			istream.close();
 		}
 	}
 
