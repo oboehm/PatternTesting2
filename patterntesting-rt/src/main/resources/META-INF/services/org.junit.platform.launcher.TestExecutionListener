@@ -1,0 +1,2 @@
+# for the registration as test execution listener
+patterntesting.runtime.junit.extension.AnnotatedTestExtension

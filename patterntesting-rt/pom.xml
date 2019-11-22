@@ -114,6 +114,16 @@
       <artifactId>junit-jupiter-api</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-launcher</artifactId>
+      <scope>provided</scope>
+    </dependency>
     <!-- needed for testing -->
     <dependency>
       <groupId>org.hamcrest</groupId>
@@ -191,6 +201,7 @@
         <includes>
           <include>**/*.template</include>
           <include>**/*.txt</include>
+          <include>**/META-INF/**/*.*</include>
         </includes>
       </resource>
     </resources>

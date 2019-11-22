@@ -19,7 +19,7 @@ package patterntesting.runtime.junit.extension;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import patterntesting.runtime.junit.ObjectTester;
 import patterntesting.runtime.junit.extension.IntegrationTestExtension;
@@ -35,8 +35,32 @@ class IntegrationTestExtensionIT {
 
     private static final Logger LOG = LogManager.getLogger();
 
+    @BeforeAll
+    static void beforeAll() {
+        shouldRunOnlyIfTestsEnabled();
+    }
+
+    @BeforeEach
+    void beforeEach() {
+        shouldRunOnlyIfTestsEnabled();
+    }
+
     @Test
     void integrationTest() {
+        shouldRunOnlyIfTestsEnabled();
+    }
+
+    @AfterEach
+    void afterEach() {
+        shouldRunOnlyIfTestsEnabled();
+    }
+
+    @AfterAll
+    static void afterAll() {
+        shouldRunOnlyIfTestsEnabled();
+    }
+
+    private static void shouldRunOnlyIfTestsEnabled() {
         if (Environment.INTEGRATION_TEST_ENABLED) {
             LOG.info("Integration tests are enabled ('-D{}=true').", Environment.INTEGRATION_TEST);
         } else {

@@ -1,0 +1,2 @@
+# for the registration of JUnit extensions
+patterntesting.runtime.junit.extension.AnnotatedTestExtension
