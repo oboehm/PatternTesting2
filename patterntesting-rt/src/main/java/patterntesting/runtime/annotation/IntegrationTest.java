@@ -20,6 +20,9 @@
 
 package patterntesting.runtime.annotation;
 
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
 import java.lang.annotation.*;
 
 /**
@@ -42,8 +45,10 @@ import java.lang.annotation.*;
  * @since 1.0 (05.03.2010)
  */
 @Documented
-@Target({ ElementType.METHOD, ElementType.TYPE })
+@Target({ ElementType.METHOD, ElementType.TYPE, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
+@Test
+@Tag("integration")
 public @interface IntegrationTest {
 
 	/**

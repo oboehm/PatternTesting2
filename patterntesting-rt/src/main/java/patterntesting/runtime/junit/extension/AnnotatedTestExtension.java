@@ -20,6 +20,7 @@ package patterntesting.runtime.junit.extension;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.extension.*;
+import org.junit.platform.commons.support.AnnotationSupport;
 import org.junit.platform.launcher.*;
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.util.Environment;
@@ -30,12 +31,23 @@ import patterntesting.runtime.util.Environment;
  * @author oboehm
  * @since 2.0 (08.11.2019)
  */
-public class AnnotatedTestExtension implements Extension, TestExecutionListener {
+public class AnnotatedTestExtension implements ExecutionCondition, TestExecutionListener {
 
     private static final Logger LOG = LogManager.getLogger();
 
     static {
-        LOG.info("AnnotationTestExtension is registered as JUnit extension and TestExecutionListener.");
+        LOG.debug("{} is registered as JUnit extension and TestExecutionListener.", AnnotatedTestExtension.class);
+    }
+
+    @Override
+    public ConditionEvaluationResult evaluateExecutionCondition(ExtensionContext context) {
+        Class<?> testClass = context.getRequiredTestClass();
+        if (AnnotationSupport.isAnnotated(testClass, IntegrationTest.class) && !Environment.INTEGRATION_TEST_ENABLED) {
+            LOG.debug("Tests for {} are disabled because test is marked with @IntegrationTest.", testClass);
+            return ConditionEvaluationResult
+                    .disabled(testClass + " disabled - use '-D" + Environment.INTEGRATION_TEST + "=true' to enable it");
+        }
+        return ConditionEvaluationResult.enabled("Tests for " + testClass + " are enabled");
     }
 
 }
