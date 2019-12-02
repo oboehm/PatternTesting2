@@ -1,2 +1,2 @@
 # for the registration of JUnit extensions
-patterntesting.runtime.junit.extension.AnnotatedTestExtension
+patterntesting.runtime.junit.extension.SmokeTestExtension

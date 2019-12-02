@@ -23,20 +23,29 @@ import org.junit.jupiter.api.extension.*;
 import org.junit.platform.commons.support.AnnotationSupport;
 import org.junit.platform.launcher.*;
 import patterntesting.runtime.annotation.IntegrationTest;
+import patterntesting.runtime.annotation.SmokeTest;
 import patterntesting.runtime.util.Environment;
 
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Method;
+import java.util.Optional;
+
 /**
- * The class AnnotatedTestExtension.
+ * This extension replaces the SmokeRunner class for JUnit 4. The name is
+ * derived from the {@link patterntesting.runtime.annotation.SmokeTest}
+ * annotation which allows you to mark tests as "SmokeTest". But it works
+ * also for the other JUnit annotations like {@link IntegrationTest} or
+ * {@link patterntesting.runtime.annotation.Broken}.
  *
  * @author oboehm
  * @since 2.0 (08.11.2019)
  */
-public class AnnotatedTestExtension implements ExecutionCondition, TestExecutionListener {
+public class SmokeTestExtension implements ExecutionCondition, TestExecutionListener {
 
     private static final Logger LOG = LogManager.getLogger();
 
     static {
-        LOG.debug("{} is registered as JUnit extension and TestExecutionListener.", AnnotatedTestExtension.class);
+        LOG.debug("{} is registered as JUnit extension and TestExecutionListener.", SmokeTestExtension.class);
     }
 
     @Override
@@ -46,6 +55,11 @@ public class AnnotatedTestExtension implements ExecutionCondition, TestExecution
             LOG.debug("Tests for {} are disabled because test is marked with @IntegrationTest.", testClass);
             return ConditionEvaluationResult
                     .disabled(testClass + " disabled - use '-D" + Environment.INTEGRATION_TEST + "=true' to enable it");
+        }
+        Optional<Method> testMethod = context.getTestMethod();
+        if (testMethod.isPresent() && !AnnotationSupport.isAnnotated(testMethod, SmokeTest.class) && Environment.SMOKE_TEST_ENABLED) {
+            LOG.debug("{} is disabled because method is not marked as @SmokeTest.", testMethod.get());
+            return ConditionEvaluationResult.disabled(testMethod.get() + " disabled for " + Environment.RUN_SMOKE_TESTS);
         }
         return ConditionEvaluationResult.enabled("Tests for " + testClass + " are enabled");
     }

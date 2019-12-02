@@ -39,7 +39,7 @@ import patterntesting.runtime.util.Environment;
  * @since 1.0 (15.03.2010)
  */
 @IntegrationTest
-@ExtendWith(IntegrationTestExtension.class)
+@ExtendWith(SmokeTestExtension.class)
 public final class IntegrationTestClassTest {
 
     private static final Logger log = LogManager.getLogger(IntegrationTestClassTest.class);

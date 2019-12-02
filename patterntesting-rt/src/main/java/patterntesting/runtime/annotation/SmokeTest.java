@@ -20,6 +20,9 @@
 
 package patterntesting.runtime.annotation;
 
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
 import java.lang.annotation.*;
 
 /**
@@ -45,6 +48,8 @@ import java.lang.annotation.*;
 @Documented
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
+@Test
+@Tag("smoketest")
 public @interface SmokeTest {
 
 	/**
