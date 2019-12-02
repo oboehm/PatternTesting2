@@ -1,2 +1,2 @@
 # for the registration as test execution listener
-patterntesting.runtime.junit.extension.AnnotatedTestExtension
+patterntesting.runtime.junit.extension.SmokeTestExtension

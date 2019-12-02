@@ -31,12 +31,12 @@ import patterntesting.runtime.util.Environment;
  * @author oboehm
  * @since 2.0 (08.11.2019)
  */
-public class AnnotatedTestExtension implements ExecutionCondition, TestExecutionListener {
+public class SmokeTestExtension implements ExecutionCondition, TestExecutionListener {
 
     private static final Logger LOG = LogManager.getLogger();
 
     static {
-        LOG.debug("{} is registered as JUnit extension and TestExecutionListener.", AnnotatedTestExtension.class);
+        LOG.debug("{} is registered as JUnit extension and TestExecutionListener.", SmokeTestExtension.class);
     }
 
     @Override
