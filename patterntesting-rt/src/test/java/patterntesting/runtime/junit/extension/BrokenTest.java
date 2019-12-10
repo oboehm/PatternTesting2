@@ -27,6 +27,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import patterntesting.runtime.annotation.Broken;
 import patterntesting.runtime.annotation.RunTestOn;
 import patterntesting.runtime.util.Assertions;
+import patterntesting.runtime.util.Environment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -149,9 +150,6 @@ public final class BrokenTest {
     @Broken(osName = "unknown OS")
     @Test
     public void testBrokenForUnknownOS() {
-        assertThrows(AssertionError.class, () -> {
-            fail("this test should fail otherwise it is not executed");
-        });
         shouldBeExecuted.put("testBrokenForUnknownOS", true);
     }
 
@@ -206,6 +204,9 @@ public final class BrokenTest {
 
     @AfterAll
     public static void testExecutions() {
+        if (Environment.SMOKE_TEST_ENABLED) {
+            return;
+        }
         for (Map.Entry<String, Boolean> entry : shouldBeExecuted.entrySet()) {
             assertTrue(entry.getValue(), "not executed: " + entry.getKey());
         }
