@@ -20,9 +20,12 @@
 
 package patterntesting.runtime.annotation;
 
-import static patterntesting.runtime.NullConstants.NULL_STRING;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 import java.lang.annotation.*;
+
+import static patterntesting.runtime.NullConstants.NULL_STRING;
 
 /**
  * If you want to mark JUnit tests which does not work for the moment as
@@ -55,6 +58,8 @@ import java.lang.annotation.*;
 @Documented
 @Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
+@Test
+@Tag("broken")
 public @interface Broken {
 
 	/**

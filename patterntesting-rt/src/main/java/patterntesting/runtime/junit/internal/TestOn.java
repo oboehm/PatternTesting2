@@ -20,20 +20,19 @@
 
 package patterntesting.runtime.junit.internal;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import patterntesting.runtime.net.Localhost;
+import patterntesting.runtime.util.Converter;
+import patterntesting.runtime.util.Environment;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-
-import patterntesting.runtime.net.Localhost;
-import patterntesting.runtime.util.Converter;
-import patterntesting.runtime.util.Environment;
 
 /**
  * This is a local helper class for the RunTestOn and SkipTestOn annotation. So

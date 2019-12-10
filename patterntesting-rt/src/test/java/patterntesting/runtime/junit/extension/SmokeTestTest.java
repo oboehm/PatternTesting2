@@ -18,19 +18,15 @@
 
 package patterntesting.runtime.junit.extension;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import patterntesting.runtime.annotation.SmokeTest;
-import patterntesting.runtime.junit.ObjectTester;
 import patterntesting.runtime.util.Environment;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
