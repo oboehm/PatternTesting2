@@ -20,14 +20,13 @@ package patterntesting.runtime.junit.extension;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.extension.ConditionEvaluationResult;
-import org.junit.jupiter.api.extension.ExecutionCondition;
-import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.*;
 import org.junit.platform.commons.support.AnnotationSupport;
 import org.junit.platform.launcher.TestExecutionListener;
 import patterntesting.runtime.NullConstants;
 import patterntesting.runtime.annotation.Broken;
 import patterntesting.runtime.annotation.IntegrationTest;
+import patterntesting.runtime.annotation.RunTestOn;
 import patterntesting.runtime.annotation.SmokeTest;
 import patterntesting.runtime.junit.internal.TestOn;
 import patterntesting.runtime.util.Converter;
@@ -78,6 +77,9 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
             return ConditionEvaluationResult.disabled(testMethod + " disabled for " + Environment.RUN_SMOKE_TESTS);
         }
         ConditionEvaluationResult result = getBrokenEvaluationResult(testMethod);
+        if (!result.isDisabled()) {
+            result = getRunOnEvaluationResult(testMethod);
+        }
         return result;
     }
 
@@ -85,6 +87,14 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
         Optional<Broken> annotation = AnnotationSupport.findAnnotation(testMethod, Broken.class);
         if (annotation.isPresent() && isBroken(testMethod.getName(), annotation.get())) {
             return ConditionEvaluationResult.disabled(testMethod + " is disabled because method marked as @Broken");
+        }
+        return ConditionEvaluationResult.enabled(testMethod + " is enabled");
+    }
+
+    private ConditionEvaluationResult getRunOnEvaluationResult(Method testMethod) {
+        Optional<RunTestOn> annotation = AnnotationSupport.findAnnotation(testMethod, RunTestOn.class);
+        if (annotation.isPresent() && !isRunTestOn(testMethod.getName(), annotation.get())) {
+            return ConditionEvaluationResult.disabled(testMethod + " is disabled because condition of @RunTestOn does not match");
         }
         return ConditionEvaluationResult.enabled(testMethod + " is enabled");
     }
@@ -118,6 +128,28 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
                 LOG.debug("{}() started, because it should be fixed since {}.", method, broken.till());
                 return false;
             }
+        }
+        return false;
+    }
+
+    private static boolean isRunTestOn(String method, RunTestOn runOn) {
+        TestOn testOn = new TestOn();
+        testOn.setOsNames(runOn.value(), runOn.osName());
+        testOn.setOsArchs(runOn.osArch());
+        testOn.setOsVersions(runOn.osVersion());
+        testOn.setHosts(runOn.host());
+        testOn.setJavaVersions(runOn.javaVersion());
+        testOn.setJavaVendors(runOn.javaVendor());
+        testOn.setUsers(runOn.user());
+        testOn.setSystemProps(runOn.property());
+        testOn.setDays(runOn.day());
+        testOn.setTimes(runOn.time());
+        if (!testOn.isValueGiven()) {
+            throw new IllegalArgumentException(method + ":  @RunTestOn has no value");
+        }
+        if (testOn.matches()) {
+            LOG.info("{} executed {}.", method, testOn.getReason());
+            return true;
         }
         return false;
     }
