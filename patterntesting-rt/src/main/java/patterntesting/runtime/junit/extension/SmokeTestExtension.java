@@ -59,16 +59,28 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
     @Override
     public ConditionEvaluationResult evaluateExecutionCondition(ExtensionContext context) {
         Class<?> testClass = context.getRequiredTestClass();
-        if (AnnotationSupport.isAnnotated(testClass, IntegrationTest.class) && !Environment.INTEGRATION_TEST_ENABLED) {
-            LOG.debug("Tests for {} are disabled because test is marked with @IntegrationTest.", testClass);
-            return ConditionEvaluationResult
-                    .disabled(testClass + " disabled - use '-D" + Environment.INTEGRATION_TEST + "=true' to enable it");
+        ConditionEvaluationResult result = shouldRun(testClass);
+        if (result.isDisabled()) {
+            return result;
         }
         Optional<Method> testMethod = context.getTestMethod();
         if (testMethod.isPresent()) {
             return shouldRun(testMethod.get());
         }
         return ConditionEvaluationResult.enabled("Tests for " + testClass + " are enabled");
+    }
+
+    private ConditionEvaluationResult shouldRun(Class<?> testClass) {
+        if (AnnotationSupport.isAnnotated(testClass, IntegrationTest.class) && !Environment.INTEGRATION_TEST_ENABLED) {
+            LOG.debug("Tests for {} are disabled because test is marked with @IntegrationTest.", testClass);
+            return ConditionEvaluationResult
+                    .disabled(testClass + " disabled - use '-D" + Environment.INTEGRATION_TEST + "=true' to enable it");
+        }
+        ConditionEvaluationResult result = getBrokenEvaluationResult(testClass);
+        if (!result.isDisabled()) {
+            result = getRunOnEvaluationResult(testClass);
+        }
+        return result;
     }
 
     private ConditionEvaluationResult shouldRun(Method testMethod) {
@@ -83,12 +95,28 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
         return result;
     }
 
+    private ConditionEvaluationResult getBrokenEvaluationResult(Class<?> testClass) {
+        Optional<Broken> annotation = AnnotationSupport.findAnnotation(testClass, Broken.class);
+        if (annotation.isPresent() && isBroken(testClass.getName(), annotation.get())) {
+            return ConditionEvaluationResult.disabled(testClass + " is disabled because class marked as @Broken");
+        }
+        return ConditionEvaluationResult.enabled(testClass + " is enabled");
+    }
+
     private ConditionEvaluationResult getBrokenEvaluationResult(Method testMethod) {
         Optional<Broken> annotation = AnnotationSupport.findAnnotation(testMethod, Broken.class);
         if (annotation.isPresent() && isBroken(testMethod.getName(), annotation.get())) {
             return ConditionEvaluationResult.disabled(testMethod + " is disabled because method marked as @Broken");
         }
         return ConditionEvaluationResult.enabled(testMethod + " is enabled");
+    }
+
+    private ConditionEvaluationResult getRunOnEvaluationResult(Class<?> testClass) {
+        Optional<RunTestOn> annotation = AnnotationSupport.findAnnotation(testClass, RunTestOn.class);
+        if (annotation.isPresent() && !isRunTestOn(testClass.getName(), annotation.get())) {
+            return ConditionEvaluationResult.disabled(testClass + " is disabled because condition of @RunTestOn does not match");
+        }
+        return ConditionEvaluationResult.enabled(testClass + " is enabled");
     }
 
     private ConditionEvaluationResult getRunOnEvaluationResult(Method testMethod) {
