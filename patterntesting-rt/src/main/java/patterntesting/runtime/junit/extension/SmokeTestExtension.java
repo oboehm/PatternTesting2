@@ -70,8 +70,12 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
     }
 
     private ConditionEvaluationResult shouldRun(Class<?> testClass) {
+        if ((Environment.SMOKE_TEST_ENABLED) && !AnnotationSupport.isAnnotated(testClass, SmokeTest.class)) {
+            LOG.debug("Tests for {} are disabled because class is not marked as @SmokeTest.", testClass);
+            return ConditionEvaluationResult.disabled(testClass + " disabled by '-D" + Environment.RUN_SMOKE_TESTS + "'");
+        }
         if (AnnotationSupport.isAnnotated(testClass, IntegrationTest.class) && !Environment.INTEGRATION_TEST_ENABLED) {
-            LOG.debug("Tests for {} are disabled because test is marked with @IntegrationTest.", testClass);
+            LOG.debug("Tests for {} are disabled because class is marked with @IntegrationTest.", testClass);
             return ConditionEvaluationResult
                     .disabled(testClass + " disabled - use '-D" + Environment.INTEGRATION_TEST + "=true' to enable it");
         }
