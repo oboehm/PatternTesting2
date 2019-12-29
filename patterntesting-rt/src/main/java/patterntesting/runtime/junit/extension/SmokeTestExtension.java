@@ -90,6 +90,11 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
             LOG.debug("{} is disabled because method is not marked as @SmokeTest.", testMethod);
             return ConditionEvaluationResult.disabled(testMethod + " disabled for " + Environment.RUN_SMOKE_TESTS);
         }
+        if (AnnotationSupport.isAnnotated(testMethod, IntegrationTest.class) && !Environment.INTEGRATION_TEST_ENABLED) {
+            LOG.debug("{} is disabled because test is marked with @IntegrationTest.", testMethod);
+            return ConditionEvaluationResult
+                    .disabled(testMethod + " disabled - use '-D" + Environment.INTEGRATION_TEST + "=true' to enable it");
+        }
         ConditionEvaluationResult result = getBrokenEvaluationResult(testMethod);
         if (!result.isDisabled()) {
             result = getRunOnEvaluationResult(testMethod);
