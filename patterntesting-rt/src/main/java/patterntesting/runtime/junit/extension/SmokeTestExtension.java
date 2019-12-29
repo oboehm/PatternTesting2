@@ -20,14 +20,13 @@ package patterntesting.runtime.junit.extension;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.extension.*;
+import org.junit.jupiter.api.extension.ConditionEvaluationResult;
+import org.junit.jupiter.api.extension.ExecutionCondition;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.platform.commons.support.AnnotationSupport;
 import org.junit.platform.launcher.TestExecutionListener;
 import patterntesting.runtime.NullConstants;
-import patterntesting.runtime.annotation.Broken;
-import patterntesting.runtime.annotation.IntegrationTest;
-import patterntesting.runtime.annotation.RunTestOn;
-import patterntesting.runtime.annotation.SmokeTest;
+import patterntesting.runtime.annotation.*;
 import patterntesting.runtime.junit.internal.TestOn;
 import patterntesting.runtime.util.Converter;
 import patterntesting.runtime.util.Environment;
@@ -80,6 +79,9 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
         if (!result.isDisabled()) {
             result = getRunOnEvaluationResult(testClass);
         }
+        if (!result.isDisabled()) {
+            result = getSkipOnEvaluationResult(testClass);
+        }
         return result;
     }
 
@@ -91,6 +93,9 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
         ConditionEvaluationResult result = getBrokenEvaluationResult(testMethod);
         if (!result.isDisabled()) {
             result = getRunOnEvaluationResult(testMethod);
+        }
+        if (!result.isDisabled()) {
+            result = getSkipOnEvaluationResult(testMethod);
         }
         return result;
     }
@@ -123,6 +128,22 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
         Optional<RunTestOn> annotation = AnnotationSupport.findAnnotation(testMethod, RunTestOn.class);
         if (annotation.isPresent() && !isRunTestOn(testMethod.getName(), annotation.get())) {
             return ConditionEvaluationResult.disabled(testMethod + " is disabled because condition of @RunTestOn does not match");
+        }
+        return ConditionEvaluationResult.enabled(testMethod + " is enabled");
+    }
+
+    private ConditionEvaluationResult getSkipOnEvaluationResult(Class<?> testClass) {
+        Optional<SkipTestOn> annotation = AnnotationSupport.findAnnotation(testClass, SkipTestOn.class);
+        if (annotation.isPresent() && isSkipTestOn(testClass.getName(), annotation.get())) {
+            return ConditionEvaluationResult.disabled(testClass + " is disabled because condition of @SkipTestOn matches");
+        }
+        return ConditionEvaluationResult.enabled(testClass + " is enabled");
+    }
+
+    private ConditionEvaluationResult getSkipOnEvaluationResult(Method testMethod) {
+        Optional<SkipTestOn> annotation = AnnotationSupport.findAnnotation(testMethod, SkipTestOn.class);
+        if (annotation.isPresent() && isSkipTestOn(testMethod.getName(), annotation.get())) {
+            return ConditionEvaluationResult.disabled(testMethod + " is disabled because condition of @SkipTestOn matches");
         }
         return ConditionEvaluationResult.enabled(testMethod + " is enabled");
     }
@@ -177,6 +198,28 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
         }
         if (testOn.matches()) {
             LOG.info("{} executed {}.", method, testOn.getReason());
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isSkipTestOn(String method, SkipTestOn skipOn) {
+        TestOn testOn = new TestOn();
+        testOn.setOsNames(skipOn.value(), skipOn.osName());
+        testOn.setOsArchs(skipOn.osArch());
+        testOn.setOsVersions(skipOn.osVersion());
+        testOn.setHosts(skipOn.host());
+        testOn.setJavaVersions(skipOn.javaVersion());
+        testOn.setJavaVendors(skipOn.javaVendor());
+        testOn.setUsers(skipOn.user());
+        testOn.setSystemProps(skipOn.property());
+        testOn.setDays(skipOn.day());
+        testOn.setTimes(skipOn.time());
+        if (!testOn.isValueGiven()) {
+            throw new IllegalArgumentException(method + ":  @SkipTestOn has no value");
+        }
+        if (testOn.matches()) {
+            LOG.info("{} SKIPPED because {}.", method, testOn.getReason());
             return true;
         }
         return false;
