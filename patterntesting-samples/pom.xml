@@ -37,7 +37,6 @@
       see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
    -->	
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.patterntesting</groupId>
   <artifactId>patterntesting-samples</artifactId>
 
   <inceptionYear>2002</inceptionYear>
@@ -174,6 +173,11 @@
       <artifactId>commons-el</artifactId>
       <version>1.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.0.1</version>
+    </dependency>
 
     <!--
       This dependendy is only needed for tooling inside IntelliJ.
@@ -183,7 +187,12 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <scope>compile</scope>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-launcher</artifactId>
+      <scope>provided</scope>
     </dependency>
 
   </dependencies>

@@ -1,7 +1,5 @@
-/**
- * $Id: AbstractNullPointerTrap.aj,v 1.5 2016/12/18 21:59:31 oboehm Exp $
- *
- * Copyright (c) 2007 by Oliver Boehm
+/*
+ * Copyright (c) 2007-2020 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,15 +17,16 @@
  */
 package patterntesting.check.runtime;
 
-import java.lang.annotation.Annotation;
-
-import org.aspectj.lang.*;
+import org.apache.logging.log4j.Logger;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 import org.aspectj.lang.reflect.ConstructorSignature;
-
-import org.apache.logging.log4j.*;
 import patterntesting.annotation.check.runtime.MayBeNull;
-import patterntesting.runtime.util.*;
+import patterntesting.runtime.util.Assertions;
+import patterntesting.runtime.util.JoinPointHelper;
+
+import java.lang.annotation.Annotation;
 
 /**
  * In the AbstractNullTest aspect we log only if a null value is given to a
@@ -101,10 +100,17 @@ public abstract aspect AbstractNullPointerTrap {
 	
 	/**
 	 * If a (null) parameter is detected something is wrong with the
-	 * application code. Inner classes will be skipped because they are
+	 * application code.
+	 * <p>
+	 * Inner classes will be skipped because they are
 	 * handled different by the compiler (for private static inner classes
 	 * it adds an additional argument for the default constructor. But this
 	 * additional argument is always null).
+	 * </p>
+	 * <p>
+	 * Also some methods from the Object class (e.g. the equals method) are
+	 * also skipped because these methods are prepared for null arguments.
+	 * </p>
 	 */
 	@SuppressAjWarnings({"adviceDidNotMatch"})
 	before() : invalidNullParameter() {
@@ -151,6 +157,9 @@ public abstract aspect AbstractNullPointerTrap {
 
     private static void assertArgsNotNull(final JoinPoint joinPoint,
             Annotation[][] paramAnnotations) {
+    	if (canHaveNullArgs(joinPoint)) {
+    		return;
+		}
         Object[] args = joinPoint.getArgs();
         for (int i = 0; i < args.length; i++) {
             if ((args[i] == null) && !hasMayBeNullAnnotation(paramAnnotations[i])) {
@@ -158,6 +167,10 @@ public abstract aspect AbstractNullPointerTrap {
             }
         }
     }
+
+    private static boolean canHaveNullArgs(JoinPoint joinPoint) {
+    	return "equals".equals(joinPoint.getSignature().getName());
+	}
 
     private static boolean hasMayBeNullAnnotation(final Annotation[] annotations) {
         if (annotations == null) {
