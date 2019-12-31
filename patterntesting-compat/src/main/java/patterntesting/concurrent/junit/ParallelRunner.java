@@ -150,6 +150,7 @@ public final class ParallelRunner extends SmokeRunner {
      * @param method the test method to be called
      * @return the (recorded) result of this test method
      */
+    @SuppressWarnings("squid:S2142")
     @Override
     protected Statement methodBlock(final FrameworkMethod method) {
         if (Environment.areThreadsAllowed()) {

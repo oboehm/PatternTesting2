@@ -19,11 +19,12 @@
  */
 package patterntesting.sample;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import patterntesting.runtime.annotation.NotYetImplemented;
+import patterntesting.runtime.annotation.UnsupportedOperation;
+
 import java.math.BigDecimal;
-
-import org.apache.logging.log4j.*;
-
-import patterntesting.runtime.annotation.*;
 
 /**
  * This is a litte demo class to show how to use the @UnsupportedOperation
@@ -95,10 +96,10 @@ public final class Fraction implements Comparable<Fraction> {
      */
     @Override
     public boolean equals(final Object other) {
-        try {
+        if (other instanceof Fraction) {
             return compareTo((Fraction) other) == 0;
-        } catch (ClassCastException e) {
-            log.debug("can't compare " + this + " with " + other, e);
+        } else {
+            log.debug("can't compare " + this + " with " + other);
             return false;
         }
     }
@@ -121,7 +122,7 @@ public final class Fraction implements Comparable<Fraction> {
      * @return the fraction as decimal
      */
     public BigDecimal toBigDecimal() {
-        return new BigDecimal(this.counter / (double) this.denominator);
+        return BigDecimal.valueOf(this.counter / (double) this.denominator);
     }
 
     /**

@@ -86,10 +86,10 @@ public final class CrazyCookie implements Serializable {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void store() throws IOException {
-		OutputStream ostream = new FileOutputStream(file);
-		ObjectOutput output = new ObjectOutputStream(ostream);
-		output.writeObject(this);
-		ostream.close();
+		try (OutputStream ostream = new FileOutputStream(file)) {
+			ObjectOutput output = new ObjectOutputStream(ostream);
+			output.writeObject(this);
+		}
 		log.debug(this + " stored to " + file);
 	}
 
@@ -134,10 +134,10 @@ public final class CrazyCookie implements Serializable {
 	 */
 	@Override
 	public boolean equals(final Object other) {
-		try {
+		if (other instanceof CrazyCookie) {
 			return equals((CrazyCookie) other);
-		} catch (ClassCastException e) {
-            log.debug("can't compare " + this + " with " + other, e);
+		} else {
+            log.debug("can't compare " + this + " with " + other);
 			return false;
 		}
 	}

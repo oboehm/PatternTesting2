@@ -30,7 +30,7 @@ package patterntesting.sample;
 public final class IdGenerator {
 
     /** The instance. */
-    private static volatile IdGenerator instance;
+    private static IdGenerator instance;
     private int nextId;
 
     /**

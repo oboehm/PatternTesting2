@@ -19,14 +19,16 @@
  */
 package patterntesting.sample;
 
-import java.io.IOException;
-import java.net.*;
-
-import org.apache.logging.log4j.*;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import patterntesting.annotation.check.ct.OnlyForTesting;
 import patterntesting.annotation.check.runtime.PublicForTesting;
 import patterntesting.runtime.util.ReflectionHelper;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * The WebDog can watch a web server if he is working correct.
@@ -42,6 +44,7 @@ public final class WebDog {
     private static final Logger log = LogManager.getLogger(WebDog.class);
     private final URL url;
     private int responseCode;
+    private boolean running = true;
 
     /**
      * Instantiates a new web dog.
@@ -56,7 +59,7 @@ public final class WebDog {
      * We are a very busy WebDog - we watch the given URL without any pause.
      */
     public void watch() {
-        while (true) {
+        while (running) {
             this.ping();
         }
     }

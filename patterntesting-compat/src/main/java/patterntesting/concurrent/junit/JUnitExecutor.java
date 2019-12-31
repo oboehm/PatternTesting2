@@ -176,6 +176,7 @@ public abstract class JUnitExecutor {
      * @param obj
      *            the object
      */
+    @SuppressWarnings("squid:S2142")
     public final void playTest(final String methodName, final Object obj) {
         Result result = this.results.get(methodName);
         if ((result == null) || (result.future == null)) {

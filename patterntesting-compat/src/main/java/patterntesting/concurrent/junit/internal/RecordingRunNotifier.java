@@ -330,6 +330,7 @@ public final class RecordingRunNotifier extends RunNotifier {
      * @param notifier the notifier
      * @param waitFor the thread to wait for
      */
+    @SuppressWarnings("squid:S2142")
     public void replay(final RunNotifier notifier, final Thread waitFor) {
         this.replay(notifier);
         try {

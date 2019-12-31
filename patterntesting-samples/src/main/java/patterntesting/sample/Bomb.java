@@ -73,6 +73,7 @@ public final class Bomb {
                 tick();
             } catch (InterruptedException e) {
                 System.out.println("*TACK*");
+                Thread.currentThread().interrupt();
             }
         }
         System.out.println("BUMM");

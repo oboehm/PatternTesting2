@@ -47,6 +47,7 @@ public final class MemoryEater {
 			MemoryGuard.logFreeMemory(100);
 		} catch (InterruptedException e) {
 			log.info("free memory will be not logged", e);
+			Thread.currentThread().interrupt();
 		}
 	}
 

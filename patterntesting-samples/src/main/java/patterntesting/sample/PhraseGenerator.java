@@ -19,9 +19,9 @@
  */
 package patterntesting.sample;
 
-import java.io.*;
+import patterntesting.annotation.check.ct.OnlyForTesting;
 
-import patterntesting.annotation.check.ct.*;
+import java.io.*;
 
 /**
  * This is a example class for the use the IO classes like Reader or Writer.
@@ -72,9 +72,9 @@ public final class PhraseGenerator {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public void writeToStream(final File file) throws IOException {
-        OutputStream ostream = new FileOutputStream(file);
-        ostream.write(phrase.getBytes());
-        ostream.close();
+        try (OutputStream ostream = new FileOutputStream(file)) {
+            ostream.write(phrase.getBytes());
+        }
     }
 
     /**
@@ -88,11 +88,12 @@ public final class PhraseGenerator {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public String readFromStream(final File file) throws IOException {
-        InputStream istream = new FileInputStream(file);
-        byte[] buffer = new byte[(int) file.length()];
-        istream.read(buffer);
-        istream.close();
-        phrase = new String(buffer);
+        try (InputStream istream = new FileInputStream(file)) {
+            byte[] buffer = new byte[(int) file.length()];
+            if (istream.read(buffer) >= 0) {
+                phrase = new String(buffer);
+            }
+        }
         return phrase;
     }
 
@@ -105,9 +106,9 @@ public final class PhraseGenerator {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public void writeTo(final File file) throws IOException {
-        Writer writer = new FileWriter(file);
-        writer.write(phrase);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(phrase);
+        }
     }
 
     /**
@@ -120,11 +121,11 @@ public final class PhraseGenerator {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public String readFrom(final File file) throws IOException {
-        Reader reader = new FileReader(file);
-        char[] buffer = new char[(int) file.length()];
-        reader.read(buffer);
-        reader.close();
-        phrase = new String(buffer).trim();
+        try (Reader reader = new FileReader(file)) {
+            char[] buffer = new char[(int) file.length()];
+            reader.read(buffer);
+            phrase = new String(buffer).trim();
+        }
         return phrase;
     }
 
@@ -138,32 +139,34 @@ public final class PhraseGenerator {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public void writeToRandomAccessFile(final File file) throws IOException {
-        RandomAccessFile raf = new RandomAccessFile(file, "rw");
-        raf.writeChars(phrase);
-        raf.close();
+        try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {
+            raf.writeChars(phrase);
+        }
     }
 
     /**
      * Read from a RandomAccessFile.
      *
      * @param file the file
-     *
      * @return the string
-     *
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public String readFromRandomAccessFile(final File file) throws IOException {
-        RandomAccessFile raf = new RandomAccessFile(file, "r");
-        StringBuffer buffer = new StringBuffer();
-        while (true) {
-            try {
-                buffer.append(raf.readChar());
-            } catch(EOFException eofe) {
-                break;
+        try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
+            StringBuffer buffer = new StringBuffer();
+            while (true) {
+                try {
+                    char c = raf.readChar();
+                    buffer.append(c);
+                    if (c == 0) {
+                        break;
+                    }
+                } catch (EOFException eofe) {
+                    break;
+                }
             }
+            phrase = buffer.toString();
         }
-        raf.close();
-        phrase = buffer.toString();
         return phrase;
     }
 

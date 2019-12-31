@@ -134,6 +134,7 @@ public class ParallelProxyRunner extends ProxyRunner {
      * @param notifier the notifier
      * @see org.junit.runners.ParentRunner#runChild(Object, RunNotifier)
      */
+    @SuppressWarnings("squid:S2142")
     @Override
     protected void runChild(final FrameworkMethod method, final RunNotifier notifier) {
         if (this.shouldBeIgnored(method)) {
@@ -143,8 +144,6 @@ public class ParallelProxyRunner extends ProxyRunner {
         }
         if (Environment.areThreadsAllowed()) {
             Result result = results.get(method);
-//            Description description = describeChild(method);
-//            notifier.fireTestStarted(description);
             try {
                 RecordingRunNotifier recorder = result.future.get();
                 // in case of failure we restart original test as fallback
