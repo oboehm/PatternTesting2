@@ -25,7 +25,7 @@ public abstract class JUnitExecutor {
 
     private static final Logger LOG = LogManager.getLogger(JUnitExecutor.class);
     private static final Logger RUNLOG = LogManager.getLogger(ParallelRunner.class);
-    private static final Set<Class<?>> SETUP_CLASSES = new HashSet<Class<?>>();
+    private static final Set<Class<?>> SETUP_CLASSES = new HashSet<>();
     private final Class<?> testClass;
     private boolean runParallel;
 
@@ -36,7 +36,7 @@ public abstract class JUnitExecutor {
     protected Method setupMethod;
 
     /** The results. */
-    protected final Map<String, Result> results = new HashMap<String, Result>();
+    protected final Map<String, Result> results = new HashMap<>();
 
     /** The teardown method. */
     protected Method teardownMethod;
@@ -47,6 +47,9 @@ public abstract class JUnitExecutor {
      */
     protected static class Result {
 
+        private Method method;
+        private FutureTask<Throwable> future;
+
         /**
          * Instantiates a new result.
          *
@@ -56,11 +59,27 @@ public abstract class JUnitExecutor {
             this.method = method;
         }
 
-        /** the called method. */
-        public Method method;
+        /**
+         * Get the called method.
+         *
+         * @return the called method
+         */
+        public Method getMethod() {
+            return method;
+        }
 
-        /** the (future) result. */
-        public FutureTask<Throwable> future;
+        /**
+         * Get the (future) result.
+         *
+         * @return the future task
+         */
+        public FutureTask<Throwable> getFuture() {
+            return future;
+        }
+
+        public void setFuture(FutureTask<Throwable> future) {
+            this.future = future;
+        }
     }
 
     /**
@@ -108,10 +127,7 @@ public abstract class JUnitExecutor {
         if (!Environment.areThreadsAllowed()) {
             return false;
         }
-        if (Environment.isPropertyEnabled(Environment.RUN_TESTS_PARALLEL)) {
-            return true;
-        }
-        return false;
+        return Environment.isPropertyEnabled(Environment.RUN_TESTS_PARALLEL);
     }
 
     /**
@@ -153,18 +169,16 @@ public abstract class JUnitExecutor {
      */
     @MayReturnNull
     private void triggerTest(final Result result) {
-        Callable<Throwable> callable = new Callable<Throwable>() {
-            public Throwable call() throws Exception {
-                try {
-                    invokeTest(result.method);
-                    return null;
-                } catch (Throwable t) {
-                    return t;
-                }
+        Callable<Throwable> callable = () -> {
+            try {
+                invokeTest(result.getMethod());
+                return null;
+            } catch (Throwable t) {
+                return t;
             }
         };
-        result.future = new FutureTask<Throwable>(callable);
-        executor.execute(result.future);
+        result.setFuture(new FutureTask<>(callable));
+        executor.execute(result.getFuture());
     }
 
     /**
@@ -179,21 +193,21 @@ public abstract class JUnitExecutor {
     @SuppressWarnings("squid:S2142")
     public final void playTest(final String methodName, final Object obj) {
         Result result = this.results.get(methodName);
-        if ((result == null) || (result.future == null)) {
+        if ((result == null) || (result.getFuture() == null)) {
             LOG.trace("starting now " + methodName + "...");
             invokeTest(methodName);
             return;
         }
         try {
-            Throwable t = result.future.get();
+            Throwable t = result.getFuture().get();
             if (t != null) {
                 Thrower.provoke(t);
             }
         } catch (InterruptedException e) {
-            LOG.debug("Getting result from " + result.future + " was interrupted:", e);
+            LOG.debug("Getting result from " + result.getFuture() + " was interrupted:", e);
             Thrower.provoke(e);
         } catch (ExecutionException e) {
-            LOG.debug("Cannot execute " + result.future + ":", e);
+            LOG.debug("Cannot execute " + result.getFuture() + ":", e);
             Thrower.provoke(e);
         }
     }
@@ -219,7 +233,7 @@ public abstract class JUnitExecutor {
      * can run in parallel.
      * </p>
      *
-     * @param methodName the method name
+     * @param method the method
      */
     private void invokeTest(final Method method) {
         Throwable thrown = null;
@@ -323,7 +337,6 @@ public abstract class JUnitExecutor {
      * happens.
      *
      * @param method method to be called
-     * @param obj the object for the method
      */
     private void call(final Method method) {
         try {
