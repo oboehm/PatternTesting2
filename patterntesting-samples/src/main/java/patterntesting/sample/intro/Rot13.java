@@ -210,9 +210,9 @@ public final class Rot13 implements Comparable<Rot13>, Serializable, Cloneable, 
      */
     @Override
     public boolean equals(final Object other) {
-        try {
+        if (other instanceof Rot13) {
             return this.equals((Rot13) other);
-        } catch (ClassCastException e) {
+        } else {
             return false;
         }
     }
