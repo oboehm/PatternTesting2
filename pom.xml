@@ -180,6 +180,7 @@
 
     <!-- Sonar -->
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.skippedModules>patterntesting-compat</sonar.skippedModules>
 
     <version.spring>5.1.1.RELEASE</version.spring>
 

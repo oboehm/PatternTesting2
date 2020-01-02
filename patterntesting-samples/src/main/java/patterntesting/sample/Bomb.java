@@ -41,10 +41,9 @@ public final class Bomb {
      *
      * @param args the arguments
      *
-     * @throws InterruptedException the interrupted exception
      * @throws JMException if ExceptionFactory can't be registered to JMX
      */
-    public static void main(final String[] args) throws InterruptedException, JMException {
+    public static void main(final String... args) throws JMException {
         ExceptionFactory.registerAsMBean();
         Bomb bomb = new Bomb();
         bomb.start2();
