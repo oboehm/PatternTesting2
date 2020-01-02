@@ -1,7 +1,5 @@
 /*
- * $Id: Bomb.java,v 1.2 2016/01/06 20:47:37 oboehm Exp $
- *
- * Copyright (c) 2009 by Oliver Boehm
+ * Copyright (c) 2009-2020 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,10 +29,11 @@ import javax.management.JMException;
  * software with unexpected exceptions.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.2 $
  * @since 09.03.2009
  */
 public final class Bomb {
+
+    private final int maxTicks;
 
     /**
      * The main method.
@@ -46,7 +45,15 @@ public final class Bomb {
     public static void main(final String... args) throws JMException {
         ExceptionFactory.registerAsMBean();
         Bomb bomb = new Bomb();
-        bomb.start2();
+        bomb.startInterruptable();
+    }
+
+    public Bomb() {
+        this(3600);
+    }
+
+    public Bomb(int maxTicks) {
+        this.maxTicks = maxTicks;
     }
 
     /**
@@ -56,26 +63,24 @@ public final class Bomb {
      */
     @SuppressSystemOutWarning
     public void start() throws InterruptedException {
-        for (int i = 0; i < 3600; i++) {
+        for (int i = 0; i < maxTicks; i++) {
             tick();
         }
         System.out.println("BUMM");
     }
 
     /**
-     * Start the bomb and make "bumm" after an hour.
+     * Start the bomb and make "bumm" after an hour or so.
      */
     @SuppressSystemOutWarning
-    public void start2() {
-        for (int i = 0; i < 3600; i++) {
-            try {
-                tick();
-            } catch (InterruptedException e) {
-                System.out.println("*TACK*");
-                Thread.currentThread().interrupt();
-            }
+    public void startInterruptable() {
+        try {
+            start();
+        } catch (InterruptedException e) {
+            System.out.println("*TACK*");
+            System.out.println("BUMM");
+            Thread.currentThread().interrupt();
         }
-        System.out.println("BUMM");
     }
 
     /**
