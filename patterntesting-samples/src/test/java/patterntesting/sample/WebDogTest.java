@@ -17,14 +17,19 @@
  */
 package patterntesting.sample;
 
-import java.net.*;
-
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import patterntesting.annotation.check.ct.OnlyForTesting;
+import patterntesting.annotation.concurrent.RunBackground;
 import patterntesting.runtime.log.LogRecorder;
+import patterntesting.runtime.util.ThreadUtil;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -37,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public final class WebDogTest {
 
     private WebDog dog;
-    private static final String TEST_URL = "http://localhost";
+    private static final String TEST_URL = "http://google.com";
 
     /**
      * Setup.
@@ -52,11 +57,11 @@ public final class WebDogTest {
     /**
      * Test method for {@link WebDog#ping()}.
      */
-    //@Test
+    @Test
     public void testPing() {
         dog.ping();
         int rc = dog.getResponseCode();
-        assertEquals(200, rc);
+        assertThat(rc, greaterThanOrEqualTo(200));
     }
 
     /**
@@ -83,12 +88,17 @@ public final class WebDogTest {
         checkLog(404, TEST_URL + " has Alzheimer");
     }
 
+    @Test
+    public void testResponseCode500() {
+        checkLog(500, TEST_URL + " responded with 500");
+    }
+
     /**
      * This method must be marked as "@OnlyForTesting" because otherwise it
      * can't call checkLog(..) which is itself marked as "OnlyForTesting".
      *
-     * @param rc
-     * @param expected
+     * @param rc return code
+     * @param expected expected log message
      */
     @OnlyForTesting
     private void checkLog(final int rc, final String expected) {
@@ -96,6 +106,23 @@ public final class WebDogTest {
         dog.setResponseCode(rc);
         dog.logMessage(recorder);
         assertEquals(expected, recorder.getText());
+    }
+
+    @Test
+    public void testWatch() {
+        runWatch();
+        ThreadUtil.sleep(200, TimeUnit.MILLISECONDS);
+        dog.stop();
+    }
+
+    @RunBackground
+    private void runWatch() {
+        dog.watch();
+    }
+
+    @Test
+    public void testMain() {
+        WebDog.main("nir://wana");
     }
 
     /**

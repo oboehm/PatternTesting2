@@ -299,6 +299,7 @@
           <systemPropertyVariables>
             <propertyName>patterntesting.sample.version</propertyName>
             <propertyValue>${project.version}</propertyValue>
+            <propertyName>patterntesting.integrationTest</propertyName>
           </systemPropertyVariables>
         </configuration>
       </plugin>

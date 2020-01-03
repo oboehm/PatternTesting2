@@ -65,6 +65,13 @@ public final class WebDog {
     }
 
     /**
+     * With this method you can stop the watch method.
+     */
+    public void stop() {
+        running = false;
+    }
+
+    /**
      * Ping.
      */
     protected void ping() {
@@ -84,7 +91,7 @@ public final class WebDog {
      * HttpURLConnection because it is protected. We use reflection to
      * do it.
      *
-     * @param connection
+     * @param connection HTTP connection
      */
     private static int getResponseCodeFrom(final HttpURLConnection connection) {
         try {
@@ -131,9 +138,6 @@ public final class WebDog {
     @PublicForTesting
     public void logMessage(Logger lg) {
         switch (responseCode) {
-        case -1:
-            lg.info("can't connect to " + url);
-            break;
         case 200:
             lg.info(url + " is ok");
             break;
@@ -154,13 +158,12 @@ public final class WebDog {
      *
      * @param args the arguments
      */
-    public static void main(final String[] args) {
+    public static void main(String... args) {
         String host = (args.length == 0) ? "http://localhost" : args[0];
         try {
             WebDog dog = new WebDog(new URL(host));
             dog.watch();
         } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
             //e.printStackTrace();
             /*
              *  If you uncomment the line above you'll get a warning.

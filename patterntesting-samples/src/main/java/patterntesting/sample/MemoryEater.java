@@ -55,13 +55,13 @@ public final class MemoryEater {
 	public void eatCache(int percent) {
 		long mem = Runtime.getRuntime().maxMemory() / 1024;
 		long cacheSize = mem * percent / 100;
-		log.info(mem + " KB is free - will eat " + cacheSize + " KB of it");
-		Collection<byte[]> byteCache = new ArrayList<byte[]>();
+		log.info("{} KB is free - will eat {} KB of it", mem, cacheSize);
+		Collection<byte[]> byteCache = new ArrayList<>();
 		for (int i = 0; i < cacheSize; i++) {
 			byte[] b = new byte[1024];
 			byteCache.add(b);
 		}
-		log.info(cacheSize + " KB eaten - will now return");
+		log.info("{} KB eaten - will now return", cacheSize);
 	}
 
 	/**

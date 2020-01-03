@@ -48,7 +48,7 @@ public final class CrazyCookie implements Serializable {
 	/** argh, you should use a constant here!!! */
 	private static final long serialVersionUID = System.currentTimeMillis();
 	//private static final long serialVersionUID = 20090706;
-	private static final Logger log = LogManager.getLogger(CrazyCookie.class);
+	private static final Logger log = LogManager.getLogger();
 	private final File file = createTempFile();
 	private final Date created = new Date();
 
@@ -89,7 +89,7 @@ public final class CrazyCookie implements Serializable {
 			ObjectOutput output = new ObjectOutputStream(ostream);
 			output.writeObject(this);
 		}
-		log.debug(this + " stored to " + file);
+		log.debug("{} stored to {}", this, file);
 	}
 
 	/**
@@ -140,7 +140,6 @@ public final class CrazyCookie implements Serializable {
 	 * Equals.
 	 *
 	 * @param other the other
-	 *
 	 * @return true, if successful
 	 */
 	public boolean equals(final CrazyCookie other) {

@@ -117,6 +117,14 @@ public class Rot13Test {
         assertEquals("Hello", Rot13.crypt(s));
     }
 
+    @Test
+    public void testSetMessage() {
+        Rot13 r = new Rot13();
+        r.setMessage("Hello");
+        assertEquals("Hello", r.decrypt());
+        assertEquals(r.crypt(), r.toString());
+    }
+
     /**
      * This ist Bob's version of testing the crypt method for files.
      * Unfortunately he uses a file which is only present on his computer.
@@ -266,11 +274,9 @@ public class Rot13Test {
 
     /**
      * Test cloning.
-     *
-     * @throws CloneNotSupportedException if cloning is not supported
      */
     @Test
-    public void testCloning() throws CloneNotSupportedException {
+    public void testCloning() {
         Rot13 orig = new Rot13("Dolly");
         CloneableTester.assertCloning(orig);
         Rot13 clone = (Rot13) orig.clone();
