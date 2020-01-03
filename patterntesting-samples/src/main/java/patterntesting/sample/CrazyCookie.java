@@ -56,9 +56,8 @@ public final class CrazyCookie implements Serializable {
 		try {
 			return File.createTempFile("cookie", ".bin");
 		} catch (IOException ioe) {
-			File tempFile = new File("cookie.bin");
-			log.info("using " + tempFile.getAbsolutePath() +" as temp file", ioe);
-			return tempFile;
+			log.info("using 'cookie.bin' as temp file", ioe);
+			return new File("cookie.bin");
 		}
 	}
 
@@ -97,20 +96,15 @@ public final class CrazyCookie implements Serializable {
 	 * Load.
 	 *
 	 * @param f the file to ble loaded
-	 *
 	 * @return the crazy cookie
-	 *
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static CrazyCookie load(final File f) throws IOException {
-		InputStream istream = new FileInputStream(f);
-		ObjectInput input = new ObjectInputStream(istream);
-		try {
+		try (InputStream istream = new FileInputStream(f);
+			 ObjectInput input = new ObjectInputStream(istream)) {
 			return (CrazyCookie) input.readObject();
-		} catch (ClassNotFoundException e) {
-			throw new IOException("unknows class in " + f);
-		} finally {
-		    input.close();
+		} catch (ClassNotFoundException | ClassCastException e) {
+			throw new IOException("unexpected class in " + f, e);
 		}
 	}
 
@@ -161,7 +155,7 @@ public final class CrazyCookie implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return (int) serialVersionUID;
+		return getCreated().hashCode();
 	}
 
 }

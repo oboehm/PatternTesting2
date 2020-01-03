@@ -8,6 +8,7 @@
   </Appenders>
   <Loggers>
     <Logger name="patterntesting" level="info"/>
+    <logger name="patterntesting.runtime.monitor.MemoryGuard" level="debug"/>
     <Root level="warn" additivity="false">
       <AppenderRef ref="console" />
     </Root>

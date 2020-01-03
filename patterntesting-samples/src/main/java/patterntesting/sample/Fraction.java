@@ -31,7 +31,6 @@ import java.math.BigDecimal;
  * annotation.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.6 $
  * @since 19.10.2008
  */
 public final class Fraction implements Comparable<Fraction> {

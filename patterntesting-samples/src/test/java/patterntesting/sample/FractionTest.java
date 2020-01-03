@@ -132,4 +132,9 @@ public class FractionTest {
         assertTrue(fraction.isNegative(), fraction + ".isNegative()");
     }
 
+    @Test
+    public void testNotEquals() {
+        assertNotEquals(new Fraction(1, 2), "1/2");
+    }
+
 }

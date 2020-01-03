@@ -141,10 +141,8 @@ public final class MemoryGuard {
 	 *
 	 * @param interval
 	 *            (the sleep intervall in milliseconds, e.g. 300000 for 5 min.)
-	 * @throws InterruptedException
-	 *             the interrupted exception
 	 */
-	public static synchronized void logFreeMemory(final long interval) throws InterruptedException {
+	public static synchronized void logFreeMemory(final long interval) {
 		if (LOG.isDebugEnabled()) {
 			if (backgroundTask == null) {
 				backgroundTask = new BackgroundLogger(interval);

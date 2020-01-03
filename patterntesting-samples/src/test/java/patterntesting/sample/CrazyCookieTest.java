@@ -16,10 +16,13 @@
 package patterntesting.sample;
 
 import org.junit.jupiter.api.Test;
+import patterntesting.runtime.junit.ObjectTester;
 
-import java.io.IOException;
+import java.io.*;
+import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * We don't test here what happens if a cookie is loaded after the restart of
@@ -42,7 +45,23 @@ public final class CrazyCookieTest {
 	public void testStore() throws IOException {
 		cookie.store();
 		CrazyCookie stored = CrazyCookie.load(cookie.getFile());
-		assertEquals(cookie, stored);
+		ObjectTester.assertEquals(cookie, stored);
+	}
+
+	@Test
+	public void testNotEquals() {
+		assertNotEquals(cookie, new Date());
+		assertNotEquals(cookie, new CrazyCookie());
+	}
+
+	@Test
+	public void testLoadWithException() throws IOException {
+		File corruptFile = new File("target", "hello.world");
+		try (OutputStream ostream = new FileOutputStream(corruptFile)) {
+			ObjectOutput output = new ObjectOutputStream(ostream);
+			output.writeObject("Hello World!");
+		}
+		assertThrows(IOException.class, () -> CrazyCookie.load(corruptFile));
 	}
 
 }

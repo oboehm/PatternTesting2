@@ -89,6 +89,12 @@ public class BombTest {
     }
 
     @Test
+    public void testBumm() {
+        Bomb fastBomb = new Bomb(1);
+        fastBomb.startInterruptable();
+    }
+
+    @Test
     public void testMain() throws JMException {
         runMain();
         ThreadUtil.sleep(1, TimeUnit.SECONDS);

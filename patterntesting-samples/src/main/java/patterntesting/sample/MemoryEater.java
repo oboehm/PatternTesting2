@@ -43,21 +43,18 @@ public final class MemoryEater {
 	 * We want to log all 100 ms the free memory.
 	 */
 	public MemoryEater() {
-		try {
-			MemoryGuard.logFreeMemory(100);
-		} catch (InterruptedException e) {
-			log.info("free memory will be not logged", e);
-			Thread.currentThread().interrupt();
-		}
+		MemoryGuard.logFreeMemory(100);
 	}
 
 	/**
-	 * Uses 9/10 of the free memory for caching but nobody will use it
-	 * (remember it is only a demo).
+	 * Uses the given percentage of the free memory for caching but nobody will
+	 * use it (remember it is only a demo).
+	 *
+	 * @param percent the percent
 	 */
-	public void eatCache() {
+	public void eatCache(int percent) {
 		long mem = Runtime.getRuntime().maxMemory() / 1024;
-		long cacheSize = mem * 9 / 10;
+		long cacheSize = mem * percent / 100;
 		log.info(mem + " KB is free - will eat " + cacheSize + " KB of it");
 		Collection<byte[]> byteCache = new ArrayList<byte[]>();
 		for (int i = 0; i < cacheSize; i++) {
@@ -68,13 +65,18 @@ public final class MemoryEater {
 	}
 
 	/**
-	 * The main method.
+	 * The main method. A value of 90% as first argument normally ends up with
+	 * a OutOfMemoryError.
 	 *
-	 * @param args the arguments
+	 * @param args the first argument is used as percent value
 	 */
-	public static void main(final String[] args) {
+	public static void main(final String... args) {
 		MemoryEater memEater = new MemoryEater();
-		memEater.eatCache();
+		int percent = 90;
+		if (args.length > 0) {
+			percent = Integer.parseInt(args[0]);
+		}
+		memEater.eatCache(percent);
 	}
 
 }
