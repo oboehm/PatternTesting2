@@ -489,14 +489,6 @@
     <pluginManagement>
 
       <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-failsafe-plugin</artifactId>
-        </plugin>
         <!-- JavaDoc -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -603,12 +595,6 @@
               <tag>FIXME</tag>
             </tags>
           </configuration>
-        </plugin>
-        <!-- Sonar -->
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>sonar-maven-plugin</artifactId>
-          <version>3.7.0.1746</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -720,10 +706,51 @@
           </execution>
         </executions>
       </plugin>
-      <!-- see http://maven.apache.org/plugins/maven-surefire-plugin/examples/inclusion-exclusion.html -->
+
+      <!-- Code Coverage  -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.5</version>
+        <configuration>
+          <append>true</append>
+        </configuration>
+        <executions>
+          <!-- set arg line property for surefire -->
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            <configuration>
+              <append>true</append>
+            </configuration>
+          </execution>
+          <!-- set arg line property for failsafe -->
+          <execution>
+            <id>prepare-agent-integration</id>
+            <goals>
+              <goal>prepare-agent-integration</goal>
+            </goals>
+            <configuration>
+              <append>true</append>
+            </configuration>
+          </execution>
+          <execution>
+            <id>report-aggregate</id>
+            <goals>
+              <goal>report-aggregate</goal>
+            </goals>
+            <phase>verify</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- unit and integraion tests -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.2</version>
         <configuration>
           <excludes>
             <exclude>**/Test*Aspect*.java</exclude>
@@ -733,12 +760,21 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
+        <version>2.22.2</version>
         <configuration>
           <systemPropertyVariables>
             <propertyName>patterntesting.integrationTest</propertyName>
           </systemPropertyVariables>
         </configuration>
       </plugin>
+
+      <!-- Sonar -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.7.0.1746</version>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -810,37 +846,6 @@
                    if set to false warnings will be logged. -->
               <failOnError>true</failOnError>
             </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- Code Coverage  -->
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.5</version>
-        <configuration>
-          <append>true</append>
-        </configuration>
-        <executions>
-          <execution>
-            <id>default-prepare-agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>default-report</id>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>post-unit-test</id>
-            <goals>
-              <goal>report</goal>
-            </goals>
-            <phase>test</phase>
           </execution>
         </executions>
       </plugin>
