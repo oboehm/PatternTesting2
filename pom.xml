@@ -694,10 +694,10 @@
           </execution>
           <execution>
             <id>coverage-report</id>
-            <phase>post-integration-test</phase>
             <goals>
               <goal>report</goal>
             </goals>
+            <phase>post-integration-test</phase>
           </execution>
         </executions>
       </plugin>

@@ -34,12 +34,6 @@ import static patterntesting.runtime.NullConstants.NULL_STRING;
  * If the date is reached then the test will fail if it is not fixed (and
  * the @Broken removed).
  * <p>
- * Before 1.0.0 this annotation was handled by BrokenAspect. But since 1.0.0 it
- * is handled now by the {@link patterntesting.runtime.junit.SmokeRunner} class.
- * You should use this annotation together with
- * {@code @RunWith(SmokeRunner.class)}, also for JUnit 3 tests.
- * </p>
- * <p>
  * You can also use this annotation to mark a method or constructor as "broken".
  * If assertions are enabled an AssertionError will be thrown if you call such a
  * broken method. If not only a error message will be logged.

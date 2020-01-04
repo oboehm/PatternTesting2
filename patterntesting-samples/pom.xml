@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 	Project Object Model (POM) for Maven
 	If you are behind a proxy try the following command:
@@ -22,76 +21,34 @@
 	
     (c)reated 13-Mar-07 by ob@aosd.de
 -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!-- 
+      The Basics
+      must be set if you want to upload it to the Central Repository
+      see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+   -->
+  <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.patterntesting</groupId>
     <artifactId>patterntesting-parent</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
-	
-  <!-- 
-      The Basics
-      must be set if you want to upload it to the Central Repository
-      see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
-   -->	
-  <modelVersion>4.0.0</modelVersion>
   <artifactId>patterntesting-samples</artifactId>
-
-  <inceptionYear>2002</inceptionYear>
-  <description>
-    PatternTesting Samples (patterntesting-samples) is a collection of samples
+  <description>PatternTesting Samples (patterntesting-samples) is a collection of samples
     how to use the PatternTesting framework. It uses patterntesting-rt,
     patterntesting-check, patterntesting-concurrent and patterntesting-exception
-    to give you some ideas how to use it.
-  </description>
-  
-  <url>http://patterntesting.org/${project.version}/samples</url>
+    to give you some ideas how to use it.</description>
 
   <!-- 
-      Deployment
-      see "Better Builds with Maven", p. 74
-      see http://maven.apache.org/plugins/maven-deploy-plugin/
-  -->
-  <distributionManagement>
-    <!--
-        Deployment of the Web-Site 
-        (try 'mvn site-deploy' to deploy it)
-    -->
-    <site>
-      <id>ftp-patterntesting.org</id>
-      <name>PatternTesting Website</name>
-      <url>${patterntesting.site.url}/${project.version}/samples/</url>
-    </site>
-  </distributionManagement>
+      General Properties
+      (see parent POM)
+   -->
+  <properties>
+    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/samples/</patterntesting.site.artifact.dir>
+  </properties>
 
-  <developers>
-    <developer>
-      <name>Christian Heise</name>
-      <id>ninthbit</id>
-      <email>christian.heise@agentes.de</email>
-      <url>http://www.agentes.de</url>
-      <organization>agentes AG</organization>
-      <organizationUrl>http://www.agentes.de</organizationUrl>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-  </developers>
-  <contributors>
-    <contributor>
-      <name>Oliver Boehm</name>
-      <email>ob@aosd.de</email>
-      <url>http://www.aosd.de/</url>
-      <organization>agentes AG</organization>
-      <organizationUrl>http://www.agentes.de</organizationUrl>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </contributor>
-  </contributors>
-  
   <!-- 
       L I B R A R I E S
       see http://www.ibiblio.org/maven2/ for available libraries (default repository)
@@ -204,31 +161,21 @@
 
   </dependencies>
 
-
-
-  <!-- 
-      General Properties
-      (see parent POM)
-   -->
-  <properties>
-    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/samples/</patterntesting.site.artifact.dir>
-  </properties> 
-
   <!-- Build Settings -->
   <build>
+    <filters>
+      <filter>${basedir}/target/filter.properties</filter>
+    </filters>
     <!--
         replace properties in default.properties
         see http://www.sonatype.com/books/maven-book/reference_de/lifecycle-sect-common-goals.html
      -->
     <resources>
       <resource>
-        <directory>src/main/resources</directory>
         <filtering>true</filtering>
+        <directory>src/main/resources</directory>
       </resource>
     </resources>
-    <filters>
-      <filter>${basedir}/target/filter.properties</filter>
-    </filters>
     <plugins>
       <!--
           AspectJ compiler
@@ -270,21 +217,21 @@
         <executions>
           <execution>
             <id>compile</id>
-            <configuration>
-              <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
-            </configuration>
             <goals>
               <goal>compile</goal>
             </goals>
+            <configuration>
+              <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
+            </configuration>
           </execution>
           <execution>
             <id>test-compile</id>
-            <configuration>
-              <ajdtBuildDefFile>src/test/build.ajproperties</ajdtBuildDefFile>
-            </configuration>
             <goals>
               <goal>test-compile</goal>
             </goals>
+            <configuration>
+              <ajdtBuildDefFile>src/test/build.ajproperties</ajdtBuildDefFile>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -319,18 +266,18 @@
            -->
           <execution>
             <id>filter.properties</id>
-            <phase>generate-resources</phase>
             <goals>
               <goal>run</goal>
             </goals>
+            <phase>generate-resources</phase>
             <configuration>
               <tasks>
                 <!-- Safety -->
-                <mkdir dir="${project.build.directory}" />
+                <mkdir dir="${project.build.directory}"></mkdir>
                 <tstamp>
-                  <format property="last.updated" pattern="dd-MMM-yyyy HH:mm:ss" />
+                  <format pattern="dd-MMM-yyyy HH:mm:ss" property="last.updated"></format>
                 </tstamp>
-                <echo file="${basedir}/target/filter.properties" message="build.time=${last.updated}" />
+                <echo file="${basedir}/target/filter.properties" message="build.time=${last.updated}"></echo>
               </tasks>
             </configuration>
           </execution>
@@ -338,5 +285,52 @@
       </plugin>
     </plugins>
   </build>
+
+  <url>http://patterntesting.org/${project.version}/samples</url>
+
+  <inceptionYear>2002</inceptionYear>
+
+  <developers>
+    <developer>
+      <id>ninthbit</id>
+      <name>Christian Heise</name>
+      <email>christian.heise@agentes.de</email>
+      <url>http://www.agentes.de</url>
+      <organization>agentes AG</organization>
+      <organizationUrl>http://www.agentes.de</organizationUrl>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+  </developers>
+  <contributors>
+    <contributor>
+      <name>Oliver Boehm</name>
+      <email>ob@aosd.de</email>
+      <url>http://www.aosd.de/</url>
+      <organization>agentes AG</organization>
+      <organizationUrl>http://www.agentes.de</organizationUrl>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+  </contributors>
+
+  <!-- 
+      Deployment
+      see "Better Builds with Maven", p. 74
+      see http://maven.apache.org/plugins/maven-deploy-plugin/
+  -->
+  <distributionManagement>
+    <!--
+        Deployment of the Web-Site 
+        (try 'mvn site-deploy' to deploy it)
+    -->
+    <site>
+      <id>ftp-patterntesting.org</id>
+      <name>PatternTesting Website</name>
+      <url>${patterntesting.site.url}/${project.version}/samples/</url>
+    </site>
+  </distributionManagement>
 
 </project>

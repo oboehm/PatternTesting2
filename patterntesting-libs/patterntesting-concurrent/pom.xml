@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 	Project Object Model (POM) for Maven
 	If you are behind a proxy try the following command:
@@ -20,79 +21,37 @@
 	
     (c)reated 22-Mar-09 by ob@aosd.de
 -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!-- 
+      The Basics
+      must be set if you want to upload it to the Central Repository
+      see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+   -->
+  <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.patterntesting</groupId>
     <artifactId>patterntesting-libs</artifactId>
     <version>2.0.0-SNAPSHOT</version>
   </parent>
-
-  <!-- 
-      The Basics
-      must be set if you want to upload it to the Central Repository
-      see http://maven.apache.org/guides/mini/guide-central-repository-upload.html
-   -->	
-  <modelVersion>4.0.0</modelVersion>
   <artifactId>patterntesting-concurrent</artifactId>
   <packaging>jar</packaging>
   <name>patterntesting-concurrent</name>
-  <!-- see http://maven.apache.org/pom.html#Licenses -->
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-    </license>
-  </licenses>
-  <url>http://patterntesting.org/release/concurrent/</url>
-
-  <inceptionYear>2009</inceptionYear>
-  <description>
-    PatternTesting Concurrent (patterntesting-concurrent) is a collection
+  <description>PatternTesting Concurrent (patterntesting-concurrent) is a collection
     of useful thread aspects. It has support for testing, for
     sychnronization and for concurrent programming.
     Some of the ideas used in this library comes from reading
-    Brian Goetz's book "Java Concurrency in Practice".
-  </description>
+    Brian Goetz's book "Java Concurrency in Practice".</description>
 
   <!-- 
-      Deployment
-      see "Better Builds with Maven", p. 74
-      see http://maven.apache.org/plugins/maven-deploy-plugin/
-  -->
-  <distributionManagement>
-    <!--
-        Deployment of the Web-Site 
-        (try 'mvn site-deploy' to deploy it)
-    -->
-    <site>
-      <id>ftp-patterntesting.org</id>
-      <name>PatternTesting Website</name>
-      <url>${patterntesting.site.url}/${project.version}/concurrent/</url>
-    </site>
-  </distributionManagement>
-  
-  <scm>
-    <connection>scm:cvs:pserver:anonymous@patterntesting.cvs.sourceforge.net:/cvsroot/patterntesting:PatternTesting10/patterntesting-concurrent</connection>
-    <url>http://patterntesting.cvs.sourceforge.net/viewvc/patterntesting/PatternTesting10/patterntesting-concurrent/</url>
-    <tag>patterntesting-1_3_0</tag>
-  </scm>
+      General Properties
+      (see parent POM)
+   -->
+  <properties>
+    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/concurrent/</patterntesting.site.artifact.dir>
+  </properties>
 
-  <developers>
-    <developer>
-      <name>Oliver Boehm</name>
-      <id>oboehm</id>
-      <email>ob@aosd.de</email>
-      <url>http://www.aosd.de/</url>
-      <organization>agentes AG</organization>
-      <organizationUrl>http://www.agentes.de</organizationUrl>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-  </developers>
-  
   <!-- 
 	  L I B R A R I E S
 	  see http://www.ibiblio.org/maven2/ for available libraries
@@ -105,23 +64,8 @@
     </dependency>
   </dependencies>
 
-  <!-- 
-      General Properties
-      (see parent POM)
-   -->
-  <properties>
-    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/concurrent/</patterntesting.site.artifact.dir>
-  </properties> 
-
   <!-- Build Settings -->
   <build>
-    <extensions>
-      <!-- Enabling the use of FTP -->
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-         <artifactId>wagon-ftp</artifactId>
-      </extension>
-    </extensions>
     <plugins>
       <!--
           AspectJ compiler
@@ -147,40 +91,40 @@
         <executions>
           <execution>
             <id>compile</id>
-            <configuration>
-              <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
-            </configuration>
             <goals>
               <goal>compile</goal>
             </goals>
+            <configuration>
+              <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
+            </configuration>
           </execution>
           <execution>
             <id>test-compile</id>
-            <configuration>
-              <ajdtBuildDefFile>src/test/build.ajproperties</ajdtBuildDefFile>
-            </configuration>
             <goals>
               <goal>test-compile</goal>
             </goals>
+            <configuration>
+              <ajdtBuildDefFile>src/test/build.ajproperties</ajdtBuildDefFile>
+            </configuration>
           </execution>
         </executions>
       </plugin>
-	  <!-- see http://maven.apache.org/plugins/maven-surefire-plugin/examples/inclusion-exclusion.html -->
-	  <plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
+      <!-- see http://maven.apache.org/plugins/maven-surefire-plugin/examples/inclusion-exclusion.html -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-	  </plugin>
-	  <!-- see http://maven.apache.org/plugins/maven-source-plugin/usage.html -->
+      </plugin>
+      <!-- see http://maven.apache.org/plugins/maven-source-plugin/usage.html -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <executions>
           <execution>
             <id>attach-sources</id>
-            <phase>verify</phase>
             <goals>
               <goal>jar</goal>
             </goals>
+            <phase>verify</phase>
           </execution>
         </executions>
       </plugin>
@@ -194,26 +138,20 @@
         <extensions>true</extensions>
         <configuration>
           <instructions>
-            <Import-Package>
-              *
-            </Import-Package>
-            <Export-Package>
-              patterntesting.concurrent,
-              patterntesting.concurrent.*
-            </Export-Package>
-            <Private-Package>
-              patterntesting.concurrent.experimental,
-              patterntesting.concurrent.junit.internal
-            </Private-Package>
+            <Import-Package>*</Import-Package>
+            <Export-Package>patterntesting.concurrent,
+              patterntesting.concurrent.*</Export-Package>
+            <Private-Package>patterntesting.concurrent.experimental,
+              patterntesting.concurrent.junit.internal</Private-Package>
           </instructions>
         </configuration>
         <executions>
           <execution>
             <id>bundle-manifest</id>
-            <phase>process-classes</phase>
-            <goals>    
+            <goals>
               <goal>manifest</goal>
-            </goals>   
+            </goals>
+            <phase>process-classes</phase>
           </execution>
         </executions>
       </plugin>
@@ -224,13 +162,67 @@
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
-          <archive>  
+          <archive>
             <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-          </archive> 
+          </archive>
         </configuration>
       </plugin>
     </plugins>
+    <extensions>
+      <!-- Enabling the use of FTP -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ftp</artifactId>
+      </extension>
+    </extensions>
   </build>
+  <url>http://patterntesting.org/release/concurrent/</url>
+
+  <inceptionYear>2009</inceptionYear>
+  <!-- see http://maven.apache.org/pom.html#Licenses -->
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>oboehm</id>
+      <name>Oliver Boehm</name>
+      <email>ob@aosd.de</email>
+      <url>http://www.aosd.de/</url>
+      <organization>agentes AG</organization>
+      <organizationUrl>http://www.agentes.de</organizationUrl>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:cvs:pserver:anonymous@patterntesting.cvs.sourceforge.net:/cvsroot/patterntesting:PatternTesting10/patterntesting-concurrent</connection>
+    <url>http://patterntesting.cvs.sourceforge.net/viewvc/patterntesting/PatternTesting10/patterntesting-concurrent/</url>
+    <tag>patterntesting-1_3_0</tag>
+  </scm>
+
+  <!-- 
+      Deployment
+      see "Better Builds with Maven", p. 74
+      see http://maven.apache.org/plugins/maven-deploy-plugin/
+  -->
+  <distributionManagement>
+    <!--
+        Deployment of the Web-Site 
+        (try 'mvn site-deploy' to deploy it)
+    -->
+    <site>
+      <id>ftp-patterntesting.org</id>
+      <name>PatternTesting Website</name>
+      <url>${patterntesting.site.url}/${project.version}/concurrent/</url>
+    </site>
+  </distributionManagement>
 
   <profiles>
 
@@ -258,9 +250,12 @@
             <artifactId>maven-antrun-plugin</artifactId>
             <executions>
               <execution>
+                <goals>
+                  <goal>run</goal>
+                </goals>
                 <phase>site</phase>
                 <configuration>
-                  <tasks name="install.reports" description="copy reports to local site">
+                  <tasks description="copy reports to local site" name="install.reports">
                     <!--
                       Place any ant task here. You can add anything
                       you can add between <target> and </target> in a
@@ -268,20 +263,17 @@
                     -->
                     <echo>copying reports...</echo>
                     <copy todir="${patterntesting.site.dir}/concurrent/" verbose="false">
-                      <fileset dir="target/site" />
+                      <fileset dir="target/site"></fileset>
                     </copy>
                   </tasks>
                 </configuration>
-                <goals>
-                  <goal>run</goal>
-                </goals>
               </execution>
             </executions>
           </plugin>
         </plugins>
       </build>
     </profile>
-    
+
     <!-- 
         If you want an uber JAR with all dependant libs you can use this profile here.
         It is not in the default profile because for patterntesting-rt an uber JAR is
@@ -297,10 +289,10 @@
             <artifactId>maven-shade-plugin</artifactId>
             <executions>
               <execution>
-                <phase>package</phase>
                 <goals>
                   <goal>shade</goal>
                 </goals>
+                <phase>package</phase>
                 <configuration>
                   <shadedArtifactAttached>true</shadedArtifactAttached>
                   <shadedClassifierName>uberjar</shadedClassifierName>
@@ -316,7 +308,7 @@
         </plugins>
       </build>
     </profile>
-    
+
   </profiles>
 
 </project>

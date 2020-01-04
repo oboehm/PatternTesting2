@@ -1,7 +1,5 @@
 /*
- * $Id: package-info.java,v 1.1 2016/10/25 19:23:14 oboehm Exp $
- *
- * Copyright (c) 2016 by Oliver Boehm
+ * Copyright (c) 2016-2020 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +17,7 @@
  */
 
 /**
- * Here you find the SmokeRunner for JUnit. The
- * {@link patterntesting.runtime.junit.SmokeRunner} can be used together with
- * the {@code @RunWith} annotation provided by JUnit 4.
+ * Here you find the some Tester which can be used for testing with JUnit.
  *
  * @author oliver
  * @since 0.8

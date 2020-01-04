@@ -62,6 +62,7 @@ public final class NetworkTester {
      * Checks if the given host is online.
      *
      * @param host the hostname or IP address
+     * @return true if host is online
      * @since 2.0
      */
     public static boolean isOnline(String host) {
@@ -87,6 +88,7 @@ public final class NetworkTester {
      * @param host hostname or ip address
      * @param time how long should we try to connect to host?
      * @param unit the time unit
+     * @return true if host is online
      * @since 2.0
      */
     public static boolean isOnline(String host, int time, TimeUnit unit) {
