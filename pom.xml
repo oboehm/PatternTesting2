@@ -500,62 +500,11 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <!-- 3.1 does not work together with maven-aspect-plugin 1.5 -->
           <version>2.5.1</version>
-          <configuration>
-            <source>${maven.compile.source}</source>
-            <target>${maven.compile.target}</target>
-            <encoding>${commons.encoding}</encoding>
-            <showDeprecation>true</showDeprecation>
-            <showWarnings>true</showWarnings>
-          </configuration>
         </plugin>
-        <!--
-            AspectJ compiler
-            @see http://www.mail-archive.com/user@mojo.codehaus.org/msg00157.html
-            @see http://mail-archives.apache.org/mod_mbox/maven-users/200601.mbox/%3CB39B8F0E-BB20-44DB-96B3-3C7FCB85B594@gmail.com%3E
-            @see http://mojo.codehaus.org/aspectj-maven-plugin/differentTestAndCompile.html
-            NOTE:
-                use build.ajproperties as ajdtBuildDefFile
-                (src/build.ajproperties does not work for ajdoc)
-         -->
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>aspectj-maven-plugin</artifactId>
           <version>1.11</version>
-          <configuration>
-            <source>${maven.compile.source}</source>
-            <target>${maven.compile.target}</target>
-            <complianceLevel>${maven.compile.complianceLevel}</complianceLevel>
-            <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
-          </configuration>
-          <executions>
-            <execution>
-              <id>compile</id>
-              <goals>
-                <goal>compile</goal>
-              </goals>
-              <phase>process-sources</phase>
-              <configuration>
-                <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
-              </configuration>
-            </execution>
-            <execution>
-              <id>test-compile</id>
-              <goals>
-                <goal>test-compile</goal>
-              </goals>
-              <phase>process-sources</phase>
-              <configuration>
-                <ajdtBuildDefFile>src/test/build.ajproperties</ajdtBuildDefFile>
-              </configuration>
-            </execution>
-            <execution>
-              <id>reports</id>
-              <goals>
-                <goal>aspectj-report</goal>
-              </goals>
-              <phase>site</phase>
-            </execution>
-          </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -750,7 +699,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.2</version>
+        <version>3.0.0-M4</version>
         <configuration>
           <excludes>
             <exclude>**/Test*Aspect*.java</exclude>
@@ -760,7 +709,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>2.22.2</version>
+        <version>3.0.0-M4</version>
         <configuration>
           <systemPropertyVariables>
             <propertyName>patterntesting.integrationTest</propertyName>
