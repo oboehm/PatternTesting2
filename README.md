@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/oboehm/PatternTesting2.svg?branch=develop)](https://travis-ci.org/oboehm/PatternTesting2)
-[![codecov](https://codecov.io/gh/oboehm/PatternTesting2/branch/develop/graph/badge.svg)](https://codecov.io/gh/oboehm/PatternTesting2/branch/develop)
-[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?metric=alert_status&project=org.patterntesting:patterntesting-parent)](https://sonarcloud.io/dashboard?id=org.patterntesting%3Apatterntesting-parent)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesting-parent)
 
@@ -20,11 +17,13 @@ Version 2 will be more focussed on the original vision:
 
 The plans for version 2 are:
 
-* foreign classes like ClasspathMonitor will be moved to a separate project
+* foreign classes like ClasspathMonitor are moved to a separate project [ClassFish](https://github.com/oboehm/ClazzFish)
 * deprecated methods and classes will be removed
 * move to JUnit 5
-* code will be prepared for Java 9 module system
-* consolidation of the different document parts
+* switch to Java 11 (not yet done)
+* consolidation of the different document parts (not yet done)
+
+The runner for JUnit 4 and other outdated classes are moved to [patterntesting-compat](patterntesting-compat/README.adoc).
 
 
 ## Branching Model
@@ -38,5 +37,5 @@ The actual development you can find on the [develop](https://github.com/oboehm/P
 * Release Notes: [doc/release-notes](doc/release-notes.adoc)
 
 ---
-October 2018,
+Januar 2020,
 Oli B.

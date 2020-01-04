@@ -5,7 +5,7 @@ https://maven-badges.herokuapp.com/maven-central/org.patterntesting/patterntesti
 = What Is patterntesting-compat?
 
 
-In patterntesting-compat you will find classes, which are out-dated.
+In patterntesting-compat you will find the runners for JUnit 4 and classes, which are out-dated.
 Reasons for that are:
 
 * the class or interface are replaced by a newer class
@@ -13,6 +13,7 @@ Reasons for that are:
 
 Normally you don't need this module.
 You only needed it if you have a dependency to a deprecated class.
+Or if you still use JUnit 4 and want to use the SmokeRunner.
 
 
 
