@@ -47,7 +47,7 @@ This is a little checklist for the deployment of the next release:
 . after upload to  https://oss.sonatype.org/[Sonatype]:
   select https://oss.sonatype.org/#stagingRepositories[Staging Repositories] on oss.sonatype.org, press "Refresh" and then "Close" and "Release".
 . generate the website with `mvn -Plocal-site site-deploy` and copy it to http://patterntesting.org/release/[patterntesting.org/release/]
-. commit the changes (if not already done) and label the sources, e.g. with patterntesting-2-0-0
+. commit the changes (if not already done) and label the sources, e.g. with patterntesting-2.0.1
 . provide the jar files for normal download at https://sourceforge.net/projects/patterntesting/files/[SourceForge]:
 .. login to https://sourceforge.net/auth/[Sourceforge]
 .. select https://sourceforge.net/projects/patterntesting/files/[patterntesting/files] and upload the tar and zip files from patterntesting-libs, patterntesting-tools and patterntesting-samples (you can find it in the target directory).
