@@ -182,9 +182,9 @@
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 
     <!-- see https://github.com/mojohaus/aspectj-maven-plugin/pull/45 -->
-    <aspectj.maven.plugin.version>1.12.9</aspectj.maven.plugin.version>
-    <aspectj.maven.plugin.groupId>io.starter</aspectj.maven.plugin.groupId>
-    <aspectj.version>1.9.5</aspectj.version>
+    <aspectj.maven.plugin.version>1.12.1</aspectj.maven.plugin.version>
+    <aspectj.maven.plugin.groupId>com.nickwongdev</aspectj.maven.plugin.groupId>
+    <aspectj.version>1.8.14</aspectj.version>
 
     <version.spring>5.1.1.RELEASE</version.spring>
 
@@ -334,12 +334,12 @@
       <dependency>
         <groupId>org.aspectj</groupId>
         <artifactId>aspectjrt</artifactId>
-        <version>1.9.4</version>
+        <version>${aspectj.version}</version>
       </dependency>
       <dependency>
         <groupId>org.aspectj</groupId>
         <artifactId>aspectjtools</artifactId>
-        <version>1.9.4</version>
+        <version>${aspectj.version}</version>
       </dependency>
       <dependency>
         <groupId>org.easymock</groupId>
