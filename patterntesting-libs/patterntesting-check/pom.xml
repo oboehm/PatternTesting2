@@ -71,7 +71,7 @@
           @see http://mojo.codehaus.org/aspectj-maven-plugin/differentTestAndCompile.html
        -->
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
+        <groupId>${aspectj.maven.plugin.groupId}</groupId>
         <artifactId>aspectj-maven-plugin</artifactId>
         <configuration>
           <source>${maven.compile.source}</source>

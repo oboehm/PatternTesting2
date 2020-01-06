@@ -72,9 +72,9 @@
     </dependency>
     <!-- Maven plugin dependencies -->
     <dependency>
-      <groupId>org.codehaus.mojo</groupId>
+      <groupId>${aspectj.maven.plugin.groupId}</groupId>
       <artifactId>aspectj-maven-plugin</artifactId>
-      <version>1.11</version>
+      <version>${aspectj.maven.plugin.version}</version>
       <type>maven-plugin</type>
       <exclusions>
         <exclusion>
@@ -104,6 +104,10 @@
         <exclusion>
           <groupId>org.apache.maven.doxia</groupId>
           <artifactId>doxia-sink-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.maven.doxia</groupId>
+          <artifactId>doxia-site-renderer</artifactId>
         </exclusion>
         <exclusion>
           <groupId>org.apache.maven</groupId>
@@ -372,16 +376,12 @@
           @see http://mojo.codehaus.org/aspectj-maven-plugin/differentTestAndCompile.html
        -->
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
+        <groupId>${aspectj.maven.plugin.groupId}</groupId>
         <artifactId>aspectj-maven-plugin</artifactId>
         <configuration>
           <source>${maven.compile.source}</source>
           <target>${maven.compile.target}</target>
           <complianceLevel>${maven.compile.complianceLevel}</complianceLevel>
-          <options>
-            <option>-verbose</option>
-            <option>-showWeaveInfo</option>
-          </options>
           <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
           <aspectLibraries>
             <aspectLibrary>

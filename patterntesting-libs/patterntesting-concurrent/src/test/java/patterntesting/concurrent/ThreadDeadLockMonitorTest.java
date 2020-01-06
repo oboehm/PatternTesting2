@@ -66,8 +66,16 @@ public final class ThreadDeadLockMonitorTest implements DeadLockListener {
 	 */
 	private void provocateDeadLocks() {
 		ExecutorService pool = Executors.newFixedThreadPool(2);
-		pool.submit(() -> test.acquireTwoLocks());
-		pool.submit(() -> test.acquireLocks());
+		pool.submit(new Runnable() {
+			public void run() {
+				test.acquireTwoLocks();
+			}
+		});
+		pool.submit(new Runnable() {
+			public void run() {
+				test.acquireLocks();
+			}
+		});
 	}
 
 	/**

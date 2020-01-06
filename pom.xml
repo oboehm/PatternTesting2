@@ -181,8 +181,11 @@
     <!-- Sonar -->
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 
+    <!-- see https://github.com/mojohaus/aspectj-maven-plugin/pull/45 -->
+    <aspectj.maven.plugin.version>1.12.9</aspectj.maven.plugin.version>
+    <aspectj.maven.plugin.groupId>io.starter</aspectj.maven.plugin.groupId>
     <aspectj.version>1.9.5</aspectj.version>
-    <aspectj.maven.plugin.version>1.11</aspectj.maven.plugin.version>
+
     <version.spring>5.1.1.RELEASE</version.spring>
 
   </properties>
@@ -500,11 +503,11 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <!-- 3.1 does not work together with maven-aspect-plugin 1.5 -->
+          <!-- 3.x does not work together with maven-aspect-plugin 1.5 -->
           <version>2.5.1</version>
         </plugin>
         <plugin>
-          <groupId>org.codehaus.mojo</groupId>
+          <groupId>${aspectj.maven.plugin.groupId}</groupId>
           <artifactId>aspectj-maven-plugin</artifactId>
           <version>${aspectj.maven.plugin.version}</version>
         </plugin>
@@ -613,20 +616,8 @@
         </executions>
       </plugin>
 
-      <!-- set JDK level, see http://maven.apache.org/general.html#Compiling-J2SE-5 -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <!-- 3.1 does not work together with maven-aspect-plugin 1.5 -->
-        <configuration>
-          <source>${maven.compile.source}</source>
-          <target>${maven.compile.target}</target>
-          <showDeprecation>true</showDeprecation>
-          <showWarnings>true</showWarnings>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
+        <groupId>${aspectj.maven.plugin.groupId}</groupId>
         <artifactId>aspectj-maven-plugin</artifactId>
         <configuration>
           <source>${maven.compile.source}</source>
@@ -917,7 +908,7 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
+        <groupId>${aspectj.maven.plugin.groupId}</groupId>
         <artifactId>aspectj-maven-plugin</artifactId>
         <version>${aspectj.maven.plugin.version}</version>
         <configuration>
