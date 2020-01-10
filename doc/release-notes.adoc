@@ -35,10 +35,9 @@ This is a little checklist for the deployment of the next release:
 . change the version in pom.xml (remove -SNAPSHOT)
 . build all artifacts from patterntesting-parent
   (`mvn -DskipTests -B clean install javadoc:jar repository:bundle-create gpg:sign -Dgpg.passphrase=xx`)
-. workaround for javadoc-generation of patterntesting-check-ct:
+. workaround for javadoc-generation if javadoc-JAR in patterntesting-check-ct is empty:
 .. `pushd patterntesting-libs/patterntesting-check/patterntesting-check-ct/`
-.. `mvn site`
-.. `cp -r target/site/aspecj-report target/apidocs`
+.. `mvn site` (generates the ajdoc reports and copies it to apidoc directory)
 .. `mvn javadoc:jar`
 .. `popd`
 . use the script `src/script/deploy.sh` to upload bundles to https://oss.sonatype.org/[oss.sonatype.org] (but don't forget to update the VERSION variable inside this script).

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 	Project Object Model (POM) for PatternTesting
 	If you are behind a proxy try the following command:
@@ -66,6 +66,12 @@
    -->
 
   <properties>
+    <aspectj.maven.plugin.groupId>com.nickwongdev</aspectj.maven.plugin.groupId>
+
+    <!-- see https://github.com/mojohaus/aspectj-maven-plugin/pull/45 -->
+    <aspectj.maven.plugin.version>1.12.1</aspectj.maven.plugin.version>
+    <!-- don't use AspectJ 1.9.5, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=558995 -->
+    <aspectj.version>1.8.14</aspectj.version>
     <commons.docEncoding>${commons.encoding}</commons.docEncoding>
 
     <!--
@@ -94,9 +100,9 @@
     -->
     <patterntesting.site.dir>${htdocs.dir}/builds/patterntesting</patterntesting.site.dir>
     <patterntesting.site.url>file:${patterntesting.site.dir}</patterntesting.site.url>
-    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
     <!-- ignore violations -->
     <sonar.issue.ignore.multicriteria>1,2,3,4,5,6,7,8,9,10,11,12,106,112,1312,1313,1698,1872,2159,2232,2250,2259,2384,2386</sonar.issue.ignore.multicriteria>
     <sonar.issue.ignore.multicriteria.1.resourceKey>**</sonar.issue.ignore.multicriteria.1.resourceKey>
@@ -180,11 +186,6 @@
 
     <!-- Sonar -->
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-
-    <!-- see https://github.com/mojohaus/aspectj-maven-plugin/pull/45 -->
-    <aspectj.maven.plugin.version>1.12.1</aspectj.maven.plugin.version>
-    <aspectj.maven.plugin.groupId>com.nickwongdev</aspectj.maven.plugin.groupId>
-    <aspectj.version>1.8.14</aspectj.version>
 
     <version.spring>5.1.1.RELEASE</version.spring>
 
@@ -550,6 +551,12 @@
             </tags>
           </configuration>
         </plugin>
+        <!-- ANT -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.8</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -625,6 +632,13 @@
           <complianceLevel>${maven.compile.complianceLevel}</complianceLevel>
           <ajdtBuildDefFile>build.ajproperties</ajdtBuildDefFile>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>${aspectj.version}</version>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
             <id>compile</id>
@@ -654,13 +668,6 @@
             <phase>site</phase>
           </execution>
         </executions>
-        <dependencies>
-          <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjtools</artifactId>
-            <version>${aspectj.version}</version>
-          </dependency>
-        </dependencies>
       </plugin>
 
       <!-- Code Coverage  -->
@@ -750,7 +757,6 @@
           -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.8</version>
         <!--$NO-MVN-MAN-VER$-->
         <executions>
           <execution>
