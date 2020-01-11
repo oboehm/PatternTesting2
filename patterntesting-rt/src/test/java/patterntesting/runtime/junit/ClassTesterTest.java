@@ -22,6 +22,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.util.Set;
 
@@ -84,16 +85,24 @@ public final class ClassTesterTest {
 	 * Test method for {@link ClassTester#tryStaticInitializer(String)}.
 	 */
 	@Test
-	public void testTryStaticInitializerWithMissingClass() throws ClassNotFoundException {
-		assertThrows(ClassNotFoundException.class, () -> ClassTester.tryStaticInitializer("does.not.exist"));
+	public void testTryStaticInitializerWithMissingClass() {
+		assertThrows(ClassNotFoundException.class, new Executable() {
+			public void execute() throws Throwable {
+				ClassTester.tryStaticInitializer("does.not.exist");
+			}
+		});
 	}
 
 	/**
 	 * Test method for {@link ClassTester#tryStaticInitializer(String)}.
 	 */
 	@Test
-	public void testTryStaticInitializer() throws ClassNotFoundException {
-		assertThrows(AssertionError.class, () -> ClassTester.tryStaticInitializer("patterntesting.runtime.junit.test.Unloadable"));
+	public void testTryStaticInitializer() {
+		assertThrows(AssertionError.class, new Executable() {
+			public void execute() throws Throwable {
+				ClassTester.tryStaticInitializer("patterntesting.runtime.junit.test.Unloadable");
+			}
+		});
 	}
 
 	/**

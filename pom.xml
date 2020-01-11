@@ -51,12 +51,12 @@
       a cycle).
    -->
   <modules>
-    <module>doc</module>
     <module>patterntesting-rt</module>
     <module>patterntesting-tools</module>
     <module>patterntesting-libs</module>
     <module>patterntesting-samples</module>
     <module>patterntesting-compat</module>
+    <module>doc</module>
   </modules>
 
   <!--

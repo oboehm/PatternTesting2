@@ -13,6 +13,10 @@
 
   <inceptionYear>2019</inceptionYear>
 
+  <properties>
+    <patterntesting.site.artifact.dir>${patterntesting.site.dir}/patterntesting-compat/</patterntesting.site.artifact.dir>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.patterntesting</groupId>

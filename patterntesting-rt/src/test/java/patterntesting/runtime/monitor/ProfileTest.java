@@ -106,7 +106,6 @@ public final class ProfileTest {
      * Test run.
      *
      * @throws JMException the JM exception
-     * @throws InterruptedException the interrupted exception
      */
     @Test
     public void testRun() throws JMException {
