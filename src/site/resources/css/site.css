@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+/*
+ * styles for maven-site-plugin
+ * (see http://www.sonatype.com/books/maven-book/reference_de/site-generation-sect-site-appearance.html)
+ * (c)reated: 17-Feb-2010 by oboehm
+ */
+
+#banner {
+  padding: 0;
+  background-image: url("../img/PatternTesting.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}

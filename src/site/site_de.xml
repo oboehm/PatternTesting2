@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	$Id: site_de.xml,v 1.18 2017/05/14 20:09:50 oboehm Exp $
+	
+	This is the adapted "xdocs/navigation.xml" from v0.4-SNAPSHOT
+	@see http://maven.apache.org/guides/mini/guide-site.html
+	@see http://maven.apache.org/maven-1.x/plugins/xdoc/
+	@see http://www.sonatype.com/book/reference/site-generation.html
+	
+	(c)reated: 14-Jun-2007 by ob@aosd.de
+	last up$Date: 2017/05/14 20:09:50 $ by $Author: oboehm $
+-->
+
+<project name="PatternTesting">
+
+  <bannerLeft>
+    <name> PatternTesting </name>
+    <src>../img/banner-left.png</src>
+  </bannerLeft>
+ 
+  <bannerRight>
+    <name> PatternTesting </name>
+    <src>../img/banner-right.png</src>
+  </bannerRight>
+ 
+  <version position="left"/>
+
+  <publishDate position="navigation-bottom" format="dd-MMM-yyyy" />
+
+  <body>
+
+    <!-- see http://www.communardo.de/techblog/tag/maven2/ -->
+    <breadcrumbs>
+      <item name="Home" href="index.html" />
+    </breadcrumbs>
+
+    <!-- see http://www.communardo.de/techblog/tag/maven2/ -->
+    <menu ref="parent"/>
+	   
+    <links>
+      <item name="en" href="../index.html"/>
+      <item name="AspectJ" href="http://www.eclipse.org/aspectj"/>
+    </links>
+
+    <menu ref="modules" />
+
+    <menu name="Doc &amp; Downloads">
+      <item name="Antipattern"              href="http://patterntesting.sourceforge.net/wiki/index.php/AntiPattern"/>
+      <item name="Wiki"                     href="http://sourceforge.net/p/patterntesting/wiki/" />
+      <item name="Dokumentation"            href="/doc/index.html" collapse="true" >
+	    <item name="Release Notes"            href="/changes-report.html" />
+	    <item name="Wie alles begann..."      href="/doc/whatis.html" />
+	    <item name="API"                      href="/apidocs/index.html" />
+      </item>
+      <item name="Downloads"                href="downloads.html"/>
+      <item name="Repositories"             href="http://central.maven.org/maven2/org/patterntesting/" />
+    </menu>
+    <menu name="Support">
+      <item name="Mailing-Listen"           href="mail-lists.html"/>
+      <item name="Issue Tracking"           href="issue-tracking.html" collapse="true">
+        <item name="Support-Anfragen"         href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454318"/>
+        <item name="Feature-Anfragen"         href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454320"/>
+        <item name="Bug-Reports"              href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454317"/>
+      </item>
+      <item name="Wunschliste"              href="http://c2.com/cgi/wiki?PatternTestingWishList"/>
+      <item name="Entwicklung"              href="/dev/index.html" collapse="true" >
+        <item name="Verzeichnis-Struktur"     href="/dev/directory_organization.html"/>
+        <item name="Programmier-Regeln"       href="/dev/coding_conventions.html"/>
+        <item name="Namens-Konventionen"      href="/dev/naming_conventions.html"/>
+      </item>
+    </menu>
+
+    <menu ref="reports" />
+	  
+	${reports}
+	  
+  </body>
+
+</project>
