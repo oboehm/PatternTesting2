@@ -6,6 +6,11 @@ https://codecov.io/gh/oboehm/PatternTesting2/branch/develop[image:https://codeco
 
 
 
+== 2.0.1 (Snapshot)
+
+* dependencies updated
+
+
 == 2.0 (05-Jan-2020)
 
 * move from https://sourceforge.net/projects/patterntesting/[SoureForge] (CVS) to https://github.com/oboehm/PatternTesting2[GitHub] (GIT)
