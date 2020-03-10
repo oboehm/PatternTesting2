@@ -49,7 +49,7 @@
       <item name="Antipattern"              href="http://patterntesting.sourceforge.net/wiki/index.php/AntiPattern"/>
       <item name="Wiki"                     href="http://sourceforge.net/p/patterntesting/wiki/" />
       <item name="Dokumentation"            href="/doc/index.html" collapse="true" >
-	    <item name="Release Notes"            href="/changes-report.html" />
+	    <item name="Release Notes"            href="https://github.com/oboehm/PatternTesting2/blob/master/doc/release-notes.adoc" />
 	    <item name="Wie alles begann..."      href="/doc/whatis.html" />
 	    <item name="API"                      href="/apidocs/index.html" />
       </item>
@@ -64,11 +64,7 @@
         <item name="Bug-Reports"              href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454317"/>
       </item>
       <item name="Wunschliste"              href="http://c2.com/cgi/wiki?PatternTestingWishList"/>
-      <item name="Entwicklung"              href="/dev/index.html" collapse="true" >
-        <item name="Verzeichnis-Struktur"     href="/dev/directory_organization.html"/>
-        <item name="Programmier-Regeln"       href="/dev/coding_conventions.html"/>
-        <item name="Namens-Konventionen"      href="/dev/naming_conventions.html"/>
-      </item>
+      <item name="Entwicklung"              href="https://github.com/oboehm/PatternTesting2/tree/master/doc" />
     </menu>
 
     <menu ref="reports" />
