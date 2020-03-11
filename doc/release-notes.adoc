@@ -6,7 +6,7 @@ https://codecov.io/gh/oboehm/PatternTesting2/branch/develop[image:https://codeco
 
 
 
-== 2.0.1 (Snapshot)
+== 2.0.1 (12-Mar-2020)
 
 * dependencies updated
 
@@ -35,7 +35,7 @@ https://codecov.io/gh/oboehm/PatternTesting2/branch/develop[image:https://codeco
 
 This is a little checklist for the deployment of the next release:
 
-. change to release branch and merge the
+. change to release branch and merge the developer branch
 . update the Release Notes above
 . change the version in pom.xml (remove -SNAPSHOT)
 . build all artifacts from patterntesting-parent

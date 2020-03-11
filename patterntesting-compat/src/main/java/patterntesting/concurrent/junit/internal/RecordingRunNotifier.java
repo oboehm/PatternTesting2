@@ -336,7 +336,7 @@ public final class RecordingRunNotifier extends RunNotifier {
         try {
             while (waitFor.getState() != Thread.State.TERMINATED) {
                 waitFor.join(1);
-                log.trace("Waited for {} to record {}.", waitFor);
+                log.trace("Waited for {} to replay {}.", waitFor, notifier);
                 replay(notifier);
             }
         } catch (InterruptedException ie) {

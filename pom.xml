@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 	Project Object Model (POM) for PatternTesting
 	If you are behind a proxy try the following command:
@@ -35,7 +35,7 @@
   -->
   <groupId>org.patterntesting</groupId>
   <artifactId>patterntesting-parent</artifactId>
-  <version>2.0.1-SNAPSHOT</version>
+  <version>2.0.1</version>
   <packaging>pom</packaging>
   <name>PatternTesting</name>
 
@@ -72,8 +72,6 @@
     <aspectj.maven.plugin.version>1.12.1</aspectj.maven.plugin.version>
     <!-- don't use AspectJ 1.9.5, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=558995 -->
     <aspectj.version>1.8.14</aspectj.version>
-    <junit-jupiter.version>5.6.0</junit-jupiter.version>
-    <junit-platform.version>1.6.0</junit-platform.version>
     <commons.docEncoding>${commons.encoding}</commons.docEncoding>
 
     <!--
@@ -82,6 +80,8 @@
       overwrite this, if they are using another encoding.
     -->
     <commons.encoding>utf-8</commons.encoding>
+    <junit-jupiter.version>5.6.0</junit-jupiter.version>
+    <junit-platform.version>1.6.0</junit-platform.version>
     <maven.compile.complianceLevel>1.8</maven.compile.complianceLevel>
 
     <!-- Default configuration for compiler source and target JVM -->
@@ -102,9 +102,9 @@
     -->
     <patterntesting.site.dir>${htdocs.dir}/builds/patterntesting</patterntesting.site.dir>
     <patterntesting.site.url>file:${patterntesting.site.dir}</patterntesting.site.url>
+    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
     <!-- ignore violations -->
     <sonar.issue.ignore.multicriteria>1,2,3,4,5,6,7,8,9,10,11,12,106,112,1312,1313,1698,1872,2159,2232,2250,2259,2384,2386</sonar.issue.ignore.multicriteria>
     <sonar.issue.ignore.multicriteria.1.resourceKey>**</sonar.issue.ignore.multicriteria.1.resourceKey>
