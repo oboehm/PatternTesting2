@@ -1,6 +1,22 @@
 [[section-introduction-and-goals]]
 == Introduction and Goals
 
+Many years ago PatternTesting began as a framework to *automatically* check for Architecture/Design/Implementation decisions.
+This is now https://github.com/oboehm/PatternTesting2/tree/master/patterntesting-libs/patterntesting-check[PatternTesting-Check].
+
+Perhaps you don't want to have some of the checks (e.g. link:patterntesting-libs/patterntesting-check/patterntesting-check-rt/src/main/aspect/patterntesting/check/runtime/NullPointerTrap.aj[NullPointer-check] for arguments) in the delivered jar file.
+But you want to keep the annotations for the check in your code.
+So you find now these annotations together with other stuff (e.g. profiling support) in https://github.com/oboehm/PatternTesting2/tree/master/patterntesting-rt[PatternTesting-Runtime].
+
+There are some aspects which improves your code, e.g. providing better error messages if an IOException was thrown.
+These aspects are put also in the runtime part.
+So this part has some utilities which supports you to write better code.
+
+You can use the PatternTesting framework also if you doesn't know anything about AspectJ.
+But you need a cookbook how to use it.
+And you need examples.
+This is where https://github.com/oboehm/PatternTesting2/tree/master/patterntesting-samples[PatternTesting-Samples] came in.
+
 
 
 === Requirements Overview

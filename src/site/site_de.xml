@@ -48,11 +48,9 @@
     <menu name="Doc &amp; Downloads">
       <item name="Antipattern"              href="http://patterntesting.sourceforge.net/wiki/index.php/AntiPattern"/>
       <item name="Wiki"                     href="http://sourceforge.net/p/patterntesting/wiki/" />
-      <item name="Dokumentation"            href="/doc/index.html" collapse="true" >
-	    <item name="Release Notes"            href="https://github.com/oboehm/PatternTesting2/blob/master/doc/release-notes.adoc" />
-	    <item name="Wie alles begann..."      href="/doc/whatis.html" />
-	    <item name="API"                      href="/apidocs/index.html" />
-      </item>
+      <item name="Dokumentation"            href="https://github.com/oboehm/PatternTesting2/blob/master/doc/README.adoc" />
+      <item name="Release Notes"            href="https://github.com/oboehm/PatternTesting2/blob/master/doc/release-notes.adoc" />
+      <item name="API"                      href="/apidocs/index.html" />
       <item name="Downloads"                href="downloads.html"/>
       <item name="Repositories"             href="http://central.maven.org/maven2/org/patterntesting/" />
     </menu>
