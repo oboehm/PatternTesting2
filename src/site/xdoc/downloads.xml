@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<document>
+
+  <properties>
+    <title>Downloads</title>
+    <author email="vmassol@apache.org">Vincent Massol</author>
+  </properties>
+
+  <body>
+
+    <section name="Releases">
+      <p>
+        Releases can be found on
+        <a href="http://sourceforge.net/project/showfiles.php?group_id=48833">SourceForge</a>
+        and are devided into:
+      </p>
+      <dl>
+        <dt>patterntesting-libs</dt>
+        <dd>with patterntesting-rt and other libraries</dd>
+        <dt>patterntesting-samples</dt>
+        <dd>with diffent sample projects of PatternTesting</dd>
+        <dt>patterntesting-tools</dt>
+        <dd>with some tools around PatternTesting (mainly for Ant and Maven)</dd>
+      </dl>
+    </section>
+
+  </body>
+
+</document>
