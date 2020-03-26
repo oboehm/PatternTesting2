@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>What is PatternTesting</title>
+    <author email="ob@aosd.de">Oliver Boehm</author>
+  </properties>
+
+  <body>
+
+    <section name="Introduction">
+      <p>
+        A few years ago PatternTesting began as a framework to
+        <strong>automatically</strong> check for 
+        Architecture/Design/Implementation decisions.
+        This is now <a href="../check/index.html">PatternTesting-Check</a>.
+      </p>
+      <p>
+        Perhaps you don't want to have some of the checks (e.g.
+        <a href="../check/rt/aspectj-report/patterntesting/check/runtime/NullPointerTrap.html">NullPointer-check</a>
+        for arguments) in the delivered jar file. But you want to keep
+        the annotations for the check in your code. So you find now these
+        annotations together with other stuff (e.g.
+        profiling support) in 
+        <a href="../runtime/index.html">PatternTesting-Runtime</a>.        
+      </p>
+      <p>
+        There are some aspects which improves your code, e.g. 
+        providing better error messages if an IOExceptons was thrown.
+        These aspects are put also in the runtime part. So this part grows and grows
+        and allows you to write better applications for free.
+      </p>
+      <p>
+        For the build process we use Maven2 and Continuum. Since Maven2
+        suggests to deliver only one artifact in a project we took the tools
+        part into <a href="../tools/index.html">PatternTesting-Tools</a>.
+        This part contains Ant support and a Maven plugin.
+      </p>
+      <p>
+        You can use the PatternTesting framework also if you doesn't know
+        anything about AspectJ. But you need a cookbook how to use it.
+        And you need examples. This is where
+        <a href="../samples/index.html">PatternTesting-Samples</a>
+        came in.
+      </p>
+    </section>
+    
+    <section name="Why Not Checkstyle?">
+      <p>
+        There are tools like
+        Checkstyle,
+        PMD or
+        FindBugs,
+        which can also find anti patterns in your code.
+        Read, what Vincent Massol say in
+        <a href="http://www.theserverside.com/news/thread.tss?thread_id=25415">Pattern Testing with AOP</a>
+        at TheServerSide.com about this topic.
+      </p>
+    </section>
+
+    <section name="History">
+    
+      <subsection name="The Origin">
+        <p>from Vinent Massol:</p>
+        <p>
+          Around 2001 I discovered AOP and AspectJ and I thought the idea neat. Since I
+          wanted to test it I used it on the Apache Jakarta Cactus project to generate
+          debug logs and to automate runtime checking of the Cactus configuration. In
+          2002 I was working as a software architect on a project and remembered my
+          experimentations on Cactus and since I needed a way to enforce some best
+          practices on this project I thought that I could use AspectJ for this. Either
+          at build time or at runtime (think about a custom profiler providing
+          business-related metrics). I coded a few aspects and it seemed to be working
+          ok so I thought I should share it with others and created the PatternTesting
+          open source project. A few years later I started working on other stuff and
+          dropped the ball but the project was lucky to have Oliver step up and continue
+          it :)
+        </p>
+      </subsection>
+      
+      <subsection name="The Reincarnation">
+        <p>from Oli B.:</p>
+        <p>
+          In 2005 I wrote a (German) book about AspectJ
+          (<a href="http://www.aosd.de/buecher/AOP_AspectJ/">Aspektorientierte
+          Programmierung mit AspectJ 5</a>), when
+          I detect PatternTesting, which brought me some ideas for my book.
+          The original NullTestAspect (now: NullPointerTrap) I presented during my
+          <a href="http://www.aosd.de/Vorlesung/SS06.html">lecture
+          at the University of Applied Sciences in ULM</a>.
+          At the same time I began to use it in several projects.
+        </p>
+        <p>
+          In 2007 I wanted to get one of the authors, Vincent Massol and
+          Matt Smith, for a talk at the
+          <a href="http://www.jugs.org/aop2007/index.html">AOP-Day 07</a>.
+          I offered them to help at the PatternTesting project to give some
+          of the ideas back I had "borrowed" for some projects.
+          They added me not only as developper but as administrator
+          because both had no time any more for that project because both
+          were busy with other projects.
+        </p>
+      </subsection>
+      
+    </section>
+
+  </body>
+
+</document>

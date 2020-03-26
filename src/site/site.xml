@@ -49,7 +49,6 @@
       <item name="Release Notes"            href="https://github.com/oboehm/PatternTesting2/blob/master/doc/release-notes.adoc" />
       <item name="API"                      href="/apidocs/index.html" />
       <item name="Downloads"                href="downloads.html"/>
-      <item name="Repositories"             href="http://central.maven.org/maven2/org/patterntesting/" />
     </menu>
     <menu name="Support">
       <item name="Mailing Lists"            href="mail-lists.html"/>
