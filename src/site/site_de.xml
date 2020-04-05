@@ -55,11 +55,7 @@
     </menu>
     <menu name="Support">
       <item name="Mailing-Listen"           href="mail-lists.html"/>
-      <item name="Issue Tracking"           href="issue-tracking.html" collapse="true">
-        <item name="Support-Anfragen"         href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454318"/>
-        <item name="Feature-Anfragen"         href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454320"/>
-        <item name="Bug-Reports"              href="http://sourceforge.net/tracker/?group_id=48833&amp;atid=454317"/>
-      </item>
+      <item name="Issue Tracking"           href="issue-tracking.html" />
       <item name="Wunschliste"              href="http://c2.com/cgi/wiki?PatternTestingWishList"/>
       <item name="Entwicklung"              href="https://github.com/oboehm/PatternTesting2/tree/master/doc" />
     </menu>
