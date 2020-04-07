@@ -37,6 +37,7 @@
 	   
     <links>
       <item name="de" href="${this.url}/de/index.html"/>
+      <item name="GitHub" href="https://github.com/oboehm/PatternTesting2"/>
       <item name="AspectJ" href="http://www.eclipse.org/aspectj"/>
     </links>
 
