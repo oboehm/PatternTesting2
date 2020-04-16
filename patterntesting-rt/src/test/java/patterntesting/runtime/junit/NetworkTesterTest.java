@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.*;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
@@ -58,6 +59,13 @@ public final class NetworkTesterTest {
         File file = new File("pom.xml");
         assertTrue(file.exists(), "should exist: " + file);
         NetworkTester.assertExists(file.toURI());
+    }
+
+    @Test
+    public void testAssertExistsFalse() {
+        File file = new File("nirwana");
+        assertFalse(file.exists(), "should not exist: " + file);
+        assertFalse(NetworkTester.exists(file.toURI()));
     }
 
     /**

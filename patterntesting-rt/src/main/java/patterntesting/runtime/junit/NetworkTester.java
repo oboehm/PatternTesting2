@@ -257,11 +257,7 @@ public final class NetworkTester {
      * @param uri a valid URI
      */
     public static void assertExists(URI uri) {
-        try {
-            assertExists(uri.toURL());
-        } catch (MalformedURLException ex) {
-            throw new IllegalArgumentException("invalid URI: " + uri, ex);
-        }
+        assertTrue(exists(uri));
     }
 
     /**
@@ -270,13 +266,42 @@ public final class NetworkTester {
      * @param url a valid URL
      */
     public static void assertExists(URL url) {
+        assertTrue(exists(url));
+    }
+
+    /**
+     * Checks, if the given URI exists and is reachable.
+     *
+     * @param uri a valid URI
+     * @return true if uri exists
+     * @since 2.0.2
+     */
+    public static boolean exists(URI uri) {
+        try {
+            return exists(uri.toURL());
+        } catch (MalformedURLException ex) {
+            throw new IllegalArgumentException("invalid URI: " + uri, ex);
+        }
+    }
+
+    /**
+     * Checks, if the given URL exists and is reachable.
+     *
+     * @param url a valid URL
+     * @return true if url exists
+     * @since 2.0.2
+     */
+    public static boolean exists(URL url) {
         try {
             URLConnection connection = url.openConnection();
             LOG.trace("Got connection {} to {}.", connection,  url);
             connection.connect();
             LOG.debug("{} is online.", url);
+            return true;
         } catch (IOException ioe) {
-            throw new AssertionError("cannot open " + url, ioe);
+            LOG.debug("Cannot open {} ({}).", url, ioe.getMessage());
+            LOG.trace("Details:", ioe);
+            return false;
         }
     }
 

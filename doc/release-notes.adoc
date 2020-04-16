@@ -5,6 +5,10 @@ https://codecov.io/gh/oboehm/PatternTesting2/branch/develop[image:https://codeco
 = Release Notes
 
 
+== 2.0.2 (SNAPSHOT)
+
+* NetworkTester provides now for each assert method also a boolean method
+
 
 == 2.0.1 (12-Mar-2020)
 
