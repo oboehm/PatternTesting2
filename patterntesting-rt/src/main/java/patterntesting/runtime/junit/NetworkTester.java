@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public final class NetworkTester {
 
     private static final Logger LOG = LogManager.getLogger(NetworkTester.class);
-    private static final int CONNECTION_TIMEOUT = 2;
+    private static final int CONNECTION_TIMEOUT_IN_MINUTES = 2;
 
     /** Utility class - no need to instantiate it. */
     private NetworkTester() {
@@ -55,7 +55,7 @@ public final class NetworkTester {
      * @param host the hostname or IP address
      */
     public static void assertOnline(String host) {
-        assertOnline(host, CONNECTION_TIMEOUT, TimeUnit.MINUTES);
+        assertOnline(host, CONNECTION_TIMEOUT_IN_MINUTES, TimeUnit.MINUTES);
     }
 
     /**
@@ -66,7 +66,7 @@ public final class NetworkTester {
      * @since 2.0
      */
     public static boolean isOnline(String host) {
-        return isOnline(host, CONNECTION_TIMEOUT, TimeUnit.MINUTES);
+        return isOnline(host, CONNECTION_TIMEOUT_IN_MINUTES, TimeUnit.MINUTES);
     }
 
     /**
@@ -180,7 +180,7 @@ public final class NetworkTester {
      * @param host the hostname or IP address
      */
     public static void assertOffline(String host) {
-        assertOffline(host, CONNECTION_TIMEOUT, TimeUnit.MINUTES);
+        assertOffline(host, CONNECTION_TIMEOUT_IN_MINUTES, TimeUnit.MINUTES);
     }
 
     /**

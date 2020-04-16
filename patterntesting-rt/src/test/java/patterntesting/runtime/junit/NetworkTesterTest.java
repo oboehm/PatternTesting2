@@ -45,7 +45,7 @@ public final class NetworkTesterTest {
      */
     @Test
     public void testAssertExists() {
-        assumeTrue(NetworkTester.isOnline("patterntesting.org"), "patterntesting.org is offline");
+        assumeTrue(NetworkTester.isOnline("patterntesting.org", 80), "patterntesting.org is offline");
         URI uri = URI.create("http://patterntesting.org");
         NetworkTester.assertExists(uri);
     }
@@ -118,15 +118,29 @@ public final class NetworkTesterTest {
      */
     @Test
     public void testAssertOnlineInetAddress() throws UnknownHostException {
-        NetworkTester.assertOnline(InetAddress.getLocalHost());
+        InetAddress localHost = InetAddress.getLocalHost();
+        NetworkTester.assertOnline(localHost, 100, TimeUnit.MILLISECONDS);
+        NetworkTester.assertOnline(localHost);
     }
 
-    /**
-     * Thest method for {@link NetworkTester#assertOffline(InetAddress, int, TimeUnit)}.
-     */
     @Test
-    public void testAssertOfflineHost() {
-        NetworkTester.assertOffline("128.0.0.0", 1, TimeUnit.SECONDS);
+    public void testAssertOnlineInetAdressPort() throws UnknownHostException {
+        assumeTrue(NetworkTester.isOnline("patterntesting.org", 80), "patterntesting.org is offline");
+        InetAddress addr = InetAddress.getByName("patterntesting.org");
+        NetworkTester.assertOnline(addr, 80);
+    }
+
+    @Test
+    public void testAssertOnlineInetSocketAdress() {
+        assumeTrue(NetworkTester.isOnline("patterntesting.org", 80), "patterntesting.org is offline");
+        InetSocketAddress addr = InetSocketAddress.createUnresolved("patterntesting.org", 80);
+        NetworkTester.assertOnline(addr);
+    }
+
+    @Test
+    public void testAssertOfflineHost() throws UnknownHostException {
+        InetAddress addr = InetAddress.getByName("128.0.0.0");
+        NetworkTester.assertOffline(addr, 10, TimeUnit.MILLISECONDS);
     }
 
 }
