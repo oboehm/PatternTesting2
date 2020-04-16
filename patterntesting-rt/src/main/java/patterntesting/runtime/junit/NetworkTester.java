@@ -109,11 +109,7 @@ public final class NetworkTester {
      * @param port the port between 0 and 0xFFFF
      */
     public static void assertOnline(String host, int port) {
-        try {
-            assertTrue(isOnline(host, port), host + ":" + port + " is offline");
-        } catch (IOException ioe) {
-            throw new AssertionError(host + ":" + port + " is offline", ioe);
-        }
+        assertTrue(isOnline(host, port), host + ":" + port + " is offline");
     }
 
     /**
@@ -157,10 +153,23 @@ public final class NetworkTester {
         assertOnline(host.getHostName(), port);
     }
 
-    private static boolean isOnline(String host, int port) throws IOException {
+
+    /**
+     * Checks if the given host is online.
+     *
+     * @param host the hostname or IP address
+     * @param port the port between 0 and 0xFFFF
+     * @return true if host is online
+     * @since 2.0.2
+     */
+    public static boolean isOnline(String host, int port) {
         try (Socket socket = new Socket(host, port)) {
             LOG.debug("Socket {} for {}:{} is created.", socket, host, port);
             return socket.isConnected();
+        } catch (IOException ioe) {
+            LOG.debug("{}:{} seems to be offline ({}).", host, port, ioe.getMessage());
+            LOG.trace("Details:", ioe);
+            return false;
         }
     }
 
@@ -196,11 +205,7 @@ public final class NetworkTester {
      * @param port the port between 0 and 0xFFFF
      */
     public static void assertOffline(String host, int port) {
-        try {
-            assertFalse(isOnline(host, port), host + ":" + port + " is online");
-        } catch (IOException ioe) {
-            LOG.debug(host + ":" + port + " is offline:", ioe);
-        }
+        assertFalse(isOnline(host, port), host + ":" + port + " is online");
     }
 
     /**
@@ -365,12 +370,7 @@ public final class NetworkTester {
 
         @Override
         public Boolean call() {
-            boolean online = false;
-            try {
-                online = isOnline(address.getHostName(), address.getPort());
-            } catch (IOException ioe) {
-                LOG.trace("{} seems to be offline:",  address, ioe);
-            }
+            boolean online = isOnline(address.getHostName(), address.getPort());
             observer.update(this, online);
             return online;
         }
