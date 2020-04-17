@@ -4,34 +4,7 @@ https://codecov.io/gh/oboehm/PatternTesting2/branch/develop[image:https://codeco
 
 = Release Notes
 
-
-== 2.0.2 (SNAPSHOT)
-
-* NetworkTester provides now for each assert method also a boolean method
-
-
-== 2.0.1 (12-Mar-2020)
-
-* dependencies updated
-
-
-== 2.0 (05-Jan-2020)
-
-* move from https://sourceforge.net/projects/patterntesting/[SoureForge] (CVS) to https://github.com/oboehm/PatternTesting2[GitHub] (GIT)
-* ObjectTester and other XxxTester classes will no longer try to instantiate private classes
-  (patterntesting-rt)
-
-
-== 1.8 (11-Nov-2017)
-
-* last version with CVS
-* depends now on Java 8
-* #_fixed_#: bug http://sourceforge.net/p/patterntesting/bugs/38/[#38] and http://sourceforge.net/p/patterntesting/bugs/39/[#39]
-
-
-== 1.7 and earlier
-
-* see http://www.patterntesting.com/release/index.html
+see link:../CHANGELOG.md[CHANGELOG]
 
 
 

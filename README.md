@@ -47,8 +47,8 @@ The actual development you can find on the [develop](https://github.com/oboehm/P
 
 ## More Infos
 
-* Release Notes: [doc/release-notes](doc/release-notes.adoc)
+* changelog: [CHANGELOG.md](CHANGELOG.md)
 
 ---
-Januar 2020,
+April 2020,
 Oli B.
