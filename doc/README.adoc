@@ -31,7 +31,7 @@ see link:../CHANGELOG.md[CHANGELOG]
 This is a little checklist for the deployment of the next release:
 
 . change to release branch and merge the developer branch
-. update the Release Notes above
+. update the link:../CHANGELOG.md[changelog]
 . change the version in pom.xml (remove -SNAPSHOT)
 . build all artifacts from patterntesting-parent
 (`mvn -DskipTests -B clean install javadoc:jar repository:bundle-create gpg:sign -Dgpg.passphrase=xx`)
