@@ -48,6 +48,7 @@ The actual development you can find on the [develop](https://github.com/oboehm/P
 ## More Infos
 
 * changelog: [CHANGELOG.md](CHANGELOG.md)
+* documentation: [doc/README.adoc](doc/README.adoc)
 
 ---
 April 2020,
