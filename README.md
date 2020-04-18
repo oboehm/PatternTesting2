@@ -31,7 +31,6 @@ The runner for JUnit 4 and other outdated classes are moved to [patterntesting-c
 Version 2.0.0 is released on 05-Jan-2020. Not everything that was planned was realized.
 What needs to be done is:
 
-* repair the broken javadoc and website generation
 * put the documentation together in patterntesting-doc module
 * complete missing functionality of the old JUnit-4 runner for JUnit 5
 * update dependencies
