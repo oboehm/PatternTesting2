@@ -23,7 +23,7 @@ package patterntesting.runtime.junit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
-import patterntesting.runtime.monitor.ClasspathMonitor;
+import clazzfish.monitor.ClasspathMonitor;
 import patterntesting.runtime.util.Converter;
 
 import java.util.Arrays;

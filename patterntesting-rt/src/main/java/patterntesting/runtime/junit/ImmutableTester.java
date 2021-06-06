@@ -25,7 +25,7 @@ import javax.annotation.concurrent.Immutable;
 
 import org.apache.logging.log4j.*;
 
-import patterntesting.runtime.monitor.ClasspathMonitor;
+import clazzfish.monitor.ClasspathMonitor;
 
 /**
  * This is a utility class to test if a class is really (strict) Immuable.

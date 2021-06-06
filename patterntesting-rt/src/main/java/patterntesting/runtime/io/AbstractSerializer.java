@@ -20,14 +20,13 @@
 
 package patterntesting.runtime.io;
 
+import clazzfish.monitor.ClasspathMonitor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import patterntesting.runtime.exception.DetailedInvalidClassException;
+
 import java.io.*;
 import java.net.URI;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
-
-import patterntesting.runtime.exception.DetailedInvalidClassException;
-import patterntesting.runtime.monitor.ClasspathMonitor;
 
 /**
  * This is the common superclass for all Serializer casses in PatternTesting.

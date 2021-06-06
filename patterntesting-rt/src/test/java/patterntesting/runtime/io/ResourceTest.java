@@ -23,7 +23,7 @@ package patterntesting.runtime.io;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
-import patterntesting.runtime.monitor.ClasspathMonitor;
+import clazzfish.monitor.ClasspathMonitor;
 
 import java.io.File;
 import java.io.IOException;

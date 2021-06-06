@@ -34,7 +34,7 @@ import org.apache.commons.lang3.*;
 import org.apache.logging.log4j.*;
 
 import patterntesting.runtime.io.FileInputStreamReader;
-import patterntesting.runtime.monitor.ClasspathMonitor;
+import clazzfish.monitor.ClasspathMonitor;
 
 /**
  * This class provides some utilities for the access to the environment (e.g.

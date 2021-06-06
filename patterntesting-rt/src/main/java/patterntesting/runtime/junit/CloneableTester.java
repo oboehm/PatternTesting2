@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 import org.apache.logging.log4j.*;
 
 import patterntesting.runtime.exception.DetailedAssertionError;
-import patterntesting.runtime.monitor.ClasspathMonitor;
+import clazzfish.monitor.ClasspathMonitor;
 import patterntesting.runtime.util.Converter;
 
 /**

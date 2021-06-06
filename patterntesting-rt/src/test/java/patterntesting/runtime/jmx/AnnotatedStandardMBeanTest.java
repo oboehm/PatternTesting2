@@ -22,7 +22,7 @@ package patterntesting.runtime.jmx;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import patterntesting.runtime.monitor.ClasspathMonitor;
+import clazzfish.monitor.ClasspathMonitor;
 import patterntesting.runtime.monitor.ProfileStatistic;
 import patterntesting.runtime.monitor.ProfileStatisticMBean;
 

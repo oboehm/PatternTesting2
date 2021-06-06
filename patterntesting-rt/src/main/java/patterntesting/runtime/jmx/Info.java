@@ -30,7 +30,7 @@ import org.apache.logging.log4j.*;
 
 import patterntesting.runtime.NullConstants;
 import patterntesting.runtime.io.Resource;
-import patterntesting.runtime.monitor.ClasspathMonitor;
+import clazzfish.monitor.ClasspathMonitor;
 
 /**
  * This Info bean is registered as MBean and provides some information about
