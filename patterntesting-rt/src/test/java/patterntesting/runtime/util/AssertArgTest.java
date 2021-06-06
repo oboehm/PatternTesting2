@@ -18,12 +18,12 @@
 
 package patterntesting.runtime.util;
 
+import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -45,8 +45,11 @@ public class AssertArgTest {
      */
     @BeforeAll
     public static void setUpValidator() {
-        ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
-        validator = vf.getValidator();
+        validator = Validation.byDefaultProvider()
+                  .configure()
+                  .messageInterpolator(new ParameterMessageInterpolator())
+                  .buildValidatorFactory()
+                  .getValidator();
     }
 
     /**
