@@ -58,7 +58,7 @@ public final class XrayClassLoaderTest  {
      */
     @Test
     public void testLoadClass() throws ClassNotFoundException {
-        Class<?> loaded = classLoader.loadClass("patterntesting.runtime.monitor.ClasspathMonitor");
+        Class<?> loaded = classLoader.loadClass("clazzfish.monitor.ClasspathMonitor");
         assertNotNull(loaded);
         Set<Class<?>> loadedClasses = classLoader.getLoadedClasses();
         assertThat(loadedClasses.size(), greaterThan(1));

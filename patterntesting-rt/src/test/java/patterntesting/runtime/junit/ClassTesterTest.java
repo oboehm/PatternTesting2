@@ -49,7 +49,7 @@ public final class ClassTesterTest {
      */
     @BeforeAll
     public static void setUpClassTester() throws ClassNotFoundException {
-        classTester = new ClassTester("patterntesting.runtime.monitor.ClasspathMonitor");
+        classTester = new ClassTester("clazzfish.monitor.ClasspathMonitor");
     }
 
     /**
@@ -68,7 +68,7 @@ public final class ClassTesterTest {
      */
     @Test
     public void testDependsOn() {
-        assertTrue(classTester.dependsOn(Logger.class));
+        assertTrue(classTester.dependsOn(org.slf4j.Logger.class));
     }
 
 	/**

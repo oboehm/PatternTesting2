@@ -50,28 +50,6 @@ public class SmokeTest {
 	 * For the ClasspathMonitor and ClassWalker we need the commons-io lib. And
 	 * at least version 1.3.1 of commons-io is needed because the FileFilter and
 	 * DirectoryWalker of this lib is used.
-	 * <p>
-	 * If you use commons-io-1.2 you may get a NoSuchMethodError and
-	 * </p>
-	 *
-	 * <pre>
-	 * java.lang.NoSuchMethodError: org.apache.commons.io.filefilter.FileFilterUtils.fileFileFilter()Lorg/apache/commons/io/filefilter/IOFileFilter;
-	 *    patterntesting.runtime.monitor.internal.ClassWalker.getFileFilter(ClassWalker.java:65)
-	 *    patterntesting.runtime.monitor.internal.ClassWalker.&lt;init&gt;(ClassWalker.java:48)
-	 *    patterntesting.runtime.monitor.ClasspathMonitor.addClassesFromDir_aroundBody38(ClasspathMonitor.java:884)
-	 *    patterntesting.runtime.monitor.ClasspathMonitor.addClassesFromDir_aroundBody39$advice(ClasspathMonitor.java:49)
-	 *    patterntesting.runtime.monitor.ClasspathMonitor.addClassesFromDir(ClasspathMonitor.java:1)
-	 *    patterntesting.runtime.monitor.ClasspathMonitor.addClasses(ClasspathMonitor.java:864)
-	 *    patterntesting.runtime.monitor.ClasspathMonitor.getClasspathClassSet_aroundBody36(ClasspathMonitor.java:847)
-	 *    patterntesting.runtime.monitor.ClasspathMonitor.getClasspathClassSet_aroundBody37$advice(ClasspathMonitor.java:49)
-	 *    patterntesting.runtime.monitor.ClasspathMonitor.getClasspathClassSet(ClasspathMonitor.java:1)
-	 *    patterntesting.runtime.monitor.ClasspathMonitor.&lt;init&gt;(ClasspathMonitor.java:119)
-	 *    patterntesting.runtime.monitor.ClasspathMonitor.&lt;clinit&gt;(ClasspathMonitor.java:109)
-	 *    ...
-	 * </pre>
-	 * <p>
-	 * as stacktrace.
-	 * </p>
 	 */
 	@Test
 	public final void testCommonsIO() {

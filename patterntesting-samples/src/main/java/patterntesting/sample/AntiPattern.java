@@ -18,15 +18,17 @@
 
 package patterntesting.sample;
 
-import java.io.*;
-import java.net.*;
-
 import org.apache.commons.lang3.math.Fraction;
-import org.apache.logging.log4j.*;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import patterntesting.runtime.annotation.ProfileMe;
-import patterntesting.runtime.monitor.*;
+import patterntesting.runtime.monitor.ProfileStatistic;
 import patterntesting.runtime.util.Converter;
+
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * This class contains some common anti pattern. This class can be used to
@@ -68,7 +70,7 @@ public final class AntiPattern implements Serializable {
     /**
      * This is an example of a method which is never called. It should be
      * detected by the {@link ProfileStatistic} as "cold" (dead) code.
-     * To find unused classes you can use the {@link ClasspathMonitor}.
+     * To find unused classes you can use {@link clazzfish.monitor.ClasspathMonitor}.
      * <p>
      * Anti pattern: lava flow (also known as "dead code")
      * </p>
@@ -267,8 +269,8 @@ public final class AntiPattern implements Serializable {
      * @throws UnsupportedEncodingException the unsupported encoding exception
      */
     public static void copyAndPaste() throws UnsupportedEncodingException {
-        byte[] ba = "world".getBytes("ASCII");
-        String s = new String(ba, "ASCII");
+        byte[] ba = "world".getBytes(StandardCharsets.US_ASCII);
+        String s = new String(ba, StandardCharsets.US_ASCII);
         log.info("Hello {}", s);
     }
 
@@ -327,12 +329,12 @@ public final class AntiPattern implements Serializable {
      */
     public static void definedEncoding(final File file, final InputStream istream, final OutputStream ostream)
             throws IOException {
-        Reader fr = new InputStreamReader(new FileInputStream(file), "ISO-8859-1");
-        Writer fw = new OutputStreamWriter(new FileOutputStream(file), "ISO-8859-1");
-        Reader ir = new InputStreamReader(istream, "UTF-8");
-        Writer ow = new OutputStreamWriter(ostream, "UTF-8");
-        byte[] ba = "world".getBytes("ASCII");
-        String s = new String(ba, "ASCII");
+        Reader fr = new InputStreamReader(new FileInputStream(file), StandardCharsets.ISO_8859_1);
+        Writer fw = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.ISO_8859_1);
+        Reader ir = new InputStreamReader(istream, StandardCharsets.UTF_8);
+        Writer ow = new OutputStreamWriter(ostream, StandardCharsets.UTF_8);
+        byte[] ba = "world".getBytes(StandardCharsets.US_ASCII);
+        String s = new String(ba, StandardCharsets.US_ASCII);
         log.info("Hello {}", s);
         ow.close();
         ir.close();

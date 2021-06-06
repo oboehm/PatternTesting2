@@ -380,19 +380,7 @@ public final class ArchivEntryTest {
 
     /**
      * There was reported a {@link StringIndexOutOfBoundsException} in
-     * the private method 'initArchiv' of {@link ArchivEntry}. Here part of
-     * the stacktrace (v1.4.4):
-     * <pre>
-     * Caused by: java.lang.StringIndexOutOfBoundsException
-     *   at java.lang.String.substring(String.java:1148)
-     *   at patterntesting.runtime.util.ArchivEntry.initArchiv(ArchivEntry.java:128)
-     *   at patterntesting.runtime.util.ArchivEntry.&lt;init&gt;(ArchivEntry.java:102)
-     *   at patterntesting.runtime.monitor.ClasspathMonitor.getIncompatibleClassList(ClasspathMonitor.java:1326)
-     *   at patterntesting.runtime.monitor.ClasspathMonitor.getIncompatibleClasses(ClasspathMonitor.java:1346)
-     *   at patterntesting.runtime.monitor.ClasspathMonitor.dumpMe(ClasspathMonitor.java:1523)
-     *   at patterntesting.runtime.monitor.ClasspathMonitor.dumpMe(ClasspathMonitor.java:1502)
-     *   at patterntesting.runtime.monitor.ClasspathMonitor.dumpMe(ClasspathMonitor.java:1487)
-     * </pre>
+     * the private method 'initArchiv' of {@link ArchivEntry}.
      * This test tried to reconstruct this exception.
      * <p>
      * Note: In the meantime the initArchiv method was refactored and does not

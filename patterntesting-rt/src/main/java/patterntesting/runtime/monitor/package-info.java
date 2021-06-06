@@ -20,7 +20,6 @@
 
 /**
  * This package provides some monitors like the
- * {@link patterntesting.runtime.monitor.ClasspathMonitor} or
  * {@link patterntesting.runtime.monitor.ProfileMonitor}.
  *
  * @author oliver
