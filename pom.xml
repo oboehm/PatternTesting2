@@ -69,9 +69,9 @@
     <aspectj.maven.plugin.groupId>com.nickwongdev</aspectj.maven.plugin.groupId>
 
     <!-- see https://github.com/mojohaus/aspectj-maven-plugin/pull/45 -->
-    <aspectj.maven.plugin.version>1.12.1</aspectj.maven.plugin.version>
+    <aspectj.maven.plugin.version>1.12.6</aspectj.maven.plugin.version>
     <!-- don't use AspectJ 1.9.5, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=558995 -->
-    <aspectj.version>1.8.14</aspectj.version>
+    <aspectj.version>1.9.6</aspectj.version>
     <commons.docEncoding>${commons.encoding}</commons.docEncoding>
 
     <!--
