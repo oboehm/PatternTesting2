@@ -24,6 +24,7 @@ ajcore.*.txt
 
 # IntelliJ
 *.iml
+.idea
 
 # Eclipse
 .project
