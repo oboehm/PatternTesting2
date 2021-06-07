@@ -621,7 +621,6 @@
               <goal>enforce</goal>
             </goals>
             <configuration>
-              <skip>true</skip>
               <rules>
                 <requireMavenVersion>
                   <version>${maven.version}</version>
@@ -629,7 +628,7 @@
                 <requireJavaVersion>
                   <version>${maven.compile.target}</version>
                 </requireJavaVersion>
-                <dependencyConvergence></dependencyConvergence>
+                <dependencyConvergence/>
               </rules>
             </configuration>
           </execution>
@@ -782,8 +781,8 @@
               <target>
                 <copy todir="${project.build.directory}/apidocs/META-INF">
                   <fileset dir="${basedir}">
-                    <include name="LICENSE.txt"></include>
-                    <include name="NOTICE.txt"></include>
+                    <include name="LICENSE.txt"/>
+                    <include name="NOTICE.txt"/>
                   </fileset>
                 </copy>
               </target>
@@ -1020,7 +1019,7 @@
   <contributors>
     <contributor>
       <name>Shohara Shaikh</name>
-      <email></email>
+      <email/>
       <organization>KPIT Cummins</organization>
       <roles>
         <role>Java Devleoper</role>
