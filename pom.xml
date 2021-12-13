@@ -35,7 +35,7 @@
   -->
   <groupId>org.patterntesting</groupId>
   <artifactId>patterntesting-parent</artifactId>
-  <version>2.0.3-SNAPSHOT</version>
+  <version>2.1.0</version>
   <packaging>pom</packaging>
   <name>PatternTesting</name>
 
@@ -628,7 +628,7 @@
                 <requireJavaVersion>
                   <version>${maven.compile.target}</version>
                 </requireJavaVersion>
-                <dependencyConvergence/>
+                <dependencyConvergence></dependencyConvergence>
               </rules>
             </configuration>
           </execution>
@@ -781,8 +781,8 @@
               <target>
                 <copy todir="${project.build.directory}/apidocs/META-INF">
                   <fileset dir="${basedir}">
-                    <include name="LICENSE.txt"/>
-                    <include name="NOTICE.txt"/>
+                    <include name="LICENSE.txt"></include>
+                    <include name="NOTICE.txt"></include>
                   </fileset>
                 </copy>
               </target>
@@ -1019,7 +1019,7 @@
   <contributors>
     <contributor>
       <name>Shohara Shaikh</name>
-      <email/>
+      <email></email>
       <organization>KPIT Cummins</organization>
       <roles>
         <role>Java Devleoper</role>
