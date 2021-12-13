@@ -23,9 +23,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.management.*;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.impl.LogFactoryImpl;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import patterntesting.runtime.jmx.MBeanRegistry;
 import patterntesting.runtime.util.ThreadUtil;
 
@@ -39,7 +38,7 @@ import patterntesting.runtime.util.ThreadUtil;
 public final class AlarmClock extends TimerTask implements AlarmClockMBean,
         MBeanRegistry {
 
-    private static final Log log = LogFactoryImpl.getLog(AlarmClock.class);
+    private static final Logger log = LogManager.getLogger();
     private Date alarmTime;
     private Timer timer;
 

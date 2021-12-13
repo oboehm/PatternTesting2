@@ -17,6 +17,7 @@ package patterntesting.sample;
 
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.junit.ObjectTester;
+import patterntesting.runtime.util.ThreadUtil;
 
 import java.io.*;
 import java.util.Date;
@@ -51,6 +52,7 @@ public final class CrazyCookieTest {
 	@Test
 	public void testNotEquals() {
 		assertNotEquals(cookie, new Date());
+		ThreadUtil.sleep();
 		assertNotEquals(cookie, new CrazyCookie());
 	}
 
