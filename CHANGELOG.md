@@ -8,13 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+* update to Log4J 2.15.0 to fix Log4J vulnerability
+  [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228)
+
+
 ### Removed
 
 * ClasspathMonitor and ResourcepathMonitor is deprecated and moved to patterntesting-compat
-
-### Security
-
-* libraries with security vulnerability updated (PRs from dependabot)
 
 
 ## [2.0.2] - 2020-04-18
