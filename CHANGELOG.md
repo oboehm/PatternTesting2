@@ -8,11 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### [2.1.0] - 2021-12-14
+### Security
+
+* update to Log4J 2.16.0 to fix Log4J vulnerability
+  [CVE-2021-45046](hhttps://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45046)
+
+
+## [2.1.0] - 2021-12-14
+
+### Security
 
 * update to Log4J 2.15.0 to fix Log4J vulnerability
   [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228)
-
 
 ### Removed
 
