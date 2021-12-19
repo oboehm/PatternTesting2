@@ -6,12 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [2.1.1] - 2021-12-15
+
+## [2.1.2] - 2021-12-19
+
+### Security
+
+* update to Log4J 2.17.0 to fix next Log4J vulnerability
+
+
+_## [2.1.1] - 2021-12-15
 
 ### Security
 
 * update to Log4J 2.16.0 to fix Log4J vulnerability
-  [CVE-2021-45046](hhttps://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45046)
+  [CVE-2021-45046](hhttps://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45046)_
 
 
 ## [2.1.0] - 2021-12-14

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     This POM is a copy of https://github.com/dukecon/dukecon.
     It was adapted to PatternTesting's needs and is used to generate
@@ -14,7 +14,7 @@
   <parent>
     <groupId>org.patterntesting</groupId>
     <artifactId>patterntesting-parent</artifactId>
-    <version>2.1.2-SNAPSHOT</version>
+    <version>2.1.2</version>
   </parent>
   <artifactId>doc</artifactId>
   <packaging>pom</packaging>
