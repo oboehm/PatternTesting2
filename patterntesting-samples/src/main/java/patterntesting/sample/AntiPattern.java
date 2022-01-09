@@ -353,7 +353,7 @@ public final class AntiPattern implements Serializable {
      * when it happened.
      * <p>
      * To convert the umlauts in your source as unicode you can use
-     * <tt>native2ascii</tt> which is part of the JDK tools.s
+     * <i>native2ascii</i> which is part of the JDK tools.s
      * </p>
      *
      * @since 1.3.1 (Oliver Boehm)
