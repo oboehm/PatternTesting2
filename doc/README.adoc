@@ -1,4 +1,4 @@
-https://travis-ci.org/oboehm/PatternTesting2[image:https://travis-ci.org/oboehm/PatternTesting2.svg[BuildStatus]]
+https://app.travis-ci.com/github/oboehm/PatternTesting2[image:https://app.travis-ci.com/oboehm/PatternTesting2.svg[BuildStatus]]
 https://sonarcloud.io/dashboard?id=org.patterntesting%3Apatterntesting-parent[image:https://sonarcloud.io/api/project_badges/measure?project=org.patterntesting%3Apatterntesting-parent&metric=bugs[Bugs]]
 https://codecov.io/gh/oboehm/PatternTesting2/branch/develop[image:https://codecov.io/gh/oboehm/PatternTesting2/branch/develop/graph/badge.svg[CodeCov]]
 

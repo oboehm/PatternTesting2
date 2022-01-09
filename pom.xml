@@ -531,12 +531,6 @@
           <artifactId>commons-build-plugin</artifactId>
           <version>1.4</version>
         </plugin>
-        <!-- Changes -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-changes-plugin</artifactId>
-          <version>2.11</version>
-        </plugin>
         <!-- TODO list -->
         <plugin>
           <groupId>org.codehaus.mojo</groupId>

@@ -10,31 +10,27 @@ Version 2 of PatternTesting is not only a move from CVS to GIT but also a restar
 
 ## Roadmap
 
-Version 2 is more focussed on the original vision:
+Version 2 was released on 05-Jan-2020.
+It is more focussed on the original vision:
 
 > PatternTesting:
 > A new type of automated testing that ensures that development patterns, best practices, architecture design are being correctly implemented.
 
-The plans for version 2 are:
+The difference to version 1 is:
 
 * foreign classes like ClasspathMonitor are moved to a separate project [ClassFish](https://github.com/oboehm/ClazzFish)
-* deprecated methods and classes will be removed
-* move to JUnit 5
-* switch to Java 11 (not yet done)
-* consolidation of the different document parts (not yet done)
+* deprecated methods and classes are removed
+* support of JUnit 5
 
 The runner for JUnit 4 and other outdated classes are moved to [patterntesting-compat](patterntesting-compat/README.adoc).
 
 
 ### Next Steps
 
-Version 2.0.0 is released on 05-Jan-2020. Not everything that was planned was realized.
-What needs to be done is:
-
-* put the documentation together in patterntesting-doc module
+* switch to Java 11 (will come with v2.2)
+* continue the documentation in patterntesting-doc module
 * complete missing functionality of the old JUnit-4 runner for JUnit 5
 * update dependencies
-* switch to Java 11
 
 
 
@@ -50,5 +46,5 @@ The actual development you can find on the [develop](https://github.com/oboehm/P
 * documentation: [doc/README.adoc](doc/README.adoc)
 
 ---
-April 2020,
+January 2022,
 Oli B.

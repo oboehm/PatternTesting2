@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * update to Log4J 2.17.1
   ([CVE-2021-44832](https://github.com/advisories/GHSA-8489-44mv-ggj8))
 
+### Changed
+
+* switch to Java 11 as development and build environment
+
 
 ## [2.1.2] - 2021-12-19
 
