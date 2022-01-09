@@ -61,8 +61,8 @@ public final class ObjectTester extends AbstractTester {
 
 	/**
 	 * Check equality of the given objects. They must be equals otherwise an
-	 * AssertionError will be thrown. And if <tt>A == B</tt> also
-	 * <tt>B == A</tt> must be true (commutative law, i.e. it is a symmetrical
+	 * AssertionError will be thrown. And if <i>A == B</i> also
+	 * <i>B == A</i> must be true (commutative law, i.e. it is a symmetrical
 	 * operation).
 	 * <p>
 	 * If two objects are equals they must have also the same hash code (but not

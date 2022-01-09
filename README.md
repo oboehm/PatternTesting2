@@ -29,8 +29,6 @@ The runner for JUnit 4 and other outdated classes are moved to [patterntesting-c
 
 * switch to Java 11 (will come with v2.2)
 * continue the documentation in patterntesting-doc module
-* complete missing functionality of the old JUnit-4 runner for JUnit 5
-* update dependencies
 
 
 
@@ -44,6 +42,7 @@ The actual development you can find on the [develop](https://github.com/oboehm/P
 
 * changelog: [CHANGELOG.md](CHANGELOG.md)
 * documentation: [doc/README.adoc](doc/README.adoc)
+* project page: [current release](http://www.patterntesting.com/release/index.html)
 
 ---
 January 2022,

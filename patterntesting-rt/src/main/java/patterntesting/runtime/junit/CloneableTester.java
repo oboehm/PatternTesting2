@@ -20,15 +20,17 @@
 
 package patterntesting.runtime.junit;
 
-import java.lang.reflect.Method;
-import java.util.*;
-import java.util.regex.Pattern;
-
-import org.apache.logging.log4j.*;
-
-import patterntesting.runtime.exception.DetailedAssertionError;
 import clazzfish.monitor.ClasspathMonitor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import patterntesting.runtime.exception.DetailedAssertionError;
 import patterntesting.runtime.util.Converter;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * This tester checks class which implements Clonable and has therefore the
@@ -45,14 +47,14 @@ import patterntesting.runtime.util.Converter;
  * x.clone().getClass() == x.getClass()
  * </pre>
  *
- * </blockquote> will be <tt>true</tt>, but these are not absolute requirements.
- * While it is typically the case that: <blockquote>
+ * </blockquote> will be <i>true</i>, but these are not absolute requirements.
+ * While it is typically the case that:
  *
  * <pre>
  * x.clone().equals(x)
  * </pre>
  *
- * </blockquote> will be <tt>true</tt>, this is not an absolute requirement.
+ * will be <i>true</i>, this is not an absolute requirement.
  * <p>
  * So the equals method will be only checked if it is overwritten.
  * </p>

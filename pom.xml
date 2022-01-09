@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 	Project Object Model (POM) for PatternTesting
 	If you are behind a proxy try the following command:
@@ -102,9 +102,9 @@
     -->
     <patterntesting.site.dir>${htdocs.dir}/builds/patterntesting</patterntesting.site.dir>
     <patterntesting.site.url>file:${patterntesting.site.dir}</patterntesting.site.url>
+    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
     <!-- ignore violations -->
     <sonar.issue.ignore.multicriteria>1,2,3,4,5,6,7,8,9,10,11,12,106,112,1312,1313,1698,1872,2159,2232,2250,2259,2384,2386</sonar.issue.ignore.multicriteria>
     <sonar.issue.ignore.multicriteria.1.resourceKey>**</sonar.issue.ignore.multicriteria.1.resourceKey>
@@ -312,7 +312,7 @@
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>3.3.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
@@ -497,7 +497,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>3.3.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -628,7 +628,7 @@
                 <requireJavaVersion>
                   <version>${maven.compile.target}</version>
                 </requireJavaVersion>
-                <dependencyConvergence/>
+                <dependencyConvergence></dependencyConvergence>
               </rules>
             </configuration>
           </execution>
@@ -781,8 +781,8 @@
               <target>
                 <copy todir="${project.build.directory}/apidocs/META-INF">
                   <fileset dir="${basedir}">
-                    <include name="LICENSE.txt"/>
-                    <include name="NOTICE.txt"/>
+                    <include name="LICENSE.txt"></include>
+                    <include name="NOTICE.txt"></include>
                   </fileset>
                 </copy>
               </target>
@@ -873,56 +873,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.3.1</version>
         <configuration>
-          <tags>
-            <tag>
-              <name>extendsPlugin</name>
-              <placement>a</placement>
-              <head>extends plugin:</head>
-            </tag>
-            <tag>
-              <name>goal</name>
-              <placement>a</placement>
-              <head>goal:</head>
-            </tag>
-            <tag>
-              <name>requiresDependencyResolution</name>
-              <placement>a</placement>
-              <head>requires dependency resolution:</head>
-            </tag>
-            <tag>
-              <name>requiresProject</name>
-              <placement>a</placement>
-              <head>requires project:</head>
-            </tag>
-            <tag>
-              <name>phase</name>
-              <placement>a</placement>
-              <head>phase:</head>
-            </tag>
-            <tag>
-              <name>description</name>
-              <placement>a</placement>
-              <head>description:</head>
-            </tag>
-          </tags>
-          <source>${maven.compile.source}</source>
-          <encoding>${commons.encoding}</encoding>
-          <additionalDependencies>
-            <additionalDependency>
-              <groupId>org.apache.maven.plugin-testing</groupId>
-              <artifactId>maven-test-tools</artifactId>
-              <version>3.3.0</version>
-            </additionalDependency>
-          </additionalDependencies>
-          <linksource>true</linksource>
-          <!--
-              The following apidocs were not included because of missing package-list:
-              http://jamonapi.sourceforge.net/javadoc/
-           -->
-          <links>
-            <link>http://www.eclipse.org/aspectj/doc/released/runtime-api</link>
-          </links>
+          <detectJavaApiLink>false</detectJavaApiLink>
         </configuration>
       </plugin>
       <plugin>
@@ -1285,7 +1238,7 @@
                     -->
                     <echo>copying reports...</echo>
                     <copy todir="${patterntesting.site.artifact.dir}/" verbose="false">
-                      <fileset dir="target/site"/>
+                      <fileset dir="target/site"></fileset>
                     </copy>
                   </tasks>
                 </configuration>
