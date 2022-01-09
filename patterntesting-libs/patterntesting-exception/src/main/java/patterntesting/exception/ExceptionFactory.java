@@ -41,7 +41,7 @@ import patterntesting.runtime.util.*;
  * You will see the ExceptionFactory not before the first
  * method marked as @TestException has finished (because it is realized as
  * after advice). If you want to see it before
- * call <tt>ExceptionFactory.getInstance()</tt> (with the creation of
+ * call <i>ExceptionFactory.getInstance()</i> (with the creation of
  * the instance it is also registered as MBean).
  * </p>
  *

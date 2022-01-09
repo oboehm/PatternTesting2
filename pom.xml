@@ -71,7 +71,7 @@
     <!-- see https://github.com/mojohaus/aspectj-maven-plugin/pull/45 -->
     <aspectj.maven.plugin.version>1.12.6</aspectj.maven.plugin.version>
     <!-- don't use AspectJ 1.9.5, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=558995 -->
-    <aspectj.version>1.9.6</aspectj.version>
+    <aspectj.version>1.9.7</aspectj.version>
     <commons.docEncoding>${commons.encoding}</commons.docEncoding>
 
     <!--
@@ -80,8 +80,8 @@
       overwrite this, if they are using another encoding.
     -->
     <commons.encoding>utf-8</commons.encoding>
-    <junit-jupiter.version>5.6.0</junit-jupiter.version>
-    <junit-platform.version>1.6.0</junit-platform.version>
+    <junit-jupiter.version>5.8.2</junit-jupiter.version>
+    <junit-platform.version>1.8.2</junit-platform.version>
     <maven.compile.complianceLevel>1.8</maven.compile.complianceLevel>
 
     <!-- Default configuration for compiler source and target JVM -->

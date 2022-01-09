@@ -30,7 +30,7 @@ import patterntesting.runtime.annotation.*;
  * The Enigma was a cipher machine of the Germans during World War II (see
  * <a href="http://en.wikipedia.org/wiki/Enigma_machine">Enigma machine</a>).
  * This class is only a demo how to use the different cipher engines provided by
- * the JDK. And it is an example to show the use of the <tt>@ProfileMe</tt>
+ * the JDK. And it is an example to show the use of the <i>@ProfileMe</i>
  * annotation.
  * <p>
  * See <a href=
