@@ -531,6 +531,12 @@
           <artifactId>commons-build-plugin</artifactId>
           <version>1.4</version>
         </plugin>
+        <!-- Changes -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-changes-plugin</artifactId>
+          <version>2.12.1</version>
+        </plugin>
         <!-- TODO list -->
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -622,7 +628,7 @@
                 <requireJavaVersion>
                   <version>${maven.compile.target}</version>
                 </requireJavaVersion>
-                <dependencyConvergence></dependencyConvergence>
+                <dependencyConvergence/>
               </rules>
             </configuration>
           </execution>
@@ -775,8 +781,8 @@
               <target>
                 <copy todir="${project.build.directory}/apidocs/META-INF">
                   <fileset dir="${basedir}">
-                    <include name="LICENSE.txt"></include>
-                    <include name="NOTICE.txt"></include>
+                    <include name="LICENSE.txt"/>
+                    <include name="NOTICE.txt"/>
                   </fileset>
                 </copy>
               </target>
@@ -1013,7 +1019,6 @@
   <contributors>
     <contributor>
       <name>Shohara Shaikh</name>
-      <email></email>
       <organization>KPIT Cummins</organization>
       <roles>
         <role>Java Devleoper</role>
@@ -1280,7 +1285,7 @@
                     -->
                     <echo>copying reports...</echo>
                     <copy todir="${patterntesting.site.artifact.dir}/" verbose="false">
-                      <fileset dir="target/site"></fileset>
+                      <fileset dir="target/site"/>
                     </copy>
                   </tasks>
                 </configuration>

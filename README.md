@@ -18,7 +18,7 @@ It is more focussed on the original vision:
 
 The difference to version 1 is:
 
-* foreign classes like ClasspathMonitor are moved to a separate project [ClassFish](https://github.com/oboehm/ClazzFish)
+* foreign classes like ClasspathMonitor are moved to a separate project ([ClazzFish](https://github.com/oboehm/ClazzFish)).
 * deprecated methods and classes are removed
 * support of JUnit 5
 

@@ -123,11 +123,6 @@
     </dependency>
     <!-- needed for testing -->
     <dependency>
-      <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-library</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>com.c2.fit</groupId>
       <artifactId>fit</artifactId>
       <version>1.1</version>
