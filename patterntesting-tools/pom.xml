@@ -68,7 +68,10 @@
     <dependency>
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
-      <version>1.10.11</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
     </dependency>
     <!-- Maven plugin dependencies -->
     <dependency>
@@ -377,6 +380,7 @@
       <plugin>
         <groupId>${aspectj.maven.plugin.groupId}</groupId>
         <artifactId>aspectj-maven-plugin</artifactId>
+        <version>${aspectj.maven.plugin.version}</version>
         <configuration>
           <source>${maven.compile.source}</source>
           <target>${maven.compile.target}</target>

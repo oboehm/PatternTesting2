@@ -186,6 +186,7 @@
       <plugin>
         <groupId>${aspectj.maven.plugin.groupId}</groupId>
         <artifactId>aspectj-maven-plugin</artifactId>
+        <version>${aspectj.maven.plugin.version}</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
