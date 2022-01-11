@@ -102,8 +102,8 @@ public class XAjcCompileMojoTest extends AbstractMojoTestCase {
 
     /**
      * The Xlint option should be "ignore" to avoid warnings like
-     * <tt>[WARNING] advice defined in patterntesting.concurrent.RunParallelAspect
-     * has not been applied [Xlint:adviceDidNotMatch]</tt>.
+     * <i>[WARNING] advice defined in patterntesting.concurrent.RunParallelAspect
+     * has not been applied [Xlint:adviceDidNotMatch]</i>.
      *
      * @throws Exception the exception
      */
@@ -150,10 +150,10 @@ public class XAjcCompileMojoTest extends AbstractMojoTestCase {
     /**
      * This method checks the result of a 'mvn archetype:generate' command.
      * It does the same as the following command:
-     * <tt>mvn archetype:generate
+     * <i>mvn archetype:generate
      * -DarchetypeGroupId=org.patterntesting
      * -DarchetypeArtifactId=patterntesting-tools
-     * -DarchetypeVersion=2.0.0-SNAPSHOT</tt>
+     * -DarchetypeVersion=2.0.0-SNAPSHOT</i>
      * (see also src/main/resources/META-INF/maven/archetype-metadata.xml
      * for the default values).
      *

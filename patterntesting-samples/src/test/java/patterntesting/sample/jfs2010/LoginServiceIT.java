@@ -18,14 +18,12 @@
 
 package patterntesting.sample.jfs2010;
 
-import java.io.IOException;
-
-import javax.security.auth.login.LoginException;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.junit.extension.IntegrationTestExtension;
+
+import javax.security.auth.login.LoginException;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -36,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * test as integration test for your favourite IDE.
  * <p>
  * To enable the integration tests call this class with the option
- * <tt>-Dpatterntesting.integrationTest</tt>.
+ * <i>-Dpatterntesting.integrationTest</i>.
  * </p>
  *
  * @author oliver

@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased]
+## [2.2.0] - 2021-01-11
 
 ### Security
 
@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * update to Log4J 2.17.0 to fix next Log4J vulnerability
 
 
-_## [2.1.1] - 2021-12-15
+## [2.1.1] - 2021-12-15
 
 ### Security
 
@@ -45,25 +45,15 @@ _## [2.1.1] - 2021-12-15
 * ClasspathMonitor and ResourcepathMonitor is deprecated and moved to patterntesting-compat
 
 
-## [2.0.2] - 2020-04-18
+## [2.0] - 2020-02-05
 
 ### Added
 
-* NetworkTester provides now for each assert method also a boolean method
-
-
-
-## [2.0.1] - 2020-03-12
+* **v2.0.2**: NetworkTester provides now for each assert method also a boolean method
 
 ### Changed
 
-* dependencies updated
-
-
-## [2.0.0] - 2020-02-05
-
-### Changed
-
+* **v2.0.1**: dependencies updated
 * move from [SoureForge](https://sourceforge.net/projects/patterntesting/) (CVS) to [GitHub](https://github.com/oboehm/PatternTesting2) (GIT)
 * ObjectTester and other XxxTester classes will no longer try to instantiate private classes
   (patterntesting-rt)
