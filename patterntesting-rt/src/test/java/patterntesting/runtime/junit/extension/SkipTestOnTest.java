@@ -21,6 +21,7 @@ package patterntesting.runtime.junit.extension;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,12 +45,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class SkipTestOnTest {
 
     private static final Logger LOG = LogManager.getLogger(SkipTestOnTest.class);
-    private static String osName = System.getProperty("os.name");
-    private static String osArch = System.getProperty("os.arch");
-    private static String osVersion = System.getProperty("os.version");
-    private static String javaVmName = System.getProperty("java.vm.name");
-    private static String javaVersion = System.getProperty("java.version");
-    private static String javaVendor = System.getProperty("java.vendor");
+    private static final String osName = System.getProperty("os.name");
+    private static final String osArch = System.getProperty("os.arch");
+    private static final String osVersion = System.getProperty("os.version");
+    private static final String javaVmName = System.getProperty("java.vm.name");
+    private static final String javaVersion = System.getProperty("java.version");
+    private static final String javaVendor = System.getProperty("java.vendor");
 
     /**
      * This setup method is only inserted to see on which platform the test
@@ -78,7 +79,7 @@ class SkipTestOnTest {
     @Test
     public void testSkipOnMacOS() {
         if (SystemUtils.IS_OS_MAC) {
-            fail("this test should be skipped for Mac");
+            Assertions.fail("this test should be skipped for Mac");
         }
         LOG.info("testSkipOnMac() was excecuted on " + osName);
     }
@@ -91,7 +92,7 @@ class SkipTestOnTest {
     @Test
     public void testSkipOnMac() {
         if (SystemUtils.IS_OS_MAC) {
-            fail("this test should be skipped for Mac");
+            Assertions.fail("this test should be skipped for Mac");
         }
         LOG.info("testSkipOnMac() was excecuted on " + osName);
     }
@@ -105,7 +106,7 @@ class SkipTestOnTest {
     public void testSkipOnMacAndLinux() {
         if (osName.equalsIgnoreCase("Linux")
                 || osName.equalsIgnoreCase("Mac OS X")) {
-            fail("this test should be skipped for Linux or Mac");
+            Assertions.fail("this test should be skipped for Linux or Mac");
         }
         LOG.info("testSkipOnMacAndLinux() was excecuted on " + osName);
     }
@@ -117,7 +118,7 @@ class SkipTestOnTest {
     @Test
     public void testSkipOnIntelMac64Bit() {
         if ("Mac OS X".equalsIgnoreCase(osName) && ("x86_64".equalsIgnoreCase(osArch))) {
-            fail("this test should be skipped for an Intel Mac 64 bit");
+            Assertions.fail("this test should be skipped for an Intel Mac 64 bit");
         }
     }
 
@@ -130,7 +131,7 @@ class SkipTestOnTest {
         if ("Mac OS X".equalsIgnoreCase(osName)
                 && (osArch.equalsIgnoreCase("x86_62") || osArch
                         .equalsIgnoreCase("x86_64"))) {
-            fail("this test should be skipped for an Intel Mac");
+            Assertions.fail("this test should be skipped for an Intel Mac");
         }
         LOG.info("testSkipOnMacAndLinux() was excecuted on {} {}.", osName, osArch);
     }
@@ -151,7 +152,7 @@ class SkipTestOnTest {
     @Test
     public void testSkipOnSnowLeopard() {
         if ("Mac OS X".equalsIgnoreCase(osName) && osVersion.startsWith("10.6")) {
-            fail("this test should be skipped on Snow Leopard");
+            Assertions.fail("this test should be skipped on Snow Leopard");
         }
         LOG.info("testSkipOnSnowLeopard() was excecuted on {} {}.", osName, osVersion);
     }
@@ -166,7 +167,7 @@ class SkipTestOnTest {
         if ("Mac OS X".equalsIgnoreCase(osName)
                 && (osVersion.startsWith("10.6.2") || osVersion
                         .startsWith("10.6.3"))) {
-            fail("this test should be skipped on Snow Leopard");
+            Assertions.fail("this test should be skipped on Snow Leopard");
         }
         LOG.info("testSkipOnSnowLeopard23() was excecuted on {} {}.", osName, osVersion);
     }
@@ -189,7 +190,7 @@ class SkipTestOnTest {
     @IntegrationTest("this test needs too long if we are offline")
     @Test
     public void testSkipOnLocalhost() throws UnknownHostException {
-        fail("this test should be never executed on " + InetAddress.getLocalHost());
+        Assertions.fail("this test should be never executed on " + InetAddress.getLocalHost());
     }
 
     /**
@@ -231,9 +232,18 @@ class SkipTestOnTest {
         skipOnJavaVersion("1.8");
     }
 
+    /**
+     * This test should be never executed on Java 11.
+     */
+    @SkipTestOn(javaVersion = "11", hide = true)
+    @Test
+    public void testSkipOnJava11() {
+        skipOnJavaVersion("11");
+    }
+
     private void skipOnJavaVersion(String version) {
         if (javaVersion.startsWith(version)) {
-            fail("this test should be never executed with JDK " + javaVersion);
+            Assertions.fail("this test should be never executed with JDK " + javaVersion);
         }
         LOG.info("skipOnJavaVersion(\"{}\") was executed on JDK {}.", version, javaVersion);
     }
@@ -254,7 +264,7 @@ class SkipTestOnTest {
     @Test
     public void testSkipOnAppleVM() {
         if (javaVendor.equalsIgnoreCase("Apple Inc.")) {
-            fail("this test should be never executed for VM of " + javaVendor);
+            Assertions.fail("this test should be never executed for VM of " + javaVendor);
         }
         LOG.info("testSkipOnAppleVM() was executed on VM of {}.", javaVendor);
     }
@@ -276,7 +286,7 @@ class SkipTestOnTest {
     @SkipTestOn(property = "java.home", hide = true)
     @Test
     public void testSkipOnProperty() {
-        fail("this test should be always skipped");
+        Assertions.fail("this test should be always skipped");
     }
 
     /**
@@ -288,7 +298,7 @@ class SkipTestOnTest {
     public void testSkipOnPropertyNirwana() {
         assertThrows(AssertionError.class, () -> {
             if (System.getProperty("nir.wana") == null) {
-                fail("this test should fail otherwise it is not executed");
+                Assertions.fail("this test should fail otherwise it is not executed");
             }
         });
     }
@@ -301,7 +311,7 @@ class SkipTestOnTest {
     public void testSkipOnWorkingDays() {
         int d = RunTestOnTest.getDayOfWeek();
         if (d < 6) {
-            fail("This test should not be skipped on day " + d);
+            Assertions.fail("This test should not be skipped on day " + d);
         }
     }
 
@@ -313,7 +323,7 @@ class SkipTestOnTest {
     public void testRunOnWeekend() {
         int d = RunTestOnTest.getDayOfWeek();
         if (d > 5) {
-            fail("This test should not be skipped on day " + d);
+            Assertions.fail("This test should not be skipped on day " + d);
         }
     }
 
@@ -323,7 +333,7 @@ class SkipTestOnTest {
     @SkipTestOn(time = { "0:00-8:00", "8:00-16:00", "16:00-24:00" }, hide = true)
     @Test
     public void testRunWholeDay() {
-        fail("This test should be skipped the whole day.");
+        Assertions.fail("This test should be skipped the whole day.");
     }
 
 }
