@@ -18,25 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * switch to Java 11 as development and build environment
 
 
-## [2.1.2] - 2021-12-19
+## [2.1] - 2021-12-14
 
 ### Security
 
-* update to Log4J 2.17.0 to fix next Log4J vulnerability
-
-
-## [2.1.1] - 2021-12-15
-
-### Security
-
-* update to Log4J 2.16.0 to fix Log4J vulnerability
+* **v2.1.2**: update to Log4J 2.17.0 to fix next Log4J vulnerability
+* **v2.1.1**: update to Log4J 2.16.0 to fix Log4J vulnerability
   [CVE-2021-45046](hhttps://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45046)_
-
-
-## [2.1.0] - 2021-12-14
-
-### Security
-
 * update to Log4J 2.15.0 to fix Log4J vulnerability
   [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228)
 
