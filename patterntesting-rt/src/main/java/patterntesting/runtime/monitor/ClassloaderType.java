@@ -39,8 +39,11 @@ public enum ClassloaderType {
 	/** Unknown classloader. */
 	UNKNOWN("unknown"),
 
-	/** The default classloader of the Sun VM. */
+	/** The default classloader of the Sun VM (till Java 8). */
 	SUN("sun.misc.Launcher$AppClassLoader"),
+
+	/** The default classloader of Open JDK (since Java 9). */
+	JDK("jdk.internal.loader.ClassLoaders$AppClassLoader"),
 
 	/** The URLClassLoader where many appserver are based on. */
 	NET(java.net.URLClassLoader.class),

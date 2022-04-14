@@ -26,6 +26,7 @@ import java.util.Map.Entry;
 import java.util.jar.*;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.*;
 
 import patterntesting.runtime.NullConstants;
@@ -83,11 +84,21 @@ public class Info implements InfoMBean {
 			properties.load(istream);
 		} catch (IOException ioe) {
 			LOG.warn("Cannot read info.properties for {}:", clazz, ioe);
-			properties.put("project.version", clazz.getPackage().getImplementationVersion());
+			properties.put("project.version", getImplementationVersion(clazz));
 		} finally {
 			IOUtils.closeQuietly(istream);
 		}
 		return properties;
+	}
+
+	private static String getImplementationVersion(Class<?> clazz) {
+		Package pkg = clazz.getPackage();
+		String version = pkg.getImplementationVersion();
+		if (version == null) {
+			String nameAndVersion = clazz.getModule().getDescriptor().toNameAndVersion();
+			version = StringUtils.substringAfter(nameAndVersion, "@");
+		}
+		return version;
 	}
 
 	private static Manifest getManifest(final Class<?> clazz) {
