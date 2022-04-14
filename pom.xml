@@ -68,7 +68,7 @@
   <properties>
     <aspectj.maven.plugin.groupId>org.codehaus.mojo</aspectj.maven.plugin.groupId>
     <aspectj.maven.plugin.version>1.14.0</aspectj.maven.plugin.version>
-    <aspectj.version>1.9.7</aspectj.version>
+    <aspectj.version>1.9.9.1</aspectj.version>
     <commons.docEncoding>${commons.encoding}</commons.docEncoding>
 
     <!--
