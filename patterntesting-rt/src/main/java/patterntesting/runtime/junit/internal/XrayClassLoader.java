@@ -30,6 +30,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -149,6 +153,9 @@ public final class XrayClassLoader extends ClassLoader {
 			if ("jar".equals(scheme)) {
 				LOG.debug("Will read " + uri + " as JAR:", iae);
 				return readJar(uri);
+			} else if ("jrt".equals(scheme)) {
+				LOG.debug("Will read " + uri + " as JRT:", iae);
+				return readJrt(uri);
 			} else {
 				throw new IllegalArgumentException("don't know how to load " + uri, iae);
 			}
@@ -171,6 +178,13 @@ public final class XrayClassLoader extends ClassLoader {
 			entry = jarFile.getJarEntry(classpath.substring(1));
 		}
 		return entry;
+	}
+
+	private static byte[] readJrt(final URI uri) throws IOException {
+		FileSystem fs = FileSystems.getFileSystem(URI.create("jrt:/"));
+		Path jrtPath = fs.getPath("modules", uri.getPath());
+		byte[] jlo = Files.readAllBytes(jrtPath);
+		return jlo;
 	}
 
 }

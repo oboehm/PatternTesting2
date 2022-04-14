@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * update to xstream from 1.4.19
   ([CVE-2021-43859](https://x-stream.github.io/CVE-2021-43859.html))
 
+### Changed
+
+* ClassTester supports module concept of Java 9
+
+### Deleted
+
+* NamingConventionsAspect was deleted because of conflicts with Java 11
+
 
 ## [2.2.0] - 2021-01-11
 
