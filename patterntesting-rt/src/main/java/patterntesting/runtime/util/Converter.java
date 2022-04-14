@@ -634,8 +634,7 @@ public final class Converter {
 	 * @return e.g. "26-Nov-2009"
 	 */
 	public static String toString(final Date date, final String pattern) {
-		DateFormat df = new SimpleDateFormat(pattern);
-		return df.format(date);
+		return toString(date, pattern, Locale.ENGLISH);
 	}
 
 	/**
