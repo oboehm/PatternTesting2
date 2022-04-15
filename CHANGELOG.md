@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased]
+## [2.2.20-YEARS] - 2022-04-14
 
 ### Security
 
@@ -15,14 +15,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* ClassTester supports module concept of Java 9
+* AspectJ version updated to 1.9.9.1
+* Classloader of OpenJDK is supported
+* ClassTester supports module concept of Java 9+
 
 ### Deleted
 
 * NamingConventionsAspect was deleted because of conflicts with Java 11
 
 
-## [2.2.0] - 2021-01-11
+## [2.2.0] - 2022-01-11
 
 ### Security
 
