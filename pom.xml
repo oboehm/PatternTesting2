@@ -35,7 +35,7 @@
   -->
   <groupId>org.patterntesting</groupId>
   <artifactId>patterntesting-parent</artifactId>
-  <version>2.2.20-YEARS</version>
+  <version>2.2.30-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>PatternTesting</name>
 
