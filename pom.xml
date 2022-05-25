@@ -186,7 +186,7 @@
     <!-- Sonar -->
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 
-    <version.spring>5.3.19</version.spring>
+    <version.spring>5.3.20</version.spring>
 
   </properties>
 
