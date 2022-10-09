@@ -23,7 +23,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import patterntesting.annotation.check.ct.OnlyForTesting;
 import patterntesting.annotation.check.runtime.PublicForTesting;
-import patterntesting.runtime.util.ReflectionHelper;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -95,10 +94,8 @@ public final class WebDog {
      */
     private static int getResponseCodeFrom(final HttpURLConnection connection) {
         try {
-            Integer rc = (Integer) ReflectionHelper.getFieldValue(connection,
-                    "responseCode");
-            return rc.intValue();
-        } catch (ReflectiveOperationException ex) {
+            return connection.getResponseCode();
+        } catch (IOException ex) {
             throw new IllegalStateException("can't get responseCode of " + connection, ex);
         }
     }

@@ -37,8 +37,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit tests for {@link ExtendedFile} class.
@@ -142,7 +141,7 @@ public class ExtendedFileTest {
             ExtendedFile.validate(notExisting);
         });
 	}
-    
+
     /**
      * Under Windows filenames are not case sensitve. I.e. the file "test.txt"
      * and "test.TXT" are the same under Windows but not on Unix. This may be
@@ -154,7 +153,7 @@ public class ExtendedFileTest {
     public void testValidateFileExistsOnWindows() {
         File expected = new File("src/test/resources/log4j2.xml");
         File wrong = spy(new File("src/test/resources/log4j2.XML"));
-        when(wrong.exists()).thenReturn(false);
+        doReturn(false).when(wrong).exists();
         checkValidate(expected, wrong);
     }
     

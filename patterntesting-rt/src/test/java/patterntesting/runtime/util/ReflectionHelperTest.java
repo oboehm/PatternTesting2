@@ -25,8 +25,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 
-import java.awt.*;
-import java.awt.event.TextEvent;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -55,6 +53,7 @@ public final class ReflectionHelperTest {
     protected String notNull = "not null";  // SUPPRESS CHECKSTYLE
     private final String privateNullString = null;
     private String privateKey = "myPrivateKey";
+    private int id;
 
     /**
      * This constructor inserted to avoid some warnings about never read local
@@ -195,9 +194,9 @@ public final class ReflectionHelperTest {
      */
     @Test
     public void testGetIdFromField() {
-        AWTEvent event = new TextEvent("hello", 4711);
-        assertTrue(ReflectionHelper.hasId(event), "has id: " + event);
-        assertEquals(4711, ReflectionHelper.getId(event));
+        this.id = 4711;
+        assertTrue(ReflectionHelper.hasId(this), "has id: " + this);
+        assertEquals(4711, ReflectionHelper.getId(this));
     }
 
     /**
@@ -215,7 +214,7 @@ public final class ReflectionHelperTest {
      */
     @Test
     public void testGetIdNotExisting() {
-        assertThrows(IllegalArgumentException.class, () -> ReflectionHelper.getId(this));
+        assertThrows(IllegalArgumentException.class, () -> ReflectionHelper.getId(new Date()));
     }
 
 }
