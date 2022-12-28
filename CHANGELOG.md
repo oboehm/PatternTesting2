@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * tested under Java 17
 
+### Added
+
+* Localhost.matches(..) accepts now timout parameter
+
 
 ## [2.2.20-YEARS] - 2022-04-14
 

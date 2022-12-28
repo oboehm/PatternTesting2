@@ -29,6 +29,7 @@ import patterntesting.runtime.util.Converter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Collection;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -79,8 +80,7 @@ public final class LocalhostTest {
     @IntegrationTest("needs too long (> 2 seconds)")
     public void testMatchesHosts() {
         String[] hosts = {"unknown", "unknown.nowhere"};
-        assertFalse(Localhost.matches(hosts), Converter.toString(hosts) + " should not match");
+        assertFalse(Localhost.matches(10, TimeUnit.SECONDS, hosts), Converter.toString(hosts) + " should not match");
     }
 
 }
-

@@ -20,11 +20,14 @@
 
 package patterntesting.runtime.net;
 
-import java.net.*;
-import java.util.*;
-
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Logger;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * This (static) class represents your local host. You can ask it for the local
@@ -80,17 +83,45 @@ public final class Localhost {
 	 * hosts. The host can be given as hostname (e.g. "localhost") or as IP
 	 * address (e.g. "127.0.0.1").
 	 *
-	 * @param hosts
-	 *            an array of hosts
+	 * @param hosts an array of hosts
 	 * @return true if matches one of the given hosts.
 	 */
-	public static boolean matches(final String[] hosts) {
+	public static boolean matches(final String... hosts) {
+		return matches(20, TimeUnit.SECONDS, hosts);
+	}
+
+	/**
+	 * Here we try to get all network addresses to compare it against the given
+	 * hosts in a given time. The host can be given as hostname (e.g. "localhost")
+	 * or as IP address (e.g. "127.0.0.1").
+	 *
+	 * @param timeout – the maximum time to wait
+	 * @param unit    – the time unit of the timeout argument
+	 * @param hosts   - an array of hosts
+	 * @return true if matches one of the given hosts
+	 * @since 2.3
+	 */
+	public static boolean matches(long timeout, TimeUnit unit, final String... hosts) {
+		ExecutorService executor = Executors.newFixedThreadPool(hosts.length);
+		Future<Boolean>[] future = new Future[hosts.length];
 		for (int i = 0; i < hosts.length; i++) {
-			if (matches(hosts[i])) {
-				return true;
+			future[i] = matches(executor, hosts[i]);
+		}
+		for (int i = 0; i < hosts.length; i++) {
+			try {
+				if (future[i].get(timeout, unit)) {
+					return true;
+				}
+			} catch (InterruptedException | ExecutionException | TimeoutException ex) {
+				LOG.info("Match with {} failed ({}).", hosts[i], ex.toString());
+				LOG.debug("Details:", ex);
 			}
 		}
 		return false;
+	}
+
+	private static Future<Boolean> matches(ExecutorService executor, String host) {
+		return executor.submit(() -> matches(host));
 	}
 
 	/**
