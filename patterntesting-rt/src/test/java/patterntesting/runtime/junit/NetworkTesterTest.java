@@ -26,7 +26,7 @@ import patterntesting.runtime.annotation.IntegrationTest;
 import java.io.File;
 import java.io.IOException;
 import java.net.*;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -101,16 +101,19 @@ public final class NetworkTesterTest {
     }
 
     private static void checkAssertOnline(InetSocketAddress address) {
+        LOG.info("Checking {}...", address);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<Socket> fs = executor.submit(() -> new Socket(address.getHostName(), address.getPort()));
         InetAddress inetAddr = address.getAddress();
-        try (Socket socket = new Socket(address.getHostName(), address.getPort())) {
-            LOG.debug("{} is online, because {} could be created.", address, socket);
+        try (Socket socket = fs.get(2, TimeUnit.SECONDS)) {
+            LOG.info("{} is online, because {} could be created.", address, socket);
             if (inetAddr == null) {
                 NetworkTester.assertOnline(address);
             } else {
                 NetworkTester.assertOnline(inetAddr);
             }
-        } catch (IOException ioe) {
-            LOG.debug("{} is probably offline:", address, ioe);
+        } catch (IOException | TimeoutException | InterruptedException | ExecutionException ex) {
+            LOG.info("{} is probably offline ({}).", address, ex.toString());
             if (inetAddr == null) {
                 NetworkTester.assertOffline(address);
             } else {

@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Localhost.matches(..) accepts now timout parameter
+* NetworkTester.isOnline(..) accepts also timeout parameter
 
 ### Changed
 

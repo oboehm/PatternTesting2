@@ -163,12 +163,29 @@ public final class NetworkTester {
      * @since 2.0.2
      */
     public static boolean isOnline(String host, int port) {
-        try (Socket socket = new Socket(host, port)) {
-            LOG.debug("Socket {} for {}:{} is created.", socket, host, port);
+        return isOnline(host, port, 20, TimeUnit.SECONDS);
+    }
+
+    /**
+     * Checks if the given host is online in the given time distance.
+     *
+     * @param host the hostname or IP address
+     * @param port the port between 0 and 0xFFFF
+     * @param timeout timeout
+     * @param unit    e.g. {@link TimeUnit#SECONDS}
+     * @return true if host is online
+     * @since 2.3
+     */
+    public static boolean isOnline(String host, int port, long timeout, TimeUnit unit) {
+        LOG.debug("Connecting to {}:{}...", host, port);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<Socket> fs = executor.submit(() -> new Socket(host, port));
+        try (Socket socket = fs.get(timeout, unit)) {
+            LOG.debug("Connecting to {}:{} was successful.", host, port);
             return socket.isConnected();
-        } catch (IOException ioe) {
-            LOG.debug("{}:{} seems to be offline ({}).", host, port, ioe.getMessage());
-            LOG.trace("Details:", ioe);
+        } catch (IOException | InterruptedException | ExecutionException | TimeoutException ex) {
+            LOG.debug("Connecting to {}:{} failed ({}).", host, port, ex.toString());
+            LOG.trace("Details:", ex);
             return false;
         }
     }
