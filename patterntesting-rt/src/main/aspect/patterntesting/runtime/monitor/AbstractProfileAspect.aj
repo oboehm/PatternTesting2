@@ -19,7 +19,7 @@
  */
 package patterntesting.runtime.monitor;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
@@ -33,7 +33,7 @@ import patterntesting.runtime.util.JoinPointHelper;
  */
 public abstract aspect AbstractProfileAspect {
 
-    private static final Logger LOG = LogManager.getLogger(AbstractProfileAspect.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractProfileAspect.class);
 
     /**
      * To get the aspect specific logger.

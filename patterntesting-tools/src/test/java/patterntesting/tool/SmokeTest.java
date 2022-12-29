@@ -21,8 +21,8 @@
 package patterntesting.tool;
 
 import clazzfish.monitor.ClasspathMonitor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.Test;
 
 import java.net.URL;
@@ -39,7 +39,7 @@ import static org.junit.Assert.assertNotNull;
  */
 public class SmokeTest {
     
-    private static final Logger LOG = LogManager.getLogger(SmokeTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SmokeTest.class);
     
     /**
      * Here we test some resources which are needed for patterntesting-tools

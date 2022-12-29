@@ -20,8 +20,8 @@ package patterntesting.sample.jfs2010;
 
 import java.math.BigDecimal;
 
-import org.apache.logging.log4j.*;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.*;
+import org.slf4j.LoggerFactory;
 
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.DrawSequenceDiagram;
@@ -36,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class AccountTest {
 
-    private static final Logger log = LogManager.getLogger(AccountTest.class);
+    private static final Logger log = LoggerFactory.getLogger(AccountTest.class);
     private final Account account = new Account(1, new User("oli"));
 
     /**

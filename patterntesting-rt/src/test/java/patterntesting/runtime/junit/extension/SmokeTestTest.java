@@ -18,8 +18,8 @@
 
 package patterntesting.runtime.junit.extension;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import patterntesting.runtime.annotation.SmokeTest;
@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SmokeTestExtension.class)
 public final class SmokeTestTest {
 
-    private static Logger log = LogManager.getLogger(SmokeTestTest.class);
+    private static Logger log = LoggerFactory.getLogger(SmokeTestTest.class);
     private static int counter = 0;
     private static int classCalled = 0;
     private int tearDownCounter;

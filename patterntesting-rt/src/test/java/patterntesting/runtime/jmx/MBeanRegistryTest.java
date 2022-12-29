@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime.jmx;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.jmx.demo.Jim;
 
@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public final class MBeanRegistryTest {
 
-    private static final Logger log = LogManager.getLogger(MBeanRegistryTest.class);
+    private static final Logger log = LoggerFactory.getLogger(MBeanRegistryTest.class);
     private final Jim jim = new Jim();
 
     /**

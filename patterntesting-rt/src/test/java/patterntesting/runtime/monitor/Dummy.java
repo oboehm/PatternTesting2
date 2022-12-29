@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime.monitor;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.runtime.annotation.DontProfileMe;
 import patterntesting.runtime.annotation.ProfileMe;
 
@@ -34,7 +34,7 @@ import patterntesting.runtime.annotation.ProfileMe;
 @ProfileMe
 public final class Dummy {
 
-    private static final Logger LOG = LogManager.getLogger(Dummy.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Dummy.class);
 
     /**
      * Instantiates a new dummy.

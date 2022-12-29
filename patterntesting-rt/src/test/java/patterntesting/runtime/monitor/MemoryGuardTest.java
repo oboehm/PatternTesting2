@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime.monitor;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.IntegrationTest;
@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public final class MemoryGuardTest {
 
-    private static final Logger LOG = LogManager.getLogger(MemoryGuardTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MemoryGuardTest.class);
 
     /**
      * Test method for {@link patterntesting.runtime.monitor.MemoryGuard#getFreeMemoryInPercent()}.
@@ -85,7 +85,7 @@ public final class MemoryGuardTest {
      */
     @Test
     public void testLogMemoryLog4J() {
-        Logger lg = LogManager.getLogger("test");
+        Logger lg = LoggerFactory.getLogger("test");
         MemoryGuard.logMemory(lg);
     }
 

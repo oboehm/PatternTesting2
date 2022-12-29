@@ -22,8 +22,8 @@ package patterntesting.runtime;
 import java.lang.reflect.Field;
 import java.util.Collection;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 
 import patterntesting.runtime.annotation.GuardInitialization;
@@ -48,7 +48,7 @@ import patterntesting.runtime.util.*;
  */
 public aspect InitializationAspect {
 
-	private static final Logger log = LogManager.getLogger(InitializationAspect.class);
+	private static final Logger log = LoggerFactory.getLogger(InitializationAspect.class);
 
 	static {
 	    if (log.isDebugEnabled()) {

@@ -18,8 +18,8 @@
 
 package patterntesting.concurrent;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import patterntesting.concurrent.test.DeadLocker;
 import patterntesting.runtime.util.ThreadUtil;
@@ -35,7 +35,7 @@ import java.util.concurrent.Executors;
  */
 public final class ThreadDeadLockMonitorTest implements DeadLockListener {
 
-    private static final Logger log = LogManager.getLogger(ThreadDeadLockMonitorTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ThreadDeadLockMonitorTest.class);
 	private final DeadLocker test = new DeadLocker();
 	private boolean deadLockFound = false;
 

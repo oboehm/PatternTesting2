@@ -20,8 +20,8 @@
 
 package patterntesting.concurrent.junit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.TestClass;
 import patterntesting.runtime.junit.internal.ProfiledStatement;
@@ -35,7 +35,7 @@ import patterntesting.runtime.junit.internal.ProfiledStatement;
  */
 public final class RecordedStatement extends ProfiledStatement {
 
-    private static final Logger log = LogManager.getLogger(RecordedStatement.class);
+    private static final Logger log = LoggerFactory.getLogger(RecordedStatement.class);
     private Throwable thrown;
 
     /**

@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.io;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public abstract class AbstractSerializerTest {
 
-    private static final Logger log = LogManager.getLogger(AbstractSerializerTest.class);
+    private static final Logger log = LoggerFactory.getLogger(AbstractSerializerTest.class);
     private final AbstractSerializer serializer = this.getSerializer();
 
     /**

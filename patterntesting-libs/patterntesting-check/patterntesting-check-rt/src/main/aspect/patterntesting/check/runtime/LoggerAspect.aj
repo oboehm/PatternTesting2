@@ -20,19 +20,17 @@
 
 package patterntesting.check.runtime;
 
-import patterntesting.annotation.check.runtime.SuppressLoggerWarning;
-
 /**
- * If you use a static {@link org.apache.logging.log4j.Logger} it can happen that you use the
+ * If you use a static {@link org.slf4j.Logger} it can happen that you use the
  * logger for the wrong class. This can happen if you copy the create statement
  * from another class and forget to change the classname. E.g. if you copy
  * 
  * <pre>
- * private static final Logger log = LogManager.getLogger(MyClass.class);
+ * private static final Logger log = LoggerFactory.getLogger(MyClass.class);
  * </pre>
  * 
  * at the beginning of AnotherClass, you should not forget to change the
- * argument of {@link org.apache.logging.log4j.LogManager#getLogger(Class)} to
+ * argument of {@link org.slf4j.LoggerFactory#getLogger(Class)} to
  * "AnotherClass.class".
  * <p>
  * This aspect reminds you and prints a warning if you forgot it.

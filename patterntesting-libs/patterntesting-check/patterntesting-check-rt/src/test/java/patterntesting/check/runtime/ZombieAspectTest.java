@@ -22,8 +22,8 @@ package patterntesting.check.runtime;
 
 import java.net.URI;
 
-import org.apache.logging.log4j.*;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.*;
+import org.slf4j.LoggerFactory;
 
 import org.junit.jupiter.api.Test;
 import patterntesting.check.runtime.test.ZombieClass;
@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public final class ZombieAspectTest extends AbstractRuntimeTest {
 
-    private static final Logger LOG = LogManager.getLogger(ZombieAspectTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ZombieAspectTest.class);
 
     /**
      * If a zombie class is loaded we expect an {@link AssertionError} if this

@@ -18,8 +18,8 @@
 
 package patterntesting.concurrent.junit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -38,7 +38,7 @@ import static org.junit.Assert.assertEquals;
 @Ignore("@RunTestsParallel is no longer supported")
 public final class JUnit4ExecutorTest extends AbstractJUnitExecutorTest {
 
-    private static final Logger log = LogManager.getLogger(JUnit4ExecutorTest.class);
+    private static final Logger log = LoggerFactory.getLogger(JUnit4ExecutorTest.class);
     private RunTestsParallelJUnit4Test junit4Test = new RunTestsParallelJUnit4Test();
 
     /**

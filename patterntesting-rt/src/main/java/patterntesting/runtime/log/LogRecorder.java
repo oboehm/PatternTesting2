@@ -19,13 +19,15 @@
  */
 package patterntesting.runtime.log;
 
-import java.util.*;
-
-import org.apache.logging.log4j.*;
-import org.apache.logging.log4j.message.Message;
-import org.apache.logging.log4j.spi.AbstractLogger;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.event.Level;
+import org.slf4j.helpers.AbstractLogger;
 import patterntesting.annotation.check.runtime.NullArgsAllowed;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Class LogRecorder can only record log messages. It ignores the level.
@@ -41,7 +43,7 @@ import patterntesting.annotation.check.runtime.NullArgsAllowed;
 public final class LogRecorder extends AbstractLogger implements Logger {
 
     private static final long serialVersionUID = 20161228L;
-    private static final Logger LOG = LogManager.getLogger(LogRecorder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LogRecorder.class);
     private final List<String> objects = new ArrayList<>();
 	private final List<Throwable> exceptions = new ArrayList<>();
 
@@ -104,133 +106,66 @@ public final class LogRecorder extends AbstractLogger implements Logger {
 		}
 	}
 
-	
-	///// new methods after switch from SLF4J to Log4J-2 //////////////////////
-
 	@Override
-	public Level getLevel() {
-		throw new UnsupportedOperationException("not yet implemented");
+	protected String getFullyQualifiedCallerName() {
+		throw new UnsupportedOperationException("getFullyQualifiedCallerName not yet implemented");
 	}
 
-	
-	///// methods from AbstractLogger /////////////////////////////////////////
+	@Override
+	protected void handleNormalizedLoggingCall(Level level, Marker marker, String message, Object[] arguments,
+											   Throwable t) {
+        LOG.trace("handleNormalizedLoggingCall({}, {}, \"{}\", {}, {}, {}", level, marker, message, arguments, t);
+        this.record(marker, message, t);
+	}
 
 	@Override
-    public boolean isEnabled(Level level, Marker marker, Message message, Throwable t) {
-        return isEnabled(level, marker, (Object) message, t);
-    }
+	public boolean isTraceEnabled() {
+		return true;
+	}
 
-    @Override
-    public boolean isEnabled(Level level, Marker marker, CharSequence message, Throwable t) {
-        return isEnabled(level, marker, (Object) message, t);
-    }
+	@Override
+	public boolean isTraceEnabled(Marker marker) {
+		return isTraceEnabled();
+	}
 
-    @Override
-    public boolean isEnabled(Level level, Marker marker, Object message, Throwable t) {
-        return isEnabled(level, marker, Objects.toString(message), t);
-    }
+	@Override
+	public boolean isDebugEnabled() {
+		return true;
+	}
 
-    /**
-     * This check returns true for all levels.
-     *
-     * @param level the level
-     * @param marker the marker
-     * @param message the message
-     * @param t the t
-     * @return always true
-     * @see org.apache.logging.log4j.spi.ExtendedLogger#isEnabled(org.apache.logging.log4j.Level, org.apache.logging.log4j.Marker, java.lang.String, java.lang.Throwable)
-     */
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message, Throwable t) {
-        LOG.trace("isEnabled({}, {}, \"{}\", {}) = true", level, marker, message, t);
-        return true;
-    }
+	@Override
+	public boolean isDebugEnabled(Marker marker) {
+		return isDebugEnabled();
+	}
 
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message) {
-        return isEnabled(level, marker, message, (Throwable) null);
-    }
+	@Override
+	public boolean isInfoEnabled() {
+		return true;
+	}
 
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message, Object... params) {
-        return isEnabled(level, marker, message + ", " + Arrays.toString(params));
-    }
+	@Override
+	public boolean isInfoEnabled(Marker marker) {
+		return isInfoEnabled();
+	}
 
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message, Object p0) {
-        return isEnabled(level, marker, message, toArray(p0));
-    }
+	@Override
+	public boolean isWarnEnabled() {
+		return true;
+	}
 
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1) {
-        return isEnabled(level, marker, message, toArray(p0, p1));
-    }
+	@Override
+	public boolean isWarnEnabled(Marker marker) {
+		return isWarnEnabled();
+	}
 
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2) {
-        return isEnabled(level, marker, message, toArray(p0, p1, p2));
-    }
+	@Override
+	public boolean isErrorEnabled() {
+		return true;
+	}
 
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3) {
-        return isEnabled(level, marker, message, toArray(p0, p1, p2, p3));
-    }
-
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3,
-            Object p4) {
-        return isEnabled(level, marker, message, toArray(p0, p1, p2, p3, p4));
-    }
-
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3,
-            Object p4, Object p5) {
-        return isEnabled(level, marker, message, toArray(p0, p1, p2, p3, p4, p5));
-    }
-
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3,
-            Object p4, Object p5, Object p6) {
-        return isEnabled(level, marker, message, toArray(p0, p1, p2, p3, p4, p5, p6));
-    }
-
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3,
-            Object p4, Object p5, Object p6, Object p7) {
-        return isEnabled(level, marker, message, toArray(p0, p1, p2, p3, p4, p5, p6, p7));
-    }
-
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3,
-            Object p4, Object p5, Object p6, Object p7, Object p8) {
-        return isEnabled(level, marker, message, toArray(p0, p1, p2, p3, p4, p5, p6, p7, p8));
-    }
-
-    @Override
-    public boolean isEnabled(Level level, Marker marker, String message, Object p0, Object p1, Object p2, Object p3,
-            Object p4, Object p5, Object p6, Object p7, Object p8, Object p9) {
-        return isEnabled(level, marker, message, toArray(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9));
-    }
-
-    private static Object[] toArray(Object... args) {
-        return args;
-    }
-
-    /**
-     * The message is logged and recorded here.
-     *
-     * @param fqcn the fqcn
-     * @param level the level
-     * @param marker the marker
-     * @param message the message
-     * @param t the t
-     * @see org.apache.logging.log4j.spi.ExtendedLogger#logMessage(String, Level, Marker, Message, Throwable)
-     */
-    @Override
-    public void logMessage(String fqcn, Level level, Marker marker, Message message, Throwable t) {
-        LOG.trace("logMessage(\"{}\", {}, {}, {}, {}", fqcn, level, marker, message, t);
-        LOG.log(level, marker, message, t);
-        this.record(marker, message, t);
-    }
+	@Override
+	public boolean isErrorEnabled(Marker marker) {
+		return isErrorEnabled();
+	}
 
 }

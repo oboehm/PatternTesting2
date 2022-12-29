@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.monitor;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.runtime.jmx.MBeanHelper;
 
 import javax.management.ObjectName;
@@ -60,7 +60,7 @@ import java.util.concurrent.FutureTask;
 @Deprecated
 public class ClasspathMonitor extends clazzfish.monitor.ClasspathMonitor {
 
-	private static final Logger LOG = LogManager.getLogger(ClasspathMonitor.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ClasspathMonitor.class);
 	private static final ClasspathMonitor INSTANCE;
 
 	static {

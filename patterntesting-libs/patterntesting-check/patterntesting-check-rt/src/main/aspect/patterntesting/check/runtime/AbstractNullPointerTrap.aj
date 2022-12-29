@@ -17,7 +17,7 @@
  */
 package patterntesting.check.runtime;
 
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.SuppressAjWarnings;

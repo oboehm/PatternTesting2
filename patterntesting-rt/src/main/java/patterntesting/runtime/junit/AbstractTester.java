@@ -24,8 +24,8 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.regex.Pattern;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 /**
  * This is the common superclass for some tester classes defined in this
@@ -37,7 +37,7 @@ import org.apache.logging.log4j.*;
  */
 public abstract class AbstractTester {
 
-	private static final Logger LOG = LogManager.getLogger(AbstractTester.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AbstractTester.class);
 
 	/** Utility class - no need to instantiate it. */
 	protected AbstractTester() {

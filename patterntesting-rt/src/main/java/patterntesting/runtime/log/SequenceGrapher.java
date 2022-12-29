@@ -26,7 +26,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.JoinPoint.StaticPart;
 import org.aspectj.lang.reflect.ConstructorSignature;
@@ -55,7 +55,7 @@ import patterntesting.runtime.util.regex.TypePattern;
  */
 public class SequenceGrapher extends AbstractLogger {
 
-	private static final Logger LOG = LogManager.getLogger(SequenceGrapher.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SequenceGrapher.class);
 	private final SequenceDiagramWriter diagramWriter;
 	private final List<DrawStatement> statements = new ArrayList<>();
 	private final Map<Object, String> objnames = new HashMap<>();

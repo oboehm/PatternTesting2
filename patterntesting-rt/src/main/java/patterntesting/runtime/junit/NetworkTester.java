@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.junit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.net.*;
@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public final class NetworkTester {
 
-    private static final Logger LOG = LogManager.getLogger(NetworkTester.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NetworkTester.class);
     private static final int CONNECTION_TIMEOUT_IN_MINUTES = 2;
 
     /** Utility class - no need to instantiate it. */

@@ -23,7 +23,7 @@ import java.io.*;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.xml.sax.SAXException;
 
 import patterntesting.annotation.check.runtime.MayReturnNull;
@@ -38,7 +38,7 @@ import patterntesting.annotation.check.runtime.MayReturnNull;
  */
 public final class SAXHelper {
 
-    private static final Logger LOG = LogManager.getLogger(SAXHelper.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SAXHelper.class);
 
     /** The Constant DRIVER_PROPERTY. */
     public static final String DRIVER_PROPERTY = "org.xml.sax.driver";

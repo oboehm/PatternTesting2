@@ -23,7 +23,7 @@ import java.lang.reflect.*;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.annotation.check.runtime.MayReturnNull;
 
@@ -37,7 +37,7 @@ import patterntesting.annotation.check.runtime.MayReturnNull;
  */
 public class ReflectionHelper {
 
-	private static final Logger LOG = LogManager.getLogger(ReflectionHelper.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ReflectionHelper.class);
 
 	/** Utility class - no need to instantiate it */
 	private ReflectionHelper() {

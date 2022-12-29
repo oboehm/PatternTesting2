@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime.monitor;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.aspectj.lang.Signature;
 import patterntesting.annotation.check.runtime.MayReturnNull;
 import patterntesting.runtime.annotation.DontProfileMe;
@@ -50,7 +50,7 @@ import java.util.*;
 public class ProfileStatistic extends Thread implements ProfileStatisticMBean {
 
 	private static final ProfileStatistic INSTANCE;
-	private static final Logger LOG = LogManager.getLogger(ProfileStatistic.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ProfileStatistic.class);
 
 	private ObjectName mbeanName = MBeanHelper.getAsObjectName(this.getClass());
 	private final ProfileMonitorFactory factory;

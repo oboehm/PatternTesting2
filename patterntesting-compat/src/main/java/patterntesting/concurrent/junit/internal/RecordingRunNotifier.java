@@ -20,8 +20,8 @@
 
 package patterntesting.concurrent.junit.internal;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.runner.Description;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -44,7 +44,7 @@ import java.util.concurrent.TimeoutException;
  */
 public final class RecordingRunNotifier extends RunNotifier {
 
-    private static final Logger log = LogManager.getLogger(RecordingRunNotifier.class);
+    private static final Logger log = LoggerFactory.getLogger(RecordingRunNotifier.class);
     private static final Object NO_ARG = createNoArgDescription();
 
     private static Object createNoArgDescription() {

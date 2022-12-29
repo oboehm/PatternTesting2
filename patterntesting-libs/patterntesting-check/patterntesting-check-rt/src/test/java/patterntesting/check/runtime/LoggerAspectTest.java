@@ -20,7 +20,7 @@
 
 package patterntesting.check.runtime;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import org.junit.jupiter.api.Test;
 import patterntesting.annotation.check.runtime.SuppressLoggerWarning;
@@ -36,14 +36,14 @@ import patterntesting.annotation.check.runtime.SuppressLoggerWarning;
 @SuppressLoggerWarning
 public class LoggerAspectTest {
 
-    private static final Logger LOG = LogManager.getLogger(Logger.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Logger.class);
 
     /**
      * This is one of the test methods for the LoggerAspect for the static
      * {@link Logger} used in this unit test (see above).
      *
      * You should see a warning in the log because
-     * {@link LogManager#getLogger(Class)} is not called with
+     * {@link LoggerFactory#getLogger(Class)} is not called with
      * "LoggerAspectTest.class" as argument.
      * <p>
      * Watch the log - it is more or less a manual test.
@@ -56,7 +56,7 @@ public class LoggerAspectTest {
 
     /**
      * This is one of the test methods for the LoggerAspect. You should see
-     * a warning in the log because {@link LogManager#getLogger(Class)}
+     * a warning in the log because {@link LoggerFactory#getLogger(Class)}
      * is not called with "LoggerAspectTest.class" as argument.
      * <p>
      * Watch the log - it is more or less a manual test.
@@ -64,7 +64,7 @@ public class LoggerAspectTest {
      */
     @Test
     public void testSLF4JLogger() {
-        Logger logger = LogManager.getLogger(String.class);
+        Logger logger = LoggerFactory.getLogger(String.class);
         logger.info("Hello {}!", logger);
     }
 
@@ -86,7 +86,7 @@ public class LoggerAspectTest {
      */
     @Test
     public void testLog4JLogger() {
-        org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger(String.class);
+        org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(String.class);
         logger.info("Hello " + logger);
     }
 

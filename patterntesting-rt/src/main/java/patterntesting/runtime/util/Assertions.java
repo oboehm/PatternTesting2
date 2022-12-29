@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 /**
  * If you want to know if assertions are enabled (java option "-ea"), you can
@@ -34,7 +34,7 @@ import org.apache.logging.log4j.*;
  */
 public final class Assertions {
 
-	private static final Logger LOG = LogManager.getLogger(Assertions.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Assertions.class);
 
 	/** Utility class - no need to instantiate it */
 	private Assertions() {

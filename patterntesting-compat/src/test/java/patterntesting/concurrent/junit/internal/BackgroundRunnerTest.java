@@ -18,8 +18,8 @@
 
 package patterntesting.concurrent.junit.internal;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +38,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(BackgroundRunner.class)
 public final class BackgroundRunnerTest {
     
-    private static final Logger log = LogManager.getLogger(BackgroundRunnerTest.class);
+    private static final Logger log = LoggerFactory.getLogger(BackgroundRunnerTest.class);
     private static BackgroundRunner bgRunner;
     
     /**

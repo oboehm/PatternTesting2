@@ -28,8 +28,8 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 import patterntesting.runtime.util.Converter;
 
@@ -43,7 +43,7 @@ import patterntesting.runtime.util.Converter;
  */
 public class Resource {
 
-	private static final Logger LOG = LogManager.getLogger(Resource.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Resource.class);
 	private final URI uri;
 
 	/**

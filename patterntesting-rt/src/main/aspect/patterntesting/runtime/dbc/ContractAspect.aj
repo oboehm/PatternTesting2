@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime.dbc;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 
 import patterntesting.runtime.util.Assertions;
@@ -34,7 +34,7 @@ import patterntesting.runtime.util.JoinPointHelper;
  */
 public aspect ContractAspect {
 
-    private static final Logger log = LogManager.getLogger(ContractAspect.class);
+    private static final Logger log = LoggerFactory.getLogger(ContractAspect.class);
     private static final boolean assertEnabled = Assertions.areEnabled();
 
     pointcut dbcMethods() :

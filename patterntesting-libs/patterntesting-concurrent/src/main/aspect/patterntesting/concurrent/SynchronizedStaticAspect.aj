@@ -19,8 +19,8 @@
  */
 package patterntesting.concurrent;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 import patterntesting.annotation.concurrent.Synchronized;
 
@@ -37,7 +37,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public aspect SynchronizedStaticAspect pertypewithin(@Synchronized *) {
 
-	private static final Logger log = LogManager.getLogger(SynchronizedStaticAspect.class);
+	private static final Logger log = LoggerFactory.getLogger(SynchronizedStaticAspect.class);
 	private Lock classLock = new ReentrantLock();
 	protected long timeout = 1800;
 	protected TimeUnit unit = TimeUnit.SECONDS;

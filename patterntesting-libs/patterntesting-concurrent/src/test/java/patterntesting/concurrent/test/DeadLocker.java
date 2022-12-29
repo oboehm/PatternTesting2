@@ -20,7 +20,7 @@
 
 package patterntesting.concurrent.test;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.runtime.util.ThreadUtil;
 
@@ -34,7 +34,7 @@ import patterntesting.runtime.util.ThreadUtil;
  */
 public final class DeadLocker {
 
-	private static final Logger log = LogManager.getLogger(DeadLocker.class);
+	private static final Logger log = LoggerFactory.getLogger(DeadLocker.class);
 	private final Object lock = new Object();
 
 	/**

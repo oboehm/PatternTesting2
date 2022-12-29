@@ -7,7 +7,7 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import clazzfish.monitor.ClasspathMonitor;
 import patterntesting.runtime.util.Converter;
@@ -28,7 +28,7 @@ import patterntesting.runtime.util.Converter;
  */
 public final class SerializableTester {
 
-	private static final Logger LOG = LogManager.getLogger(SerializableTester.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SerializableTester.class);
 	private static final ClasspathMonitor CLASSPATH_MONITOR = ClasspathMonitor.getInstance();
 
 	/** Utitlity class - no need to instantiate it. */

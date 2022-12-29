@@ -17,16 +17,19 @@
  */
 package patterntesting.sample.jmx;
 
-import java.lang.management.ManagementFactory;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-
-import javax.management.*;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.runtime.jmx.MBeanRegistry;
 import patterntesting.runtime.util.ThreadUtil;
+
+import javax.management.JMException;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+import java.lang.management.ManagementFactory;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This is a simple example how you can to write an MBean and how you can use
@@ -38,7 +41,7 @@ import patterntesting.runtime.util.ThreadUtil;
 public final class AlarmClock extends TimerTask implements AlarmClockMBean,
         MBeanRegistry {
 
-    private static final Logger log = LogManager.getLogger();
+    private static final Logger log = LoggerFactory.getLogger(AlarmClock.class);
     private Date alarmTime;
     private Timer timer;
 

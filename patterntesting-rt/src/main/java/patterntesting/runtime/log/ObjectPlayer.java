@@ -25,7 +25,7 @@ import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.aspectj.lang.JoinPoint;
 
 import patterntesting.runtime.io.*;
@@ -40,7 +40,7 @@ import patterntesting.runtime.util.*;
  */
 public final class ObjectPlayer {
 
-	private static final Logger LOG = LogManager.getLogger(ObjectPlayer.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ObjectPlayer.class);
 	private static final AbstractSerializer SERIALIZER = AbstractSerializer.getInstance();
 	private final Map<String, List<Object>> loggedJoinpoints = new HashMap<>();
 

@@ -20,8 +20,8 @@
 package patterntesting.runtime.monitor;
 
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.JUnitCore;
@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public final class ProfileTest {
 
-    private static final Logger log = LogManager.getLogger(ProfileTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ProfileTest.class);
     private static final MBeanServer mbeanServer = ManagementFactory
             .getPlatformMBeanServer();
     private static final ProfileStatistic statistic = ProfileStatistic.getInstance();

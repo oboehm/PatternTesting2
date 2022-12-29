@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.junit.v4;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -41,7 +41,7 @@ import patterntesting.runtime.junit.SmokeRunner;
 @RunWith(SmokeRunner.class)
 public final class SkipTestOnFakeTest {
 
-    private static final Logger log = LogManager.getLogger(SkipTestOnFakeTest.class);
+    private static final Logger log = LoggerFactory.getLogger(SkipTestOnFakeTest.class);
 
     /**
      * Test dummy which should be always called.

@@ -18,8 +18,8 @@
 
 package patterntesting.runtime.junit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public final class ClassTesterTest {
 
-	private static final Logger LOG = LogManager.getLogger(ClassTesterTest.class);
+	private final Logger LOG = LoggerFactory.getLogger(ClassTesterTest.class);
     private static ClassTester classTester;
 
     /**

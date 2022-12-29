@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.junit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 public final class IOTesterTest {
 
-    private static final Logger LOG = LogManager.getLogger(IOTesterTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(IOTesterTest.class);
 
     /**
      * Test method for

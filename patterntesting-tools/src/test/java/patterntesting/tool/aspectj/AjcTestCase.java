@@ -19,7 +19,7 @@
  */
 package patterntesting.tool.aspectj;
 
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.LoggerFactory;
 
 import java.util.Enumeration;
 import java.util.Map;
@@ -38,7 +38,7 @@ import static org.junit.Assert.fail;
 public class AjcTestCase
 {
 	/** For normal logging. */
-	private static final org.apache.logging.log4j.Logger LOG = LogManager.getLogger(AjcTestCase.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(AjcTestCase.class);
 
    /**
     * The AjcXml compiler.

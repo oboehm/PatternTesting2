@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.junit.extension;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import patterntesting.runtime.annotation.RunTestOn;
@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 @ExtendWith(SmokeTestExtension.class)
 class RunTestOnTest {
 
-    private static final Logger LOG = LogManager.getLogger(RunTestOnTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RunTestOnTest.class);
     private static String osName = System.getProperty("os.name");
     private static String osArch = System.getProperty("os.arch");
     private static String osVersion = System.getProperty("os.version");

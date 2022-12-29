@@ -23,7 +23,7 @@ import java.util.*;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import clazzfish.monitor.ClasspathMonitor;
 
@@ -36,7 +36,7 @@ import clazzfish.monitor.ClasspathMonitor;
  */
 public final class ImmutableTester extends AbstractTester {
 
-	private static final Logger LOG = LogManager.getLogger(ImmutableTester.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ImmutableTester.class);
 	private static final ClasspathMonitor classpathMonitor = ClasspathMonitor.getInstance();
 
 	/**

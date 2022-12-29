@@ -20,7 +20,7 @@
 
 package patterntesting.tool.aspectj;
 
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.LoggerFactory;
 import org.aspectj.tools.ant.taskdefs.AjcTask;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public final class AjcXmlTaskTest {
 
-    private static final org.apache.logging.log4j.Logger LOG = LogManager.getLogger(AjcXmlTaskTest.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(AjcXmlTaskTest.class);
     private final AjcXmlTask compiler = new AjcXmlTask();
 
     /**

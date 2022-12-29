@@ -20,8 +20,8 @@
 
 package patterntesting.concurrent.junit.internal;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
@@ -41,7 +41,7 @@ import patterntesting.runtime.util.Environment;
  */
 public final class BackgroundRunner extends Runner {
 
-    private static final Logger log = LogManager.getLogger(BackgroundRunner.class);
+    private static final Logger log = LoggerFactory.getLogger(BackgroundRunner.class);
     private static int threadNumber = 1;
     private final Runner wrapped;
     private final RecordingRunNotifier recorder = new RecordingRunNotifier();

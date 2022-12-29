@@ -22,8 +22,8 @@ package patterntesting.runtime.io;
 
 import java.io.*;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 /**
  * If extends {@link BufferedReader} but provides you the line number in which
@@ -34,7 +34,7 @@ import org.apache.logging.log4j.*;
  */
 public final class LineReader extends BufferedReader {
 
-	private static final Logger LOG = LogManager.getLogger(LineReader.class);
+	private static final Logger LOG = LoggerFactory.getLogger(LineReader.class);
 	private int lineNumber = 0;
 
 	/**

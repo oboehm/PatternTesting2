@@ -19,7 +19,7 @@
  */
 package patterntesting.exception;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.annotation.exception.TestException;
 import patterntesting.runtime.util.Assertions;
@@ -31,7 +31,7 @@ import patterntesting.runtime.util.Assertions;
  */
 public aspect TestExceptionAspect extends AbstractTestExceptionAspect {
 
-    private static final Logger log = LogManager.getLogger(TestExceptionAspect.class);
+    private static final Logger log = LoggerFactory.getLogger(TestExceptionAspect.class);
 
     /**
      * To return the aspect specific logger to the super aspect.

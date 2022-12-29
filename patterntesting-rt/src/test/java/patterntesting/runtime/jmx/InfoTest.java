@@ -20,8 +20,8 @@ package patterntesting.runtime.jmx;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.net.URI;
@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public final class InfoTest {
 
-    private static final Logger LOG = LogManager.getLogger(InfoTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(InfoTest.class);
     private final Info info = new Info();
 
     /**

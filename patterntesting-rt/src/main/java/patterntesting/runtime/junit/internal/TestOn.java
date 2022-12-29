@@ -22,8 +22,8 @@ package patterntesting.runtime.junit.internal;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.runtime.net.Localhost;
 import patterntesting.runtime.util.Converter;
 import patterntesting.runtime.util.Environment;
@@ -44,7 +44,7 @@ import java.util.Date;
  */
 public final class TestOn {
 
-	private static final Logger LOG = LogManager.getLogger(TestOn.class);
+	private static final Logger LOG = LoggerFactory.getLogger(TestOn.class);
 	private static final String[] EMPTY_STRINGS = { "" };
 
 	private final Environment env;

@@ -31,7 +31,7 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.*;
 
 import org.apache.commons.lang3.*;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.runtime.io.FileInputStreamReader;
 import clazzfish.monitor.ClasspathMonitor;
@@ -49,7 +49,7 @@ import clazzfish.monitor.ClasspathMonitor;
  */
 public class Environment {
 
-	private static final Logger LOG = LogManager.getLogger(Environment.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Environment.class);
 	private static final String FALSE = "false";
 
 	/** The only instance of this class. */

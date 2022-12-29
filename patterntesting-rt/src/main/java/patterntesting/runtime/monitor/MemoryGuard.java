@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime.monitor;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 import patterntesting.runtime.util.Converter;
 
@@ -33,7 +33,7 @@ import patterntesting.runtime.util.Converter;
  */
 public final class MemoryGuard {
 
-	private static final Logger LOG = LogManager.getLogger(MemoryGuard.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MemoryGuard.class);
 	private static final long MAX_MEM = Runtime.getRuntime().maxMemory();
 	private static BackgroundLogger backgroundTask;
 

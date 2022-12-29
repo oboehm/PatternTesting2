@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.log;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 /**
  * This class is a kind of performance logger to be able to log the execution
@@ -65,7 +65,7 @@ public final class PerfLogger {
 	 *            the clazz
 	 */
 	public PerfLogger(final Class<?> clazz) {
-		this(LogManager.getLogger(clazz));
+		this(LoggerFactory.getLogger(clazz));
 	}
 
 	/**

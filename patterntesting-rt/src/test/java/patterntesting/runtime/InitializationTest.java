@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.init.CrashBean;
@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 public final class InitializationTest {
 
-	private static final Logger LOG = LogManager.getLogger(InitializationTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(InitializationTest.class);
 	private static final String testClassName = CrashBean.class.getName();
 
 	/**

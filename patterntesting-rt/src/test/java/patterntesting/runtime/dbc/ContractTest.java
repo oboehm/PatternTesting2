@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime.dbc;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.util.Assertions;
@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
  */
 public class ContractTest {
 
-    private static Logger log = LogManager.getLogger(ContractTest.class);
+    private static Logger log = LoggerFactory.getLogger(ContractTest.class);
     private final ContractViolator rowdie = new ContractViolator();
 
     /**
@@ -70,7 +70,7 @@ public class ContractTest {
     
     static class ContractViolator implements Contract {
 
-        private static Logger LOG = LogManager.getLogger(ContractViolator.class);
+        private static Logger LOG = LoggerFactory.getLogger(ContractViolator.class);
         private boolean valid = true;
 
         public void violateInvariant() {

@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.SocketException;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public final class ExceptionFactoryTest extends AbstractExceptionTest {
 
-    private static final Logger log = LogManager.getLogger(ExceptionFactoryTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ExceptionFactoryTest.class);
     private final ExceptionFactory factory = ExceptionFactory.getInstance();
 
     /**

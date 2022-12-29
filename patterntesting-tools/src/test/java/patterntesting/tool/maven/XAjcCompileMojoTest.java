@@ -21,9 +21,7 @@
 package patterntesting.tool.maven;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.util.OptionConverter;
+import org.apache.log4j.helpers.OptionConverter;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.DefaultArtifact;
 import org.apache.maven.artifact.handler.ArtifactHandler;
@@ -34,6 +32,8 @@ import org.apache.maven.plugin.Mojo;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.mojo.aspectj.Module;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +49,7 @@ import java.util.Properties;
  */
 public class XAjcCompileMojoTest extends AbstractMojoTestCase {
 
-    private static final Logger LOG = LogManager.getLogger(XAjcCompileMojoTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(XAjcCompileMojoTest.class);
 
     /**
      * Sets up the environment for the Mojo.

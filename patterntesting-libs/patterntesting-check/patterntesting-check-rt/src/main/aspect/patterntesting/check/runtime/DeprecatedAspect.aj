@@ -20,8 +20,8 @@
 package patterntesting.check.runtime;
 
 import org.aspectj.lang.JoinPoint;
-import org.apache.logging.log4j.*;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.*;
+import org.slf4j.LoggerFactory;
 
 /**
  * Do you have developers who are resistent against deprecated methods?
@@ -37,7 +37,7 @@ import org.apache.logging.log4j.LogManager;
  */
 public aspect DeprecatedAspect extends AbstractDeprecatedAspect {
     
-    private static final Logger LOG = LogManager.getLogger(DeprecatedAspect.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DeprecatedAspect.class);
     
     /**
      * To return the aspect specific logger to the super aspect.

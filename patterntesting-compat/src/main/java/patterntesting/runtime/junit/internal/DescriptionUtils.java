@@ -21,8 +21,8 @@
 package patterntesting.runtime.junit.internal;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.runner.Description;
 import patterntesting.annotation.check.runtime.MayReturnNull;
 
@@ -44,7 +44,7 @@ import java.util.regex.Pattern;
  */
 public abstract class DescriptionUtils {
 
-	private static final Logger LOG = LogManager.getLogger(DescriptionUtils.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DescriptionUtils.class);
 	private static final Pattern METHOD_NAME_PATTERN = Pattern.compile("(.*)\\((.*)\\)");
 
 	/** Utility class - no need to instantiate it. */

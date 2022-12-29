@@ -22,8 +22,8 @@ import clazzfish.monitor.ClasspathMonitor;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.runtime.util.Converter;
 
 import java.io.File;
@@ -56,7 +56,7 @@ import java.util.jar.JarFile;
 public final class XrayClassLoader extends ClassLoader {
 
 	private static final ClasspathMonitor classpathMonitor = ClasspathMonitor.getInstance();
-	private static final Logger LOG = LogManager.getLogger(XrayClassLoader.class);
+	private static final Logger LOG = LoggerFactory.getLogger(XrayClassLoader.class);
 	private final Map<String, Class<?>> loadedClassMap = new HashMap<>();
 
 	/**

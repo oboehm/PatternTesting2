@@ -21,8 +21,8 @@
 package patterntesting.runtime.log;
 
 import org.apache.commons.lang3.time.StopWatch;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
  */
 public class PerfLoggerTest {
 
-    private static final Logger log = LogManager.getLogger(PerfLoggerTest.class);
+    private static final Logger log = LoggerFactory.getLogger(PerfLoggerTest.class);
     private final static PerfLogger perfLogger = new PerfLogger(log);
 
     /**

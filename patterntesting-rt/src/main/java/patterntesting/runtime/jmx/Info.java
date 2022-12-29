@@ -27,7 +27,7 @@ import java.util.jar.*;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.runtime.NullConstants;
 import patterntesting.runtime.io.Resource;
@@ -43,7 +43,7 @@ import clazzfish.monitor.ClasspathMonitor;
  */
 public class Info implements InfoMBean {
 
-	private static final Logger LOG = LogManager.getLogger(Info.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Info.class);
 	private static final String MANIFEST_URI = "Manifest-URI";
 	private final Properties properties;
 	private final Manifest manifest;

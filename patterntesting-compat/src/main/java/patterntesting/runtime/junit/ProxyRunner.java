@@ -25,8 +25,8 @@ import java.lang.reflect.Constructor;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.ParentRunner;
@@ -47,7 +47,7 @@ import patterntesting.runtime.util.ReflectionHelper;
  */
 public class ProxyRunner extends SmokeRunner {
 
-	private static final Logger LOG = LogManager.getLogger(ProxyRunner.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ProxyRunner.class);
 	private ParentRunner<FrameworkMethod> delegateRunner;
 
 	/**

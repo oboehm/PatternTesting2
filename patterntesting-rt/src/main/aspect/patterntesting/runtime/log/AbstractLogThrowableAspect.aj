@@ -19,7 +19,7 @@
  */
 package patterntesting.runtime.log;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.aspectj.lang.JoinPoint;
 
 import patterntesting.runtime.util.JoinPointHelper;

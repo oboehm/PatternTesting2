@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 public class StackTraceScannerTest {
 
-    private static final Logger LOG = LogManager.getLogger(StackTraceScannerTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StackTraceScannerTest.class);
 
     /**
      * Default constructor.

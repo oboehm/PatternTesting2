@@ -20,7 +20,7 @@ package patterntesting.runtime.monitor;
 
 import java.util.List;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 /**
  * This is the counterpart to JamonMonitorFactory. It encapsulate the different
@@ -31,7 +31,7 @@ import org.apache.logging.log4j.*;
  */
 public final class SimpleProfileMonitorFactory extends ProfileMonitorFactory {
 
-	private static final Logger LOG = LogManager.getLogger(SimpleProfileMonitorFactory.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SimpleProfileMonitorFactory.class);
 	private int maxSize = Integer.MAX_VALUE;
 
 	/**

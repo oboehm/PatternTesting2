@@ -24,7 +24,7 @@ import java.lang.management.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 /**
  * You can use JMX and the 'jconsole' to find dead locks. But perhaps you can't
@@ -41,7 +41,7 @@ import org.apache.logging.log4j.*;
  */
 public final class ThreadDeadLockMonitor {
 
-	private static final Logger log = LogManager.getLogger(ThreadDeadLockMonitor.class);
+	private static final Logger log = LoggerFactory.getLogger(ThreadDeadLockMonitor.class);
 	private final Timer threadCheck = new Timer(true);
 	private final ThreadMXBean mbean = ManagementFactory.getThreadMXBean();
 	private final Collection<DeadLockListener> listeners = new CopyOnWriteArraySet<DeadLockListener>();

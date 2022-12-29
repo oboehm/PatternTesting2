@@ -21,8 +21,8 @@
 package patterntesting.runtime.util;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.net.URI;
 
@@ -39,7 +39,7 @@ import java.net.URI;
  */
 public final class ClasspathHelper {
 
-	private static final Logger LOG = LogManager.getLogger(ClasspathHelper.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ClasspathHelper.class);
 
 	/** to avoid instantiation */
 	private ClasspathHelper() {

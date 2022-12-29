@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.junit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.util.StringConverter;
 
@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public final class FileTesterTest {
 
-    private static final Logger LOG = LogManager.getLogger(FileTesterTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FileTesterTest.class);
     private static final File DOSFILE1 = new File(
             "src/test/resources/patterntesting/runtime/junit/dosfile1.txt");
     private static final File FILE1 = new File(

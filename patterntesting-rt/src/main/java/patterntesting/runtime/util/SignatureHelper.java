@@ -23,8 +23,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.*;
 
@@ -40,7 +40,7 @@ import patterntesting.runtime.util.reflect.MethodSignatureImpl;
  */
 public class SignatureHelper {
 
-	private static final Logger LOG = LogManager.getLogger(SignatureHelper.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SignatureHelper.class);
 
 	/** Utility class - no need to instantiate it */
 	private SignatureHelper() {

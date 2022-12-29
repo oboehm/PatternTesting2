@@ -22,8 +22,8 @@ package patterntesting.runtime.monitor;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.aspectj.lang.Signature;
 
 import patterntesting.runtime.util.SignatureHelper;
@@ -37,7 +37,7 @@ import patterntesting.runtime.util.SignatureHelper;
  */
 public final class SimpleProfileMonitor extends AbstractProfileMonitor {
 
-	private static final Logger LOG = LogManager.getLogger(SimpleProfileMonitor.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SimpleProfileMonitor.class);
 	private SimpleProfileMonitor parent;
 	private final Map<String, SimpleProfileMonitor> childs = new ConcurrentHashMap<>();
 	private final String label;

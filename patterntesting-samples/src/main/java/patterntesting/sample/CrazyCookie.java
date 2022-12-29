@@ -19,8 +19,8 @@
  */
 package patterntesting.sample;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.*;
 import java.util.Date;
@@ -48,7 +48,7 @@ public final class CrazyCookie implements Serializable {
 	/** argh, you should use a constant here!!! */
 	private static final long serialVersionUID = System.currentTimeMillis();
 	//private static final long serialVersionUID = 20090706;
-	private static final Logger log = LogManager.getLogger();
+	private static final Logger log = LoggerFactory.getLogger(CrazyCookie.class);
 	private final File file = createTempFile();
 	private final Date created = new Date();
 

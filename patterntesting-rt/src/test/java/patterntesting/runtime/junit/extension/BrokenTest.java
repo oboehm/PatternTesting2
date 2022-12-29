@@ -18,8 +18,8 @@
 
 package patterntesting.runtime.junit.extension;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SmokeTestExtension.class)
 public final class BrokenTest {
 
-    private static final Logger log = LogManager.getLogger(BrokenTest.class);
+    private static final Logger log = LoggerFactory.getLogger(BrokenTest.class);
     private static Map<String, Boolean> shouldBeExecuted = new HashMap<>();
 
     @BeforeAll

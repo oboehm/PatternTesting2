@@ -21,8 +21,8 @@
 package patterntesting.check.runtime;
 
 import org.aspectj.lang.JoinPoint;
-import org.apache.logging.log4j.*;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.*;
+import org.slf4j.LoggerFactory;
 
 import patterntesting.annotation.check.runtime.Zombie;
 
@@ -43,7 +43,7 @@ import patterntesting.annotation.check.runtime.Zombie;
  */
 public aspect ZombieAspect extends AbstractDeprecatedAspect {
 
-    private static final Logger LOG = LogManager.getLogger(ZombieAspect.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ZombieAspect.class);
     
     /**
      * To return the aspect specific logger to the super aspect.

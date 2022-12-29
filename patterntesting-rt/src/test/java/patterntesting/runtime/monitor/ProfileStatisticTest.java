@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime.monitor;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.AdviceSignature;
 import org.aspectj.lang.reflect.CatchClauseSignature;
@@ -57,7 +57,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class ProfileStatisticTest {
 
-    private static final Logger log = LogManager.getLogger(ProfileStatisticTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ProfileStatisticTest.class);
     private static final MBeanServer mbeanServer = ManagementFactory.getPlatformMBeanServer();
     private static Signature[] signatures = new Signature[5];
     private final ProfileStatistic profileStatistic = getProfileStatistic();

@@ -21,7 +21,7 @@
 package patterntesting.tool.aspectj;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.junit.FileTester;
@@ -39,7 +39,7 @@ import java.util.Vector;
  */
 public final class XMLFormatterTest {
 
-    private static final org.apache.logging.log4j.Logger LOG = LogManager.getLogger(XMLFormatterTest.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(XMLFormatterTest.class);
     private static Vector<AjcFileResult> ajcFileResults = new Vector<AjcFileResult>();
     private final XMLFormatter xmlFormatter = new XMLFormatter();
 

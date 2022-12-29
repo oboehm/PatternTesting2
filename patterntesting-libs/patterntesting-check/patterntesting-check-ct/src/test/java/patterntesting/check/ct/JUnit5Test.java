@@ -17,8 +17,8 @@
  */
 package patterntesting.check.ct;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import patterntesting.annotation.check.ct.SuppressJUnitWarning;
 
@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 public final class JUnit5Test {
 
-    private static final Logger LOG = LogManager.getLogger(JUnit5Test.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JUnit5Test.class);
 
     /**
      * This test method should give a warning that exceptions should be handled
@@ -45,7 +45,7 @@ public final class JUnit5Test {
         try {
             LOG.info("testDummy() does nothing");
         } catch (RuntimeException e) {
-            LOG.error(e);
+            LOG.error("test failed", e);
             fail("test failed");
         }
     }

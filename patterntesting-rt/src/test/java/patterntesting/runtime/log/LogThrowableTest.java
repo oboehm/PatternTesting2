@@ -20,8 +20,8 @@
 package patterntesting.runtime.log;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.LogThrowable;
@@ -38,7 +38,7 @@ import static org.junit.Assert.*;
 @LogThrowable
 public final class LogThrowableTest {
 
-	private static final Logger log = LogManager.getLogger(LogThrowableTest.class);
+	private static final Logger log = LoggerFactory.getLogger(LogThrowableTest.class);
     private static final LogThrowableAspect logThrowableAspect = LogThrowableAspect.aspectOf();
     private static final Logger aspectLog = logThrowableAspect.getLog();
 	private LogRecorder testLog;

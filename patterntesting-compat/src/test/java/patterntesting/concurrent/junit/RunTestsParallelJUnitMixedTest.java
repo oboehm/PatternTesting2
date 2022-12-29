@@ -19,8 +19,8 @@
 package patterntesting.concurrent.junit;
 
 import junit.framework.TestCase;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +37,7 @@ import java.util.Date;
 @RunWith(ParallelRunner.class)
 public final class RunTestsParallelJUnitMixedTest extends TestCase {
 
-    private static final Logger log = LogManager.getLogger(RunTestsParallelJUnitMixedTest.class);
+    private static final Logger log = LoggerFactory.getLogger(RunTestsParallelJUnitMixedTest.class);
     private final Date now = new Date();
 
     /**

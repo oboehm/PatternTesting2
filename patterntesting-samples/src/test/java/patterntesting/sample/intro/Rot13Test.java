@@ -20,8 +20,8 @@ package patterntesting.sample.intro;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import patterntesting.runtime.annotation.Broken;
@@ -53,7 +53,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SmokeTestExtension.class)
 public class Rot13Test {
 
-    private static final Logger log = LogManager.getLogger(Rot13Test.class);
+    private static final Logger log = LoggerFactory.getLogger(Rot13Test.class);
 
     /**
      * Let's start with a simple test for the crypt method for a single

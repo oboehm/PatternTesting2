@@ -26,8 +26,8 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.junit.*;
 import org.junit.internal.AssumptionViolatedException;
 import org.junit.internal.runners.model.MultipleFailureException;
@@ -60,7 +60,7 @@ import patterntesting.runtime.junit.internal.SmokeFilter;
 @SuppressWarnings("deprecation")
 public class SmokeRunner extends ParentRunner<FrameworkMethod> {
 
-	private static final Logger LOG = LogManager.getLogger(SmokeRunner.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SmokeRunner.class);
 	private final SmokeFilter xfilter = new SmokeFilter();
 
 	/**

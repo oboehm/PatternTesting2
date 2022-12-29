@@ -21,8 +21,8 @@
 package patterntesting.tool.html;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.Test;
 import patterntesting.runtime.io.ExtendedFile;
 
@@ -42,7 +42,7 @@ import static org.junit.Assert.assertTrue;
  */
 public final class UmlautEncoderTest {
     
-    private static final Logger log = LogManager.getLogger(UmlautEncoderTest.class);
+    private static final Logger log = LoggerFactory.getLogger(UmlautEncoderTest.class);
     private static final File INPUT_ISO = new File(
             "src/test/resources/patterntesting/tool/html/input-iso8859.html");
     private static final File INPUT_UTF = new File(

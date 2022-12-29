@@ -21,8 +21,8 @@
 package patterntesting.runtime.log;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.junit.FileTester;
 import patterntesting.runtime.mock.JoinPointStaticPartMock;
@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 public final class SequenceGrapherTest {
 
-    private static final Logger LOG = LogManager.getLogger(SequenceGrapherTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SequenceGrapherTest.class);
     private static final Pattern[] IGNORED_LINES = { Pattern.compile("#.*"),
             Pattern.compile("[ \\t]*"), Pattern.compile("boxwid = .*"), Pattern.compile("step().*") };
 

@@ -23,8 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.aspectj.lang.JoinPoint;
 
 import patterntesting.annotation.check.runtime.NullArgsAllowed;
@@ -42,7 +42,7 @@ import patterntesting.runtime.util.SignatureHelper;
  */
 public class LazyObjectRecorder extends ObjectRecorder {
 
-	private static final Logger LOG = LogManager.getLogger(LazyObjectRecorder.class);
+	private static final Logger LOG = LoggerFactory.getLogger(LazyObjectRecorder.class);
 	private final Map<String, ValueContainer> cachedJoinpoints = new HashMap<>();
 
 	/**

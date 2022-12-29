@@ -25,8 +25,8 @@ import static org.junit.Assert.fail;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.junit.*;
 import org.junit.runner.RunWith;
 
@@ -43,7 +43,7 @@ import patterntesting.runtime.junit.SmokeRunner;
 @RunWith(SmokeRunner.class)
 public final class RunTestOnTest {
 
-    private static final Logger LOG = LogManager.getLogger(RunTestOnTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RunTestOnTest.class);
     private static String osName = System.getProperty("os.name");
     private static String osArch = System.getProperty("os.arch");
     private static String osVersion = System.getProperty("os.version");

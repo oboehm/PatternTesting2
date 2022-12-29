@@ -26,7 +26,7 @@ import java.util.zip.*;
 
 import org.apache.commons.io.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 /**
  * Unfortunately we can't extends URI because this is a final class. So now it
@@ -49,7 +49,7 @@ import org.apache.logging.log4j.*;
  */
 public final class ArchivEntry {
 
-	private static final Logger LOG = LogManager.getLogger(ArchivEntry.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ArchivEntry.class);
 	private final URI uri;
 	private Long size = null;
 

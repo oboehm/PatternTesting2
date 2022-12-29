@@ -23,7 +23,7 @@ import javax.management.JMException;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.CodeSignature;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.runtime.jmx.MBeanHelper;
 import patterntesting.runtime.util.*;
@@ -51,7 +51,7 @@ import patterntesting.runtime.util.*;
  */
 public final class ExceptionFactory implements ExceptionFactoryMBean {
 
-    private static final Logger LOG = LogManager.getLogger(ExceptionFactory.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ExceptionFactory.class);
     private static final ExceptionFactory INSTANCE;
     /** number of provoked exceptions. */
     private long numberOfProvoked = 0L;

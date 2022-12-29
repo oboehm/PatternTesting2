@@ -23,7 +23,7 @@ package patterntesting.runtime.log;
 import java.io.*;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 /**
  * This is a common super class for all classes which do a kind of logging. It
@@ -35,7 +35,7 @@ import org.apache.logging.log4j.*;
  */
 public abstract class AbstractLogger extends Thread implements AutoCloseable {
 
-	private final static Logger LOG = LogManager.getLogger(AbstractLogger.class);
+	private final static Logger LOG = LoggerFactory.getLogger(AbstractLogger.class);
 	private final OutputStream logStream;
 
 	/**

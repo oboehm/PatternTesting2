@@ -23,8 +23,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.junit.ArrayTester;
@@ -58,7 +58,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public final class ArchivEntryTest {
 
-    private static final Logger LOG = LogManager.getLogger(ArchivEntryTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ArchivEntryTest.class);
     private static ArchivEntry zipEntry;
     private static File mavenRepositoryDir;
     private static File log0jar;

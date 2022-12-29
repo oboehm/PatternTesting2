@@ -19,8 +19,8 @@
  */
 package patterntesting.check.runtime;
 
-import org.apache.logging.log4j.*;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.*;
+import org.slf4j.LoggerFactory;
 import patterntesting.annotation.check.runtime.*;
 
 /**
@@ -39,7 +39,7 @@ import patterntesting.annotation.check.runtime.*;
  */
 public aspect NullPointerTrap  extends AbstractNullPointerTrap {
 
-    private static final Logger LOG = LogManager.getLogger(NullPointerTrap.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NullPointerTrap.class);
 
     static {
         if (assertEnabled) {

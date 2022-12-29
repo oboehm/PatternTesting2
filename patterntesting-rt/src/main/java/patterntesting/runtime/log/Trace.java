@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.log;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.SourceLocation;
 
@@ -37,7 +37,7 @@ import patterntesting.runtime.util.JoinPointHelper;
  */
 public final class Trace {
 
-	private static final Logger LOG = LogManager.getLogger(Trace.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Trace.class);
 	private static final int INDENT_START = calibrateStacktraceDepth();
 
 	static {

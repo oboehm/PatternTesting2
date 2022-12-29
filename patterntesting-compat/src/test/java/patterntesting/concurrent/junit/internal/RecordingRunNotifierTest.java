@@ -18,8 +18,8 @@
 
 package patterntesting.concurrent.junit.internal;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.Result;
@@ -45,7 +45,7 @@ import static org.junit.Assert.*;
  */
 public final class RecordingRunNotifierTest {
 
-    private static final Logger log = LogManager.getLogger(RecordingRunNotifierTest.class);
+    private static final Logger log = LoggerFactory.getLogger(RecordingRunNotifierTest.class);
     private static int counter;
     private final RecordingRunNotifier notifier = new RecordingRunNotifier();
 

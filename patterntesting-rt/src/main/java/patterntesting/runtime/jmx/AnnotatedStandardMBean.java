@@ -5,8 +5,8 @@ import java.util.*;
 
 import javax.management.*;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 import patterntesting.runtime.util.Converter;
 
@@ -21,7 +21,7 @@ import patterntesting.runtime.util.Converter;
  */
 public class AnnotatedStandardMBean extends StandardMBean {
 
-	private static final Logger LOG = LogManager.getLogger(AnnotatedStandardMBean.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AnnotatedStandardMBean.class);
 
 	/**
 	 * Instance where the MBean interface is implemented by another object.

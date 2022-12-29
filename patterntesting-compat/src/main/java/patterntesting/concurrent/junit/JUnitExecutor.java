@@ -1,7 +1,7 @@
 package patterntesting.concurrent.junit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.annotation.check.runtime.MayReturnNull;
 import patterntesting.runtime.util.Environment;
 
@@ -23,8 +23,8 @@ import java.util.concurrent.*;
  */
 public abstract class JUnitExecutor {
 
-    private static final Logger LOG = LogManager.getLogger(JUnitExecutor.class);
-    private static final Logger RUNLOG = LogManager.getLogger(ParallelRunner.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JUnitExecutor.class);
+    private static final Logger RUNLOG = LoggerFactory.getLogger(ParallelRunner.class);
     private static final Set<Class<?>> SETUP_CLASSES = new HashSet<>();
     private final Class<?> testClass;
     private boolean runParallel;

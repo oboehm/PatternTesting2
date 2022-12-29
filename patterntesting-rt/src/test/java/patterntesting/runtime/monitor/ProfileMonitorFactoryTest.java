@@ -18,8 +18,8 @@
 
 package patterntesting.runtime.monitor;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 public abstract class ProfileMonitorFactoryTest {
 
-	private static final Logger LOG = LogManager.getLogger(ProfileMonitorFactoryTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ProfileMonitorFactoryTest.class);
 	private final ProfileMonitorFactory factory = this.createProfileMonitorFactory();
 	
 	/**

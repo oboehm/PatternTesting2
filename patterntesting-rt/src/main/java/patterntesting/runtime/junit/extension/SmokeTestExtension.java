@@ -18,8 +18,8 @@
 package patterntesting.runtime.junit.extension;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.extension.ConditionEvaluationResult;
 import org.junit.jupiter.api.extension.ExecutionCondition;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -47,7 +47,7 @@ import java.util.Optional;
  */
 public class SmokeTestExtension implements ExecutionCondition, TestExecutionListener {
 
-    private static final Logger LOG = LogManager.getLogger();
+    private static final Logger LOG = LoggerFactory.getLogger(SmokeTestExtension.class);
     private final Date today = new Date();
     private final Environment env = Environment.INSTANCE;
 

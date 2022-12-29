@@ -23,7 +23,7 @@ import java.util.Random;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.annotation.check.runtime.NullArgsAllowed;
 import patterntesting.runtime.util.*;

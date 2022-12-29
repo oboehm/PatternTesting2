@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Localhost.matches(..) accepts now timout parameter
 
+### Changed
+
+* switched to SLF4J as logging framework
+
 
 ## [2.2.20-YEARS] - 2022-04-14
 

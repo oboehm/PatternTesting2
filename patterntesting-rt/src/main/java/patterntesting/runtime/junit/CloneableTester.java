@@ -21,8 +21,8 @@
 package patterntesting.runtime.junit;
 
 import clazzfish.monitor.ClasspathMonitor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.runtime.exception.DetailedAssertionError;
 import patterntesting.runtime.util.Converter;
 
@@ -72,7 +72,7 @@ import java.util.regex.Pattern;
  */
 public final class CloneableTester extends AbstractTester {
 
-	private static final Logger LOG = LogManager.getLogger(CloneableTester.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CloneableTester.class);
 	private static final ClasspathMonitor classpathMonitor = ClasspathMonitor.getInstance();
 
 	/** Utility class - no need to instantiate it. */

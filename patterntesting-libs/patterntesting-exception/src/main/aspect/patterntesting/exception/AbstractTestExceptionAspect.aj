@@ -20,7 +20,7 @@
 
 package patterntesting.exception;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 
 import patterntesting.runtime.util.Assertions;

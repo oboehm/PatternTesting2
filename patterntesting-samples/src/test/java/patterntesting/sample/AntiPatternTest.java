@@ -18,8 +18,8 @@
 
 package patterntesting.sample;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.junit.ObjectTester;
 import patterntesting.runtime.junit.SerializableTester;
@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class AntiPatternTest {
 
-    private static final Logger log = LogManager.getLogger(AntiPatternTest.class);
+    private static final Logger log = LoggerFactory.getLogger(AntiPatternTest.class);
 
     /**
      * For successful testing you must enable assertions.

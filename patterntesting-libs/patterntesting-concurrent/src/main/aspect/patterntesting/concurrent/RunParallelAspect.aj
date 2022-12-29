@@ -20,7 +20,7 @@
 package patterntesting.concurrent;
 
 import org.aspectj.lang.annotation.SuppressAjWarnings;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.annotation.concurrent.RunParallel;
 import patterntesting.runtime.util.JoinPointHelper;
@@ -35,7 +35,7 @@ import patterntesting.runtime.util.JoinPointHelper;
 @SuppressAjWarnings({"adviceDidNotMatch"})
 public aspect RunParallelAspect percflow(parallelMethods()) {
 
-    private static Logger log = LogManager.getLogger(RunParallelAspect.class);
+    private static Logger log = LoggerFactory.getLogger(RunParallelAspect.class);
 
     static {
         log.debug("{} is successful initialized.", RunParallelAspect.class);

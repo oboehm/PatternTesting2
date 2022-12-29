@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.net;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.util.Converter;
@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public final class LocalhostTest {
 
-    private static final Logger log = LogManager.getLogger(LocalhostTest.class);
+    private static final Logger log = LoggerFactory.getLogger(LocalhostTest.class);
 
     /**
      * Test method for {@link Localhost#getInetAddresses()}.

@@ -21,8 +21,8 @@
 package patterntesting.exception.net;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 public final class SocketExceptionTest {
 
-    private static final Logger log = LogManager.getLogger(SocketExceptionTest.class);
+    private static final Logger log = LoggerFactory.getLogger(SocketExceptionTest.class);
 
     /**
      * Creates a NoRouteToHostException and examines the thrown exception.

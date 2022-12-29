@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.exception;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class NotFoundExceptionTest {
 
-    private static final Logger LOG = LogManager.getLogger(NotFoundException.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NotFoundException.class);
 
     /**
      * Test method for {@link NotFoundException#NotFoundException(String, Throwable)}.

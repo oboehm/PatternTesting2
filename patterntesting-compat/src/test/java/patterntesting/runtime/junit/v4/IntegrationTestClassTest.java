@@ -22,8 +22,8 @@ package patterntesting.runtime.junit.v4;
 
 import static org.junit.Assert.fail;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.junit.*;
 import org.junit.runner.RunWith;
 
@@ -45,7 +45,7 @@ import patterntesting.runtime.util.Environment;
 //@Ignore
 public final class IntegrationTestClassTest {
 
-    private static final Logger log = LogManager.getLogger(IntegrationTestClassTest.class);
+    private static final Logger log = LoggerFactory.getLogger(IntegrationTestClassTest.class);
 
     /**
      * Normally this setUp method should be not executed. Only if the system

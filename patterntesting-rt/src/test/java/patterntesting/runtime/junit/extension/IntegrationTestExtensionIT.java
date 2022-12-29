@@ -17,12 +17,10 @@
  */
 package patterntesting.runtime.junit.extension;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import patterntesting.runtime.junit.ObjectTester;
-import patterntesting.runtime.junit.extension.IntegrationTestExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.runtime.util.Environment;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -33,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 @ExtendWith(IntegrationTestExtension.class)
 class IntegrationTestExtensionIT {
 
-    private static final Logger LOG = LogManager.getLogger();
+    private static final Logger LOG = LoggerFactory.getLogger(IntegrationTestExtensionIT.class);
 
     @BeforeAll
     static void beforeAll() {

@@ -23,8 +23,8 @@ package patterntesting.runtime.junit;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 import patterntesting.runtime.util.Converter;
 
@@ -36,7 +36,7 @@ import patterntesting.runtime.util.Converter;
  */
 public class MapTester {
 
-	private static final Logger LOG = LogManager.getLogger(MapTester.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MapTester.class);
 
 	/** Utility class - no need to instantiate it. */
 	private MapTester() {

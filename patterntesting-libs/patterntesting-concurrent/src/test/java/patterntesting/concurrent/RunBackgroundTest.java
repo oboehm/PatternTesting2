@@ -17,8 +17,8 @@
  */
 package patterntesting.concurrent;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import patterntesting.annotation.concurrent.RunBackground;
 import patterntesting.runtime.log.LogRecorder;
@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class RunBackgroundTest {
 
-    private static final Logger log = LogManager.getLogger(RunBackgroundTest.class);
+    private static final Logger log = LoggerFactory.getLogger(RunBackgroundTest.class);
 
     /**
      * Test background run.

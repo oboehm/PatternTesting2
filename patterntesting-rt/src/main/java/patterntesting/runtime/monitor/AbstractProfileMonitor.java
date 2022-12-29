@@ -21,8 +21,8 @@ package patterntesting.runtime.monitor;
 
 import java.util.Locale;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 import patterntesting.runtime.util.Converter;
 
@@ -35,7 +35,7 @@ import patterntesting.runtime.util.Converter;
  */
 public abstract class AbstractProfileMonitor implements ProfileMonitor {
 
-	private static final Logger LOG = LogManager.getLogger(AbstractProfileMonitor.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AbstractProfileMonitor.class);
 
 	/**
 	 * The ProfileMonitor with the higher number of totals is considered as

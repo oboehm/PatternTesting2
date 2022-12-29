@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.io;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public final class LineReaderTest {
 
-    private static final Logger LOG = LogManager.getLogger(LineReaderTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LineReaderTest.class);
 
     /**
      * Test method for {@link LineReader#read()}.

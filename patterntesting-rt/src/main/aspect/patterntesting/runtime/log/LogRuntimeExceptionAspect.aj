@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime.log;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 
 import patterntesting.runtime.annotation.LogRuntimeException;
@@ -54,7 +54,7 @@ import patterntesting.runtime.annotation.LogRuntimeException;
 public aspect LogRuntimeExceptionAspect extends AbstractLogThrowableAspect {
 
     /** the log object. */
-    protected Logger log = LogManager.getLogger(LogRuntimeExceptionAspect.class);
+    protected Logger log = LoggerFactory.getLogger(LogRuntimeExceptionAspect.class);
 
     /**
      * For testing you can set the logger.

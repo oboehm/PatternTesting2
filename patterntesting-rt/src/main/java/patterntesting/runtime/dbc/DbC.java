@@ -3,8 +3,8 @@
  */
 package patterntesting.runtime.dbc;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 import patterntesting.runtime.util.Assertions;
 
@@ -15,7 +15,7 @@ import patterntesting.runtime.util.Assertions;
  */
 public final class DbC {
 
-	private static final Logger LOG = LogManager.getLogger(DbC.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DbC.class);
 
 	static {
 		if (Assertions.ENABLED) {

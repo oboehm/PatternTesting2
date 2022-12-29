@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.junit.internal;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.runners.model.FrameworkMethod;
 import patterntesting.annotation.check.runtime.MayReturnNull;
 
@@ -35,7 +35,7 @@ import java.lang.reflect.Method;
  */
 public final class JUnitHelper {
 
-	private static final Logger LOG = LogManager.getLogger(JUnitHelper.class);
+	private static final Logger LOG = LoggerFactory.getLogger(JUnitHelper.class);
 
 	/** No need to instantiate it (utility class). */
 	private JUnitHelper() {

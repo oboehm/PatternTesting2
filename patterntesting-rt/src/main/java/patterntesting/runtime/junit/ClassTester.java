@@ -18,8 +18,8 @@
 
 package patterntesting.runtime.junit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.runtime.exception.DetailedAssertionError;
 import patterntesting.runtime.junit.internal.XrayClassLoader;
 
@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class ClassTester extends AbstractTester {
 
-	private static final Logger LOG = LogManager.getLogger(ClassTester.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ClassTester.class);
 	private static final ClassTester INSTANCE = new ClassTester();
 
 	private final Class<?> clazz;

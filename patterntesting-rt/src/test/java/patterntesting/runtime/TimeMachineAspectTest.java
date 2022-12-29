@@ -25,8 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.junit.jupiter.api.Test;
 
 import patterntesting.runtime.annotation.TimeMachine;
@@ -41,7 +41,7 @@ import patterntesting.runtime.util.Converter;
  */
 public final class TimeMachineAspectTest {
 
-    private static final Logger LOG = LogManager.getLogger(TimeMachineAspectTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TimeMachineAspectTest.class);
 
     /**
      * The {@link TimeMachine} annotation does not work as expected because this

@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.*;
 
 import org.aspectj.lang.annotation.SuppressAjWarnings;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.annotation.concurrent.Synchronized;
 
@@ -46,7 +46,7 @@ import patterntesting.annotation.concurrent.Synchronized;
  */
 public aspect SynchronizedAspect perthis(@this(Synchronized)) {
 	
-	private static final Logger log = LogManager.getLogger(SynchronizedAspect.class);
+	private static final Logger log = LoggerFactory.getLogger(SynchronizedAspect.class);
 	private Lock objectLock = new ReentrantLock();
 	private static long timeout = 1800;
 	private static TimeUnit unit = TimeUnit.SECONDS;

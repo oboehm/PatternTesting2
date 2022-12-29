@@ -19,7 +19,7 @@
  */
 package patterntesting.exception.xml;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 import org.xml.sax.*;
 import org.xml.sax.helpers.XMLReaderFactory;
@@ -33,7 +33,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
  */
 public aspect XMLReaderFactoryAspect {
 
-    private static final Logger log = LogManager.getLogger(XMLReaderFactoryAspect.class);
+    private static final Logger log = LoggerFactory.getLogger(XMLReaderFactoryAspect.class);
 
     /**
      * SAXExceptions are sometimes hard to read because they don't contain

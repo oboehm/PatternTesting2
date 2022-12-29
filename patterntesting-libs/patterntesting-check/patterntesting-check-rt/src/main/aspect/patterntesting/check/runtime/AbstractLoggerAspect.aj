@@ -22,7 +22,7 @@ package patterntesting.check.runtime;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.annotation.check.runtime.SuppressLoggerWarning;
 import patterntesting.runtime.util.JoinPointHelper;
@@ -32,10 +32,10 @@ import patterntesting.runtime.util.JoinPointHelper;
  * for the wrong class. This can happen if you copy the create statement from
  * another class and forget to change the classname. E.g. if you copy
  * <pre>
- * private static final Logger log = LogManager.getLogger(MyClass.class);
+ * private static final Logger log = LoggerFactory.getLogger(MyClass.class);
  * </pre>
  * at the beginning of AnotherClass, you should not forget to change the
- * argument of {@link LogManager#getLogger(Class)} to "AnotherClass.class".
+ * argument of {@link LoggerFactory#getLogger(Class)} to "AnotherClass.class".
  * <p>
  * This aspect reminds you and prints a warning if you forgot it.
  * </p>
@@ -46,7 +46,7 @@ import patterntesting.runtime.util.JoinPointHelper;
 @SuppressLoggerWarning
 public abstract aspect AbstractLoggerAspect {
     
-    private static final Logger log = LogManager.getLogger(AbstractLoggerAspect.class);
+    private static final Logger log = LoggerFactory.getLogger(AbstractLoggerAspect.class);
 
     /**
      * Specify what the application code is that should be subject to the
@@ -58,10 +58,10 @@ public abstract aspect AbstractLoggerAspect {
     
     /**
      * The usual (and recommended) call to get a {@link Logger} is the call
-     * of {@link LogManager#getLogger(Class)}.
+     * of {@link LoggerFactory#getLogger(Class)}.
      */
     pointcut getClassLogger() :
-        (call(public org.apache.logging.log4j.Logger org.slf4j.LogManager.getClassLogger(java.lang.Class))
+        (call(public org.slf4j.Logger org.slf4j.LoggerFactory.getClassLogger(java.lang.Class))
         || call(public org.apache.commons.logging.Log org.apache.commons.logging.LogFactory.getLog(java.lang.Class))
         || call(public org.apache.log4j..Logger org.apache.log4j..Logger.getLogger(java.lang.Class)))
         && applicationCode();
@@ -71,14 +71,14 @@ public abstract aspect AbstractLoggerAspect {
      * as argument.
      */
     pointcut getStringLogger() :
-        (call(public org.apache.logging.log4j.Logger org.slf4j.LogManager.getClassLogger(java.lang.String))
+        (call(public org.slf4j.Logger org.slf4j.LoggerFactory.getClassLogger(java.lang.String))
         || call(public org.apache.log4j..Logger org.apache.log4j..Logger.getLogger(java.lang.String))
         || call(public org.apache.commons.logging.Log org.apache.commons.logging.LogFactory.getLog(java.lang.String))
         || call(public java.util.logging.Logger java.util.logging.Logger.getLogger(java.lang.String)))
         && applicationCode();
 
     /**
-     * If {@link LogManager#getLogger(Class)} is called we try to get the
+     * If {@link LoggerFactory#getLogger(Class)} is called we try to get the
      * class of the caller to verify if it matches the clazz argument.
      */
     @SuppressAjWarnings({"adviceDidNotMatch"})
@@ -110,7 +110,7 @@ public abstract aspect AbstractLoggerAspect {
     private static void check(final JoinPoint jp, final Class<?> clazz) {
         Class<?> callerClass = getCallerOf(jp);
         if (!clazz.equals(callerClass)) {
-            Logger classLogger = LogManager.getLogger(callerClass);
+            Logger classLogger = LoggerFactory.getLogger(callerClass);
             classLogger.warn("For " + JoinPointHelper.getAsShortString(jp) + " " + callerClass
                     + " is expected as argument in {}.", jp.getSourceLocation());
         } else if (log.isTraceEnabled()) {

@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public final class ReflectionHelperTest {
 
-    private static final Logger LOG = LogManager.getLogger(ReflectionHelperTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ReflectionHelperTest.class);
 
     /** The Constant NULL_STRING. */
     protected static final String NULL_STRING = null;

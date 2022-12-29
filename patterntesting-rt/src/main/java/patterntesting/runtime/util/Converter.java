@@ -23,8 +23,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.runtime.log.LogWatch;
 
 import java.io.*;
@@ -47,7 +47,7 @@ import static patterntesting.runtime.NullConstants.NULL_DATE;
  */
 public final class Converter {
 
-	private static final Logger LOG = LogManager.getLogger(Converter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Converter.class);
 
 	/** The different date patterns (date only) which are used by toDate(). */
 	private static final String[] datePatterns = { "dd-MMM-yyyy", "dd-MM-yyyy", "yyyy-MMM-dd", "yyyy-MM-dd",

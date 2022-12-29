@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public final class NestedZipFileTest {
     
-    private static final Logger LOG = LogManager.getLogger(NestedZipFileTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NestedZipFileTest.class);
     private static final File WORLD_WAR = new File("src/test/resources/patterntesting/runtime/monitor/world.war");
     private static final File WORLD_EAR = new File("src/test/resources/patterntesting/runtime/monitor/world.ear");
 

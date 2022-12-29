@@ -25,8 +25,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.custommonkey.xmlunit.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.xml.sax.SAXException;
@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public abstract class AbstractAcjXmlTest {
 
-    private static final Logger LOG = LogManager.getLogger(AbstractAcjXmlTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractAcjXmlTest.class);
 
     /**
      * We want to tell XMLUnit to ignore white spaces.

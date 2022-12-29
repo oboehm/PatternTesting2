@@ -21,8 +21,8 @@ package patterntesting.runtime.init;
 
 import java.util.Date;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 import patterntesting.runtime.annotation.GuardInitialization;
 
@@ -39,7 +39,7 @@ import patterntesting.runtime.annotation.GuardInitialization;
 public class CrashBean {
 
 	/** This initialization will fail if you don't have log4j.jar in your classpath */
-	private static final Logger LOG = LogManager.getLogger(CrashBean.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CrashBean.class);
 
 	/** This initialization always fails. @see Crash#Crash() */
 	protected static final Crash crash = new Crash();

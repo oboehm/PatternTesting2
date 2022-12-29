@@ -2,7 +2,7 @@ package patterntesting.tool.aspectj;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.io.ExtendedFile;
 
@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public final class TestAjcXml extends AjcTestCase {
     
-	private static org.apache.logging.log4j.Logger log = LogManager.getLogger(TestAjcXml.class);
+	private static org.slf4j.Logger log = LoggerFactory.getLogger(TestAjcXml.class);
 
     /**
      * Look, if we find the Joinpoint class.

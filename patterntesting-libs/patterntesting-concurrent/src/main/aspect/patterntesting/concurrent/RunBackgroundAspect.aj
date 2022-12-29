@@ -22,7 +22,7 @@ package patterntesting.concurrent;
 import java.util.*;
 
 import org.aspectj.lang.annotation.SuppressAjWarnings;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.annotation.concurrent.RunBackground;
 import patterntesting.runtime.util.*;
@@ -36,7 +36,7 @@ import patterntesting.runtime.util.*;
  */
 public final aspect RunBackgroundAspect {
 
-    private static final Logger log = LogManager.getLogger(RunBackgroundAspect.class);
+    private static final Logger log = LoggerFactory.getLogger(RunBackgroundAspect.class);
     private static int bgNumber = 0;
     private static Collection<Thread> activeJobs = new ArrayList<Thread>();
     

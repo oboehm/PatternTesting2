@@ -24,8 +24,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 /**
  * This class contains some constants (like a NULL_STRING) as constant. It can
@@ -41,7 +41,7 @@ import org.apache.logging.log4j.*;
  */
 public final class NullConstants {
 
-	private static final Logger LOG = LogManager.getLogger(NullConstants.class);
+	private static final Logger LOG = LoggerFactory.getLogger(NullConstants.class);
 
 	/** to avoid that this class will be instantiated */
 	private NullConstants() {

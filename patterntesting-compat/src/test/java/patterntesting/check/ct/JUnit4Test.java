@@ -19,13 +19,12 @@
  */
 package patterntesting.check.ct;
 
-import static org.junit.Assert.*;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
 import org.junit.Test;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.annotation.check.ct.SuppressJUnitWarning;
+
+import static org.junit.Assert.*;
 
 /**
  * This is the test class for the JUnitAspect.
@@ -36,7 +35,7 @@ import patterntesting.annotation.check.ct.SuppressJUnitWarning;
  */
 public final class JUnit4Test {
 
-    private static final Logger LOG = LogManager.getLogger(JUnit4Test.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JUnit4Test.class);
 
     /**
      * This test method should give a warning that exceptions should be handled
@@ -49,7 +48,7 @@ public final class JUnit4Test {
         try {
             LOG.info("testDummy() does nothing");
         } catch (RuntimeException e) {
-            LOG.error(e);
+            LOG.error("test failed", e);
             fail("test failed");
         }
     }

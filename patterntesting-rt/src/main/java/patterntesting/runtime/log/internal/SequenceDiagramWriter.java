@@ -26,7 +26,7 @@ import java.util.*;
 
 import org.apache.commons.io.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.aspectj.lang.JoinPoint.StaticPart;
 
 import patterntesting.runtime.io.ExtendedFile;
@@ -43,7 +43,7 @@ import patterntesting.runtime.util.Converter;
  */
 public class SequenceDiagramWriter {
 
-	private static final Logger LOG = LogManager.getLogger(SequenceDiagramWriter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SequenceDiagramWriter.class);
 
 	private final Writer writer;
 	private final List<DrawStatement> statements = new ArrayList<>();

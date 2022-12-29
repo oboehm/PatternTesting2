@@ -21,8 +21,8 @@
 package patterntesting.runtime.junit;
 
 import clazzfish.monitor.ClasspathMonitor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import patterntesting.runtime.exception.DetailedAssertionError;
 import patterntesting.runtime.util.Converter;
@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 public final class ObjectTester extends AbstractTester {
 
-	private static final Logger LOG = LogManager.getLogger(ObjectTester.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ObjectTester.class);
 	private static final ClasspathMonitor classpathMonitor = ClasspathMonitor.getInstance();
 
 	/** Utility class - no need to instantiate it. */

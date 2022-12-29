@@ -21,8 +21,8 @@
 package patterntesting.runtime.junit;
 
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 /**
  * This is a tester to do some runtime checking like memory checks and other
@@ -33,7 +33,7 @@ import org.apache.logging.log4j.*;
  */
 public final class RuntimeTester {
 
-	private static final Logger LOG = LogManager.getLogger(RuntimeTester.class);
+	private static final Logger LOG = LoggerFactory.getLogger(RuntimeTester.class);
 
 	/** Utility class - no need to instantiate it. */
 	private RuntimeTester() {

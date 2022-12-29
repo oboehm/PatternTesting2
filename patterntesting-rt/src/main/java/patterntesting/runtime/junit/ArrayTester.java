@@ -22,7 +22,7 @@ package patterntesting.runtime.junit;
 
 import java.util.Arrays;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.runtime.util.Converter;
 
@@ -35,7 +35,7 @@ import patterntesting.runtime.util.Converter;
  */
 public final class ArrayTester {
 
-	private static final Logger LOG = LogManager.getLogger(ArrayTester.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ArrayTester.class);
 
 	/** Utility class - no need to instantiate it. */
 	private ArrayTester() {

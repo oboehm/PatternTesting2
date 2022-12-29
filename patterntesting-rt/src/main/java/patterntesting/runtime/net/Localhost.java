@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.net;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -38,7 +38,7 @@ import java.util.concurrent.*;
  */
 public final class Localhost {
 
-	private static final Logger LOG = LogManager.getLogger(Localhost.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Localhost.class);
 
 	private static final Collection<InetAddress> inetAddresses = new ArrayList<>();
 

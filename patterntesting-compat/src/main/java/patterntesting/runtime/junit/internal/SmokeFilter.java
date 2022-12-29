@@ -24,8 +24,8 @@ import java.lang.annotation.Annotation;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.junit.runner.Description;
 import org.junit.runner.manipulation.Filter;
 
@@ -44,7 +44,7 @@ import patterntesting.runtime.util.Environment;
  */
 public final class SmokeFilter extends Filter {
 
-	private static final Logger LOG = LogManager.getLogger(SmokeFilter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SmokeFilter.class);
 	private final Map<Description, Boolean> shouldRunCache = new HashMap<>();
 	private Date today = new Date();
 	private Environment env = Environment.INSTANCE;

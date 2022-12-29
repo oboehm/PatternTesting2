@@ -20,8 +20,8 @@
 package patterntesting.runtime.monitor;
 
 import com.jamonapi.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.aspectj.lang.Signature;
 import patterntesting.runtime.util.SignatureHelper;
 
@@ -39,7 +39,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public final class JamonMonitorFactory extends ProfileMonitorFactory {
 
-	private static final Logger LOG = LogManager.getLogger(JamonMonitorFactory.class);
+	private static final Logger LOG = LoggerFactory.getLogger(JamonMonitorFactory.class);
 	private static final Map<String, MonitorFactoryInterface> monitorFactories = new ConcurrentHashMap<>();
 
 	/**

@@ -23,8 +23,8 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 /**
  * This utility class is intended to check arguments. It is like the Assert
@@ -47,7 +47,7 @@ import org.apache.logging.log4j.*;
  */
 public abstract class AssertArg {
 
-	private static final Logger LOG = LogManager.getLogger(AssertArg.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AssertArg.class);
 
 	/** Utility class - no need to instantiate it. */
 	private AssertArg() {

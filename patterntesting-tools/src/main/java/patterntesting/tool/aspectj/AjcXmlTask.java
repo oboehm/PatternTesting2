@@ -22,7 +22,7 @@ package patterntesting.tool.aspectj;
 import clazzfish.monitor.ResourcepathMonitor;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.LoggerFactory;
 import org.apache.tools.ant.BuildException;
 import org.aspectj.bridge.context.CompilationAndWeavingContext;
 import org.aspectj.tools.ant.taskdefs.AjcTask;
@@ -47,7 +47,7 @@ import java.util.Map;
  */
 public class AjcXmlTask extends AjcTask {
 
-    private static final org.apache.logging.log4j.Logger LOG = LogManager.getLogger(AjcXmlTask.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(AjcXmlTask.class);
 
    /**
 	 * Lists of errors received from the Ajc compiler. Array of

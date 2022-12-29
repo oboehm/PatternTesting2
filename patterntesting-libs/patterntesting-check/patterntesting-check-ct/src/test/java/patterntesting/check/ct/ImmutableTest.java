@@ -21,8 +21,8 @@ import java.io.IOException;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Immutable
 public final class ImmutableTest extends AbstractAcjXmlTest {
 
-    private static final Logger LOG = LogManager.getLogger(ImmutableTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ImmutableTest.class);
 
     /** The x. */
     //private int w = 1;    // should give a warning

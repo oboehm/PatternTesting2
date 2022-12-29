@@ -19,8 +19,8 @@
  */
 package patterntesting.sample;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.runtime.monitor.MemoryGuard;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ import java.util.Collection;
  */
 public final class MemoryEater {
 
-	private static final Logger log = LogManager.getLogger(MemoryEater.class);
+	private static final Logger log = LoggerFactory.getLogger(MemoryEater.class);
 
 	/**
 	 * We want to log all 100 ms the free memory.

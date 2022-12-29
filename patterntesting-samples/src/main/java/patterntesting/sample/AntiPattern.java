@@ -19,8 +19,8 @@
 package patterntesting.sample;
 
 import org.apache.commons.lang3.math.Fraction;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.runtime.annotation.ProfileMe;
 import patterntesting.runtime.monitor.ProfileStatistic;
 import patterntesting.runtime.util.Converter;
@@ -41,10 +41,10 @@ import java.nio.charset.StandardCharsets;
 public final class AntiPattern implements Serializable {
 
     private static final long serialVersionUID = 20120811L;
-    private static final Logger log = LogManager.getLogger(AntiPattern.class);
+    private static final Logger log = LoggerFactory.getLogger(AntiPattern.class);
     private int counter;
     /** Transitent trap - attribute can be null after deserialisation. */
-    private transient final Logger log2 = LogManager.getLogger(getClass());
+    private transient final Logger log2 = LoggerFactory.getLogger(getClass());
     /** This is not a Serializable class and will cause problems with serialization. */
     private Runtime runtime;
 

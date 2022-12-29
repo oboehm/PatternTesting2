@@ -17,8 +17,8 @@
  */
 package patterntesting.exception.xml;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public final class XMLReaderFactoryTest {
 
-    private static final Logger log = LogManager.getLogger(XMLReaderFactoryTest.class);
+    private static final Logger log = LoggerFactory.getLogger(XMLReaderFactoryTest.class);
 
     /**
      * We have the wrong system resource in the classpath so this method

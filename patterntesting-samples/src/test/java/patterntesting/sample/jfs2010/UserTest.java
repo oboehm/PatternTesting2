@@ -20,8 +20,8 @@
 
 package patterntesting.sample.jfs2010;
 
-import org.apache.logging.log4j.*;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.*;
+import org.slf4j.LoggerFactory;
 
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.util.Assertions;
@@ -36,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class UserTest {
 
-    private static final Logger log = LogManager.getLogger(UserTest.class);
+    private static final Logger log = LoggerFactory.getLogger(UserTest.class);
 
     /**
      * Test method for {@link patterntesting.sample.jfs2010.User#getName()}.

@@ -19,8 +19,8 @@
 package patterntesting.runtime.log;
 
 import org.apache.commons.lang3.time.StopWatch;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -37,7 +37,7 @@ import java.util.ResourceBundle;
  */
 public final class LogWatch extends StopWatch {
 
-	private static final Logger LOG = LogManager.getLogger(LogWatch.class);
+	private static final Logger LOG = LoggerFactory.getLogger(LogWatch.class);
 	private long nanoStartTime;
 	private long nanoEndTime;
 

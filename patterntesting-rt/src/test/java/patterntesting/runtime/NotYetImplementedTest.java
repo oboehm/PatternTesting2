@@ -19,8 +19,8 @@
  */
 package patterntesting.runtime;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.NotYetImplemented;
 
@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class NotYetImplementedTest extends AbstractCollection<String> {
 
-	private static final Logger log = LogManager
+	private static final Logger log = LoggerFactory
 			.getLogger(NotYetImplementedTest.class);
 
 	/**

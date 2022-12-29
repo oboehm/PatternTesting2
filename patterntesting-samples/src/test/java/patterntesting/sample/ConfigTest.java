@@ -17,8 +17,8 @@
  */
 package patterntesting.sample;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import patterntesting.annotation.check.ct.SuppressJUnitWarning;
 import patterntesting.runtime.annotation.Broken;
@@ -39,7 +39,7 @@ import static patterntesting.runtime.NullConstants.NULL_STRING;
  */
 public class ConfigTest {
 
-    private static final Logger LOG = LogManager.getLogger(ConfigTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ConfigTest.class);
 
     /**
      * Test method for {@link Config#getVersion()}.

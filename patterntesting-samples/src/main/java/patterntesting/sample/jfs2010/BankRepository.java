@@ -23,7 +23,7 @@ import java.sql.*;
 import java.util.*;
 
 import clazzfish.jdbc.ProxyDriver;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.runtime.annotation.ProfileMe;
 
@@ -41,7 +41,7 @@ import patterntesting.runtime.annotation.ProfileMe;
 @ProfileMe
 public final class BankRepository {
 
-    private static final Logger log = LogManager.getLogger(BankRepository.class);
+    private static final Logger log = LoggerFactory.getLogger(BankRepository.class);
     private static String JDBC_URL = System.getProperty("JDBC_URL", "jdbc:hsqldb:mem:testdb");
 
     static {

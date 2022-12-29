@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public final class EnvironmentTest {
 
-    private static final Logger LOG = LogManager.getLogger(EnvironmentTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EnvironmentTest.class);
 
     /**
      * Test method for {@link Environment#getName()}.

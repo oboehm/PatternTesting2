@@ -19,7 +19,7 @@
  */
 package patterntesting.concurrent;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.annotation.concurrent.TestThread;
 
@@ -34,7 +34,7 @@ import patterntesting.annotation.concurrent.TestThread;
  */
 public aspect TestThreadAspect extends AbstractTestThreadAspect {
 
-    private static final Logger log = LogManager.getLogger(TestThreadAspect.class);
+    private static final Logger log = LoggerFactory.getLogger(TestThreadAspect.class);
     
     /**
      * To return the aspect specific logger to the super aspect.

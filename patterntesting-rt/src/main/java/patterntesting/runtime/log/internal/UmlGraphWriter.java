@@ -26,7 +26,7 @@ import java.util.*;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.aspectj.lang.JoinPoint.StaticPart;
 
 import patterntesting.runtime.exception.NotFoundException;
@@ -44,7 +44,7 @@ import patterntesting.runtime.util.Converter;
  */
 public final class UmlGraphWriter extends SequenceDiagramWriter {
 
-	private static final Logger LOG = LogManager.getLogger(UmlGraphWriter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UmlGraphWriter.class);
 
 	/**
 	 * Instantiates a new uml graph writer.

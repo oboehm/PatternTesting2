@@ -21,8 +21,8 @@
 package patterntesting.runtime.junit.internal;
 
 import junit.framework.TestCase;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +48,7 @@ import java.util.List;
  */
 public class ProfiledStatement extends Statement {
 
-	private static final Logger LOG = LogManager.getLogger(ProfiledStatement.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ProfiledStatement.class);
 	private final TestClass testClass;
 	private final FrameworkMethod frameworkMethod;
 	private long startTime;

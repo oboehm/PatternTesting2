@@ -19,7 +19,7 @@ package patterntesting.sample.dbc;
 
 import static patterntesting.runtime.dbc.DbC.require;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.runtime.dbc.Contract;
 

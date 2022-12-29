@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.junit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import patterntesting.annotation.check.runtime.MayReturnNull;
 import patterntesting.runtime.io.LineReader;
@@ -43,7 +43,7 @@ import java.util.regex.Pattern;
  */
 public final class IOTester {
 
-	private static final Logger LOG = LogManager.getLogger(IOTester.class);
+	private static final Logger LOG = LoggerFactory.getLogger(IOTester.class);
 
 	/** Utility class - no need to instantiate it. */
 	private IOTester() {

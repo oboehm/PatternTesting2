@@ -26,7 +26,7 @@ import java.util.*;
 import java.util.zip.*;
 
 import org.apache.commons.io.*;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 /**
  * This class provides more details about the underlying ZIP file as the
@@ -40,7 +40,7 @@ import org.apache.logging.log4j.*;
  */
 public final class NestedZipFile extends ZipFile {
     
-    private static final Logger LOG = LogManager.getLogger(NestedZipFile.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NestedZipFile.class);
 
     /**
      * Instantiates a new detailed zip file.

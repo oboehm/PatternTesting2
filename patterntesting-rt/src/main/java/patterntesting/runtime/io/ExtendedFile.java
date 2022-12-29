@@ -22,8 +22,8 @@ package patterntesting.runtime.io;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,7 +42,7 @@ import java.util.List;
 public final class ExtendedFile extends File {
 
 	private static final long serialVersionUID = 20140827L;
-	private static final Logger LOG = LogManager.getLogger(ExtendedFile.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ExtendedFile.class);
 
 	/**
 	 * Instantiates a new extended file.

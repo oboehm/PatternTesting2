@@ -23,7 +23,7 @@ import java.util.Arrays;
 
 import javax.security.auth.login.LoginException;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.annotation.exception.TestException;
 
@@ -35,7 +35,7 @@ import patterntesting.annotation.exception.TestException;
  */
 public final class LoginService {
 
-    private static final Logger log = LogManager.getLogger(LoginService.class);
+    private static final Logger log = LoggerFactory.getLogger(LoginService.class);
     private static final String[] KNOWN_LOGINS = { "ninthbit", "oboehm" };
 
     /** There is no need to instantiate this utility class. */

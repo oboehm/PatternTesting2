@@ -21,8 +21,8 @@ package patterntesting.runtime.util;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -51,7 +51,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public final class ConverterTest {
 
-	private static Logger LOG = LogManager.getLogger(ConverterTest.class);
+	private static Logger LOG = LoggerFactory.getLogger(ConverterTest.class);
 
     /**
      * Test method for {@link Converter#getMemoryAsString(long)}.

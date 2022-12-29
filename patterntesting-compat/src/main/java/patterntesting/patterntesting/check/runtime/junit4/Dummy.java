@@ -17,8 +17,8 @@
  */
 package patterntesting.patterntesting.check.runtime.junit4;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.annotation.check.runtime.PublicForTesting;
 
 /**
@@ -30,7 +30,7 @@ import patterntesting.annotation.check.runtime.PublicForTesting;
  */
 public final class Dummy {
 
-    private static final Logger log = LogManager.getLogger(Dummy.class);
+    private static final Logger log = LoggerFactory.getLogger(Dummy.class);
 
     private Dummy() {}
 

@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -40,7 +40,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 public final class ExceptionThrower {
 
-	private static final Logger LOG = LogManager.getLogger(ExceptionThrower.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ExceptionThrower.class);
 
 	/** only a utility class - no need to instantiate it. */
 	private ExceptionThrower() {

@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.junit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import clazzfish.monitor.ClasspathMonitor;
 import patterntesting.runtime.util.Converter;
@@ -41,7 +41,7 @@ import java.util.regex.Pattern;
  */
 public final class ComparableTester extends AbstractTester {
 
-	private static final Logger LOG = LogManager.getLogger(ComparableTester.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ComparableTester.class);
 	private static final ClasspathMonitor classpathMonitor = ClasspathMonitor.getInstance();
 
 	/** Utility class - no need to instantiate it. */

@@ -17,7 +17,7 @@
  */
 package patterntesting.check.runtime;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.annotation.check.runtime.*;
 
@@ -33,7 +33,7 @@ import patterntesting.annotation.check.runtime.*;
 @MayReturnNull
 public final class NullDummy {
 
-	private static Logger log = LogManager.getLogger(NullDummy.class);
+	private static Logger log = LoggerFactory.getLogger(NullDummy.class);
 
 	/**
 	 * Instantiates a new null dummy.

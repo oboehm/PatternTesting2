@@ -23,8 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.aspectj.lang.JoinPoint;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +39,7 @@ import patterntesting.runtime.mock.JoinPointMock;
  */
 public final class ObjectPlayerTest {
 
-    private static final Logger LOG = LogManager.getLogger(ObjectPlayerTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ObjectPlayerTest.class);
     private static JoinPoint testJoinPoint = new JoinPointMock("test");
 
     /**

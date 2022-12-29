@@ -21,8 +21,8 @@ package patterntesting.runtime.util;
 
 import java.util.concurrent.TimeUnit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 /**
  * The Class ThreadUtil.
@@ -33,7 +33,7 @@ import org.apache.logging.log4j.*;
  */
 public final class ThreadUtil {
 
-	private static final Logger LOG = LogManager.getLogger(ThreadUtil.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ThreadUtil.class);
 	private static final long TIME_IN_MILLIS;
 
 	static {

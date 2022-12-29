@@ -17,8 +17,8 @@
  */
 package patterntesting.check.ct.junit4;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.junit.Test;
 
 import patterntesting.annotation.check.ct.OnlyForTesting;
@@ -31,7 +31,7 @@ import patterntesting.annotation.check.ct.OnlyForTesting;
  */
 public final class OnlyForTesting4Test {
 
-    private static final Logger LOG = LogManager.getLogger(OnlyForTesting4Test.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OnlyForTesting4Test.class);
 
     /**
      * Test allowed use.

@@ -20,7 +20,7 @@
 
 package patterntesting.concurrent.test;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.annotation.concurrent.RunParallel;
 
@@ -34,7 +34,7 @@ import patterntesting.annotation.concurrent.RunParallel;
  */
 public final class Counter {
 
-	private static final Logger log = LogManager.getLogger(Counter.class);
+	private static final Logger log = LoggerFactory.getLogger(Counter.class);
 	
     /** Counts how often this class will be created. */
     private static int created = 0;

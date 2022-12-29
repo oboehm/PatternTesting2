@@ -18,8 +18,8 @@
 
 package patterntesting.runtime.log;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.util.ThreadUtil;
@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class LogWatchTest {
 
-    private static Logger log = LogManager.getLogger(LogWatchTest.class);
+    private static Logger log = LoggerFactory.getLogger(LogWatchTest.class);
     private LogWatch watch;
 
     /**

@@ -22,8 +22,8 @@ package patterntesting.runtime.mock;
 
 import java.lang.reflect.Method;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.SourceLocation;
@@ -38,7 +38,7 @@ import patterntesting.runtime.util.reflect.MethodSignatureImpl;
  */
 public final class JoinPointMock implements JoinPoint {
 
-    private static final Logger log = LogManager.getLogger(JoinPointMock.class);
+    private static final Logger log = LoggerFactory.getLogger(JoinPointMock.class);
     private final Object thisObject;
     private final Object[] args = new Object[0];
     private Signature signature;

@@ -21,7 +21,7 @@ package patterntesting.runtime.log;
 import java.io.*;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.aspectj.lang.JoinPoint;
 
 import patterntesting.annotation.check.runtime.NullArgsAllowed;
@@ -47,7 +47,7 @@ import patterntesting.runtime.util.JoinPointHelper;
  */
 public class ObjectRecorder extends AbstractLogger {
 
-	private static final Logger LOG = LogManager.getLogger(ObjectRecorder.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ObjectRecorder.class);
 	private static final AbstractSerializer serializer = AbstractSerializer.getInstance();
 	private final ObjectOutputStream objStream;
 

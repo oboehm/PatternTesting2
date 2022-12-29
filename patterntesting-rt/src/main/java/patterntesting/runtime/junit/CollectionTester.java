@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.junit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.runtime.util.Converter;
 
 import java.util.Collection;
@@ -36,7 +36,7 @@ import java.util.List;
  */
 public final class CollectionTester {
 
-	private static final Logger LOG = LogManager.getLogger(CollectionTester.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CollectionTester.class);
 
 	/** Utility class - no need to instantiate it. */
 	private CollectionTester() {

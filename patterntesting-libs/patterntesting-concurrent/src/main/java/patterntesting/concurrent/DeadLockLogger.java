@@ -20,7 +20,7 @@
 
 package patterntesting.concurrent;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.runtime.util.Converter;
 
@@ -33,7 +33,7 @@ import patterntesting.runtime.util.Converter;
  */
 public final class DeadLockLogger implements DeadLockListener {
 
-	private static final Logger LOG = LogManager.getLogger(DeadLockLogger.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DeadLockLogger.class);
 
 	/**
 	 * Dead lock detected.

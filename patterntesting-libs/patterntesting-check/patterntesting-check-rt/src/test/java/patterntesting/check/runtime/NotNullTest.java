@@ -21,7 +21,7 @@ package patterntesting.check.runtime;
 
 import javax.validation.constraints.NotNull;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @MayReturnNull
 public class NotNullTest {
 
-    private static final Logger log = LogManager.getLogger(NotNullTest.class);
+    private static final Logger log = LoggerFactory.getLogger(NotNullTest.class);
     @NotNull private static String s0 = "static-test";
     @NotNull private String s1 = "test";
     private String s2;

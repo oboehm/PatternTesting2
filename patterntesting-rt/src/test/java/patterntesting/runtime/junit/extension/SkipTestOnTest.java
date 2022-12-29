@@ -19,8 +19,8 @@
 package patterntesting.runtime.junit.extension;
 
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(SmokeTestExtension.class)
 class SkipTestOnTest {
 
-    private static final Logger LOG = LogManager.getLogger(SkipTestOnTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SkipTestOnTest.class);
     private static final String osName = System.getProperty("os.name");
     private static final String osArch = System.getProperty("os.arch");
     private static final String osVersion = System.getProperty("os.version");

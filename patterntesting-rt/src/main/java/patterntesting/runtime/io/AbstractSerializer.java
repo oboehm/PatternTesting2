@@ -21,8 +21,8 @@
 package patterntesting.runtime.io;
 
 import clazzfish.monitor.ClasspathMonitor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import patterntesting.runtime.exception.DetailedInvalidClassException;
 
 import java.io.*;
@@ -39,7 +39,7 @@ import java.net.URI;
  */
 public abstract class AbstractSerializer {
 
-	private static final Logger LOG = LogManager.getLogger(AbstractSerializer.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AbstractSerializer.class);
 	private static final AbstractSerializer instance;
 
 	static {

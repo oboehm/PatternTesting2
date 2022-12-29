@@ -20,7 +20,7 @@ package patterntesting.exception.io;
 import java.io.*;
 
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 
 /**
@@ -37,7 +37,7 @@ import org.aspectj.lang.annotation.SuppressAjWarnings;
  */
 public aspect IOExceptionAspect {
 
-	private static final Logger log = LogManager.getLogger(IOExceptionAspect.class);
+	private static final Logger log = LoggerFactory.getLogger(IOExceptionAspect.class);
 
 	/**
 	 * If File.createTempFile(String prefix, String suffix, File directory)

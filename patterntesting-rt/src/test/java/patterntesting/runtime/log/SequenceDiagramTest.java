@@ -20,8 +20,8 @@
 
 package patterntesting.runtime.log;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 import patterntesting.runtime.annotation.DrawSequenceDiagram;
@@ -50,7 +50,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class SequenceDiagramTest {
 
-    private static final Logger log = LogManager.getLogger(SequenceDiagramTest.class);
+    private static final Logger log = LoggerFactory.getLogger(SequenceDiagramTest.class);
 
     /** The ignored lines. */
     public final static Pattern[] IGNORED_LINES = { Pattern.compile("#.*"), Pattern.compile("[ \\t]*"),

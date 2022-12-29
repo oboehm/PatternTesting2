@@ -22,7 +22,7 @@ package patterntesting.check.runtime;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.apache.commons.logging.impl.SimpleLog;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import org.junit.jupiter.api.Test;
 import patterntesting.annotation.check.runtime.*;
@@ -39,7 +39,7 @@ import patterntesting.runtime.annotation.LogThrowable;
  */
 public final class NullPointerTrapTest extends AbstractRuntimeTest {
 
-	private static final Logger LOG = LogManager.getLogger(NullPointerTrapTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(NullPointerTrapTest.class);
 
 	/**
 	 * Test null arg.

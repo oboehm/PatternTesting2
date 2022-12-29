@@ -24,8 +24,8 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 
@@ -42,7 +42,7 @@ import patterntesting.runtime.util.JoinPointHelper;
  */
 public abstract aspect AbstractSequenceDiagramAspect {
 
-    private static Logger log = LogManager.getLogger(AbstractSequenceDiagramAspect.class);
+    private static Logger log = LoggerFactory.getLogger(AbstractSequenceDiagramAspect.class);
     private static SequenceGrapher grapher = new SequenceGrapher();
     private static List<SequenceGrapher> grapherList = new CopyOnWriteArrayList<>();
 

@@ -23,7 +23,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +39,7 @@ import patterntesting.annotation.check.ct.SuppressEncodingWarning;
  */
 public final class EncodingTest {
 
-    private static final Logger log = LogManager.getLogger(EncodingTest.class);
+    private static final Logger log = LoggerFactory.getLogger(EncodingTest.class);
     private static final String INPUT = "Hello world!";
     private InputStream istream;
     private ByteArrayOutputStream ostream;

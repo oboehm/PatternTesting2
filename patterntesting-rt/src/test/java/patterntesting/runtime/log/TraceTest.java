@@ -22,8 +22,8 @@ package patterntesting.runtime.log;
 
 import java.util.Date;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.junit.jupiter.api.Test;
 
 import patterntesting.runtime.annotation.DontTraceMe;
@@ -39,7 +39,7 @@ import patterntesting.runtime.annotation.TraceMe;
 @TraceMe
 public class TraceTest {
 
-    private static Logger log = LogManager.getLogger(TraceTest.class);
+    private static Logger log = LoggerFactory.getLogger(TraceTest.class);
 
     /**
      * We want to see something in the log.

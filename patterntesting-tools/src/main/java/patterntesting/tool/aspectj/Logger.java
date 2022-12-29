@@ -19,7 +19,7 @@
  */
 package patterntesting.tool.aspectj;
 
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.LoggerFactory;
 import org.aspectj.lang.reflect.SourceLocation;
 import patterntesting.runtime.io.ExtendedFile;
 
@@ -39,7 +39,7 @@ import java.util.Hashtable;
  */
 public final class Logger {
     
-    private static final org.apache.logging.log4j.Logger LOG = LogManager.getLogger(Logger.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(Logger.class);
     
 	/** Lists of errors that were logged. Array of {@link AjcFileResult} objects. */
 	private Hashtable<String, AjcFileResult> errors;

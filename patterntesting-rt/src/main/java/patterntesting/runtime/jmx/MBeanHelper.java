@@ -25,8 +25,8 @@ import javax.management.*;
 import javax.management.openmbean.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 
 /**
  * This class simplifies the use of JMX and MBeans a little bit.
@@ -37,7 +37,7 @@ import org.apache.logging.log4j.*;
  */
 public class MBeanHelper {
 
-	private static final Logger LOG = LogManager.getLogger(MBeanHelper.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MBeanHelper.class);
 	private static MBeanServer server = ManagementFactory.getPlatformMBeanServer();
 
 	/** Utility class - no need to instantiate it */

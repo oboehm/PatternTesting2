@@ -23,7 +23,7 @@ package patterntesting.runtime.monitor;
 import java.net.URLClassLoader;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import patterntesting.runtime.util.ReflectionHelper;
 
@@ -63,7 +63,7 @@ public enum ClassloaderType {
 	/** Surefire provides an isolated classloader. */
 	SUREFIRE("org.apache.maven.surefire.booter.IsolatedClassLoader");
 
-	private static final Logger LOG = LogManager.getLogger(ClassloaderType.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ClassloaderType.class);
 	private Class<? extends ClassLoader> classLoader = null;
 	private final String classname;
 	private final String fieldname;

@@ -18,8 +18,8 @@
 
 package patterntesting.runtime.log;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.mock.JoinPointMock;
 
@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class ObjectRecorderTest {
 
-    private static final Logger log = LogManager.getLogger(ObjectRecorderTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ObjectRecorderTest.class);
 
     /**
      * We record here some joinpoints with its return value to see if the

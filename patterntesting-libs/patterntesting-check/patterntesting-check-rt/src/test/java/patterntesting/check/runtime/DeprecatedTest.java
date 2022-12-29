@@ -17,8 +17,8 @@
  */
 package patterntesting.check.runtime;
 
-import org.apache.logging.log4j.*;
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.*;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public final class DeprecatedTest extends AbstractRuntimeTest {
 
-    private static final Logger log = LogManager.getLogger(DeprecatedTest.class);
+    private static final Logger log = LoggerFactory.getLogger(DeprecatedTest.class);
     @Deprecated
     private int deprecatedAttribute = 1;
 

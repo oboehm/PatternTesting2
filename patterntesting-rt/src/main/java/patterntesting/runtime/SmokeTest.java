@@ -21,8 +21,8 @@
 package patterntesting.runtime;
 
 import org.apache.commons.io.filefilter.FileFilterUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileFilter;
@@ -44,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 public class SmokeTest {
 
-	private static final Logger LOG = LogManager.getLogger(SmokeTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SmokeTest.class);
 
 	/**
 	 * For the ClasspathMonitor and ClassWalker we need the commons-io lib. And
