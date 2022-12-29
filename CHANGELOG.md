@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+* update to xstream 1.4.20
+  ([CVE-2022-41966](https://x-stream.github.io/CVE-2022-41966.html))
+
 ### Fixed
 
 * tested under Java 17
@@ -25,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-* update to xstream from 1.4.19
+* update to xstream 1.4.19
   ([CVE-2021-43859](https://x-stream.github.io/CVE-2021-43859.html))
 
 ### Changed
