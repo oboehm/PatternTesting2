@@ -1,7 +1,5 @@
-/**
- * $Id: LogRecorder.java,v 1.16 2016/12/29 22:10:57 oboehm Exp $
- *
- * Copyright (c) 2008-2017 by Oliver Boehm
+/*
+ * Copyright (c) 2008-2022 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +26,7 @@ import patterntesting.annotation.check.runtime.NullArgsAllowed;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The Class LogRecorder can only record log messages. It ignores the level.
@@ -57,6 +56,18 @@ public final class LogRecorder extends AbstractLogger implements Logger {
 	private void record(final Marker arg0, final Object arg1, final Throwable arg2) {
 	    String prefix = (arg0 == null) ? "" : arg0 + ": ";
 		this.record(prefix + arg1, arg2);
+	}
+
+	private void record(Marker marker, String format, Object[] args, Throwable t) {
+		if (args == null || args.length == 0) {
+			record(marker, format, t);
+		} else {
+			String msg = format;
+			for (Object obj : args) {
+				msg = msg.replaceFirst("\\{}", Objects.toString(obj));
+			}
+			record(marker, msg, t);
+		}
 	}
 
 	/**
@@ -114,8 +125,8 @@ public final class LogRecorder extends AbstractLogger implements Logger {
 	@Override
 	protected void handleNormalizedLoggingCall(Level level, Marker marker, String message, Object[] arguments,
 											   Throwable t) {
-        LOG.trace("handleNormalizedLoggingCall({}, {}, \"{}\", {}, {}, {}", level, marker, message, arguments, t);
-        this.record(marker, message, t);
+        LOG.trace("handleNormalizedLoggingCall({}, {}, \"{}\", {}, {}", level, marker, message, arguments, t);
+        this.record(marker, message, arguments, t);
 	}
 
 	@Override

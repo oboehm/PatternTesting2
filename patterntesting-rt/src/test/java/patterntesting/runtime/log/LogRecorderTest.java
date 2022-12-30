@@ -19,7 +19,6 @@ package patterntesting.runtime.log;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -37,6 +36,12 @@ class LogRecorderTest {
         recorder.info("hello world", new RuntimeException("bumm"));
         assertEquals(1, recorder.getNumberOfRecords());
         assertEquals("hello world", recorder.getText());
+    }
+
+    @Test
+    void debugArguments() {
+        recorder.debug("hello {}{}","world", '!');
+        assertEquals("hello world!", recorder.getText());
     }
 
 }
