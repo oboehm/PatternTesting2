@@ -21,16 +21,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import patterntesting.annotation.check.ct.OnlyForTesting;
 import patterntesting.annotation.concurrent.RunBackground;
+import patterntesting.runtime.junit.NetworkTester;
 import patterntesting.runtime.log.LogRecorder;
 import patterntesting.runtime.util.ThreadUtil;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 /**
  * The Class WebDogTest.
@@ -59,6 +62,7 @@ public final class WebDogTest {
      */
     @Test
     public void testPing() {
+        assumeTrue(NetworkTester.isOnline(URI.create(TEST_URL).getHost(), 80), TEST_URL + " is not online");
         dog.ping();
         int rc = dog.getResponseCode();
         assertThat(rc, greaterThanOrEqualTo(200));

@@ -84,10 +84,6 @@
       <groupId>com.jamonapi</groupId>
       <artifactId>jamon</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.fdsapi</groupId>
-      <artifactId>fdsapi</artifactId>
-    </dependency>
     <!--
         embedded servlet container (including JSP)
         see http://docs.codehaus.org/display/JETTY/Embedding+Jetty
@@ -274,11 +270,11 @@
             <configuration>
               <tasks>
                 <!-- Safety -->
-                <mkdir dir="${project.build.directory}"></mkdir>
+                <mkdir dir="${project.build.directory}"/>
                 <tstamp>
-                  <format pattern="dd-MMM-yyyy HH:mm:ss" property="last.updated"></format>
+                  <format pattern="dd-MMM-yyyy HH:mm:ss" property="last.updated"/>
                 </tstamp>
-                <echo file="${basedir}/target/filter.properties" message="build.time=${last.updated}"></echo>
+                <echo file="${basedir}/target/filter.properties" message="build.time=${last.updated}"/>
               </tasks>
             </configuration>
           </execution>
