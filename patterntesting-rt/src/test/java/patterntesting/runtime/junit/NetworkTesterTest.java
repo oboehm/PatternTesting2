@@ -18,9 +18,9 @@
 
 package patterntesting.runtime.junit;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.runtime.annotation.IntegrationTest;
 
 import java.io.File;
@@ -124,12 +124,10 @@ public final class NetworkTesterTest {
 
     /**
      * Test method for {@link NetworkTester#assertOnline(InetAddress)}.
-     *
-     * @throws UnknownHostException if localhost is unknown
      */
     @Test
-    public void testAssertOnlineInetAddress() throws UnknownHostException {
-        InetAddress localHost = InetAddress.getLocalHost();
+    public void testAssertOnlineInetAddress() {
+        InetAddress localHost = InetAddress.getLoopbackAddress();
         NetworkTester.assertOnline(localHost, 100, TimeUnit.MILLISECONDS);
         NetworkTester.assertOnline(localHost);
     }
