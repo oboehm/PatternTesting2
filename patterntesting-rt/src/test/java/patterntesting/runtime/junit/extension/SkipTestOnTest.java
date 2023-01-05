@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2020 by Oliver Boehm
+ * Copyright (c) 2010-2023 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,6 @@ import patterntesting.runtime.annotation.SkipTestOn;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 

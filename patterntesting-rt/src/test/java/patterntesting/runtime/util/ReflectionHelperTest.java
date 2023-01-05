@@ -1,7 +1,5 @@
 /*
- * $Id: ReflectionHelperTest.java,v 1.17 2017/02/05 17:06:09 oboehm Exp $
- *
- * Copyright (c) 2009 by Oliver Boehm
+ * Copyright (c) 2009-2023 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +17,9 @@
  */
 package patterntesting.runtime.util;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
-import org.junit.runners.BlockJUnit4ClassRunner;
-import org.junit.runners.model.FrameworkMethod;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -163,9 +159,9 @@ public final class ReflectionHelperTest {
      */
     @Test
     public void testGetMethod() throws NoSuchMethodException {
-        Method method = ReflectionHelper.getMethod(BlockJUnit4ClassRunner.class, "describeChild",
-                FrameworkMethod.class);
-        assertEquals("describeChild", method.getName());
+        Method method = ReflectionHelper.getMethod(ReflectionHelperTest.class, "sayHello",
+                String.class);
+        assertEquals("sayHello", method.getName());
     }
 
     /**

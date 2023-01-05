@@ -1,7 +1,5 @@
 /*
- * $Id: ProfileTest.java,v 1.17 2017/05/11 20:08:56 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2023 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +18,16 @@
 package patterntesting.runtime.monitor;
 
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.JUnitCore;
+import org.junit.platform.launcher.Launcher;
+import org.junit.platform.launcher.LauncherDiscoveryRequest;
+import org.junit.platform.launcher.TestPlan;
+import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
+import org.junit.platform.launcher.core.LauncherFactory;
+import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.runtime.annotation.ProfileMe;
 
 import javax.management.JMException;
@@ -32,6 +35,7 @@ import javax.management.MBeanServer;
 import java.lang.management.ManagementFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
 
 /**
  * The Class ProfileTest.
@@ -76,7 +80,14 @@ public final class ProfileTest {
      * @throws Throwable the throwable
      */
     public static void main(final String[] args) throws Throwable {
-        JUnitCore.runClasses(ProfileTest.class);
+        LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder.request()
+                .selectors(selectClass(ProfileTest.class))
+                .build();
+        Launcher launcher = LauncherFactory.create();
+        TestPlan testPlan = launcher.discover(request);
+        SummaryGeneratingListener listener = new SummaryGeneratingListener();
+        launcher.registerTestExecutionListeners(listener);
+        launcher.execute(request);
         Thread.sleep(300000);
     }
 

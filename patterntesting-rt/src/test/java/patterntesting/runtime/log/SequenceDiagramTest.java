@@ -1,7 +1,5 @@
 /*
- * $Id: SequenceDiagramTest.java,v 1.22 2016/12/18 20:19:37 oboehm Exp $
- *
- * Copyright (c) 2013 by Oliver Boehm
+ * Copyright (c) 2013-2023 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +36,7 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * This is class if for testing the generation of sequence diagrams by the

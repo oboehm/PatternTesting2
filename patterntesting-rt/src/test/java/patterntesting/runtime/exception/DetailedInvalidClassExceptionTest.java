@@ -1,7 +1,5 @@
 /*
- * $Id: DetailedInvalidClassExceptionTest.java,v 1.1 2016/03/13 21:44:26 oboehm Exp $
- *
- * Copyright (c) 2016 by Oliver Boehm
+ * Copyright (c) 2016-2023 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +20,7 @@ package patterntesting.runtime.exception;
 
 import org.junit.jupiter.api.Test;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for {@link DetailedInvalidClassException}.

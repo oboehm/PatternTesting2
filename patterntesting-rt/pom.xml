@@ -137,18 +137,6 @@
     </dependency>
     <!-- needed for testing -->
     <dependency>
-      <groupId>com.c2.fit</groupId>
-      <artifactId>fit</artifactId>
-      <version>1.1</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.hamcrest</groupId>
-          <artifactId>hamcrest-core</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-catalina</artifactId>
       <version>8.5.11</version>

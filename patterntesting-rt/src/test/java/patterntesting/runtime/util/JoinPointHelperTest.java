@@ -1,7 +1,5 @@
-/**
- * $Id: JoinPointHelperTest.java,v 1.17 2017/02/05 17:06:09 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+/*
+ * Copyright (c) 2008-2023 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,17 +17,17 @@
  */
 package patterntesting.runtime.util;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.aspectj.lang.JoinPoint;
+import org.junit.jupiter.api.Test;
+import patterntesting.runtime.annotation.DontLogMe;
+import patterntesting.runtime.annotation.ProfileMe;
+import patterntesting.runtime.mock.JoinPointMock;
 
+import javax.annotation.concurrent.Immutable;
 import java.lang.annotation.Annotation;
 import java.util.Date;
 
-import org.aspectj.lang.JoinPoint;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-
-import patterntesting.runtime.annotation.*;
-import patterntesting.runtime.mock.JoinPointMock;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Class JoinPointHelperTest.
@@ -139,7 +137,7 @@ public final class JoinPointHelperTest {
     @Test
     public void testGetClassAnnotation() {
         JoinPointMock jp = new JoinPointMock(this);
-        Annotation annotation = JoinPointHelper.getClassAnnotation(jp, RunWith.class);
+        Annotation annotation = JoinPointHelper.getClassAnnotation(jp, Immutable.class);
         assertNull(annotation);
     }
 

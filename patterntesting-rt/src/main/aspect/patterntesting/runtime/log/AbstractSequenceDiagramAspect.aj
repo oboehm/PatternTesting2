@@ -133,11 +133,11 @@ public abstract aspect AbstractSequenceDiagramAspect {
         ;
 
     private pointcut callAllMethods() :
-        call(public * *.*(..)) && !(call(public * org.junit.*.*(..)));
+        call(public * *.*(..)) && !(call(public * org.junit..*(..)));
         //call(public !static * *.*(..)) && !(call(public * java.lang.*.valueOf(*)));
 
     private pointcut callVoidMethods() :
-        call(public void *.*(..)) && !(call(public void org.junit.*.*(..)));
+        call(public void *.*(..)) && !(call(public void org.junit..*(..)));
         //call(public !static void *.*(..));
 
     private pointcut callReturningMethods() :

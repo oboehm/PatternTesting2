@@ -1,7 +1,5 @@
 /*
- * $Id: LogThrowableTest.java,v 1.9 2016/12/18 20:19:37 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008-2023 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +24,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.LogThrowable;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Class LogThrowableTest.
@@ -134,7 +132,7 @@ public final class LogThrowableTest {
     	        throwAssertionError(s);
     	    } catch (AssertionError expected) {
     	        log.info(expected.toString());
-    	        checkLog("AssertionError in throwAssertionError(\"" + s + "\")");
+    	        checkLog("AssertionFailedError in throwAssertionError(\"" + s + "\")");
     	    }
         }
 	}
@@ -155,7 +153,7 @@ public final class LogThrowableTest {
 	 */
 	protected static void checkLog(final LogRecorder testLog, final String expected) {
         log.debug(testLog.getRecord());
-        assertTrue(testLog + " is blank", StringUtils.isNotBlank(testLog.getRecord()));
+        assertTrue(StringUtils.isNotBlank(testLog.getRecord()), testLog + " is blank");
         assertEquals(1, testLog.getNumberOfRecords());
         assertEquals(expected, testLog.getText());
 	}

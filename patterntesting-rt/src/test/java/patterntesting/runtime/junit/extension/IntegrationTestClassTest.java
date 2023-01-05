@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2020 by Oliver Boehm
+ * Copyright (c) 2010-2023 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,15 @@
 
 package patterntesting.runtime.junit.extension;
 
-import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import org.slf4j.LoggerFactory;
-import org.slf4j.*;
-
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.runtime.annotation.IntegrationTest;
 import patterntesting.runtime.util.Environment;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * This is the JUnit test for the correct handling of the IntegrationTest
