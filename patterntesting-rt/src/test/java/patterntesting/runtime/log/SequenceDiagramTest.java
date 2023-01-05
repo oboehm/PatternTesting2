@@ -20,10 +20,9 @@
 
 package patterntesting.runtime.log;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.util.ReflectionTestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.runtime.annotation.DrawSequenceDiagram;
 import patterntesting.runtime.annotation.IgnoreForSequenceDiagram;
 import patterntesting.runtime.junit.FileTester;
@@ -33,6 +32,7 @@ import patterntesting.runtime.log.test.City;
 import patterntesting.runtime.log.test.CityRepo;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
@@ -108,15 +108,20 @@ public class SequenceDiagramTest {
      * </p>
      */
     @Test
-    public void testPingPongIndirect() {
-        ReflectionTestUtils.invokeMethod(this, "playPingPong", 2);
+    public void testPingPongIndirect() throws ReflectiveOperationException {
+        invokeMethod(this,"playPingPong", 2);
         FileTester.assertContentEquals(new File(
                 "src/test/resources/patterntesting/runtime/log/ping-pong-indirect.pic"), new File(
                 "target", "ping-pong-indirect.pic"), IGNORED_LINES);
     }
 
+    private static void invokeMethod(Object target, String name, int n) throws ReflectiveOperationException {
+        Method method = target.getClass().getMethod(name, int.class);
+        method.invoke(target, n);
+    }
+
     @DrawSequenceDiagram("target/ping-pong-indirect.pic")
-    private void playPingPong(final int rounds) {
+    public void playPingPong(final int rounds) {
         Player hugo = new Player();
         playPingPongWith(hugo, rounds);
     }

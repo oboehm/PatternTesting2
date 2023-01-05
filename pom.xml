@@ -186,8 +186,6 @@
     <!-- Sonar -->
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 
-    <version.spring>5.3.20</version.spring>
-
   </properties>
 
   <!--
@@ -424,25 +422,6 @@
         <artifactId>org.osgi.compendium</artifactId>
         <version>6.0.0</version>
         <scope>provided</scope>
-      </dependency>
-      <!-- Spring -->
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-core</artifactId>
-        <version>${version.spring}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        <version>${version.spring}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-test</artifactId>
-        <version>${version.spring}</version>
-        <scope>test</scope>
       </dependency>
     </dependencies>
 
