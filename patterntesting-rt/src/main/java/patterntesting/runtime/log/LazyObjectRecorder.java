@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 by Oli B.
+ * Copyright (c) 2013-2023 by Oli B.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,19 @@
 
 package patterntesting.runtime.log;
 
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.lang3.ObjectUtils;
-import org.slf4j.LoggerFactory;
-import org.slf4j.*;
 import org.aspectj.lang.JoinPoint;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.annotation.check.runtime.NullArgsAllowed;
 import patterntesting.runtime.util.JoinPointHelper;
 import patterntesting.runtime.util.SignatureHelper;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * In contradiction to {@link ObjectRecorder} this class only records joinpoints
@@ -78,6 +79,7 @@ public class LazyObjectRecorder extends ObjectRecorder {
 	 * 'void' are not recorded because the have no return value.
 	 * <p>
 	 * Because the given joinPoint cannot be used as key for a map in
+	 * </p>
 	 *
 	 * @param joinPoint
 	 *            the joinpoint
@@ -85,7 +87,6 @@ public class LazyObjectRecorder extends ObjectRecorder {
 	 *            the return value {@link ObjectPlayer} it is saved as string.
 	 *            As a side effect this will speedup the serialization stuff and
 	 *            shorten the generated record file.
-	 *            </p>
 	 *            <p>
 	 *            The given return value will be only stored if it is not the
 	 *            same as the last time.

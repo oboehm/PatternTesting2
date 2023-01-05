@@ -1,7 +1,5 @@
 /*
- * $Id: PerfLogger.java,v 1.12 2016/12/18 20:19:38 oboehm Exp $
- *
- * Copyright (c) 2014 by Oliver Boehm
+ * Copyright (c) 2014-2023 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,12 +42,7 @@ public final class PerfLogger {
 	private final Logger wrapped;
 
 	/** The local stopwatch. */
-	private final ThreadLocal<LogWatch> timer = new ThreadLocal<LogWatch>() {
-		@Override
-		protected LogWatch initialValue() {
-			return new LogWatch();
-		}
-	};
+	private final ThreadLocal<LogWatch> timer = ThreadLocal.withInitial(() -> new LogWatch());
 
 	/**
 	 * Instantiates a new perf logger.
@@ -130,6 +123,7 @@ public final class PerfLogger {
 	 * call one of the start methods before.
 	 * <p>
 	 * It is recommended to use the same as in
+	 * </p>
 	 *
 	 * @param logLevel
 	 *            the log level
@@ -139,7 +133,6 @@ public final class PerfLogger {
 	 *            the args {@link #start(int, String, Object...)}. If the
 	 *            reported times is greater than 1 minute the log level will be
 	 *            increased at least to "INFO".
-	 *            </p>
 	 */
 	public void end(int logLevel, final String format, final Object... args) {
 		LogWatch watch = timer.get();
