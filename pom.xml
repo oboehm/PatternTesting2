@@ -35,7 +35,7 @@
   -->
   <groupId>org.patterntesting</groupId>
   <artifactId>patterntesting-parent</artifactId>
-  <version>2.2.30-SNAPSHOT</version>
+  <version>2.3.0</version>
   <packaging>pom</packaging>
   <name>PatternTesting</name>
 
@@ -755,8 +755,8 @@
               <target>
                 <copy todir="${project.build.directory}/apidocs/META-INF">
                   <fileset dir="${basedir}">
-                    <include name="LICENSE.txt"/>
-                    <include name="NOTICE.txt"/>
+                    <include name="LICENSE.txt"></include>
+                    <include name="NOTICE.txt"></include>
                   </fileset>
                 </copy>
               </target>
@@ -1212,7 +1212,7 @@
                     -->
                     <echo>copying reports...</echo>
                     <copy todir="${patterntesting.site.artifact.dir}/" verbose="false">
-                      <fileset dir="target/site"/>
+                      <fileset dir="target/site"></fileset>
                     </copy>
                   </tasks>
                 </configuration>
