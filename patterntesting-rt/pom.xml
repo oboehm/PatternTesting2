@@ -98,6 +98,7 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-junit-jupiter</artifactId>
+      <scope>test</scope>
     </dependency>
     <!-- not only for testing -->
     <dependency>
@@ -139,7 +140,7 @@
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-catalina</artifactId>
-      <version>8.5.11</version>
+      <version>8.5.84</version>
       <scope>test</scope>
     </dependency>
     <dependency>
