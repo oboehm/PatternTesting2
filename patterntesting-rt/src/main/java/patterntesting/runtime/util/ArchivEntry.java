@@ -19,14 +19,22 @@
  */
 package patterntesting.runtime.util;
 
-import java.io.*;
-import java.net.*;
-import java.util.Arrays;
-import java.util.zip.*;
-
-import org.apache.commons.io.*;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
 
 /**
  * Unfortunately we can't extends URI because this is a final class. So now it
@@ -46,7 +54,10 @@ import org.slf4j.*;
  * @author oliver (ob@aosd.de)
  * @version $Revision: 1.26 $
  * @since 20.09.2007
+ * @deprecated no longer use, now part of clazzfish-monitor
+ * 			   (TODO: will be deleted in v2.5)
  */
+@Deprecated
 public final class ArchivEntry {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ArchivEntry.class);
