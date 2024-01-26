@@ -18,21 +18,24 @@
 package patterntesting.runtime.junit.extension;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.junit.jupiter.api.extension.ConditionEvaluationResult;
 import org.junit.jupiter.api.extension.ExecutionCondition;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.platform.commons.support.AnnotationSupport;
 import org.junit.platform.launcher.TestExecutionListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.runtime.NullConstants;
 import patterntesting.runtime.annotation.*;
 import patterntesting.runtime.junit.internal.TestOn;
 import patterntesting.runtime.util.Converter;
 import patterntesting.runtime.util.Environment;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -130,7 +133,9 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
     private ConditionEvaluationResult getRunOnEvaluationResult(Class<?> testClass) {
         Optional<RunTestOn> annotation = AnnotationSupport.findAnnotation(testClass, RunTestOn.class);
         if (annotation.isPresent() && !isRunTestOn(testClass.getName(), annotation.get())) {
-            return ConditionEvaluationResult.disabled(toString(testClass) + " is disabled because condition of @RunTestOn does not match");
+            return ConditionEvaluationResult.disabled(
+                    toString(testClass) + " is disabled because condition of" + toString(
+                            annotation.get()) + "does not match");
         }
         return ConditionEvaluationResult.enabled(toString(testClass) + " is enabled");
     }
@@ -138,7 +143,9 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
     private ConditionEvaluationResult getRunOnEvaluationResult(Method testMethod) {
         Optional<RunTestOn> annotation = AnnotationSupport.findAnnotation(testMethod, RunTestOn.class);
         if (annotation.isPresent() && !isRunTestOn(testMethod.getName(), annotation.get())) {
-            return ConditionEvaluationResult.disabled(toString(testMethod) + " is disabled because condition of @RunTestOn does not match");
+            return ConditionEvaluationResult.disabled(
+                    toString(testMethod) + " is disabled because condition of" + toString(
+                            annotation.get()) + "does not match");
         }
         return ConditionEvaluationResult.enabled(toString(testMethod) + " is enabled");
     }
@@ -146,7 +153,8 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
     private ConditionEvaluationResult getSkipOnEvaluationResult(Class<?> testClass) {
         Optional<SkipTestOn> annotation = AnnotationSupport.findAnnotation(testClass, SkipTestOn.class);
         if (annotation.isPresent() && isSkipTestOn(testClass.getName(), annotation.get())) {
-            return ConditionEvaluationResult.disabled(toString(testClass) + " is disabled because condition of @SkipTestOn matches");
+            return ConditionEvaluationResult.disabled(
+                    toString(testClass) + " is disabled because condition of" + toString(annotation.get()) + "matches");
         }
         return ConditionEvaluationResult.enabled(toString(testClass) + " is enabled");
     }
@@ -154,7 +162,9 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
     private ConditionEvaluationResult getSkipOnEvaluationResult(Method testMethod) {
         Optional<SkipTestOn> annotation = AnnotationSupport.findAnnotation(testMethod, SkipTestOn.class);
         if (annotation.isPresent() && isSkipTestOn(testMethod.getName(), annotation.get())) {
-            return ConditionEvaluationResult.disabled(toString(testMethod) + " is disabled because condition of @SkipTestOn matches");
+            return ConditionEvaluationResult.disabled(
+                    toString(testMethod) + " is disabled because condition of" + toString(
+                            annotation.get()) + "matches");
         }
         return ConditionEvaluationResult.enabled(toString(testMethod) + " is enabled");
     }
@@ -244,21 +254,36 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
         return testMethod.getName() + "()";
     }
 
-    private static String toString(Broken broken) {
-        if (StringUtils.isBlank(broken.till() + broken.why()))  {
-            return "@Broken";
+    public static String toString(Annotation annotation) {
+        Class<? extends Annotation> type = annotation.annotationType();
+        StringBuilder sb = new StringBuilder();
+        for (Method m : type.getDeclaredMethods()) {
+            if ("value".equals(m.getName())) {
+                continue;
+            }
+            try {
+                Object value = m.invoke(annotation);
+                if (value instanceof Boolean) {
+                    continue;
+                }
+                String s = Objects.toString(value, "");
+                if (value instanceof String[]) {
+                    s = Arrays.toString((String[]) value);
+                    s = s.substring(1, s.length()-1);
+                }
+                if (StringUtils.isNotBlank(s)) {
+                    sb.append(m.getName()).append("=\"").append(s).append("\", ");
+                }
+            } catch (ReflectiveOperationException ex) {
+                LOG.debug("Invoke of {} failed:", m, ex);
+            }
         }
-        StringBuilder s = new StringBuilder("@Broken(");
-        append(s, "till", broken.till());
-        append(s, "why", broken.why());
-        s.delete(s.length()-2, s.length());
-        return s + ")";
-    }
-
-    private static void append(StringBuilder s, String key, String value) {
-        if (StringUtils.isNotBlank(value)) {
-            s.append(key).append("=\"").append(value).append("\", ");
+        String prefix = "@" + type.getSimpleName();
+        if (sb.isEmpty()) {
+            return prefix;
         }
+        sb.delete(sb.length()-2, sb.length());
+        return prefix + "(" + sb + ")";
     }
 
 }
