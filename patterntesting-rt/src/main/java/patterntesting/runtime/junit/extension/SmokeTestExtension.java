@@ -121,8 +121,10 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
 
     private ConditionEvaluationResult getBrokenEvaluationResult(Method testMethod) {
         Optional<Broken> annotation = AnnotationSupport.findAnnotation(testMethod, Broken.class);
-        if (annotation.isPresent() && isBroken(testMethod.getName(), annotation.get())) {
-            return ConditionEvaluationResult.disabled(testMethod + " is disabled because method marked as @Broken");
+        String methodName = testMethod.getName();
+        if (annotation.isPresent() && isBroken(methodName, annotation.get())) {
+            return ConditionEvaluationResult.disabled(
+                    methodName + "() is disabled because method marked as " + toString(annotation.get()));
         }
         return ConditionEvaluationResult.enabled(testMethod + " is enabled");
     }
