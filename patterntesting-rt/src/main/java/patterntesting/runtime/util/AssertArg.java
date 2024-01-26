@@ -18,13 +18,12 @@
 
 package patterntesting.runtime.util;
 
-import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-
-import org.slf4j.LoggerFactory;
-import org.slf4j.*;
+import java.util.Set;
 
 /**
  * This utility class is intended to check arguments. It is like the Assert
@@ -44,7 +43,10 @@ import org.slf4j.*;
  *
  * @author oliver (boehm@javatux.de)
  * @since 1.4 (29.11.2013)
+ * @deprecated use Hibernate Validator or other frameworks if you need it
+ * 	           (TODO: will be removed in 2.5)
  */
+@Deprecated(forRemoval = true, since = "2.4")
 public abstract class AssertArg {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AssertArg.class);
