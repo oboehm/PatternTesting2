@@ -20,10 +20,12 @@
 
 package patterntesting.runtime.net;
 
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.junit.jupiter.api.Test;
 import patterntesting.runtime.annotation.IntegrationTest;
+import patterntesting.runtime.junit.extension.SmokeTestExtension;
 import patterntesting.runtime.util.Converter;
 
 import java.net.InetAddress;
@@ -40,6 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author oliver
  * @since 1.0 (30.01.2010)
  */
+@ExtendWith(SmokeTestExtension.class)
 public final class LocalhostTest {
 
     private static final Logger log = LoggerFactory.getLogger(LocalhostTest.class);

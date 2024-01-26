@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017-2020 by Oliver Boehm
+ * Copyright (c) 2017-2024 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,13 +33,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 /**
- * Junit tests for {@link NetworkTester} class.
+ * Originally Junit tests for {@link NetworkTester} class. But because you need
+ * a network it is now considered to be more a interation test (suffix IT).
  *
  * @author oboehm
  */
-public final class NetworkTesterTest {
+public final class NetworkTesterIT {
 
-    private static final Logger LOG = LoggerFactory.getLogger(NetworkTesterTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NetworkTesterIT.class);
 
     /**
      * Test method for {@link NetworkTester#assertExists(URI)}.

@@ -77,8 +77,8 @@
       overwrite this, if they are using another encoding.
     -->
     <commons.encoding>utf-8</commons.encoding>
-    <junit-jupiter.version>5.9.0</junit-jupiter.version>
-    <junit-platform.version>1.9.0</junit-platform.version>
+    <junit-jupiter.version>5.10.1</junit-jupiter.version>
+    <junit-platform.version>1.10.1</junit-platform.version>
     <maven.compile.complianceLevel>17</maven.compile.complianceLevel>
 
     <!-- Default configuration for compiler source and target JVM -->
@@ -102,86 +102,6 @@
     <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- ignore violations -->
-    <sonar.issue.ignore.multicriteria>1,2,3,4,5,6,7,8,9,10,11,12,106,112,1312,1313,1698,1872,2159,2232,2250,2259,2384,2386</sonar.issue.ignore.multicriteria>
-    <sonar.issue.ignore.multicriteria.1.resourceKey>**</sonar.issue.ignore.multicriteria.1.resourceKey>
-
-    <!-- Sonar 4.x Violations Filter -->
-    <!-- Execution of the Garbage Collector should be triggered only by the JVM -->
-    <sonar.issue.ignore.multicriteria.1.ruleKey>squid:S1215</sonar.issue.ignore.multicriteria.1.ruleKey>
-    <sonar.issue.ignore.multicriteria.10.resourceKey>**/runtime/monitor/db/internal/StasiResultSet.java</sonar.issue.ignore.multicriteria.10.resourceKey>
-    <!--  Classes should not be too complex -->
-    <sonar.issue.ignore.multicriteria.10.ruleKey>squid:ClassCyclomaticComplexity</sonar.issue.ignore.multicriteria.10.ruleKey>
-    <sonar.issue.ignore.multicriteria.106.resourceKey>**/runtime/io/ExtendedFile.java</sonar.issue.ignore.multicriteria.106.resourceKey>
-    <!--  Standard outputs should not be used directly to log anything -->
-    <sonar.issue.ignore.multicriteria.106.ruleKey>squid:S106</sonar.issue.ignore.multicriteria.106.ruleKey>
-    <sonar.issue.ignore.multicriteria.11.resourceKey>**/*Exception.java</sonar.issue.ignore.multicriteria.11.resourceKey>
-    <!--  Classes should not be too complex -->
-    <sonar.issue.ignore.multicriteria.11.ruleKey>squid:MaximumInheritanceDepth</sonar.issue.ignore.multicriteria.11.ruleKey>
-    <sonar.issue.ignore.multicriteria.112.resourceKey>src/main/java/patterntesting/runtime/**/*ro*.java</sonar.issue.ignore.multicriteria.112.resourceKey>
-    <!--  Generic exceptions should never be thrown -->
-    <sonar.issue.ignore.multicriteria.112.ruleKey>squid:S00112</sonar.issue.ignore.multicriteria.112.ruleKey>
-    <sonar.issue.ignore.multicriteria.12.resourceKey>**/annotation/*.java</sonar.issue.ignore.multicriteria.12.resourceKey>
-    <!--  Source files should not have any duplicated blocks -->
-    <sonar.issue.ignore.multicriteria.12.ruleKey>common-java:DuplicatedBlocks</sonar.issue.ignore.multicriteria.12.ruleKey>
-    <sonar.issue.ignore.multicriteria.1312.resourceKey>**/patterntesting/runtime/log/PerfLogger.java</sonar.issue.ignore.multicriteria.1312.resourceKey>
-    <!-- Loggers should be "private static final" and should share a naming convention -->
-    <sonar.issue.ignore.multicriteria.1312.ruleKey>squid:S1312</sonar.issue.ignore.multicriteria.1312.ruleKey>
-    <sonar.issue.ignore.multicriteria.1313.resourceKey>**/patterntesting/runtime/junit/internal/TestOn.java</sonar.issue.ignore.multicriteria.1313.resourceKey>
-    <!-- IP addresses should not be hardcoded -->
-    <sonar.issue.ignore.multicriteria.1313.ruleKey>squid:S1313</sonar.issue.ignore.multicriteria.1313.ruleKey>
-    <sonar.issue.ignore.multicriteria.1698.resourceKey>**/patterntesting/runtime/junit/CloneableTester.java</sonar.issue.ignore.multicriteria.1698.resourceKey>
-    <!-- Objects should be compared with "equals()" -->
-    <sonar.issue.ignore.multicriteria.1698.ruleKey>squid:S1698</sonar.issue.ignore.multicriteria.1698.ruleKey>
-    <sonar.issue.ignore.multicriteria.1872.resourceKey>src/main/java/patterntesting/runtime/**/*.java</sonar.issue.ignore.multicriteria.1872.resourceKey>
-    <!-- Classes should not be compared by name -->
-    <sonar.issue.ignore.multicriteria.1872.ruleKey>squid:S1872</sonar.issue.ignore.multicriteria.1872.ruleKey>
-    <sonar.issue.ignore.multicriteria.2.resourceKey>**/ReflectionHelper.java</sonar.issue.ignore.multicriteria.2.resourceKey>
-    <!-- Exception handlers should preserve the original exception  -->
-    <sonar.issue.ignore.multicriteria.2.ruleKey>squid:S1166</sonar.issue.ignore.multicriteria.2.ruleKey>
-    <sonar.issue.ignore.multicriteria.2159.resourceKey>**/patterntesting/runtime/junit/ObjectTester.java</sonar.issue.ignore.multicriteria.2159.resourceKey>
-    <!-- Silly equality checks should not be made -->
-    <sonar.issue.ignore.multicriteria.2159.ruleKey>squid:S2159</sonar.issue.ignore.multicriteria.2159.ruleKey>
-    <sonar.issue.ignore.multicriteria.2232.resourceKey>**/*ResultSet.java</sonar.issue.ignore.multicriteria.2232.resourceKey>
-    <!-- "ResultSet.isLast()" should not be used -->
-    <sonar.issue.ignore.multicriteria.2232.ruleKey>squid:S2232</sonar.issue.ignore.multicriteria.2232.ruleKey>
-    <sonar.issue.ignore.multicriteria.2250.resourceKey>**/*ResultSet.java</sonar.issue.ignore.multicriteria.2250.resourceKey>
-    <!-- Collection methods with O(n) performance should be used carefully -->
-    <sonar.issue.ignore.multicriteria.2250.ruleKey>squid:S2250</sonar.issue.ignore.multicriteria.2250.ruleKey>
-    <sonar.issue.ignore.multicriteria.2259.resourceKey>src/main/java/patterntesting/runtime/util/*o*n*e*er.java</sonar.issue.ignore.multicriteria.2259.resourceKey>
-    <!--  NullPointerException might be thrown -->
-    <sonar.issue.ignore.multicriteria.2259.ruleKey>squid:S2259</sonar.issue.ignore.multicriteria.2259.ruleKey>
-    <sonar.issue.ignore.multicriteria.2384.resourceKey>**/runtime/monitor/internal/DoubletDigger.java</sonar.issue.ignore.multicriteria.2384.resourceKey>
-    <!-- Mutable members should not be stored or returned directly -->
-    <sonar.issue.ignore.multicriteria.2384.ruleKey>squid:S2384</sonar.issue.ignore.multicriteria.2384.ruleKey>
-    <sonar.issue.ignore.multicriteria.2386.resourceKey>**/*Constants.java</sonar.issue.ignore.multicriteria.2386.resourceKey>
-    <!--  Mutable fields should not be "public static" -->
-    <sonar.issue.ignore.multicriteria.2386.ruleKey>squid:S2386</sonar.issue.ignore.multicriteria.2386.ruleKey>
-    <sonar.issue.ignore.multicriteria.3.resourceKey>**/ClasspathMonitor.java</sonar.issue.ignore.multicriteria.3.resourceKey>
-    <!-- Throwable.printStackTrace(...) should never be called  -->
-    <sonar.issue.ignore.multicriteria.3.ruleKey>squid:S1148</sonar.issue.ignore.multicriteria.3.ruleKey>
-    <sonar.issue.ignore.multicriteria.4.resourceKey>**/runtime/junit/ObjectTester.java</sonar.issue.ignore.multicriteria.4.resourceKey>
-    <!-- "object == null" should be used instead of "object.equals(null)"  -->
-    <sonar.issue.ignore.multicriteria.4.ruleKey>squid:S1318</sonar.issue.ignore.multicriteria.4.ruleKey>
-    <sonar.issue.ignore.multicriteria.5.resourceKey>**/UmlautEncoder.java</sonar.issue.ignore.multicriteria.5.resourceKey>
-    <!-- System.exit(...) and Runtime.getRuntime().exit(...) should not be called  -->
-    <sonar.issue.ignore.multicriteria.5.ruleKey>squid:S1147</sonar.issue.ignore.multicriteria.5.ruleKey>
-    <sonar.issue.ignore.multicriteria.6.resourceKey>**/concurrent/junit/JUnitExecutor.java</sonar.issue.ignore.multicriteria.6.resourceKey>
-    <!-- Throwable and Error classes should not be caught  -->
-    <sonar.issue.ignore.multicriteria.6.ruleKey>squid:S1181</sonar.issue.ignore.multicriteria.6.ruleKey>
-    <sonar.issue.ignore.multicriteria.7.resourceKey>**/concurrent/**</sonar.issue.ignore.multicriteria.7.resourceKey>
-    <!--
-        Dodgy - Redundant nullcheck of value known to be non-null:
-        This rule is disabled because FindBugs works on the byte code. Some (or most?)
-        of the warnings seems to be result of the weaved byte code
-    -->
-    <sonar.issue.ignore.multicriteria.7.ruleKey>findbugs:RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE</sonar.issue.ignore.multicriteria.7.ruleKey>
-    <sonar.issue.ignore.multicriteria.8.resourceKey>**/junit/internal/TestOn.java</sonar.issue.ignore.multicriteria.8.resourceKey>
-    <!-- Security - Array is stored directly   -->
-    <sonar.issue.ignore.multicriteria.8.ruleKey>pmd:ArrayIsStoredDirectly</sonar.issue.ignore.multicriteria.8.ruleKey>
-    <sonar.issue.ignore.multicriteria.9.resourceKey>**/runtime/monitor/db/internal/StasiStatement.java</sonar.issue.ignore.multicriteria.9.resourceKey>
-    <!-- Resources should be closed -->
-    <sonar.issue.ignore.multicriteria.9.ruleKey>squid:S2095</sonar.issue.ignore.multicriteria.9.ruleKey>
 
     <!-- Sonar -->
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
@@ -665,7 +585,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.8</version>
+        <version>0.8.11</version>
         <configuration>
           <append>true</append>
         </configuration>
