@@ -19,14 +19,14 @@
  */
 package patterntesting.concurrent;
 
-import java.util.Random;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
-import org.slf4j.*;
-
+import org.slf4j.Logger;
 import patterntesting.annotation.check.runtime.NullArgsAllowed;
-import patterntesting.runtime.util.*;
+import patterntesting.runtime.util.JoinPointHelper;
+import patterntesting.runtime.util.ThreadUtil;
+
+import java.util.Random;
 
 /**
  * This aspect provides some advices which put some sleeps between the given
@@ -101,7 +101,7 @@ public abstract aspect AbstractTestThreadAspect {
             && applicationCode()
             && !localCode() {
         enter(thisJoinPoint);
-        yield();
+        Thread.yield();
     }
 
     /**
@@ -112,7 +112,7 @@ public abstract aspect AbstractTestThreadAspect {
     after() : (constructors() || voidMethods() || setAttributes())
             && applicationCode()
             && !localCode() {
-        yield();
+        Thread.yield();
         leave(thisJoinPoint);
     }
 
@@ -126,7 +126,7 @@ public abstract aspect AbstractTestThreadAspect {
     after() returning(Object ret) :
             (nonVoidMethods() || getAttributes()) && applicationCode()
             && !localCode() {
-        yield();
+        Thread.yield();
         leave(thisJoinPoint, ret);
     }
 
@@ -141,7 +141,7 @@ public abstract aspect AbstractTestThreadAspect {
             (constructors() || allMethods() || accessAttributes())
             && applicationCode()
             && !localCode() {
-        yield();
+        Thread.yield();
         leave(thisJoinPoint, t);
     }
 

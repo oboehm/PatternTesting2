@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [Unreleased]
+
+### Changed
+
+* AspectJ version updated to 1.9.21
+* Java 17 required
+* better output for @Broken annotation
+  ([#43](https://github.com/oboehm/PatternTesting2/issues/43))
+
 ## [2.3.0] - 2023-01-06
 
 ### Security

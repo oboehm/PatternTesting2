@@ -68,7 +68,7 @@
   <properties>
     <aspectj.maven.plugin.groupId>org.codehaus.mojo</aspectj.maven.plugin.groupId>
     <aspectj.maven.plugin.version>1.14.0</aspectj.maven.plugin.version>
-    <aspectj.version>1.9.19</aspectj.version>
+    <aspectj.version>1.9.21</aspectj.version>
     <commons.docEncoding>${commons.encoding}</commons.docEncoding>
 
     <!--
@@ -79,13 +79,13 @@
     <commons.encoding>utf-8</commons.encoding>
     <junit-jupiter.version>5.9.0</junit-jupiter.version>
     <junit-platform.version>1.9.0</junit-platform.version>
-    <maven.compile.complianceLevel>11</maven.compile.complianceLevel>
+    <maven.compile.complianceLevel>17</maven.compile.complianceLevel>
 
     <!-- Default configuration for compiler source and target JVM -->
-    <maven.compile.source>11</maven.compile.source>
-    <maven.compile.target>11</maven.compile.target>
+    <maven.compile.source>17</maven.compile.source>
+    <maven.compile.target>17</maven.compile.target>
 
-    <maven.version>3.6.3</maven.version>
+    <maven.version>3.8.4</maven.version>
     <!--
       Overwrite this in sub module, e.g. to ${patterntesting.site.dir}/rt for runtime
      -->
@@ -322,12 +322,12 @@
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M7</version>
+        <version>3.2.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.0.0-M7</version>
+        <version>3.2.5</version>
       </dependency>
       <dependency>
         <groupId>org.aspectj</groupId>
@@ -468,6 +468,11 @@
     <pluginManagement>
 
       <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-plugin-plugin</artifactId>
+          <version>3.11.0</version>
+        </plugin>
         <!-- JavaDoc -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -755,8 +760,8 @@
               <target>
                 <copy todir="${project.build.directory}/apidocs/META-INF">
                   <fileset dir="${basedir}">
-                    <include name="LICENSE.txt"></include>
-                    <include name="NOTICE.txt"></include>
+                    <include name="LICENSE.txt"/>
+                    <include name="NOTICE.txt"/>
                   </fileset>
                 </copy>
               </target>
