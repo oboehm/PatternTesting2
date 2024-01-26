@@ -111,10 +111,12 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
 
     private ConditionEvaluationResult getBrokenEvaluationResult(Class<?> testClass) {
         Optional<Broken> annotation = AnnotationSupport.findAnnotation(testClass, Broken.class);
+        String classname = "class " + testClass.getSimpleName();
         if (annotation.isPresent() && isBroken(testClass.getName(), annotation.get())) {
-            return ConditionEvaluationResult.disabled(testClass + " is disabled because class marked as @Broken");
+            return ConditionEvaluationResult.disabled(
+                    classname + " is disabled because class marked as " + toString(annotation.get()));
         }
-        return ConditionEvaluationResult.enabled(testClass + " is enabled");
+        return ConditionEvaluationResult.enabled(classname + " is enabled");
     }
 
     private ConditionEvaluationResult getBrokenEvaluationResult(Method testMethod) {
@@ -232,6 +234,23 @@ public class SmokeTestExtension implements ExecutionCondition, TestExecutionList
             return true;
         }
         return false;
+    }
+
+    private static String toString(Broken broken) {
+        if (StringUtils.isBlank(broken.till() + broken.why()))  {
+            return "@Broken";
+        }
+        StringBuilder s = new StringBuilder("@Broken(");
+        append(s, "till", broken.till());
+        append(s, "why", broken.why());
+        s.delete(s.length()-2, s.length());
+        return s + ")";
+    }
+
+    private static void append(StringBuilder s, String key, String value) {
+        if (StringUtils.isNotBlank(value)) {
+            s.append(key).append("=\"").append(value).append("\", ");
+        }
     }
 
 }
