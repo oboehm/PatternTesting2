@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 	Project Object Model (POM) for PatternTesting
 	If you are behind a proxy try the following command:
@@ -99,9 +99,9 @@
     -->
     <patterntesting.site.dir>${htdocs.dir}/builds/patterntesting</patterntesting.site.dir>
     <patterntesting.site.url>file:${patterntesting.site.dir}</patterntesting.site.url>
-    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
 
     <!-- Sonar -->
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
@@ -217,7 +217,8 @@
       <dependency>
         <groupId>org.apache.ant</groupId>
         <artifactId>ant-launcher</artifactId>
-        <version>1.7.1</version>  <!-- 1.10.14 does not work with AJC -->
+        <version>1.7.1</version>
+        <!-- 1.10.14 does not work with AJC -->
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
@@ -323,7 +324,7 @@
       <dependency>
         <groupId>de.aosd.clazzfish</groupId>
         <artifactId>clazzfish-jdbc</artifactId>
-        <version>1.1</version>
+        <version>2.1</version>
       </dependency>
       <!-- OSGi -->
       <dependency>
@@ -1131,8 +1132,8 @@
                       build.xml.
                     -->
                     <echo>copying reports...</echo>
-                    <copy todir="${patterntesting.site.artifact.dir}/" verbose="false">
-                      <fileset dir="target/site"/>
+                    <copy todir="${patterntesting.site.artifact.dir}/" verbose="false"><![CDATA[
+                      ]]><fileset dir="target/site"></fileset>
                     </copy>
                   </tasks>
                 </configuration>
