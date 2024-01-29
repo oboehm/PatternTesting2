@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 	Project Object Model (POM) for Maven
 	If you are behind a proxy try the following command:
@@ -129,7 +129,14 @@
           </execution>
         </executions>
       </plugin>
-      <!-- 
+      <!-- enabled in parent so we must disable it here -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <skipAssembly>true</skipAssembly>
+        </configuration>
+      </plugin>
+      <!--
           provide it as bundle
           see http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html
        -->

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     This POM is a copy of https://github.com/dukecon/dukecon.
     It was adapted to PatternTesting's needs and is used to generate
@@ -20,10 +20,10 @@
   <packaging>pom</packaging>
 
   <properties>
-    <asciidoctor.maven.plugin.version>2.2.1</asciidoctor.maven.plugin.version>
-    <asciidoctorj.diagram.version>2.2.1</asciidoctorj.diagram.version>
-    <asciidoctorj.version>2.5.2</asciidoctorj.version>
-    <jruby.version>9.3.2.0</jruby.version>
+    <asciidoctor.maven.plugin.version>2.2.5</asciidoctor.maven.plugin.version>
+    <asciidoctorj.diagram.version>2.2.14</asciidoctorj.diagram.version>
+    <asciidoctorj.version>2.5.11</asciidoctorj.version>
+    <jruby.version>9.4.5.0</jruby.version>
     <patterntesting.site.artifact.dir>${patterntesting.site.dir}/doc/</patterntesting.site.artifact.dir>
   </properties>
 
