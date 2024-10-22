@@ -87,8 +87,8 @@ public class Rot13Test {
     }
 
     /**
-     * This example is extracted from Wikipedia
-     * (http://de.wikipedia.org/wiki/ROT13).
+     * This example is extracted from
+     * <a href="http://de.wikipedia.org/wiki/ROT13">Wikipedia</a>.
      */
     @Test
     public final void testCryptSentence() {
@@ -132,7 +132,7 @@ public class Rot13Test {
      *
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    @Broken(till = "01-Jul-2024")
+    @Broken(till = "01-Jul-2025")
     @Test
     public final void testCryptBobsFile() throws IOException {
         File file = new File("C:/Temp/bobsfile.txt");
