@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 	Project Object Model (POM) for PatternTesting
 	If you are behind a proxy try the following command:
@@ -99,9 +99,9 @@
     -->
     <patterntesting.site.dir>${htdocs.dir}/builds/patterntesting</patterntesting.site.dir>
     <patterntesting.site.url>file:${patterntesting.site.dir}</patterntesting.site.url>
+    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
 
     <!-- Sonar -->
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
@@ -268,7 +268,7 @@
       <dependency>
         <groupId>org.easymock</groupId>
         <artifactId>easymock</artifactId>
-        <version>4.2</version>
+        <version>5.4.0</version>
       </dependency>
       <dependency>
         <groupId>org.hsqldb</groupId>
@@ -278,12 +278,12 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-inline</artifactId>
-        <version>4.8.0</version>
+        <version>5.2.0</version>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-junit-jupiter</artifactId>
-        <version>4.8.0</version>
+        <version>5.14.2</version>
       </dependency>
       <dependency>
         <groupId>org.patterntesting</groupId>
@@ -632,7 +632,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M4</version>
+        <version>3.5.1</version>
         <configuration>
           <excludes>
             <exclude>**/Test*Aspect*.java</exclude>
@@ -642,7 +642,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.0.0-M4</version>
+        <version>3.5.1</version>
         <configuration>
           <systemPropertyVariables>
             <propertyName>patterntesting.integrationTest</propertyName>
