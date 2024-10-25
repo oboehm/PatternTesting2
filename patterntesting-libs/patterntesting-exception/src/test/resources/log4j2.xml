@@ -9,6 +9,7 @@
   <Loggers>
     <Logger name="patterntesting" level="info"/>
     <Logger name="patterntesting.exception.net.ConnectExceptionTest" level="debug"/>
+    <Logger name="patterntesting.runtime.util.ExceptionThrower" level="debug"/>
     <Root level="info" additivity="false">
       <AppenderRef ref="console" />
     </Root>

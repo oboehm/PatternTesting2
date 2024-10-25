@@ -196,22 +196,22 @@
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>2.0.11</version>
+        <version>2.0.16</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-api</artifactId>
-        <version>2.22.1</version>
+        <version>2.24.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.22.1</version>
+        <version>2.24.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-slf4j2-impl</artifactId>
-        <version>2.22.1</version>
+        <version>2.24.1</version>
       </dependency>
 
       <dependency>
@@ -365,6 +365,11 @@
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-library</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j2-impl</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -681,8 +686,8 @@
               <target>
                 <copy todir="${project.build.directory}/apidocs/META-INF">
                   <fileset dir="${basedir}">
-                    <include name="LICENSE.txt"></include>
-                    <include name="NOTICE.txt"></include>
+                    <include name="LICENSE.txt"/>
+                    <include name="NOTICE.txt"/>
                   </fileset>
                 </copy>
               </target>
@@ -1138,7 +1143,7 @@
                     -->
                     <echo>copying reports...</echo>
                     <copy todir="${patterntesting.site.artifact.dir}/" verbose="false">
-                      <fileset dir="target/site"></fileset>
+                      <fileset dir="target/site"/>
                     </copy>
                   </tasks>
                 </configuration>

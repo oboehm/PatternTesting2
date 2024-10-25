@@ -20,6 +20,7 @@
 
 package patterntesting.runtime.util;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
@@ -125,9 +126,11 @@ public final class ExceptionThrower {
 			try {
 				Thrower.class.newInstance();
 			} catch (InstantiationException unexpected) {
-				LOG.debug("can't instantiate Thrower class", unexpected);
+				LOG.debug("Can't instantiate Thrower class:", unexpected);
 			} catch (IllegalAccessException unexpected) {
-				LOG.debug("can't access Thrower constructor", unexpected);
+				LOG.debug("Can't access Thrower constructor:", unexpected);
+			} catch (IllegalArgumentException java21Exception) {
+				LOG.warn("Can't create {} on {}:", t, SystemUtils.JAVA_RUNTIME_VERSION, java21Exception);
 			}
 		}
 	}

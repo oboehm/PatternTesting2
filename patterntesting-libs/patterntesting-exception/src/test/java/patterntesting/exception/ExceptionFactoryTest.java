@@ -15,17 +15,19 @@
  */
 package patterntesting.exception;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import patterntesting.runtime.jmx.MBeanHelper;
+import patterntesting.runtime.util.Environment;
+
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.SocketException;
 
-import org.slf4j.*;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import patterntesting.runtime.jmx.MBeanHelper;
-
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 /**
  * The Class ExceptionFactoryTest.
@@ -72,13 +74,23 @@ public final class ExceptionFactoryTest extends AbstractExceptionTest {
      */
     @Test
     public void testActivateOnce() {
+        assumeFalse(Environment.getJavaMajorVersion() > 17, "works only till Java 17");
+        activateOnce(ClassCastException.class);
+    }
+
+    @Test
+    public void testActivateOnceRuntimeException() {
+        activateOnce(UnsupportedOperationException.class);
+    }
+
+    private void activateOnce(Class<? extends Exception> exceptionClass) {
         synchronized (factory) {
             factory.deactivate();
             factory.activateOnce();
             try {
-                factory.provoke(ClassCastException.class);
-                fail("ClassCastException expected");
-            } catch (ClassCastException expected) {
+                factory.provoke(exceptionClass);
+                fail("throwing " + exceptionClass + " expected");
+            } catch (Exception expected) {
                 log.info("caught " + expected);
             }
             factory.provoke(ClassNotFoundException.class);
@@ -113,13 +125,23 @@ public final class ExceptionFactoryTest extends AbstractExceptionTest {
      */
 	@Test
     public void testProvokeOneOfExactMatch() {
-        Class<? extends Throwable>[] throwables = getThrowableArrayWith(ClassCastException.class);
-		synchronized (factory) {
-		    factory.activate();
-	        factory.setFire(ClassCastException.class);
-	        assertThrows(ClassCastException.class, () -> factory.provokeOneOf(throwables));
+        assumeFalse(Environment.getJavaMajorVersion() > 17, "works only till Java 17");
+        provokeOneOfExcactMatch(ClassCastException.class);
+    }
+
+    @Test
+    public void testProvokeOneOfExactMatchRuntimeException() {
+        provokeOneOfExcactMatch(UnsupportedOperationException.class);
+    }
+
+    private void provokeOneOfExcactMatch(Class<? extends Exception> exceptionClass) {
+        Class<? extends Throwable>[] throwables = getThrowableArrayWith(exceptionClass);
+        synchronized (factory) {
+            factory.activate();
+            factory.setFire(exceptionClass);
+            assertThrows(exceptionClass, () -> factory.provokeOneOf(throwables));
         }
-	}
+    }
 
     /**
      * Tests provokeOneOf with a subclass of the fired exception.

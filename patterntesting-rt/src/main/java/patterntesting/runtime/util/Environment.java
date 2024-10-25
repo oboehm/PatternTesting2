@@ -20,21 +20,30 @@
 
 package patterntesting.runtime.util;
 
-import java.io.*;
-import java.net.*;
+import clazzfish.monitor.ClasspathMonitor;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import patterntesting.runtime.io.FileInputStreamReader;
+
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.jar.*;
-
-import javax.xml.namespace.QName;
-import javax.xml.stream.*;
-
-import org.apache.commons.lang3.*;
-import org.slf4j.*;
-
-import patterntesting.runtime.io.FileInputStreamReader;
-import clazzfish.monitor.ClasspathMonitor;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 
 /**
  * This class provides some utilities for the access to the environment (e.g.
@@ -119,6 +128,16 @@ public class Environment {
 	}
 
 	/**
+	 * Gets the Java major version.
+	 *
+	 * @return e.g. 21 for Java 21
+	 * @since 2.5
+	 */
+	public static int getJavaMajorVersion() {
+		return Integer.parseInt(StringUtils.substringBefore(SystemUtils.JAVA_VERSION, "."));
+	}
+
+	/**
 	 * Gets the java vendor.
 	 *
 	 * @return e.g. "Apple Inc."
@@ -144,7 +163,7 @@ public class Environment {
 	 */
 	public static String getName() {
 		String name = getClassLoader().getClass().getName();
-		String[] packages = name.split("\\.|\\$", 4);
+		String[] packages = name.split("[.$]", 4);
 		return packages[0] + "." + packages[1] + "." + packages[2];
 	}
 
@@ -176,15 +195,15 @@ public class Environment {
 			LOG.debug("Empty properties are ignored for matching of system properties.");
 			return true;
 		}
-		for (int i = 0; i < props.length; i++) {
-			if (props[i].contains("*") || props[i].contains("?")) {
-				LOG.warn("Wildcard in property \"" + props[i] + "\" is not supported!");
-			}
-			String prop = System.getProperty(props[i], FALSE);
-			if (!FALSE.equalsIgnoreCase(prop)) {
-				return true;
-			}
-		}
+        for (String s : props) {
+            if (s.contains("*") || s.contains("?")) {
+                LOG.warn("Wildcard in property \"" + s + "\" is not supported!");
+            }
+            String prop = System.getProperty(s, FALSE);
+            if (!FALSE.equalsIgnoreCase(prop)) {
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -260,11 +279,8 @@ public class Environment {
 	 * @return normally true
 	 */
 	public static boolean areThreadsAllowed() {
-		if (isGoogleAppEngine() || isPropertyEnabled(DISABLE_THREADS)) {
-			return false;
-		}
-		return true;
-	}
+        return !isGoogleAppEngine() && !isPropertyEnabled(DISABLE_THREADS);
+    }
 
 	/**
 	 * If we are in a Google App Engine (GAE) environment we will return true
@@ -299,11 +315,11 @@ public class Environment {
 	public static File getLocalMavenRepositoryDir() throws IOException {
 		File[] repoDirs = { getLocalRepository(), new File(".repository").getAbsoluteFile(),
 				new File("../.repository").getAbsoluteFile() };
-		for (int i = 0; i < repoDirs.length; i++) {
-			if (repoDirs[i].exists() && repoDirs[i].isDirectory()) {
-				return repoDirs[i];
-			}
-		}
+        for (File repoDir : repoDirs) {
+            if (repoDir.exists() && repoDir.isDirectory()) {
+                return repoDir;
+            }
+        }
 		throw new IOException("local maven repository not found in " + Converter.toString(repoDirs));
 	}
 

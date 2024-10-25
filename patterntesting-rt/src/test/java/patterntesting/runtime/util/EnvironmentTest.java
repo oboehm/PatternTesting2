@@ -163,5 +163,11 @@ public final class EnvironmentTest {
         LOG.info("Threads are {}.",  threadsAllowed ? "allowed" : "not allowed");
     }
 
+    @Test
+    public void testGetJavaMajorVersion() {
+        int version = Environment.getJavaMajorVersion();
+        assertThat(version, greaterThan(11));
+    }
+
 }
 
