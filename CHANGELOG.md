@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * AspectJ version updated to 1.9.22.1
 * prepared for Java 21
+* dependency to commons-logging reduced (used only for testing in patterntesting-check-rt)
 
 
 ## [2.4.0] - 2024-01-29
