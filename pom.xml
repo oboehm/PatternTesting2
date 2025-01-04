@@ -119,12 +119,12 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.14.0</version>
+        <version>3.17.0</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <version>2.15.1</version>
+        <version>2.18.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
@@ -144,7 +144,7 @@
       <dependency>
         <groupId>com.thoughtworks.xstream</groupId>
         <artifactId>xstream</artifactId>
-        <version>1.4.20</version>
+        <version>1.4.21</version>
       </dependency>
       <dependency>
         <groupId>javax.validation</groupId>
@@ -154,7 +154,7 @@
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>[4.5,4.12]</version>
+        <version>4.13.2</version>
       </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>
@@ -324,7 +324,7 @@
       <dependency>
         <groupId>de.aosd.clazzfish</groupId>
         <artifactId>clazzfish-jdbc</artifactId>
-        <version>2.1</version>
+        <version>2.3.11</version>
       </dependency>
       <!-- OSGi -->
       <dependency>
@@ -729,6 +729,18 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <!-- call 'mvn versions:display-dependency-updates' to see upates -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.18.0</version>
+        <configuration>
+          <ignoredVersions>
+            <ignoredVersion>.*-alpha.*</ignoredVersion>
+            <ignoredVersion>.*-beta.*</ignoredVersion>
+          </ignoredVersions>
+        </configuration>
       </plugin>
 
     </plugins>
