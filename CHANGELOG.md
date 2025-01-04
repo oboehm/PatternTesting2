@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 * AspectJ version updated to 1.9.22.1
-* prepared for Java 21
+* downgrade to Java 11, tested under Java 21
 * dependency to commons-logging reduced (used only for testing in patterntesting-check-rt)
 
 
