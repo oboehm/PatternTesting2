@@ -67,7 +67,7 @@
 
   <properties>
     <aspectj.maven.plugin.groupId>org.codehaus.mojo</aspectj.maven.plugin.groupId>
-    <aspectj.maven.plugin.version>1.14.0</aspectj.maven.plugin.version>
+    <aspectj.maven.plugin.version>1.15.0</aspectj.maven.plugin.version>
     <aspectj.version>1.9.22.1</aspectj.version>
     <commons.docEncoding>${commons.encoding}</commons.docEncoding>
 
@@ -238,7 +238,7 @@
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>3.6</version>
+        <version>3.21.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
@@ -278,7 +278,7 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-junit-jupiter</artifactId>
-        <version>5.14.2</version>
+        <version>5.15.2</version>
       </dependency>
       <dependency>
         <groupId>org.patterntesting</groupId>
@@ -740,6 +740,7 @@
             <ignoredVersion>.*-alpha.*</ignoredVersion>
             <ignoredVersion>.*-beta.*</ignoredVersion>
             <ignoredVersion>.*-M.*</ignoredVersion>
+            <ignoredVersion>.*-rc.*</ignoredVersion>
           </ignoredVersions>
         </configuration>
       </plugin>
