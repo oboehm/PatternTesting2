@@ -42,8 +42,11 @@ The actual development you can find on the [develop](https://github.com/oboehm/P
 
 * changelog: [CHANGELOG.md](CHANGELOG.md)
 * documentation: [doc/README.adoc](doc/README.adoc)
-* project page: [current release](http://www.patterntesting.com/release/index.html)
+* [PatternTesting Wiki](https://sourceforge.net/p/patterntesting/wiki/Home/)
+
+> [!WARNING]
+> The old homepage at www.patterntesting.org is now longer available!
 
 ---
-January 2022,
+January 2025,
 Oli B.
