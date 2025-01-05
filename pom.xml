@@ -77,9 +77,9 @@
       overwrite this, if they are using another encoding.
     -->
     <commons.encoding>utf-8</commons.encoding>
-    <junit-jupiter.version>5.10.1</junit-jupiter.version>
-    <junit-platform.version>1.10.1</junit-platform.version>
-    <maven.compile.complianceLevel>17</maven.compile.complianceLevel>
+    <junit-jupiter.version>5.11.4</junit-jupiter.version>
+    <junit-platform.version>1.11.4</junit-platform.version>
+    <maven.compile.complianceLevel>11</maven.compile.complianceLevel>
 
     <!-- Default configuration for compiler source and target JVM -->
     <maven.compile.source>11</maven.compile.source>
@@ -184,7 +184,7 @@
       <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest-library</artifactId>
-        <version>2.2</version>
+        <version>3.0</version>
       </dependency>
 
       <!-- Logging (SLF4J + Log4J v2) -->
@@ -263,12 +263,12 @@
       <dependency>
         <groupId>org.easymock</groupId>
         <artifactId>easymock</artifactId>
-        <version>5.4.0</version>
+        <version>5.5.0</version>
       </dependency>
       <dependency>
         <groupId>org.hsqldb</groupId>
         <artifactId>hsqldb</artifactId>
-        <version>2.7.1</version>
+        <version>2.7.4</version>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
