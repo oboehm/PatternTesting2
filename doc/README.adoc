@@ -32,19 +32,19 @@ This is a little checklist for the deployment of the next release:
 . update the link:../CHANGELOG.md[changelog]
 . change the version in pom.xml (remove -SNAPSHOT)
 . build all artifacts from patterntesting-parent
-(`mvn -DskipTests -B clean install javadoc:jar repository:bundle-create gpg:sign -Dgpg.passphrase=xx`)
+(`mvn -DskipTests -B clean install javadoc:jar gpg:sign -Dgpg.passphrase=xx`)
 . workaround for javadoc-generation if javadoc-JAR in patterntesting-check-ct is empty:
 .. `pushd patterntesting-libs/patterntesting-check/patterntesting-check-ct/`
 .. `mvn site` (generates the ajdoc reports and copies it to apidoc directory)
 .. `mvn javadoc:jar`
 .. `popd`
 . use the script `src/script/deploy.sh` to upload bundles to https://oss.sonatype.org/[oss.sonatype.org] (but don't forget to update the VERSION variable inside this script).
-If one of the signed bundles fail, check the signature (e.g. `gpg --verify patterntesting-libs-2.0.0-bin.tar.gz.asc`).
-If signature is wrong, sign it manually, e.g. gpg -ba patterntesting-libs-2.0.0-bin.tar.gz and bundle it again (`mvn repository:bundle-create or manually`) or remove the assembled zip file from the bundle
+If one of the signed bundles fail, check the signature (e.g. `gpg --verify patterntesting-libs-2.5.0-bin.tar.gz.asc`).
+If signature is wrong, sign it manually, e.g. gpg -ba patterntesting-libs-2.5.0-bin.tar.gz and bundle it again (`mvn repository:bundle-create or manually`) or remove the assembled zip file from the bundle
 . after upload to  https://oss.sonatype.org/[Sonatype]:
 select https://oss.sonatype.org/#stagingRepositories[Staging Repositories] on oss.sonatype.org, press "Refresh" and then "Close" and "Release".
 . generate the website with `mvn -Plocal-site site-deploy` and copy it to http://patterntesting.org/release/[patterntesting.org/release/]
-. commit the changes (if not already done) and label the sources, e.g. with patterntesting-2.0.1
+. commit the changes (if not already done) and label the sources, e.g. with patterntesting-2.5.0
 . provide the jar files for normal download at https://sourceforge.net/projects/patterntesting/files/[SourceForge]:
 .. login to https://sourceforge.net/auth/[Sourceforge]
 .. select https://sourceforge.net/projects/patterntesting/files/[patterntesting/files] and upload the tar and zip files from patterntesting-libs, patterntesting-tools and patterntesting-samples (you can find it in the target directory).

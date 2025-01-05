@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     $Id: pom.xml,v 1.72 2017/08/13 18:04:10 oboehm Exp $
 
@@ -212,7 +212,7 @@
                     -->
                     <echo>copying reports...</echo>
                     <copy todir="${patterntesting.site.dir}/check/rt/" verbose="false">
-                      <fileset dir="target/site"/>
+                      <fileset dir="target/site"></fileset>
                     </copy>
                   </tasks>
                 </configuration>
