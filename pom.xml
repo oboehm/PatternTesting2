@@ -67,7 +67,7 @@
 
   <properties>
     <aspectj.maven.plugin.groupId>org.codehaus.mojo</aspectj.maven.plugin.groupId>
-    <aspectj.maven.plugin.version>1.14.0</aspectj.maven.plugin.version>
+    <aspectj.maven.plugin.version>1.15.0</aspectj.maven.plugin.version>
     <aspectj.version>1.9.22.1</aspectj.version>
     <commons.docEncoding>${commons.encoding}</commons.docEncoding>
 
@@ -77,13 +77,13 @@
       overwrite this, if they are using another encoding.
     -->
     <commons.encoding>utf-8</commons.encoding>
-    <junit-jupiter.version>5.10.1</junit-jupiter.version>
-    <junit-platform.version>1.10.1</junit-platform.version>
-    <maven.compile.complianceLevel>17</maven.compile.complianceLevel>
+    <junit-jupiter.version>5.11.4</junit-jupiter.version>
+    <junit-platform.version>1.11.4</junit-platform.version>
+    <maven.compile.complianceLevel>11</maven.compile.complianceLevel>
 
     <!-- Default configuration for compiler source and target JVM -->
-    <maven.compile.source>17</maven.compile.source>
-    <maven.compile.target>17</maven.compile.target>
+    <maven.compile.source>11</maven.compile.source>
+    <maven.compile.target>11</maven.compile.target>
 
     <maven.version>3.8.4</maven.version>
     <!--
@@ -119,12 +119,12 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.14.0</version>
+        <version>3.17.0</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <version>2.15.1</version>
+        <version>2.18.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
@@ -144,7 +144,7 @@
       <dependency>
         <groupId>com.thoughtworks.xstream</groupId>
         <artifactId>xstream</artifactId>
-        <version>1.4.20</version>
+        <version>1.4.21</version>
       </dependency>
       <dependency>
         <groupId>javax.validation</groupId>
@@ -154,7 +154,7 @@
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>[4.5,4.12]</version>
+        <version>4.13.2</version>
       </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>
@@ -184,7 +184,7 @@
       <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest-library</artifactId>
-        <version>2.2</version>
+        <version>3.0</version>
       </dependency>
 
       <!-- Logging (SLF4J + Log4J v2) -->
@@ -196,59 +196,59 @@
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-api</artifactId>
-        <version>2.24.1</version>
+        <version>2.24.3</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.24.1</version>
+        <version>2.24.3</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-slf4j2-impl</artifactId>
-        <version>2.24.1</version>
+        <version>2.24.3</version>
       </dependency>
 
       <dependency>
         <groupId>org.apache.ant</groupId>
         <artifactId>ant</artifactId>
-        <version>1.10.14</version>
+        <version>1.10.15</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ant</groupId>
         <artifactId>ant-launcher</artifactId>
-        <version>1.7.1</version>
+        <version>1.10.15</version>
         <!-- 1.10.14 does not work with AJC -->
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.6.1</version>
+        <version>3.8.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.3.1</version>
+        <version>3.11.2</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.7</version>
+        <version>3.8.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>3.6</version>
+        <version>3.21.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.5</version>
+        <version>3.5.2</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.2.5</version>
+        <version>3.5.2</version>
       </dependency>
       <dependency>
         <groupId>org.aspectj</groupId>
@@ -263,12 +263,12 @@
       <dependency>
         <groupId>org.easymock</groupId>
         <artifactId>easymock</artifactId>
-        <version>5.4.0</version>
+        <version>5.5.0</version>
       </dependency>
       <dependency>
         <groupId>org.hsqldb</groupId>
         <artifactId>hsqldb</artifactId>
-        <version>2.7.1</version>
+        <version>2.7.4</version>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
@@ -278,7 +278,7 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-junit-jupiter</artifactId>
-        <version>5.14.2</version>
+        <version>5.15.2</version>
       </dependency>
       <dependency>
         <groupId>org.patterntesting</groupId>
@@ -324,7 +324,7 @@
       <dependency>
         <groupId>de.aosd.clazzfish</groupId>
         <artifactId>clazzfish-jdbc</artifactId>
-        <version>2.1</version>
+        <version>2.3.11</version>
       </dependency>
       <!-- OSGi -->
       <dependency>
@@ -729,6 +729,20 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <!-- call 'mvn versions:display-dependency-updates' to see upates -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.18.0</version>
+        <configuration>
+          <ignoredVersions>
+            <ignoredVersion>.*-alpha.*</ignoredVersion>
+            <ignoredVersion>.*-beta.*</ignoredVersion>
+            <ignoredVersion>.*-M.*</ignoredVersion>
+            <ignoredVersion>.*-rc.*</ignoredVersion>
+          </ignoredVersions>
+        </configuration>
       </plugin>
 
     </plugins>
