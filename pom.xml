@@ -419,7 +419,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.12.1</version>
+          <version>3.21.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.felix</groupId>
@@ -681,8 +681,8 @@
               <target>
                 <copy todir="${project.build.directory}/apidocs/META-INF">
                   <fileset dir="${basedir}">
-                    <include name="LICENSE.txt"></include>
-                    <include name="NOTICE.txt"></include>
+                    <include name="LICENSE.txt"/>
+                    <include name="NOTICE.txt"/>
                   </fileset>
                 </copy>
               </target>
@@ -1152,7 +1152,7 @@
                     -->
                     <echo>copying reports...</echo>
                     <copy todir="${patterntesting.site.artifact.dir}/" verbose="false">
-                      <fileset dir="target/site"></fileset>
+                      <fileset dir="target/site"/>
                     </copy>
                   </tasks>
                 </configuration>
