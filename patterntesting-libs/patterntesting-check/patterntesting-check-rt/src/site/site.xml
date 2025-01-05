@@ -67,8 +67,6 @@
 	  
     <menu ref="parent" />
 
-	${reports}
-	  
   </body>
 
 </project>

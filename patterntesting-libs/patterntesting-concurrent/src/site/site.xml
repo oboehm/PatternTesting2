@@ -64,9 +64,7 @@
     <menu ref="modules" />
 
     <menu ref="reports" />
-	  
-	${reports}
-	  
+
   </body>
 
 </project>

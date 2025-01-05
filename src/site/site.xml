@@ -65,9 +65,7 @@
      -->
 
     <menu ref="reports" />
-	  
-	${reports}
-	  
+
   </body>
 
 </project>
