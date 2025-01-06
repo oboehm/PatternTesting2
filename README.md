@@ -27,7 +27,6 @@ The runner for JUnit 4 and other outdated classes are moved to [patterntesting-c
 
 ### Next Steps
 
-* switch to Java 11 (will come with v2.2)
 * continue the documentation in patterntesting-doc module
 
 
