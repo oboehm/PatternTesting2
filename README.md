@@ -44,7 +44,7 @@ The actual development you can find on the [develop](https://github.com/oboehm/P
 * documentation: [doc/README.adoc](doc/README.adoc)
 * [PatternTesting Wiki](https://sourceforge.net/p/patterntesting/wiki/Home/)
 
-> [!WARNING]
+> [!NOTE]
 > The old homepage at www.patterntesting.org is now longer available!
 
 ---
