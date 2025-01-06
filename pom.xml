@@ -35,7 +35,7 @@
   -->
   <groupId>org.patterntesting</groupId>
   <artifactId>patterntesting-parent</artifactId>
-  <version>2.5.0</version>
+  <version>2.5.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>PatternTesting</name>
 
@@ -681,8 +681,8 @@
               <target>
                 <copy todir="${project.build.directory}/apidocs/META-INF">
                   <fileset dir="${basedir}">
-                    <include name="LICENSE.txt"></include>
-                    <include name="NOTICE.txt"></include>
+                    <include name="LICENSE.txt"/>
+                    <include name="NOTICE.txt"/>
                   </fileset>
                 </copy>
               </target>
