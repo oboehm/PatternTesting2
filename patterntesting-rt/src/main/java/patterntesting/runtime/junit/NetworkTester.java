@@ -153,6 +153,25 @@ public final class NetworkTester {
         assertOnline(host.getHostName(), port);
     }
 
+    /**
+     * Asserts, that the given URI is online.
+     *
+     * @param uri the URI
+     * @since 2.6
+     */
+    public static void assertOnline(URI uri) {
+        assertTrue(isOnline(uri));
+    }
+
+    /**
+     * Asserts, that the given URL is online.
+     *
+     * @param url the URL
+     * @since 2.6
+     */
+    public static void assertOnline(URL url) {
+        assertTrue(isOnline(url));
+    }
 
     /**
      * Checks if the given host is online.
@@ -188,6 +207,46 @@ public final class NetworkTester {
             LOG.trace("Details:", ex);
             return false;
         }
+    }
+
+    /**
+     * Checks if the given URI is online. In contrast to {@link #exists(URI)}
+     * it is not checked if the URI is present but if the service behind the
+     * URI is present.
+     *
+     * @param uri the URI
+     * @return true or false
+     * @since 2.6
+     */
+    public static boolean isOnline(URI uri) {
+        String host = uri.getHost();
+        int port = getPortOf(uri);
+        return isOnline(host, port);
+    }
+
+    private static int getPortOf(URI uri) {
+        int port = uri.getPort();
+        if (port > 0) {
+            return port;
+        }
+        switch (uri.getScheme().toLowerCase()) {
+            case "http":  return 80;
+            case "https": return 443;
+            default:      return port;
+        }
+    }
+
+    /**
+     * Checks if the given URL is online. In contrast to {@link #exists(URL)}
+     * it is not checked if the URI is present but if the service behind the
+     * URL is present.
+     *
+     * @param url the URL
+     * @return true or false
+     * @since 2.6
+     */
+    public static boolean isOnline(URL url) {
+        return isOnline(URI.create(url.toString()));
     }
 
     /**
