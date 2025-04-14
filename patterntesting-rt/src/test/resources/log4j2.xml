@@ -7,7 +7,7 @@
     </Console>
   </Appenders>
   <Loggers>
-    <Logger name="patterntesting.runtime.junit.NetworkTester" level="debug"/>
+    <Logger name="patterntesting.runtime.junit.NetworkTester" level="info"/>
     <Logger name="patterntesting.runtime.junit.internal" level="warn"/>
     <!-- needed to test TraceAspect -->
     <Logger name="patterntesting.runtime.log.Trace" level="debug"/>

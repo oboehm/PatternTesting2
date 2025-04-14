@@ -70,6 +70,15 @@ public final class NetworkTesterIT {
     }
 
     /**
+     * Unit test for #52.
+     */
+    @Test
+    public void testAssertExistsSSH() {
+        assumeTrue(NetworkTester.isOnline("github.com", 22));
+        NetworkTester.assertExists(URI.create("ssh://git@github.com/oboehm/ClazzFish.git"));
+    }
+
+    /**
      * Test method for {@link NetworkTester#assertOnline(InetSocketAddress)}.
      * To get a port for testing we ask the 'netstat' command.
      */

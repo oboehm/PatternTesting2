@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public final class NetworkTester {
 
-    private static final Logger LOG = LoggerFactory.getLogger(NetworkTester.class);
+    private static final Logger log = LoggerFactory.getLogger(NetworkTester.class);
     private static final int CONNECTION_TIMEOUT_IN_MINUTES = 2;
 
     /** Utility class - no need to instantiate it. */
@@ -196,15 +196,15 @@ public final class NetworkTester {
      * @since 2.3
      */
     public static boolean isOnline(String host, int port, long timeout, TimeUnit unit) {
-        LOG.debug("Connecting to {}:{}...", host, port);
+        log.debug("Connecting to {}:{}...", host, port);
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<Socket> fs = executor.submit(() -> new Socket(host, port));
         try (Socket socket = fs.get(timeout, unit)) {
-            LOG.debug("Connecting to {}:{} was successful.", host, port);
+            log.debug("Connecting to {}:{} was successful.", host, port);
             return socket.isConnected();
         } catch (IOException | InterruptedException | ExecutionException | TimeoutException ex) {
-            LOG.debug("Connecting to {}:{} failed ({}).", host, port, ex.toString());
-            LOG.trace("Details:", ex);
+            log.debug("Connecting to {}:{} failed ({}).", host, port, ex.toString());
+            log.trace("Details:", ex);
             return false;
         }
     }
@@ -230,9 +230,25 @@ public final class NetworkTester {
             return port;
         }
         switch (uri.getScheme().toLowerCase()) {
-            case "http":  return 80;
-            case "https": return 443;
-            default:      return port;
+            case "ftp":    return 21;
+            case "ssh":    return 22;
+            case "telnet": return 23;
+            case "http":   return 80;
+            case "auth":   return 113;
+            case "sftp":   return 115;
+            case "ntp":    return 123;
+            case "snmp":   return 161;
+            case "irc":    return 194;
+            case "ldap":   return 389;
+            case "https":  return 443;
+            case "rtsp":   return 554;
+            case "ipp":    return 631;
+            case "ldaps":  return 636;
+            case "ftps":   return 990;
+            case "ircs":   return 994;
+            case "nfs":    return 2049;
+            case "svn":    return 3690;
+            default:       return port;
         }
     }
 
@@ -356,7 +372,9 @@ public final class NetworkTester {
         try {
             return exists(uri.toURL());
         } catch (MalformedURLException ex) {
-            throw new IllegalArgumentException("invalid URI: " + uri, ex);
+            log.info("{} is not a valid URL ({}) - trying to see if it's online.", uri, ex.getMessage());
+            log.debug("Details:", ex);
+            return isOnline(uri);
         }
     }
 
@@ -370,13 +388,13 @@ public final class NetworkTester {
     public static boolean exists(URL url) {
         try {
             URLConnection connection = url.openConnection();
-            LOG.trace("Got connection {} to {}.", connection,  url);
+            log.trace("Got connection {} to {}.", connection,  url);
             connection.connect();
-            LOG.debug("{} is online.", url);
+            log.debug("{} is online.", url);
             return true;
         } catch (IOException ioe) {
-            LOG.debug("Cannot open {} ({}).", url, ioe.getMessage());
-            LOG.trace("Details:", ioe);
+            log.debug("Cannot open {} ({}).", url, ioe.getMessage());
+            log.trace("Details:", ioe);
             return false;
         }
     }
@@ -425,7 +443,7 @@ public final class NetworkTester {
                     }
                 }
             } catch (InterruptedException | ExecutionException | TimeoutException | CancellationException ex) {
-                LOG.debug("Wait was cancelled:", ex);
+                log.debug("Wait was cancelled:", ex);
                 Thread.currentThread().interrupt();
             }
             return openPort > 0;
@@ -437,7 +455,7 @@ public final class NetworkTester {
             if (online) {
                 PortKnocker knocker = (PortKnocker) o;
                 openPort = knocker.getAddress().getPort();
-                LOG.debug("Open port {} for host '{}' found.",  openPort, host);
+                log.debug("Open port {} for host '{}' found.",  openPort, host);
                 stopThreads();
             }
         }
