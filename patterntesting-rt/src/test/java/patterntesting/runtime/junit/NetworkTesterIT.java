@@ -47,8 +47,8 @@ public final class NetworkTesterIT {
      */
     @Test
     public void testAssertExists() {
-        assumeTrue(NetworkTester.isOnline("patterntesting.org", 80), "patterntesting.org is offline");
-        URI uri = URI.create("http://patterntesting.org");
+        assumeTrue(NetworkTester.isOnline("github.com.org", 80), "patterntesting.org is offline");
+        URI uri = URI.create("https://github.com/oboehm/PatternTesting2");
         NetworkTester.assertExists(uri);
     }
 
@@ -67,6 +67,15 @@ public final class NetworkTesterIT {
         File file = new File("nirwana");
         assertFalse(file.exists(), "should not exist: " + file);
         assertFalse(NetworkTester.exists(file.toURI()));
+    }
+
+    /**
+     * Unit test for #52.
+     */
+    @Test
+    public void testAssertExistsSSH() {
+        assumeTrue(NetworkTester.isOnline("github.com", 22));
+        NetworkTester.assertExists(URI.create("ssh://git@github.com/oboehm/ClazzFish.git"));
     }
 
     /**
@@ -90,7 +99,7 @@ public final class NetworkTesterIT {
 
     /**
      * Test method for {@link NetworkTester#assertOnline(InetAddress, int)}.
-     * To get a port for testing we ask the 'netstat' command.
+     * To get a port for testing we asked the 'netstat' command.
      */
     @Test
     public void testAssertOnlineInetAddressPort() {
@@ -151,6 +160,14 @@ public final class NetworkTesterIT {
     public void testAssertOfflineHost() throws UnknownHostException {
         InetAddress addr = InetAddress.getByName("128.0.0.0");
         NetworkTester.assertOffline(addr, 10, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * Unit test for issue #51.
+     */
+    @Test
+    public void testAssertOnlineURI() {
+        NetworkTester.assertOnline(URI.create("https://github.com/oboehm/PatternTesting2"));
     }
 
 }

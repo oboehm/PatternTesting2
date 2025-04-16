@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [Unreleased]
+
+### Added
+
+* NetworkTester.isOnline(URI) added
+  ([#51](https://github.com/oboehm/PatternTesting2/issues/51))
+* NetworkTester.exists(URI) supports SSH and other protocols
+  ([#52](https://github.com/oboehm/PatternTesting2/issues/52))
+
+
 ## [2.5.0] - 2025-01-06
 
 ### Changed
