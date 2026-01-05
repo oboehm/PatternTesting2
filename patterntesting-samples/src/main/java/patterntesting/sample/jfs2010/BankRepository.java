@@ -18,14 +18,14 @@
 
 package patterntesting.sample.jfs2010;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import patterntesting.runtime.annotation.ProfileMe;
+
 import java.math.BigDecimal;
 import java.sql.*;
-import java.util.*;
-
-import clazzfish.jdbc.ProxyDriver;
-import org.slf4j.*;
-
-import patterntesting.runtime.annotation.ProfileMe;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * This class represents the repository (or DB) of a bank. As default the
@@ -73,8 +73,6 @@ public final class BankRepository {
         String driverName = "org.hsqldb.jdbcDriver";
         if (JDBC_URL.startsWith("jdbc:mysql")) {
             driverName = "com.mysql.jdbc.Driver";
-        } else if (JDBC_URL.startsWith("jdbc:proxy")) {
-            driverName = ProxyDriver.class.getName();
         } else if (JDBC_URL.startsWith("jdbc:jamon")) {
             driverName = "com.jamonapi.proxy.JAMonDriver";
         }

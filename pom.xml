@@ -323,8 +323,8 @@
       <!-- Monitoring -->
       <dependency>
         <groupId>de.aosd.clazzfish</groupId>
-        <artifactId>clazzfish-jdbc</artifactId>
-        <version>2.3.11</version>
+        <artifactId>clazzfish-monitor</artifactId>
+        <version>2.8</version>
       </dependency>
       <!-- OSGi -->
       <dependency>
@@ -1219,10 +1219,6 @@
               <source>${maven.compile.source}</source>
               <encoding>${commons.encoding}</encoding>
               <linksource>true</linksource>
-              <!--
-                  The following apidocs were not included because of missing package-list:
-                  http://jamonapi.sourceforge.net/javadoc/
-               -->
               <links>
                 <link>http://www.eclipse.org/aspectj/doc/released/runtime-api</link>
                 <link>http://commons.apache.org/proper/commons-lang3/apidocs/</link>
