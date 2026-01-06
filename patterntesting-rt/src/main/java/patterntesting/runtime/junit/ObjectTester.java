@@ -1,7 +1,5 @@
 /*
- * $Id: ObjectTester.java,v 1.55 2017/11/09 20:34:50 oboehm Exp $
- *
- * Copyright (c) 2010 by Oliver Boehm
+ * Copyright (c) 2010-2026 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +19,9 @@
 package patterntesting.runtime.junit;
 
 import clazzfish.monitor.ClasspathMonitor;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.junit.jupiter.api.Assertions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.runtime.exception.DetailedAssertionError;
 import patterntesting.runtime.util.Converter;
 import patterntesting.runtime.util.ReflectionHelper;
@@ -31,6 +29,7 @@ import patterntesting.runtime.util.ReflectionHelper;
 import java.io.NotSerializableException;
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -38,8 +37,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * This is a utility class to check some important methods of a class like the
@@ -120,9 +117,9 @@ public final class ObjectTester extends AbstractTester {
 	 * @since 1.5
 	 */
 	public static void assertNotEquals(final Object a, final Object b) throws AssertionError {
-		assertFalse(a.equals(b), "expected: '" + a + "' != '" + b + "'");
-		assertFalse(b.equals(a),
-				a.getClass() + ": equals not symmetrical (A != B, but B == A) with A = '" + a + "' and B = '" + b + "'");
+        Assertions.assertNotEquals(a, b, "expected: '" + a + "' != '" + b + "'");
+        Assertions.assertNotEquals(b, a,
+                a.getClass() + ": equals not symmetrical (A != B, but B == A) with A = '" + a + "' and B = '" + b + "'");
 	}
 
 	/**
@@ -134,7 +131,7 @@ public final class ObjectTester extends AbstractTester {
 	 */
 	private static void assertEqualsWithNull(final Object obj) {
 		try {
-			assertFalse(obj.equals(null), obj.getClass().getName() + ".equals(null) should return 'false'");
+            Assertions.assertNotEquals(null, obj, obj.getClass().getName() + ".equals(null) should return 'false'");
 		} catch (RuntimeException re) {
 			throw new DetailedAssertionError(
 					obj.getClass().getName() + ".equals(..) implementation does not check (correct) for null argument",
@@ -240,14 +237,8 @@ public final class ObjectTester extends AbstractTester {
 	/**
 	 * Check for each class in the given package if the equals() method is
 	 * implemented correct.
-	 * <p>
-	 * To get a name of a package call {@link Package#getPackage(String)}. But
-	 * be sure that you can't get <em>null</em> as result. In this case use
-	 * {@link #assertEqualsOfPackage(String)}.
-	 * </p>
 	 *
-	 * @param pkg
-	 *            the package e.g. "patterntesting.runtime"
+	 * @param pkg the package e.g. "patterntesting.runtime"
 	 * @see #assertEqualsOfPackage(String)
 	 * @since 1.1
 	 */
@@ -259,16 +250,9 @@ public final class ObjectTester extends AbstractTester {
 	/**
 	 * Check for each class in the given package if the equals() method is
 	 * implemented correct.
-	 * <p>
-	 * To get a name of a package call {@link Package#getPackage(String)}. But
-	 * be sure that you can't get <em>null</em> as result. In this case use
-	 * {@link #assertEqualsOfPackage(String, Class...)}.
-	 * </p>
 	 *
-	 * @param pkg
-	 *            the package e.g. "patterntesting.runtime"
-	 * @param excluded
-	 *            classes which are excluded from the check
+	 * @param pkg      the package e.g. "patterntesting.runtime"
+	 * @param excluded classes which are excluded from the check
 	 * @see #assertEqualsOfPackage(String, Class...)
 	 * @since 1.1
 	 */
@@ -299,19 +283,13 @@ public final class ObjectTester extends AbstractTester {
 	/**
 	 * Check for each class in the given package if the equals() method is
 	 * implemented correct.
-	 * <p>
-	 * This method does the same as {@link #assertEquals(Package)} but was
-	 * introduced by {@link Package#getPackage(String)} sometimes return null if
-	 * no class of this package is loaded.
-	 * </p>
 	 *
-	 * @param packageName
-	 *            the package name e.g. "patterntesting.runtime"
+	 * @param packageName the package name e.g. "patterntesting.runtime"
 	 * @see #assertEquals(Package)
 	 * @since 1.1
 	 */
 	public static void assertEqualsOfPackage(final String packageName) {
-		Collection<Class<? extends Object>> classes = getClassesWithDeclaredEquals(packageName);
+		Collection<Class<?>> classes = getClassesWithDeclaredEquals(packageName);
 		assertEquals(classes);
 	}
 
@@ -328,7 +306,7 @@ public final class ObjectTester extends AbstractTester {
 	 */
 	public static void assertEqualsOfPackage(final String packageName, final Class<?>... excluded) {
 		List<Class<?>> excludedList = Arrays.asList(excluded);
-        Collection<Class<? extends Object>> classes = getClassesWithDeclaredEquals(packageName);
+        Collection<Class<?>> classes = getClassesWithDeclaredEquals(packageName);
         LOG.debug("{} will be excluded from check.", excludedList);
         removeClasses(classes, excludedList);
         assertEquals(classes);
@@ -350,7 +328,7 @@ public final class ObjectTester extends AbstractTester {
 	 * @since 1.6
 	 */
 	public static void assertEqualsOfPackage(final String packageName, final Pattern... excluded) {
-		Collection<Class<? extends Object>> classes = getClassesWithDeclaredEquals(packageName);
+		Collection<Class<?>> classes = getClassesWithDeclaredEquals(packageName);
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Pattern {} will be excluded from check.", Converter.toShortString(excluded));
 		}
@@ -358,11 +336,11 @@ public final class ObjectTester extends AbstractTester {
 		assertEquals(classes);
 	}
 
-	private static Collection<Class<? extends Object>> getClassesWithDeclaredEquals(final String packageName) {
+	private static Collection<Class<?>> getClassesWithDeclaredEquals(final String packageName) {
 		assert packageName != null;
-		Collection<Class<? extends Object>> concreteClasses = classpathMonitor.getConcreteClassList(packageName);
-		Collection<Class<? extends Object>> classes = new ArrayList<>(concreteClasses.size());
-		for (Class<? extends Object> clazz : concreteClasses) {
+		Collection<Class<?>> concreteClasses = getConcreteClassList(packageName);
+		Collection<Class<?>> classes = new ArrayList<>(concreteClasses.size());
+		for (Class<?> clazz : concreteClasses) {
 			if (!Modifier.isPublic(clazz.getModifiers())) {
 				LOG.debug(clazz + " will be ignored (class is not public)");
 				continue;
@@ -374,6 +352,62 @@ public final class ObjectTester extends AbstractTester {
 			classes.add(clazz);
 		}
 		return classes;
+	}
+
+	static Collection<Class<?>> getConcreteClassList(final String packageName) {
+		assert packageName != null;
+		Collection<String> classList = getClasspathClassList(packageName);
+		Collection<Class<?>> classes = new ArrayList<>(classList.size());
+		for (String classname : classList) {
+			try {
+				Class<Object> clazz = (Class<Object>) Class.forName(classname);
+				if (!canBeInstantiated(clazz)) {
+					LOG.trace("{} will be ignored (can't be instantiated).", clazz);
+					continue;
+				}
+				classes.add(clazz);
+			} catch (ClassNotFoundException e) {
+				LOG.debug("Class '{}' is ignored because it was not found:", classname, e);
+			} catch (NoClassDefFoundError e) {
+				LOG.debug("Class '{}' is ignored because definition was not found:", classname, e);
+			} catch (ExceptionInInitializerError ex) {
+				LOG.debug("Class '{}' is ignored because it cannot be initialized:", classname, ex);
+			}
+		}
+		return classes;
+	}
+
+	private static Collection<String> getClasspathClassList(final String packageName) {
+		Collection<String> classlist = new ArrayList<>();
+		String[] classes = classpathMonitor.getClasspathClasses();
+		String prefix = packageName.endsWith(".") ? packageName : packageName + ".";
+		for (String aClass : classes) {
+			if (aClass.startsWith(prefix)) {
+				classlist.add(aClass);
+			}
+		}
+		return classlist;
+	}
+
+	private static boolean canBeInstantiated(final Class<?> clazz) {
+		if (clazz.isInterface()) {
+			return false;
+		}
+		int mod = clazz.getModifiers();
+		if (Modifier.isAbstract(mod)) {
+			return false;
+		}
+		try {
+			clazz.getConstructor();
+			return true;
+		} catch (SecurityException ex) {
+			LOG.info("Cannot access default ctor {}:", clazz, ex);
+			return false;
+		} catch (NoSuchMethodException ex) {
+			LOG.trace("Cannot get default ctor of {}:", clazz, ex);
+			LOG.debug("{} has no default constructor.", clazz);
+			return false;
+		}
 	}
 
 	/**
@@ -516,14 +550,8 @@ public final class ObjectTester extends AbstractTester {
 
 	/**
 	 * Starts all known checks for all classes of the given package.
-	 * <p>
-	 * To get a name of a package call {@link Package#getPackage(String)}. But
-	 * be sure that you can't get <em>null</em> as result. In this case use
-	 * {@link #assertAllOfPackage(String)}.
-	 * </p>
 	 *
-	 * @param pkg
-	 *            the package e.g. "patterntesting.runtime"
+	 * @param pkg the package e.g. "patterntesting.runtime"
 	 * @since 1.1
 	 */
 	public static void assertAll(final Package pkg) {
@@ -534,16 +562,9 @@ public final class ObjectTester extends AbstractTester {
 	/**
 	 * Starts all known checks for all classes of the given package except for
 	 * the "excluded" classes.
-	 * <p>
-	 * To get a name of a package call {@link Package#getPackage(String)}. But
-	 * be sure that you can't get <em>null</em> as result. In this case use
-	 * {@link #assertEqualsOfPackage(String, Class...)}.
-	 * </p>
 	 *
-	 * @param pkg
-	 *            the package e.g. "patterntesting.runtime"
-	 * @param excluded
-	 *            classes which are excluded from the check
+	 * @param pkg      the package e.g. "patterntesting.runtime"
+	 * @param excluded classes which are excluded from the check
 	 * @see #assertAllOfPackage(String, Class...)
 	 * @since 1.1
 	 */
@@ -579,7 +600,7 @@ public final class ObjectTester extends AbstractTester {
         assert packageName != null;
 		List<Class<?>> excludedList = Arrays.asList(excluded);
         LOG.debug("{} will be excluded from check.", excludedList);
-        Collection<Class<? extends Object>> classes = classpathMonitor.getConcreteClassList(packageName);
+        Collection<Class<?>> classes = getConcreteClassList(packageName);
         classes.removeAll(excludedList);
         removeMemberClasses(classes);
         assertAll(classes);
@@ -602,7 +623,7 @@ public final class ObjectTester extends AbstractTester {
 	 */
 	public static void assertAllOfPackage(final String packageName, final Pattern... excluded) {
 		assert packageName != null;
-		Collection<Class<? extends Object>> classes = classpathMonitor.getConcreteClassList(packageName);
+		Collection<Class<?>> classes = getConcreteClassList(packageName);
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Pattern {} will be excluded from check.", Converter.toShortString(excluded));
 		}
@@ -611,9 +632,9 @@ public final class ObjectTester extends AbstractTester {
 		assertAll(classes);
 	}
 
-	private static void removeMemberClasses(final Collection<Class<? extends Object>> classes) {
-		Collection<Class<? extends Object>> memberClasses = new ArrayList<>();
-		for (Class<? extends Object> clazz : classes) {
+	private static void removeMemberClasses(final Collection<Class<?>> classes) {
+		Collection<Class<?>> memberClasses = new ArrayList<>();
+		for (Class<?> clazz : classes) {
 			if (clazz.isMemberClass()) {
 				memberClasses.add(clazz);
 			}
@@ -631,13 +652,15 @@ public final class ObjectTester extends AbstractTester {
 	 */
 	static Object newInstanceOf(final Class<?> clazz) {
 		try {
-			return clazz.newInstance();
-		} catch (InstantiationException e) {
+			return clazz.getDeclaredConstructor().newInstance();
+		} catch (NoSuchMethodException | InstantiationException e) {
 			throw new IllegalArgumentException("can't instantiate " + clazz, e);
 		} catch (IllegalAccessException e) {
 			throw new IllegalArgumentException("can't access ctor of " + clazz, e);
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(String.format("ctor call of %s failed", clazz), e);
 		}
-	}
+    }
 
 	/**
 	 * Clone.
@@ -677,18 +700,18 @@ public final class ObjectTester extends AbstractTester {
 		}
 		Object clone = newInstanceOf(orig.getClass());
 		Field[] fields = orig.getClass().getDeclaredFields();
-		for (int i = 0; i < fields.length; i++) {
-			fields[i].setAccessible(true);
-			if (ReflectionHelper.isStatic(fields[i])) {
-				continue;
-			}
-			try {
-				Object value = fields[i].get(orig);
-				fields[i].set(clone, value);
-			} catch (IllegalAccessException ex) {
-				LOG.debug(fields[i] + " is ignored:", ex);
-			}
-		}
+        for (Field field : fields) {
+            field.setAccessible(true);
+            if (ReflectionHelper.isStatic(field)) {
+                continue;
+            }
+            try {
+                Object value = field.get(orig);
+                field.set(clone, value);
+            } catch (IllegalAccessException ex) {
+                LOG.debug(field + " is ignored:", ex);
+            }
+        }
 		return clone;
 	}
 

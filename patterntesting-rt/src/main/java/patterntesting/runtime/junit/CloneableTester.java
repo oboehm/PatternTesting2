@@ -1,7 +1,5 @@
 /*
- * $Id: CloneableTester.java,v 1.26 2017/11/09 20:34:50 oboehm Exp $
- *
- * Copyright (c) 2010 by Oliver Boehm
+ * Copyright (c) 2010-2026 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +18,13 @@
 
 package patterntesting.runtime.junit;
 
-import clazzfish.monitor.ClasspathMonitor;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.runtime.exception.DetailedAssertionError;
 import patterntesting.runtime.util.Converter;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -72,8 +70,7 @@ import java.util.regex.Pattern;
  */
 public final class CloneableTester extends AbstractTester {
 
-	private static final Logger LOG = LoggerFactory.getLogger(CloneableTester.class);
-	private static final ClasspathMonitor classpathMonitor = ClasspathMonitor.getInstance();
+	private static final Logger log = LoggerFactory.getLogger(CloneableTester.class);
 
 	/** Utility class - no need to instantiate it. */
 	private CloneableTester() {
@@ -88,11 +85,9 @@ public final class CloneableTester extends AbstractTester {
 	 */
 	public static void assertCloning(final Class<? extends Cloneable> clazz) {
 		try {
-			assertCloning(clazz.newInstance());
-		} catch (InstantiationException e) {
+			assertCloning(clazz.getDeclaredConstructor().newInstance());
+		} catch (ReflectiveOperationException e) {
 			throw new DetailedAssertionError("can't instantiate " + clazz, e);
-		} catch (IllegalAccessException e) {
-			throw new DetailedAssertionError("can't access " + clazz, e);
 		}
 	}
 
@@ -147,12 +142,12 @@ public final class CloneableTester extends AbstractTester {
 	private static boolean hasCloneMethod(final Class<? extends Cloneable> cloneClass) {
 		try {
 			Method m = cloneClass.getDeclaredMethod("clone");
-			if (LOG.isTraceEnabled()) {
-				LOG.trace(m + " found in " + cloneClass);
+			if (log.isTraceEnabled()) {
+				log.trace(m + " found in " + cloneClass);
 			}
 			return true;
 		} catch (NoSuchMethodException e) {
-			LOG.trace(cloneClass + " has no clone method:", e);
+			log.trace(cloneClass + " has no clone method:", e);
 			return false;
 		}
 	}
@@ -172,14 +167,8 @@ public final class CloneableTester extends AbstractTester {
 
 	/**
 	 * Check for each class in the given package if it can be cloned correct.
-	 * <p>
-	 * To get a name of a package call {@link Package#getPackage(String)}. But
-	 * be sure that you can't get <em>null</em> as result. In this case use
-	 * {@link #assertCloningOfPackage(String)}.
-	 * </p>
 	 *
-	 * @param pkg
-	 *            the package e.g. "patterntesting.runtime"
+	 * @param pkg the package e.g. "patterntesting.runtime"
 	 * @see #assertCloningOfPackage(String)
 	 * @since 1.1
 	 */
@@ -190,16 +179,9 @@ public final class CloneableTester extends AbstractTester {
 
 	/**
 	 * Check for each class in the given package if it can be cloned correct.
-	 * <p>
-	 * To get a name of a package call {@link Package#getPackage(String)}. But
-	 * be sure that you can't get <em>null</em> as result. In this case use
-	 * {@link #assertCloningOfPackage(String, Pattern...)}.
-	 * </p>
 	 *
-	 * @param pkg
-	 *            the package
-	 * @param excluded
-	 *            class pattern which should be excluded from the check
+	 * @param pkg      the package
+	 * @param excluded class pattern which should be excluded from the check
 	 * @since 1.6
 	 */
 	public static void assertCloning(final Package pkg, final Pattern... excluded) {
@@ -233,7 +215,7 @@ public final class CloneableTester extends AbstractTester {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void assertCloningOfPackage(final String packageName, final Class<? extends Cloneable>... excluded) {
-        LOG.debug("{} will be excluded from check.", Arrays.toString(excluded));
+        log.debug("{} will be excluded from check.", Arrays.toString(excluded));
         Collection<Class<? extends Cloneable>> classes = getCloneableClasses(packageName);
         List<Class<Cloneable>> excludedList = Arrays.asList((Class<Cloneable>[]) excluded);
         removeClasses(classes, excludedList);
@@ -253,15 +235,27 @@ public final class CloneableTester extends AbstractTester {
 	 */
 	public static void assertCloningOfPackage(final String packageName, final Pattern... excluded) {
 		Collection<Class<? extends Cloneable>> classes = getCloneableClasses(packageName);
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Pattern {} will be excluded from check.", Converter.toShortString(excluded));
+		if (log.isDebugEnabled()) {
+			log.debug("Pattern {} will be excluded from check.", Converter.toShortString(excluded));
 		}
 		removeClasses(classes, excluded);
 		assertCloning(classes);
 	}
 
 	private static Collection<Class<? extends Cloneable>> getCloneableClasses(final String packageName) {
-		return classpathMonitor.getClassList(packageName, Cloneable.class);
+		return getClassList(packageName, Cloneable.class);
+	}
+
+	static <T> Collection<Class<? extends T>> getClassList(final String packageName, final Class<T> type) {
+		Collection<Class<? extends T>> classes = new ArrayList<>();
+		Collection<Class<?>> concreteClasses = ObjectTester.getConcreteClassList(packageName);
+		for (Class<?> clazz : concreteClasses) {
+			if (type.isAssignableFrom(clazz)) {
+				classes.add((Class<T>) clazz);
+				log.trace("subclass of {} found: {}", type, clazz);
+			}
+		}
+		return classes;
 	}
 
 }

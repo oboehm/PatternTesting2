@@ -1,7 +1,5 @@
 /*
- * $Id: ComparableTester.java,v 1.11 2017/11/09 20:34:50 oboehm Exp $
- *
- * Copyright (c) 2011 by Oliver Boehm
+ * Copyright (c) 2011-2026 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +18,9 @@
 
 package patterntesting.runtime.junit;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.junit.jupiter.api.Assertions;
-import clazzfish.monitor.ClasspathMonitor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.runtime.util.Converter;
 
 import java.util.Arrays;
@@ -41,8 +38,7 @@ import java.util.regex.Pattern;
  */
 public final class ComparableTester extends AbstractTester {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ComparableTester.class);
-	private static final ClasspathMonitor classpathMonitor = ClasspathMonitor.getInstance();
+	private static final Logger log = LoggerFactory.getLogger(ComparableTester.class);
 
 	/** Utility class - no need to instantiate it. */
 	private ComparableTester() {
@@ -79,7 +75,7 @@ public final class ComparableTester extends AbstractTester {
 				Assertions.assertTrue(ret2 < 0, msg);
 			}
 		}
-		LOG.info("compareTo implementation of " + c1.getClass() + " seems to be ok");
+		log.info("compareTo implementation of " + c1.getClass() + " seems to be ok");
 	}
 
 	/**
@@ -97,7 +93,7 @@ public final class ComparableTester extends AbstractTester {
 	 */
 	@SuppressWarnings("rawtypes")
 	public static void assertCompareTo(final Class<? extends Comparable> clazz) throws AssertionError {
-		LOG.trace("checking {}.compareTo(..)...", clazz);
+		log.trace("checking {}.compareTo(..)...", clazz);
 		Comparable<?> comp = (Comparable<?>) ObjectTester.newInstanceOf(clazz);
 		Comparable<?> clone = (Comparable<?>) ObjectTester.clone(comp);
 		assertCompareTo(comp, clone);
@@ -120,14 +116,8 @@ public final class ComparableTester extends AbstractTester {
 	/**
 	 * Check for each {@link Comparable} class in the given package if the
 	 * compareTo(..) method works as expected.
-	 * <p>
-	 * To get a name of a package call {@link Package#getPackage(String)}. But
-	 * be sure that you can't get <em>null</em> as result. In this case use
-	 * {@link #assertCompareToOfPackage(String)}.
-	 * </p>
 	 *
-	 * @param pkg
-	 *            the package e.g. "patterntesting.runtime"
+	 * @param pkg the package e.g. "patterntesting.runtime"
 	 * @see #assertCompareToOfPackage(String)
 	 */
 	public static void assertCompareTo(final Package pkg) {
@@ -138,16 +128,9 @@ public final class ComparableTester extends AbstractTester {
 	/**
 	 * Check for each {@link Comparable} class in the given package if the
 	 * compareTo(..) method works as expected.
-	 * <p>
-	 * To get a name of a package call {@link Package#getPackage(String)}. But
-	 * be sure that you can't get <em>null</em> as result. In this case use
-	 * {@link #assertCompareToOfPackage(String)}.
-	 * </p>
 	 *
-	 * @param pkg
-	 *            the package e.g. "patterntesting.runtime"
-	 * @param excluded
-	 *            class pattern which should be excluded from the check
+	 * @param pkg      the package e.g. "patterntesting.runtime"
+	 * @param excluded class pattern which should be excluded from the check
 	 * @see #assertCompareToOfPackage(String, Pattern...)
 	 * @since 1.6
 	 */
@@ -184,7 +167,7 @@ public final class ComparableTester extends AbstractTester {
 			final Class<? extends Comparable<?>>... excluded) {
         Collection<Class<? extends Comparable>> classes = getComparableClasses(packageName);
         List<Class<? extends Comparable<?>>> excludedList = Arrays.asList(excluded);
-        LOG.debug("{} will be excluded from check.", excludedList);
+        log.debug("{} will be excluded from check.", excludedList);
         removeClasses(classes, excludedList);
         assertCompareTo(classes);
 	}
@@ -203,8 +186,8 @@ public final class ComparableTester extends AbstractTester {
 	@SuppressWarnings("rawtypes")
 	public static void assertCompareToOfPackage(final String packageName, final Pattern... excluded) {
 		Collection<Class<? extends Comparable>> classes = getComparableClasses(packageName);
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Pattern {} will be excluded from check.", Converter.toShortString(excluded));
+		if (log.isDebugEnabled()) {
+			log.debug("Pattern {} will be excluded from check.", Converter.toShortString(excluded));
 		}
 		removeClasses(classes, excluded);
 		assertCompareTo(classes);
@@ -212,9 +195,7 @@ public final class ComparableTester extends AbstractTester {
 
 	@SuppressWarnings("rawtypes")
 	private static Collection<Class<? extends Comparable>> getComparableClasses(final String packageName) {
-		Collection<Class<? extends Comparable>> comparables = classpathMonitor.getClassList(packageName,
-				Comparable.class);
-		return comparables;
+        return CloneableTester.getClassList(packageName, Comparable.class);
 	}
 
 }
