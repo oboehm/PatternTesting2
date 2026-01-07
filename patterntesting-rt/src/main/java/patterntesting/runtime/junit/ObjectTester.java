@@ -38,6 +38,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 /**
  * This is a utility class to check some important methods of a class like the
  * {@link Object#equals(Object)} or {@link Object#hashCode()} method. Before
@@ -117,8 +119,8 @@ public final class ObjectTester extends AbstractTester {
 	 * @since 1.5
 	 */
 	public static void assertNotEquals(final Object a, final Object b) throws AssertionError {
-        Assertions.assertNotEquals(a, b, "expected: '" + a + "' != '" + b + "'");
-        Assertions.assertNotEquals(b, a,
+		assertFalse(a.equals(b), "expected: '" + a + "' != '" + b + "'");
+		assertFalse(b.equals(a),
                 a.getClass() + ": equals not symmetrical (A != B, but B == A) with A = '" + a + "' and B = '" + b + "'");
 	}
 
@@ -131,7 +133,7 @@ public final class ObjectTester extends AbstractTester {
 	 */
 	private static void assertEqualsWithNull(final Object obj) {
 		try {
-            Assertions.assertNotEquals(null, obj, obj.getClass().getName() + ".equals(null) should return 'false'");
+			assertFalse(obj.equals(null), obj.getClass().getName() + ".equals(null) should return 'false'");
 		} catch (RuntimeException re) {
 			throw new DetailedAssertionError(
 					obj.getClass().getName() + ".equals(..) implementation does not check (correct) for null argument",
