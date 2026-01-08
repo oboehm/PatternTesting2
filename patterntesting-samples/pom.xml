@@ -75,15 +75,6 @@
       <groupId>org.patterntesting</groupId>
       <artifactId>patterntesting-exception</artifactId>
     </dependency>
-    <!-- 
-        JAMonAPI
-        see http://jamonapi.sourceforge.net/
-        see http://maven.jahia.org/maven2/com/jamonapi/jamon/
-     -->
-    <dependency>
-      <groupId>com.jamonapi</groupId>
-      <artifactId>jamon</artifactId>
-    </dependency>
     <!--
         embedded servlet container (including JSP)
         see http://docs.codehaus.org/display/JETTY/Embedding+Jetty

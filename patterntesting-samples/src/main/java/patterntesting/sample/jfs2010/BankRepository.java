@@ -73,8 +73,6 @@ public final class BankRepository {
         String driverName = "org.hsqldb.jdbcDriver";
         if (JDBC_URL.startsWith("jdbc:mysql")) {
             driverName = "com.mysql.jdbc.Driver";
-        } else if (JDBC_URL.startsWith("jdbc:jamon")) {
-            driverName = "com.jamonapi.proxy.JAMonDriver";
         }
         Class.forName(driverName);
         log.info("{} loaded.", driverName);

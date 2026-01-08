@@ -18,13 +18,17 @@
 
 package patterntesting.runtime.monitor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
-import org.slf4j.*;
-
 /**
- * This is the counterpart to JamonMonitorFactory. It encapsulate the different
+ * This was the counterpart to JamonMonitorFactory. It encapsulate the different
  * behaviour of the {@link SimpleProfileMonitor} for the ProfileStatistic class.
+ * <p>
+ * NOTE: Since v2.6 JamonMonitorFactory was deleted.
+ * </p>
  *
  * @author oboehm (ob@aosd.de)
  * @since 1.6 (19.12.2015)

@@ -15,7 +15,6 @@
     <Logger name="patterntesting.runtime.monitor.MemoryGuard" level="debug"/>
     <!-- to trace problems on Travis... -->
     <logger name="patterntesting.runtime.monitor.AbstractProfileAspect" level="info"/>
-    <logger name="patterntesting.runtime.monitor.JamonMonitorFactory" level="info"/>
     <logger name="patterntesting.runtime.monitor.ProfileAspect" level="info"/>
     <logger name="patterntesting.runtime.monitor.ProfileStatistic" level="info"/>
     <logger name="patterntesting.runtime.util.Converter" level="debug"/>

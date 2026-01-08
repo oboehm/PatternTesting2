@@ -84,13 +84,6 @@
       <artifactId>xstream</artifactId>
       <optional>true</optional>
     </dependency>
-    <!-- optional: JAMon (Java and Performance Monitor) -->
-    <dependency>
-      <groupId>com.jamonapi</groupId>
-      <artifactId>jamon</artifactId>
-      <scope>compile</scope>
-      <optional>true</optional>
-    </dependency>
     <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
@@ -227,8 +220,6 @@
         <extensions>true</extensions>
         <configuration>
           <instructions>
-            <Import-Package>!com.jamonapi,
-              *</Import-Package>
             <Export-Package>patterntesting.annotation**,
               patterntesting.runtime,
               patterntesting.runtime.*</Export-Package>
@@ -273,7 +264,6 @@
               <shadedClassifierName>uberjar</shadedClassifierName>
               <artifactSet>
                 <excludes>
-                  <exclude>com.jamonapi:jamon</exclude>
                   <exclude>com.c2.fit:fit</exclude>
                   <exclude>org.easymock:easymock</exclude>
                 </excludes>

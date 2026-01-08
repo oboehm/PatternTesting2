@@ -1,7 +1,5 @@
 /*
- * $Id: ProfileStatistic.java,v 1.40 2017/06/01 17:24:29 oboehm Exp $
- *
- * Copyright (c) 2008 by Oliver Boehm
+ * Copyright (c) 2008.2026 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +17,12 @@
  */
 package patterntesting.runtime.monitor;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.aspectj.lang.Signature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import patterntesting.annotation.check.runtime.MayReturnNull;
 import patterntesting.runtime.annotation.DontProfileMe;
 import patterntesting.runtime.jmx.MBeanHelper;
-import patterntesting.runtime.util.Environment;
 import patterntesting.runtime.util.SignatureHelper;
 
 import javax.management.ObjectName;
@@ -37,36 +34,20 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
- * This is constructed as a thin layer around com.jamonapi.MonitorFactory for
- * the needs of patterntesting. The reason for this layer is that sometimes you
- * want to minimize the use of other libraries. So this implementation provides
- * also an implementation if the JaMon library is missing.
+ * Till v2.5 this was constructed as a thin layer around com.jamonapi.MonitorFactory
+ * for the needs of patterntesting. But since v2.6 the focus is to mimize
+ * the use of other libraries.
  *
  * @author <a href="boehm@javatux.de">oliver</a>
- * @version $Revision: 1.40 $
- * @see com.jamonapi.MonitorFactory
  * @since 22.12.2008
  */
 public class ProfileStatistic extends Thread implements ProfileStatisticMBean {
 
-	private static final ProfileStatistic INSTANCE;
+	private static final ProfileStatistic INSTANCE = new ProfileStatistic("root");;
 	private static final Logger LOG = LoggerFactory.getLogger(ProfileStatistic.class);
 
 	private ObjectName mbeanName = MBeanHelper.getAsObjectName(this.getClass());
 	private final ProfileMonitorFactory factory;
-
-	/** Is JaMon library available?. */
-	private static final boolean JAMON_AVAILABLE;
-
-	/**
-	 * ProfileStatistic *must* be initialized after isJamonAvailable attribute
-	 * is set. Otherwise you'll get a NullPointerException after MBean
-	 * registration.
-	 */
-	static {
-		JAMON_AVAILABLE = Environment.isJamonAvailable();
-		INSTANCE = new ProfileStatistic("root");
-	}
 
 	/**
 	 * Gets the single instance of ProfileStatistic.
@@ -80,13 +61,12 @@ public class ProfileStatistic extends Thread implements ProfileStatisticMBean {
 	/**
 	 * Instantiates a new profile statistic.
 	 *
-	 * @param rootLabel
-	 *            the root label
+	 * @param rootLabel the root label
 	 */
 	protected ProfileStatistic(final String rootLabel) {
 		SimpleProfileMonitor rootMonitor = new SimpleProfileMonitor(rootLabel);
 		MBeanHelper.registerMBean(this.mbeanName, this);
-		factory = JAMON_AVAILABLE ? new JamonMonitorFactory(rootMonitor) : new SimpleProfileMonitorFactory(rootMonitor);
+		factory = new SimpleProfileMonitorFactory(rootMonitor);
 		factory.setMaxNumMonitors(100);
 	}
 
