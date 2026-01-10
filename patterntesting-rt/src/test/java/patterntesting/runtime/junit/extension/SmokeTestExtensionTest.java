@@ -20,6 +20,7 @@ package patterntesting.runtime.junit.extension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.*;
+import org.junit.jupiter.api.function.ThrowingConsumer;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,8 @@ import patterntesting.runtime.annotation.Broken;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -99,6 +102,11 @@ class SmokeTestExtensionTest {
             return Optional.ofNullable(testClass);
         }
         @Override
+        public List<Class<?>> getEnclosingTestClasses() {
+            throw new UnsupportedOperationException("getEnclosingTestClasses not yet implemented");
+
+        }
+        @Override
         public Optional<Method> getTestMethod() {
             return Optional.ofNullable(testMethod);
         }
@@ -153,6 +161,16 @@ class SmokeTestExtensionTest {
         @Override
         public void publishReportEntry(Map<String, String> map) {
             throw new UnsupportedOperationException("publishReportEntry not yet implemented");
+        }
+        @Override
+        public void publishFile(String name, MediaType mediaType, ThrowingConsumer<Path> action) {
+            throw new UnsupportedOperationException("publishFile not yet implemented");
+
+        }
+        @Override
+        public void publishDirectory(String name, ThrowingConsumer<Path> action) {
+            throw new UnsupportedOperationException("publishDirectory not yet implemented");
+
         }
         @Override
         public Store getStore(Namespace namespace) {
