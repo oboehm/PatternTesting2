@@ -17,6 +17,7 @@
  */
 package patterntesting.runtime.junit.extension;
 
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.*;
@@ -102,13 +103,20 @@ class SmokeTestExtensionTest {
             return Optional.ofNullable(testClass);
         }
         @Override
+        public Class<?> getRequiredTestClass() {
+            return ExtensionContext.super.getRequiredTestClass();
+        }
+        @Override
         public List<Class<?>> getEnclosingTestClasses() {
             throw new UnsupportedOperationException("getEnclosingTestClasses not yet implemented");
-
         }
         @Override
         public Optional<Method> getTestMethod() {
             return Optional.ofNullable(testMethod);
+        }
+        @Override
+        public Method getRequiredTestMethod() {
+            return ExtensionContext.super.getRequiredTestMethod();
         }
         @Override
         public Optional<ExtensionContext> getParent() {
@@ -143,8 +151,16 @@ class SmokeTestExtensionTest {
             throw new UnsupportedOperationException("getTestInstance not yet implemented");
         }
         @Override
+        public Object getRequiredTestInstance() {
+            return ExtensionContext.super.getRequiredTestInstance();
+        }
+        @Override
         public Optional<TestInstances> getTestInstances() {
             throw new UnsupportedOperationException("getTestInstances not yet implemented");
+        }
+        @Override
+        public TestInstances getRequiredTestInstances() {
+            return ExtensionContext.super.getRequiredTestInstances();
         }
         @Override
         public Optional<Throwable> getExecutionException() {
@@ -155,7 +171,7 @@ class SmokeTestExtensionTest {
             throw new UnsupportedOperationException("getConfigurationParameter not yet implemented");
         }
         @Override
-        public <T> Optional<T> getConfigurationParameter(String s, Function<String, T> function) {
+        public <T> Optional<T> getConfigurationParameter(String key, Function<? super String, ? extends @Nullable T> transformer) {
             throw new UnsupportedOperationException("getConfigurationParameter not yet implemented");
         }
         @Override
@@ -163,17 +179,27 @@ class SmokeTestExtensionTest {
             throw new UnsupportedOperationException("publishReportEntry not yet implemented");
         }
         @Override
-        public void publishFile(String name, MediaType mediaType, ThrowingConsumer<Path> action) {
+        public void publishReportEntry(String key, String value) {
+            ExtensionContext.super.publishReportEntry(key, value);
+        }
+        @Override
+        public void publishReportEntry(String value) {
+            ExtensionContext.super.publishReportEntry(value);
+        }
+        @Override
+        public void publishFile(String name, org.junit.jupiter.api.MediaType mediaType, ThrowingConsumer<Path> action) {
             throw new UnsupportedOperationException("publishFile not yet implemented");
-
         }
         @Override
         public void publishDirectory(String name, ThrowingConsumer<Path> action) {
             throw new UnsupportedOperationException("publishDirectory not yet implemented");
-
         }
         @Override
         public Store getStore(Namespace namespace) {
+            throw new UnsupportedOperationException("getStore not yet implemented");
+        }
+        @Override
+        public Store getStore(StoreScope scope, Namespace namespace) {
             throw new UnsupportedOperationException("getStore not yet implemented");
         }
         @Override
