@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.net.*;
+import java.time.Duration;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -82,6 +83,18 @@ public final class NetworkTester {
     }
 
     /**
+     * Asserts, that the given host is online. The given time is the maximal
+     * time we try to connect to the given host.
+     *
+     * @param host    hostname or ip address
+     * @param timeout how long should we try to connect to host?
+     * @since 2.6
+     */
+    public static void assertOnline(String host, Duration timeout) {
+        assertTrue(isOnline(host, timeout), host + " is offline");
+    }
+
+    /**
      * Checks if the given host is online. The given time is the maximal
      * time we try to connect to the given host.
      *
@@ -94,6 +107,19 @@ public final class NetworkTester {
     public static boolean isOnline(String host, int time, TimeUnit unit) {
         PortScanner scanner = scanPortsOf(host, time, unit);
         return scanner.openPortDetected();
+    }
+
+    /**
+     * Checks if the given host is online. The given time is the maximal
+     * time we try to connect to the given host.
+     *
+     * @param host    hostname or ip address
+     * @param timeout how long should we try to connect to host?
+     * @return true if host is online
+     * @since 2.6
+     */
+    public static boolean isOnline(String host, Duration timeout) {
+        return isOnline(host, (int) timeout.toMillis(), TimeUnit.MILLISECONDS);
     }
 
     private static PortScanner scanPortsOf(String host, int timeout, TimeUnit unit) {
@@ -142,6 +168,17 @@ public final class NetworkTester {
         assertOnline(host.getHostName(), time, unit);
     }
 
+    /**
+     * Asserts, that the given host is online. The given time is the maximal
+     * time we try to connect to the given host.
+     *
+     * @param host    hostname or ip address
+     * @param timeout how long should we try to connect to host?
+     * @since 2.6
+     */
+    public static void assertOnline(InetAddress host, Duration timeout) {
+        assertOnline(host.getHostName(), timeout);
+    }
 
     /**
      * Asserts, that the given host is online at the given port.
@@ -210,6 +247,19 @@ public final class NetworkTester {
     }
 
     /**
+     * Checks if the given host is online in the given time distance.
+     *
+     * @param host the hostname or IP address
+     * @param port the port between 0 and 0xFFFF
+     * @param timeout timeout
+     * @return true if host is online
+     * @since 2.6
+     */
+    public static boolean isOnline(String host, int port, Duration timeout) {
+        return isOnline(host, port, timeout.toMillis(),  TimeUnit.MILLISECONDS);
+    }
+
+    /**
      * Checks if the given URI is online. In contrast to {@link #exists(URI)}
      * it is not checked if the URI is present but if the service behind the
      * URI is present.
@@ -229,27 +279,27 @@ public final class NetworkTester {
         if (port > 0) {
             return port;
         }
-        switch (uri.getScheme().toLowerCase()) {
-            case "ftp":    return 21;
-            case "ssh":    return 22;
-            case "telnet": return 23;
-            case "http":   return 80;
-            case "auth":   return 113;
-            case "sftp":   return 115;
-            case "ntp":    return 123;
-            case "snmp":   return 161;
-            case "irc":    return 194;
-            case "ldap":   return 389;
-            case "https":  return 443;
-            case "rtsp":   return 554;
-            case "ipp":    return 631;
-            case "ldaps":  return 636;
-            case "ftps":   return 990;
-            case "ircs":   return 994;
-            case "nfs":    return 2049;
-            case "svn":    return 3690;
-            default:       return port;
-        }
+        return switch (uri.getScheme().toLowerCase()) {
+            case "ftp" -> 21;
+            case "ssh" -> 22;
+            case "telnet" -> 23;
+            case "http" -> 80;
+            case "auth" -> 113;
+            case "sftp" -> 115;
+            case "ntp" -> 123;
+            case "snmp" -> 161;
+            case "irc" -> 194;
+            case "ldap" -> 389;
+            case "https" -> 443;
+            case "rtsp" -> 554;
+            case "ipp" -> 631;
+            case "ldaps" -> 636;
+            case "ftps" -> 990;
+            case "ircs" -> 994;
+            case "nfs" -> 2049;
+            case "svn" -> 3690;
+            default -> port;
+        };
     }
 
     /**
@@ -288,6 +338,20 @@ public final class NetworkTester {
     public static void assertOffline(String host, int time, TimeUnit unit) {
         PortScanner scanner = scanPortsOf(host, time, unit);
         assertFalse(scanner.openPortDetected(), host + " is online");
+    }
+
+    /**
+     * Asserts, that the given host is offline. The given time is the maximal
+     * time we try to connect to the given host. Normally it takes about at
+     * least 8 minutes to realize that a host is offline. So if you want to
+     * wait a shorter time use this method.
+     *
+     * @param host    hostname or ip address
+     * @param timeout how long should we try to connect to host?
+     * @since 2.6
+     */
+    public static void assertOffline(String host, Duration timeout) {
+        assertOffline(host, (int) timeout.toMillis(), TimeUnit.MILLISECONDS);
     }
 
     /**

@@ -26,6 +26,7 @@ import patterntesting.runtime.annotation.IntegrationTest;
 import java.io.File;
 import java.io.IOException;
 import java.net.*;
+import java.time.Duration;
 import java.util.concurrent.*;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -168,6 +169,11 @@ public final class NetworkTesterIT {
     @Test
     public void testAssertOnlineURI() {
         NetworkTester.assertOnline(URI.create("https://github.com/oboehm/PatternTesting2"));
+    }
+
+    @Test
+    public void testAssertOnlineHost() {
+        NetworkTester.assertOnline("localhost", Duration.ofMillis(100));
     }
 
 }
