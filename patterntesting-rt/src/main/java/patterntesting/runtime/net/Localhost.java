@@ -20,12 +20,13 @@
 
 package patterntesting.runtime.net;
 
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -42,7 +43,7 @@ public final class Localhost {
 
 	private static final Collection<InetAddress> inetAddresses = new ArrayList<>();
 
-	/**
+	/*
 	 * We don't expect that the network addresses changes during the lifetime of
 	 * the application. So we identify it only once at the start time of this
 	 * class.
@@ -120,6 +121,20 @@ public final class Localhost {
 		return false;
 	}
 
+	/**
+	 * Here we try to get all network addresses to compare it against the given
+	 * hosts in a given time. The host can be given as hostname (e.g. "localhost")
+	 * or as IP address (e.g. "127.0.0.1").
+	 *
+	 * @param timeout – the maximum time to wait
+	 * @param hosts   - an array of hosts
+	 * @return true if matches one of the given hosts
+	 * @since 2.6
+	 */
+	public static boolean matches(Duration timeout, String... hosts) {
+		return matches(timeout.toMillis(), TimeUnit.MILLISECONDS, hosts);
+	}
+
 	private static Future<Boolean> matches(ExecutorService executor, String host) {
 		return executor.submit(() -> matches(host));
 	}
@@ -128,18 +143,16 @@ public final class Localhost {
 	 * Here we try to get all network addresses to compare it against the given
 	 * hosts.
 	 *
-	 * @param host
-	 *            either IP address (e.g. "127.0.0.1") or hostname (e.g.
-	 *            "localhost")
+	 * @param host either IP address (e.g. "127.0.0.1") or hostname (e.g.
+	 *             "localhost")
 	 * @return true if matches the given host
 	 */
 	public static boolean matches(final String host) {
-		for (Iterator<InetAddress> iterator = inetAddresses.iterator(); iterator.hasNext();) {
-			InetAddress address = iterator.next();
-			if (host.equals(address.getHostAddress()) || host.equals(address.getHostName())) {
-				return true;
-			}
-		}
+        for (InetAddress address : inetAddresses) {
+            if (host.equals(address.getHostAddress()) || host.equals(address.getHostName())) {
+                return true;
+            }
+        }
 		return false;
 	}
 

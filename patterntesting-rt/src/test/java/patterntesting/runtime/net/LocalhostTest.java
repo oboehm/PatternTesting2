@@ -30,6 +30,7 @@ import patterntesting.runtime.util.Converter;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.time.Duration;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
@@ -84,6 +85,12 @@ public final class LocalhostTest {
     public void testMatchesHosts() {
         String[] hosts = {"unknown", "unknown.nowhere"};
         assertFalse(Localhost.matches(10, TimeUnit.SECONDS, hosts), Converter.toString(hosts) + " should not match");
+    }
+
+    @Test
+    public void testMatchesHostsDuration() {
+        String[] hosts = {"unknown", "unknown.nowhere"};
+        assertFalse(Localhost.matches(Duration.ofSeconds(1), hosts), Converter.toString(hosts) + " should not match");
     }
 
 }
