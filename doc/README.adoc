@@ -31,22 +31,21 @@ This is a little checklist for the deployment of the next release:
 . change to release branch and merge the developer branch
 . update the link:../CHANGELOG.md[changelog]
 . change the version in pom.xml (remove -SNAPSHOT)
-. build all artifacts from patterntesting-parent
-(`mvn -DskipTests -B clean install javadoc:jar gpg:sign -Dgpg.passphrase=xx`)
+. build all artifacts from patterntesting-parent and deploy it
+(`mvn -Prelease -DskipTests clean install source:jar site javadoc:jar gpg:sign -Dgpg.passphrase=xxx deploy`)
 . workaround for javadoc-generation if javadoc-JAR in patterntesting-check-ct is empty:
 .. `pushd patterntesting-libs/patterntesting-check/patterntesting-check-ct/`
 .. `mvn site` (generates the ajdoc reports and copies it to apidoc directory)
 .. `mvn javadoc:jar`
 .. `popd`
-. use the script `src/script/deploy.sh` to upload bundles to https://oss.sonatype.org/[oss.sonatype.org] (but don't forget to update the VERSION variable inside this script).
-If one of the signed bundles fail, check the signature (e.g. `gpg --verify patterntesting-libs-2.5.1-bin.tar.gz.asc`).
-If signature is wrong, sign it manually, e.g. gpg -ba patterntesting-libs-2.5.1-bin.tar.gz and bundle it again (`mvn repository:bundle-create or manually`) or remove the assembled zip file from the bundle
-. after upload to  https://oss.sonatype.org/[Sonatype]:
-select https://oss.sonatype.org/#stagingRepositories[Staging Repositories] on oss.sonatype.org, press "Refresh" and then "Close" and "Release".
-. generate the website with `mvn -Plocal-site site-deploy` and copy it to http://patterntesting.org/release/[patterntesting.org/release/]
-. commit the changes (if not already done) and label the sources, e.g. with patterntesting-2.5.1
+. after successful deployment go to https://central.sonatype.com/publishing and _publish_ the deployment
+. optional: generate the website with `mvn -Plocal-site site-deploy` (but patterntesting.org is no longer available)
+. commit the changes (if not already done) and label the sources, e.g. with patterntesting-2.6.0
+. go to https://github.com/oboehm/PatternTesting2/releases[Releases] and _Draft a new release_
 . provide the jar files for normal download at https://sourceforge.net/projects/patterntesting/files/[SourceForge]:
 .. login to https://sourceforge.net/auth/[Sourceforge]
 .. select https://sourceforge.net/projects/patterntesting/files/[patterntesting/files] and upload the tar and zip files from patterntesting-libs, patterntesting-tools and patterntesting-samples (you can find it in the target directory).
 . close https://github.com/oboehm/PatternTesting2/issues[issues] (if not already done)
+. merge the release branch to master and develop branch
+. change to develop branch and start next SNAPSHOT
 . after a few days: check patterntesting with http://search.maven.org/#search%7Cga%7C1%7Cpatterntesting[search.maven.org] if the new version was automatically distributed

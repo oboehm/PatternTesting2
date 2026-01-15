@@ -33,7 +33,7 @@
   <parent>
     <groupId>org.patterntesting</groupId>
     <artifactId>patterntesting-libs</artifactId>
-    <version>2.5.2-SNAPSHOT</version>
+    <version>2.6.0</version>
   </parent>
   <artifactId>patterntesting-concurrent</artifactId>
   <packaging>jar</packaging>
@@ -44,10 +44,10 @@
     Some of the ideas used in this library comes from reading
     Brian Goetz's book "Java Concurrency in Practice".</description>
 
-  <!-- 
-      General Properties
-      (see parent POM)
-   -->
+  <!--
+        General Properties
+        (see parent POM)
+     -->
   <properties>
     <patterntesting.site.artifact.dir>${patterntesting.site.dir}/concurrent/</patterntesting.site.artifact.dir>
   </properties>
@@ -125,7 +125,7 @@
             <goals>
               <goal>jar</goal>
             </goals>
-            <phase>verify</phase>
+            <phase>package</phase>
           </execution>
         </executions>
       </plugin>
