@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2020 by Oliver Boehm
+ * Copyright (c) 2010-2026 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
@@ -132,7 +133,7 @@ public class Rot13Test {
      *
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    @Broken(till = "01-Jul-2026")
+    @Broken(till = "01-Jul-2027")
     @Test
     public final void testCryptBobsFile() throws IOException {
         File file = new File("C:/Temp/bobsfile.txt");
@@ -214,7 +215,7 @@ public class Rot13Test {
      * @throws IOException e.g. a FileNotFoundException if dir doesn't exit
      */
     private void writeStringToFile(final File file, final String s) throws IOException {
-        OutputStream ostream = new FileOutputStream(file);
+        OutputStream ostream = Files.newOutputStream(file.toPath());
         IOUtils.write(s, ostream, StandardCharsets.UTF_8);
         ostream.close();
     }
