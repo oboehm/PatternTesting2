@@ -1,7 +1,5 @@
 /*
- * $Id: SmokeBuilder.java,v 1.4 2016/12/10 20:55:22 oboehm Exp $
- *
- * Copyright (c) 2012 by Oliver Boehm
+ * Copyright (c) 2011-2026 by Oliver Boehm
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,8 +67,7 @@ public class SmokeBuilder extends RunnerBuilder {
 	}
 
 	private static boolean isDefaultRunner(Runner runner) {
-		Class<? extends Runner> runnerClass = runner.getClass();
-		return runnerClass.equals(BlockJUnit4ClassRunner.class) || runnerClass.equals(JUnit38ClassRunner.class);
+		return runner instanceof BlockJUnit4ClassRunner || runner instanceof JUnit38ClassRunner;
 	}
 
 }

@@ -67,7 +67,7 @@
 
   <properties>
     <aspectj.maven.plugin.groupId>org.codehaus.mojo</aspectj.maven.plugin.groupId>
-    <aspectj.maven.plugin.version>1.15.0</aspectj.maven.plugin.version>
+    <aspectj.maven.plugin.version>1.16.1</aspectj.maven.plugin.version>
     <aspectj.version>1.9.25.1</aspectj.version>
     <commons.docEncoding>${commons.encoding}</commons.docEncoding>
 
@@ -77,8 +77,8 @@
       overwrite this, if they are using another encoding.
     -->
     <commons.encoding>utf-8</commons.encoding>
-    <junit-jupiter.version>6.0.1</junit-jupiter.version>
-    <junit-platform.version>6.0.1</junit-platform.version>
+    <junit-jupiter.version>6.1.3</junit-jupiter.version>
+    <junit-platform.version>6.1.3</junit-platform.version>
     <maven.compile.complianceLevel>17</maven.compile.complianceLevel>
 
     <!-- Default configuration for compiler source and target JVM -->
@@ -122,7 +122,7 @@
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <version>2.21.0</version>
+        <version>2.22.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
@@ -184,49 +184,49 @@
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>2.0.17</version>
+        <version>2.0.19</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-api</artifactId>
-        <version>2.25.5</version>
+        <version>2.26.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.25.4</version>
+        <version>2.26.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-slf4j2-impl</artifactId>
-        <version>2.25.3</version>
+        <version>2.26.1</version>
       </dependency>
 
       <dependency>
         <groupId>org.apache.ant</groupId>
         <artifactId>ant</artifactId>
-        <version>1.10.15</version>
+        <version>1.10.18</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ant</groupId>
         <artifactId>ant-launcher</artifactId>
-        <version>1.10.15</version>
+        <version>1.10.18</version>
         <!-- 1.10.14 does not work with AJC -->
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>3.21.0</version>
+        <version>3.22.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.5.4</version>
+        <version>3.6.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.5.4</version>
+        <version>3.6.0</version>
       </dependency>
       <dependency>
         <groupId>org.aspectj</groupId>
@@ -241,7 +241,7 @@
       <dependency>
         <groupId>org.easymock</groupId>
         <artifactId>easymock</artifactId>
-        <version>5.6.0</version>
+        <version>5.7.0</version>
       </dependency>
       <dependency>
         <groupId>org.hsqldb</groupId>
@@ -256,7 +256,7 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-junit-jupiter</artifactId>
-        <version>5.21.0</version>
+        <version>5.23.0</version>
       </dependency>
       <dependency>
         <groupId>org.patterntesting</groupId>
@@ -302,7 +302,7 @@
       <dependency>
         <groupId>de.aosd.clazzfish</groupId>
         <artifactId>clazzfish-monitor</artifactId>
-        <version>3.0</version>
+        <version>3.0.2</version>
       </dependency>
       <!-- OSGi -->
       <dependency>
@@ -610,7 +610,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.5.1</version>
+        <version>3.6.0</version>
         <configuration>
           <excludes>
             <exclude>**/Test*Aspect*.java</exclude>
@@ -620,7 +620,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.5.1</version>
+        <version>3.6.0</version>
         <configuration>
           <systemPropertyVariables>
             <propertyName>patterntesting.integrationTest</propertyName>
@@ -659,8 +659,8 @@
               <target>
                 <copy todir="${project.build.directory}/apidocs/META-INF">
                   <fileset dir="${basedir}">
-                    <include name="LICENSE.txt"></include>
-                    <include name="NOTICE.txt"></include>
+                    <include name="LICENSE.txt"/>
+                    <include name="NOTICE.txt"/>
                   </fileset>
                 </copy>
               </target>
@@ -1136,7 +1136,7 @@
                     -->
                     <echo>copying reports...</echo>
                     <copy todir="${patterntesting.site.artifact.dir}/" verbose="false">
-                      <fileset dir="target/site"></fileset>
+                      <fileset dir="target/site"/>
                     </copy>
                   </tasks>
                 </configuration>

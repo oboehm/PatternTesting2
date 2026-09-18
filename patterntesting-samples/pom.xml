@@ -133,7 +133,7 @@
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest</artifactId>
-      <version>2.2</version>
+      <version>3.0</version>
       <scope>test</scope>
     </dependency>
 
@@ -266,11 +266,11 @@
             <configuration>
               <tasks>
                 <!-- Safety -->
-                <mkdir dir="${project.build.directory}"></mkdir>
+                <mkdir dir="${project.build.directory}"/>
                 <tstamp>
-                  <format pattern="dd-MMM-yyyy HH:mm:ss" property="last.updated"></format>
+                  <format pattern="dd-MMM-yyyy HH:mm:ss" property="last.updated"/>
                 </tstamp>
-                <echo file="${basedir}/target/filter.properties" message="build.time=${last.updated}"></echo>
+                <echo file="${basedir}/target/filter.properties" message="build.time=${last.updated}"/>
               </tasks>
             </configuration>
           </execution>
