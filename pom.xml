@@ -99,9 +99,7 @@
     -->
     <patterntesting.site.dir>${htdocs.dir}/builds/patterntesting</patterntesting.site.dir>
     <patterntesting.site.url>file:${patterntesting.site.dir}</patterntesting.site.url>
-
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.sourceEncoding>${commons.encoding}</project.build.sourceEncoding>
 
     <!-- Sonar -->
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
